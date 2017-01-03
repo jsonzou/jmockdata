@@ -22,6 +22,7 @@ Jmockdata插件通过随机算法模拟Java数据.
    BigInteger.class,BigInteger[].class,  
    Date.class,Date[].class  
    ```
+     
    通过对以上基本元数据类型的模拟实现，能够进一步实现BEAN，LIST,SET,ARRAY等结构的模拟。  
 4. 可以通过JmockDataContext 获取模拟过程的所有上下文信息，甚至可以打印整个模拟类型树  
 5. 可以通过JMockDataManager 注册模拟数据类型，重写模拟数据算法，注册模拟数据类拦截器等
