@@ -11,11 +11,11 @@ package com.github.jsonzou.jmockdata.mockdata;
  */
 public interface JmockDataInterceptor {
     /**
-     *  false => 停止继续mock，return null.
-     *  true => 继续执行
-     * @param mockData
-     * @param context
-     * @return
+     *  false  停止继续mock，return null.
+     *  true 继续执行
+     *  @param mockData
+     *  @param context
+     *  @return
      */
     Boolean before(MockData mockData,JmockDataContext context);
 
