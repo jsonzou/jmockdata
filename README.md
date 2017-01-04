@@ -29,5 +29,5 @@ Jmockdata插件通过随机算法模拟Java数据.
 6. 可以通过实现MockData来实现一个模拟数据类型
 7. 可以通过实现JmockDataTemplate，或者继承JmockDataTemplateDefault来重写模拟数据算法
 8. 可以通过实现JmockDataInterceptor来实现一个拦截器
-9. 具体示例实践请参考org.jsonzou.jmockdata.test.JMockDataTest
+9. 具体示例实践请参考https://github.com/jsonzou/jmockdata-demo
 10. 有问题或者对本框架有新的想法，请联系我， 作者：jsonzou，邮箱：<keko-boy@163.com>
