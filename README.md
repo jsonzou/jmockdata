@@ -1,5 +1,5 @@
 # Jmockdata
-Jmockdta是一款实现模拟JAVA类型或对象的实例化并随机初始化对象的数据的工具框架。  
+Jmockdta是一款实现模拟JAVA类型或对象的实例化并随机初始化对象的数据的工具框架。单元测试的利器。    
 The plug-in of Jmockdata what through random algorithm mock java data.  
 Jmockdata插件通过随机算法模拟Java数据.  
   
