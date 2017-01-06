@@ -1,6 +1,4 @@
-/*
- * Copyright (C) 2017 Baidu, Inc. All Rights Reserved.
- */
+
 package com.github.jsonzou.jmockdata.mockdata.mocks;
 
 import com.github.jsonzou.jmockdata.mockdata.JMockDataManager;
