@@ -62,9 +62,9 @@ public class JmockdataConfig {
     private Integer[] arrsizeString = {0, 10};
 
     public JmockdataConfig() {
-        this.readConfig("config_default.properties");
+        // this.readConfig("config_default.properties");
         Calendar cld = Calendar.getInstance();
-        // this.setRangeDateY(new Integer[] {cld.get(Calendar.YEAR), cld.get(Calendar.YEAR)});
+        this.setRangeDateY(new Integer[] {cld.get(Calendar.YEAR), cld.get(Calendar.YEAR)});
     }
 
     public void readConfig(String classpath) {
