@@ -11,39 +11,39 @@ public interface JmockDataInterceptor {
     /**
      *  false  停止继续mock，return null.
      *  true 继续执行
-     *  @param mockData
-     *  @param context
-     *  @return
+     *  @param mockData mockData
+     *  @param context context
+     *  @return Boolean
      */
     Boolean before(MockData mockData,JmockDataContext context);
 
     /**
      * mock 数据之后，返回mock数据之前执行
-     * @param mockData
-     * @param context
+     * @param mockData mockData
+     * @param context context
      */
     void after(MockData mockData,JmockDataContext context);
 
     /**
      * 出现异常时调用
-     * @param mockData
-     * @param context
-     * @param e
+     * @param mockData mockData
+     * @param context context
+     * @param e e
      */
     void error(MockData mockData,JmockDataContext context,Throwable e);
 
     /**
      * try ... finally 中执行
-     * @param mockData
-     * @param context
+     * @param mockData mockData
+     * @param context context
      */
     void finallyDo(MockData mockData,JmockDataContext context);
 
     /**
      * 拦截的规则，也可以说是拦截的条件
-     * @param mockData
-     * @param context
-     * @return
+     * @param mockData mockData
+     * @param context context
+     * @return Boolean
      */
     Boolean interceptRule(MockData mockData,JmockDataContext context);
 }

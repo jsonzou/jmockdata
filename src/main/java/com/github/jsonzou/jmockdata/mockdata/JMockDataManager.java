@@ -130,7 +130,7 @@ public class JMockDataManager {
     /**
      * 获取单例实例
      *
-     * @return
+     * @return JMockDataManager
      */
     public static JMockDataManager getInstance() {
         return JMockDataFactoryHolder.manager;
@@ -139,7 +139,6 @@ public class JMockDataManager {
     /**
      *
      * config
-     * @return
      */
     public void config(String configUnderClasspath) {
         JMockDataFactoryHolder.manager.getConfig().readConfig(configUnderClasspath);
@@ -151,9 +150,9 @@ public class JMockDataManager {
     /**
      * 获取模拟数据类型bean
      *
-     * @param clazz
-     * @param <T>
-     * @return
+     * @param clazz clazz
+     * @param <T> any
+     * @return MockData
      */
     public <T> MockData<T> getMockDataBean(Class<T> clazz) {
         MockData mockData = mockDataMappings.get(ReflectionUtil.getClassName(clazz));
@@ -166,10 +165,10 @@ public class JMockDataManager {
     /**
      * 获取模拟数据类型bean
      *
-     * @param clazz
-     * @param genericType
-     * @param <T>
-     * @return
+     * @param clazz clazz
+     * @param genericType genericType
+     * @param <T> any
+     * @return  MockData
      */
     public <T> MockData<T> getMockDataBean(Class<T> clazz, Type genericType) {
         MockData mockData = mockDataMappings.get(ReflectionUtil.getClassName(clazz));
@@ -182,8 +181,8 @@ public class JMockDataManager {
     /**
      * 获取默认模拟数据类型bean
      *
-     * @param <T>
-     * @return
+     * @param clazz Class
+     * @return MockData
      */
     public <T> MockData<T> getDefaultMockDataBean(Class<T> clazz) {
         return new MockDataDefaultNull<T>();
@@ -192,8 +191,8 @@ public class JMockDataManager {
     /**
      * 是否已有某类型的模拟方法
      *
-     * @param clazz
-     * @return
+     * @param clazz clazz
+     * @return Boolean
      */
     public Boolean isHas(Class clazz) {
         return mockDataMappings.containsKey(clazz.getName());
@@ -202,8 +201,8 @@ public class JMockDataManager {
     /**
      * 注册模拟类型bean
      *
-     * @param mockData
-     * @param registerClazz
+     * @param mockData mockData
+     * @param registerClazz registerClazz
      */
     public void registerMockData(MockData mockData, Class... registerClazz) {
         if (registerClazz != null && registerClazz.length > 0) {
@@ -216,7 +215,7 @@ public class JMockDataManager {
     /**
      * 获取拦截器
      *
-     * @return
+     * @return interceptors
      */
     public List<JmockDataInterceptor> interceptors() {
         return interceptors;
@@ -225,8 +224,8 @@ public class JMockDataManager {
     /**
      * 注册拦截器
      *
-     * @param interceptors
-     * @param <T>
+     * @param interceptors interceptors
+     * @param <T> any
      */
     public <T extends JmockDataInterceptor> void interceptors(Class<T>... interceptors) {
         if (interceptors != null && interceptors.length > 0) {
@@ -247,7 +246,7 @@ public class JMockDataManager {
     /**
      * 获取模拟数据模板方法
      *
-     * @return
+     * @return JmockDataTemplate
      */
     public JmockDataTemplate getMockTemplate() {
         return mockTemplate;
@@ -256,7 +255,7 @@ public class JMockDataManager {
     /**
      * 设置模拟数据模板方法
      *
-     * @param mockTemplate
+     * @param mockTemplate mockTemplate
      */
     public void setMockTemplate(JmockDataTemplate mockTemplate) {
         this.mockTemplate = mockTemplate;
