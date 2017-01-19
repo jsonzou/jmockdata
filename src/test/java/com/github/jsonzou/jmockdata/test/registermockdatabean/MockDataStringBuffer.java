@@ -14,7 +14,7 @@ import com.github.jsonzou.jmockdata.utils.RandomUtil;
 public class MockDataStringBuffer implements MockData<StringBuffer> {
     public StringBuffer mock(JmockDataContext context) {
         StringBuffer sb = new StringBuffer();
-        int len= RandomUtil.randomIntNotZero(50);
+        int len= RandomUtil.randomIntegerNotZero(50);
         for (int i=0;i<len;i++){
             sb.append(JMockDataManager.getInstance().getMockDataBean(Character.class).mock(context));
         }

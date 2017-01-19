@@ -12,7 +12,7 @@ import com.github.jsonzou.jmockdata.mockdata.constants.MockType;
  */
 public class MockDataIntegerUnboxingArray implements MockData<int[]> {
     public int[] mock(JmockDataContext context) {
-        return JMockDataManager.getInstance().getMockTemplate().mockIntegerBaseArray(context);
+        return JMockDataManager.getInstance().getMockTemplate().mockIntegerUnboxingArray(context);
     }
     public MockType mockType() {
         return MockType.NUMBER;

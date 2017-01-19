@@ -1,15 +1,28 @@
 
 package com.github.jsonzou.jmockdata.mockdata.mocks;
 
+import java.lang.reflect.Array;
+import java.lang.reflect.Field;
+import java.lang.reflect.GenericArrayType;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import com.github.jsonzou.jmockdata.mockdata.JMockDataManager;
 import com.github.jsonzou.jmockdata.mockdata.JmockDataContext;
 import com.github.jsonzou.jmockdata.mockdata.MockData;
 import com.github.jsonzou.jmockdata.mockdata.constants.MockType;
 import com.github.jsonzou.jmockdata.utils.RandomUtil;
 import com.github.jsonzou.jmockdata.utils.ReflectionUtil;
-
-import java.lang.reflect.*;
-import java.util.*;
 
 /**
  * mock the Bean data
@@ -43,18 +56,26 @@ public class MockDataBean<E> implements MockData<E> {
                 }
                 types = ((ParameterizedType) genericType).getActualTypeArguments();
                 if (types != null && types.length > 0) {
-                    int size = RandomUtil.randomIntNotZero(10);
+                    int size = RandomUtil.randomInteger(JMockDataManager.getInstance().getConfig()
+                            .getArrsizeBean()[0], JMockDataManager.getInstance().getConfig().getArrsizeBean()[1]);
                     Map tempMap = new HashMap();
-                    if (context.getSelfRefLevel() != null && context.getSelfRefLevel()> JMockDataManager.getInstance().getMaxSelfRefLevel()) {
-                        return  (E) tempMap;
+                    if (context.getSelfRefLevel() != null && context.getSelfRefLevel() > JMockDataManager.getInstance()
+                            .getMaxSelfRefLevel()) {
+                        return (E) tempMap;
                     }
-                    MockData mdK = JMockDataManager.getInstance().getMockDataBean(ReflectionUtil.getClass(types[0]), ReflectionUtil.getParameterizedType(types[0]));
-                    MockData mdV = JMockDataManager.getInstance().getMockDataBean(ReflectionUtil.getClass(types[1]), ReflectionUtil.getParameterizedType(types[1]));
+                    MockData mdK = JMockDataManager.getInstance().getMockDataBean(ReflectionUtil.getClass(types[0]),
+                            ReflectionUtil.getParameterizedType(types[0]));
+                    MockData mdV = JMockDataManager.getInstance().getMockDataBean(ReflectionUtil.getClass(types[1]),
+                            ReflectionUtil.getParameterizedType(types[1]));
                     int i = 0;
                     JmockDataContext kContext, vContext;
                     while (i++ < size) {
-                        kContext = JmockDataContext.newInstance(context, "$key_" + (i - 1), ReflectionUtil.getClass(types[0]), ReflectionUtil.getParameterizedType(types[0]));
-                        vContext = JmockDataContext.newInstance(context, "$value_" + (i - 1), ReflectionUtil.getClass(types[1]), ReflectionUtil.getParameterizedType(types[1]));
+                        kContext = JmockDataContext
+                                .newInstance(context, "$key_" + (i - 1), ReflectionUtil.getClass(types[0]),
+                                        ReflectionUtil.getParameterizedType(types[0]));
+                        vContext = JmockDataContext
+                                .newInstance(context, "$value_" + (i - 1), ReflectionUtil.getClass(types[1]),
+                                        ReflectionUtil.getParameterizedType(types[1]));
                         Object k = mdK.mock(kContext);
                         Object v = mdV.mock(vContext);
                         if (k != null && mdV.mock(vContext) != null) {
@@ -72,16 +93,21 @@ public class MockDataBean<E> implements MockData<E> {
                 if (List.class.isAssignableFrom(clazz)) {
                     types = ((ParameterizedType) genericType).getActualTypeArguments();
                     if (types != null && types.length > 0) {
-                        int size = RandomUtil.randomIntNotZero(10);
+                        int size = RandomUtil.randomInteger(JMockDataManager.getInstance().getConfig()
+                                .getArrsizeBean()[0], JMockDataManager.getInstance().getConfig().getArrsizeBean()[1]);
                         List tempList = new ArrayList();
-                        if (context.getSelfRefLevel() != null && context.getSelfRefLevel() > JMockDataManager.getInstance().getMaxSelfRefLevel()) {
-                            return  (E) tempList;
+                        if (context.getSelfRefLevel() != null && context.getSelfRefLevel() > JMockDataManager
+                                .getInstance().getMaxSelfRefLevel()) {
+                            return (E) tempList;
                         }
-                        MockData md = JMockDataManager.getInstance().getMockDataBean(ReflectionUtil.getClass(types[0]), ReflectionUtil.getParameterizedType(types[0]));
+                        MockData md = JMockDataManager.getInstance().getMockDataBean(ReflectionUtil.getClass(types[0]),
+                                ReflectionUtil.getParameterizedType(types[0]));
                         int i = 0;
                         JmockDataContext vContext;
                         while (i++ < size) {
-                            vContext = JmockDataContext.newInstance(context, "$element_" + (i - 1), ReflectionUtil.getClass(types[0]), ReflectionUtil.getParameterizedType(types[0]));
+                            vContext = JmockDataContext
+                                    .newInstance(context, "$element_" + (i - 1), ReflectionUtil.getClass(types[0]),
+                                            ReflectionUtil.getParameterizedType(types[0]));
                             Object v = md.mock(vContext);
                             if (v != null) {
                                 tempList.add(v);
@@ -94,16 +120,21 @@ public class MockDataBean<E> implements MockData<E> {
                 } else if (Set.class.isAssignableFrom(clazz)) {
                     types = ((ParameterizedType) genericType).getActualTypeArguments();
                     if (types != null && types.length > 0) {
-                        int size = RandomUtil.randomIntNotZero(10);
+                        int size = RandomUtil.randomInteger(JMockDataManager.getInstance().getConfig()
+                                .getArrsizeBean()[0], JMockDataManager.getInstance().getConfig().getArrsizeBean()[1]);
                         Set tempSet = new HashSet();
-                        if (context.getSelfRefLevel() != null && context.getSelfRefLevel() > JMockDataManager.getInstance().getMaxSelfRefLevel()) {
-                            return  (E) tempSet;
+                        if (context.getSelfRefLevel() != null && context.getSelfRefLevel() > JMockDataManager
+                                .getInstance().getMaxSelfRefLevel()) {
+                            return (E) tempSet;
                         }
-                        MockData md = JMockDataManager.getInstance().getMockDataBean(ReflectionUtil.getClass(types[0]), ReflectionUtil.getParameterizedType(types[0]));
+                        MockData md = JMockDataManager.getInstance().getMockDataBean(ReflectionUtil.getClass(types[0]),
+                                ReflectionUtil.getParameterizedType(types[0]));
                         int i = 0;
                         JmockDataContext vContext;
                         while (i++ < size) {
-                            vContext = JmockDataContext.newInstance(context, "$element_" + (i - 1), ReflectionUtil.getClass(types[0]), ReflectionUtil.getParameterizedType(types[0]));
+                            vContext = JmockDataContext
+                                    .newInstance(context, "$element_" + (i - 1), ReflectionUtil.getClass(types[0]),
+                                            ReflectionUtil.getParameterizedType(types[0]));
                             Object v = md.mock(vContext);
                             if (v != null) {
                                 tempSet.add(v);
@@ -115,17 +146,20 @@ public class MockDataBean<E> implements MockData<E> {
                 return null;
             } else if (clazz.isArray()) {
                 if (clazz.getComponentType() != null && clazz.getComponentType() != Object.class) {
-                    int len = RandomUtil.randomIntNotZero(10);
+                    int len = RandomUtil.randomInteger(JMockDataManager.getInstance().getConfig()
+                            .getArrsizeBean()[0], JMockDataManager.getInstance().getConfig().getArrsizeBean()[1]);
                     Object tempArray = Array.newInstance(clazz.getComponentType(), len);
-                    if (context.getSelfRefLevel() != null && context.getSelfRefLevel() > JMockDataManager.getInstance().getMaxSelfRefLevel()) {
-                        return  (E) tempArray;
+                    if (context.getSelfRefLevel() != null && context.getSelfRefLevel() > JMockDataManager.getInstance()
+                            .getMaxSelfRefLevel()) {
+                        return (E) tempArray;
                     }
                     MockData md = null;
                     int i = 0;
                     JmockDataContext vContext;
                     boolean isComponeGeneric = false;
-                    if (genericType!=null && GenericArrayType.class.isAssignableFrom(genericType.getClass())) {
-                        md = JMockDataManager.getInstance().getMockDataBean(clazz.getComponentType(), ReflectionUtil.getParameterizedType(genericType));
+                    if (genericType != null && GenericArrayType.class.isAssignableFrom(genericType.getClass())) {
+                        md = JMockDataManager.getInstance().getMockDataBean(clazz.getComponentType(),
+                                ReflectionUtil.getParameterizedType(genericType));
                         isComponeGeneric = true;
                     } else {
                         md = JMockDataManager.getInstance().getMockDataBean(clazz.getComponentType(), null);
@@ -134,9 +168,12 @@ public class MockDataBean<E> implements MockData<E> {
 
                     while (i++ < len) {
                         if (isComponeGeneric) {
-                            vContext = JmockDataContext.newInstance(context, "$element_" + (i - 1), clazz.getComponentType(), ReflectionUtil.getParameterizedType(genericType));
+                            vContext = JmockDataContext
+                                    .newInstance(context, "$element_" + (i - 1), clazz.getComponentType(),
+                                            ReflectionUtil.getParameterizedType(genericType));
                         } else {
-                            vContext = JmockDataContext.newInstance(context, "$element_" + (i - 1), clazz.getComponentType(), null);
+                            vContext = JmockDataContext
+                                    .newInstance(context, "$element_" + (i - 1), clazz.getComponentType(), null);
                         }
                         Object v = md.mock(vContext);
                         if (v != null) {
@@ -159,7 +196,8 @@ public class MockDataBean<E> implements MockData<E> {
                         ) {
                     return null;
                 }
-                if (context.getSelfRefLevel() != null && context.getSelfRefLevel() > JMockDataManager.getInstance().getMaxSelfRefLevel()) {
+                if (context.getSelfRefLevel() != null && context.getSelfRefLevel() > JMockDataManager.getInstance()
+                        .getMaxSelfRefLevel()) {
                     return JMockDataManager.getInstance().getDefaultMockDataBean(clazz).mock(null);
                 }
                 mockData = (E) ReflectionUtil.newInstance(clazz);
@@ -199,8 +237,10 @@ public class MockDataBean<E> implements MockData<E> {
                     setMethod = ReflectionUtil.getPlainSetMethod(clazz, field);
                     getMethod = ReflectionUtil.getPlainGetMethod(clazz, field);
                     if (setMethod != null && getMethod != null) { // 只对get,set方法的属性进行mock
-                        mockDataFieldBean = JMockDataManager.getInstance().getMockDataBean(field.getType(), field.getGenericType());
-                        JmockDataContext vContext = JmockDataContext.newInstance(context, field.getName(), field.getType(), field.getGenericType());
+                        mockDataFieldBean =
+                                JMockDataManager.getInstance().getMockDataBean(field.getType(), field.getGenericType());
+                        JmockDataContext vContext = JmockDataContext
+                                .newInstance(context, field.getName(), field.getType(), field.getGenericType());
                         setMethod.invoke(mockData, mockDataFieldBean.mock(vContext));
                     }
                 }

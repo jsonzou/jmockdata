@@ -68,6 +68,7 @@ public class JMockDataManager {
     private Map<String, MockData> mockDataMappings = new ConcurrentHashMap<String, MockData>();
     private List<JmockDataInterceptor> interceptors = new ArrayList<JmockDataInterceptor>();
     private JmockDataTemplate mockTemplate = new JmockDataTemplateDefault();
+    private JmockdataConfig config=new JmockdataConfig();
     private Integer maxSelfRefLevel = 3;
 
     private JMockDataManager() {
@@ -120,7 +121,6 @@ public class JMockDataManager {
         registerMockData(new MockDataDateArray(), Date[].class);
 
         mockDataMappings.put($_DEFAULT, new MockDataDefaultNull());
-
     }
 
     private static class JMockDataFactoryHolder {
@@ -134,6 +134,18 @@ public class JMockDataManager {
      */
     public static JMockDataManager getInstance() {
         return JMockDataFactoryHolder.manager;
+    }
+
+    /**
+     *
+     * config
+     * @return
+     */
+    public void config(String configUnderClasspath) {
+        JMockDataFactoryHolder.manager.getConfig().readConfig(configUnderClasspath);
+    }
+    public JmockdataConfig config() {
+        return JMockDataFactoryHolder.manager.getConfig();
     }
 
     /**
@@ -276,5 +288,13 @@ public class JMockDataManager {
 
     private MockData proxy(MockData mockData) {
         return new MockDataProxy(mockData);
+    }
+
+    public JmockdataConfig getConfig() {
+        return config;
+    }
+
+    public void setConfig(JmockdataConfig config) {
+        this.config = config;
     }
 }

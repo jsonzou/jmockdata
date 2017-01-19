@@ -13,49 +13,50 @@ import java.util.Date;
  */
 public interface JmockDataTemplate {
     BigDecimal mockBigDecimal(JmockDataContext context);
-    BigDecimal[] mockBigDecimalObjectArray(JmockDataContext context);
+    BigDecimal[] mockBigDecimalArray(JmockDataContext context);
 
     BigInteger mockBigInteger(JmockDataContext context);
-    BigInteger[] mockBigIntegerObjectArray(JmockDataContext context);
+    BigInteger[] mockBigIntegerArray(JmockDataContext context);
 
     Boolean mockBoolean(JmockDataContext context);
-    boolean[] mockBooleanBaseArray(JmockDataContext context);
-    Boolean[] mockBooleanObjectArray(JmockDataContext context);
+    boolean[] mockBooleanUnboxingArray(JmockDataContext context);
+    Boolean[] mockBooleanBoxingArray(JmockDataContext context);
 
     Byte mockByte(JmockDataContext context);
-    byte[] mockByteBaseArray(JmockDataContext context);
-    Byte[] mockByteObjectArray(JmockDataContext context);
+    byte[] mockByteUnboxingArray(JmockDataContext context);
+    Byte[] mockByteBoxingArray(JmockDataContext context);
 
     Character mockCharacter(JmockDataContext context);
-    char[] mockCharacterBaseArray(JmockDataContext context);
-    Character[] mockCharacterObjectArray(JmockDataContext context);
+    char[] mockCharacterUnboxingArray(JmockDataContext context);
+    Character[] mockCharacterBoxingArray(JmockDataContext context);
 
     Date mockDate(JmockDataContext context);
-    Date[] mockDateObjectArray(JmockDataContext context);
+    Date[] mockDateArray(JmockDataContext context);
 
     Double mockDouble(JmockDataContext context);
-    double[] mockDoubleBaseArray(JmockDataContext context);
-    Double[] mockDoubleObjectArray(JmockDataContext context);
+    double[] mockDoubleUnboxingArray(JmockDataContext context);
+    Double[] mockDoubleBoxingArray(JmockDataContext context);
 
 
     Float mockFloat(JmockDataContext context);
-    float[] mockFloatBaseArray(JmockDataContext context);
-    Float[] mockFloatObjectArray(JmockDataContext context);
+    float[] mockFloatUnboxingArray(JmockDataContext context);
+    Float[] mockFloatBoxingArray(JmockDataContext context);
 
 
     Integer mockInteger(JmockDataContext context);
-    int[] mockIntegerBaseArray(JmockDataContext context);
-    Integer[] mockIntegerObjectArray(JmockDataContext context);
+    int[] mockIntegerUnboxingArray(JmockDataContext context);
+    Integer[] mockIntegerBoxingArray(JmockDataContext context);
 
     Long mockLong(JmockDataContext context);
-    long[] mockLongBaseArray(JmockDataContext context);
-    Long[] mockLongObjectArray(JmockDataContext context);
+    long[] mockLongUnboxingArray(JmockDataContext context);
+    Long[] mockLongBoxingArray(JmockDataContext context);
 
     Short mockShort(JmockDataContext context);
-    short[] mockShortBaseArray(JmockDataContext context);
-    Short[] mockShortObjectArray(JmockDataContext context);
+    short[] mockShortUnboxingArray(JmockDataContext context);
+    Short[] mockShortBoxingArray(JmockDataContext context);
 
     String mockString(JmockDataContext context);
-    String[] mockStringObjectArray(JmockDataContext context);
+    String[] mockStringArray(JmockDataContext context);
 
+    JmockdataConfig getConfig();
 }

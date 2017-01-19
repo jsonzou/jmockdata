@@ -12,7 +12,7 @@ import com.github.jsonzou.jmockdata.mockdata.constants.MockType;
  */
 public class MockDataBooleanBoxingArray implements MockData<Boolean[]> {
     public Boolean[] mock(JmockDataContext context) {
-        return JMockDataManager.getInstance().getMockTemplate().mockBooleanObjectArray(context);
+        return JMockDataManager.getInstance().getMockTemplate().mockBooleanBoxingArray(context);
     }
     public MockType mockType() {
         return MockType.BOOLEAN;

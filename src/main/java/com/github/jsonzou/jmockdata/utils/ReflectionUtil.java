@@ -1,4 +1,3 @@
-
 package com.github.jsonzou.jmockdata.utils;
 
 import java.lang.reflect.*;

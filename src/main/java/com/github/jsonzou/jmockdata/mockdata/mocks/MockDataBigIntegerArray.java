@@ -14,7 +14,7 @@ import java.math.BigInteger;
  */
 public class MockDataBigIntegerArray implements MockData<BigInteger[]> {
     public BigInteger[] mock(JmockDataContext context) {
-        return JMockDataManager.getInstance().getMockTemplate().mockBigIntegerObjectArray(context);
+        return JMockDataManager.getInstance().getMockTemplate().mockBigIntegerArray(context);
     }
     public MockType mockType() {
         return MockType.NUMBER;

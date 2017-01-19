@@ -12,7 +12,7 @@ import com.github.jsonzou.jmockdata.mockdata.constants.MockType;
  */
 public class MockDataDoubleBoxingArray implements MockData<Double[]> {
     public Double[] mock(JmockDataContext context) {
-        return JMockDataManager.getInstance().getMockTemplate().mockDoubleObjectArray(context);
+        return JMockDataManager.getInstance().getMockTemplate().mockDoubleBoxingArray(context);
     }
     public MockType mockType() {
         return MockType.NUMBER;

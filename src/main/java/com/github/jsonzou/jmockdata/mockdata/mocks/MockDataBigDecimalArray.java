@@ -14,7 +14,7 @@ import java.math.BigDecimal;
  */
 public class MockDataBigDecimalArray implements MockData<BigDecimal[]> {
     public BigDecimal[] mock(JmockDataContext context) {
-        return JMockDataManager.getInstance().getMockTemplate().mockBigDecimalObjectArray(context);
+        return JMockDataManager.getInstance().getMockTemplate().mockBigDecimalArray(context);
     }
     public MockType mockType() {
         return MockType.NUMBER;

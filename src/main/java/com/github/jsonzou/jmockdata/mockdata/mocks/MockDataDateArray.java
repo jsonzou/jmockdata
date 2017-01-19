@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class MockDataDateArray implements MockData<Date[]> {
     public Date[] mock(JmockDataContext context) {
-        return JMockDataManager.getInstance().getMockTemplate().mockDateObjectArray(context);
+        return JMockDataManager.getInstance().getMockTemplate().mockDateArray(context);
     }
     public MockType mockType() {
         return MockType.DATE;

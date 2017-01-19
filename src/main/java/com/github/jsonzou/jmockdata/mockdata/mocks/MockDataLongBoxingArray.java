@@ -12,7 +12,7 @@ import com.github.jsonzou.jmockdata.mockdata.constants.MockType;
  */
 public class MockDataLongBoxingArray implements MockData<Long[]> {
     public Long[] mock(JmockDataContext context) {
-        return JMockDataManager.getInstance().getMockTemplate().mockLongObjectArray (context);
+        return JMockDataManager.getInstance().getMockTemplate().mockLongBoxingArray (context);
     }
     public MockType mockType() {
         return MockType.NUMBER;

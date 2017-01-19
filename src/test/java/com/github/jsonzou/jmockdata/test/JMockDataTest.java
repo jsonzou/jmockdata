@@ -2,8 +2,10 @@
 package com.github.jsonzou.jmockdata.test;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.jsonzou.jmockdata.test.registermockdatabean.MockDataStringBuffer;
 import com.github.jsonzou.jmockdata.test.wrapperbean.MockDemoBeanAnyDataWrapper;
+import com.github.jsonzou.jmockdata.test.wrapperbean.MockDemoBeanConfigWrapper;
 import com.github.jsonzou.jmockdata.test.wrapperbean.MockDemoBeanSelfRefDataWrapper;
 import com.github.jsonzou.jmockdata.test.wrapperbean.MockDemoBeanSimpleDataWrapper;
 import com.github.jsonzou.jmockdata.test.wrapperbean.MockDemoCustomStringBufferWrapper;
@@ -31,6 +33,18 @@ public class JMockDataTest {
         MockDemoSimpleListStringWrapper mockData = JMockData.mock(MockDemoSimpleListStringWrapper.class);
         mockData.getJmockDataContext().printTree(); // 打印类型树
         print(mockData.getList());
+    }
+
+    /**
+     * 测试配置文件 》 改变默认算法行为
+     */
+    @Test
+    public void mockTest_config() {
+        JMockDataManager.getInstance().config("config.properties");
+       // System.out.println(JSONObject.toJSONString(JMockDataManager.getInstance().config(),true));
+        MockDemoBeanConfigWrapper mockData = JMockData.mock(MockDemoBeanConfigWrapper.class);
+        mockData.setJmockDataContext(null);
+        print(mockData);
     }
 
     /**

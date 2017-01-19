@@ -12,7 +12,7 @@ import com.github.jsonzou.jmockdata.mockdata.constants.MockType;
  */
 public class MockDataCharacterBoxingArray implements MockData<Character[]> {
     public Character[] mock(JmockDataContext context) {
-        return JMockDataManager.getInstance().getMockTemplate().mockCharacterObjectArray(context);
+        return JMockDataManager.getInstance().getMockTemplate().mockCharacterBoxingArray(context);
     }
     public MockType mockType() {
         return MockType.STRING;

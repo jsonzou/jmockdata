@@ -12,7 +12,7 @@ import com.github.jsonzou.jmockdata.mockdata.constants.MockType;
  */
 public class MockDataFloatUnboxingArray implements MockData<float[]> {
     public float[] mock(JmockDataContext context) {
-        return JMockDataManager.getInstance().getMockTemplate().mockFloatBaseArray(context);
+        return JMockDataManager.getInstance().getMockTemplate().mockFloatUnboxingArray(context);
     }
     public MockType mockType() {
         return MockType.NUMBER;

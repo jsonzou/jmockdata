@@ -12,7 +12,7 @@ import com.github.jsonzou.jmockdata.mockdata.constants.MockType;
  */
 public class MockDataShortUnboxingArray implements MockData<short[]> {
     public short[] mock(JmockDataContext context) {
-        return JMockDataManager.getInstance().getMockTemplate().mockShortBaseArray (context);
+        return JMockDataManager.getInstance().getMockTemplate().mockShortUnboxingArray (context);
     }
     public MockType mockType() {
         return MockType.NUMBER;
