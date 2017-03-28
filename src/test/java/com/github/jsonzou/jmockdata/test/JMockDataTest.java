@@ -27,9 +27,9 @@ import org.junit.Test;
  */
 public class JMockDataTest {
     /**
-     * 测试模拟全部元数据类型模拟
+     * 测试一次模拟全部元数据类型JmockdataWrapperMetaDataAll
      * 元数据类型包括40种
-     * 元数据类型不需提供Wrapper类，直接调用JMockData.mockMetaData()即可获取元数据类型模拟数据
+     * 元数据类型不需提供Wrapper类，直接调用JMockData.mockMetaDataAll().getXxxData()即可获取元数据类型模拟数据
      */
     @Test
     public void mockTest_mockMetaDataAll() {
@@ -40,9 +40,9 @@ public class JMockDataTest {
 
     }
     /**
-     * 测试单个模拟元数据类型模拟
+     * 测试模拟单个元数据类型模拟JmockdataWrapperMetaDataSingle
      * 元数据类型包括40种
-     * 元数据类型不需提供Wrapper类，直接调用JMockData.mockMetaData()即可获取元数据类型模拟数据
+     * 元数据类型不需提供Wrapper类，直接调用JMockData.mockMetaDataSingle().getXxxData()即可获取元数据类型模拟数据
      */
     @Test
     public void mockTest_mockMetaDataSingle() {
