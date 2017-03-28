@@ -1,8 +1,6 @@
 package com.github.jsonzou.jmockdata;
 
-import com.github.jsonzou.jmockdata.mockdata.JMockDataManager;
-import com.github.jsonzou.jmockdata.mockdata.JmockDataContext;
-import com.github.jsonzou.jmockdata.mockdata.JmockDataWrapper;
+import com.github.jsonzou.jmockdata.mockdata.*;
 
 /**
  *  <p>模拟数据入口方法
@@ -34,10 +32,27 @@ import com.github.jsonzou.jmockdata.mockdata.JmockDataWrapper;
  *
  */
 public class JMockData {
+    private static final JmockdataWrapperMetaDataSingle jmockdataWrapperMetaDataSingle = new JmockdataWrapperMetaDataSingle();
     public static <T extends JmockDataWrapper> T mock(Class<T> mockType)  {
         JmockDataContext context=JmockDataContext.newRootInstance(mockType);
         JmockDataWrapper data= JMockDataManager.getInstance().getMockDataBean(mockType).mock(context);
         data.setJmockDataContext(context);
         return (T)data;
+    }
+
+    /**
+     * mock 全部元数据
+     * @return
+     */
+    public static JmockdataWrapperMetaDataAll mockMetaDataAll()  {
+        return mock(JmockdataWrapperMetaDataAll.class);
+    }
+
+    /**
+     * mock 单个元数据
+     * @return
+     */
+    public static JmockdataWrapperMetaDataSingle mockMetaDataSingle()  {
+        return jmockdataWrapperMetaDataSingle;
     }
 }

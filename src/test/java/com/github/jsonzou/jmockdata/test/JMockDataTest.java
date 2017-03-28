@@ -2,7 +2,8 @@
 package com.github.jsonzou.jmockdata.test;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.github.jsonzou.jmockdata.mockdata.JmockdataWrapperMetaDataAll;
+import com.github.jsonzou.jmockdata.mockdata.JmockdataWrapperMetaDataSingle;
 import com.github.jsonzou.jmockdata.test.registermockdatabean.MockDataStringBuffer;
 import com.github.jsonzou.jmockdata.test.wrapperbean.MockDemoBeanAnyDataWrapper;
 import com.github.jsonzou.jmockdata.test.wrapperbean.MockDemoBeanConfigWrapper;
@@ -25,6 +26,33 @@ import org.junit.Test;
  * @since 2016/12/26
  */
 public class JMockDataTest {
+    /**
+     * 测试模拟全部元数据类型模拟
+     * 元数据类型包括40种
+     * 元数据类型不需提供Wrapper类，直接调用JMockData.mockMetaData()即可获取元数据类型模拟数据
+     */
+    @Test
+    public void mockTest_mockMetaDataAll() {
+        JmockdataWrapperMetaDataAll metaData=JMockData.mockMetaDataAll();
+        System.out.println("StringData => " + metaData.getStringData());
+        System.out.println("StringArrayData => " + JSON.toJSONString(metaData.getStringArrayData(), true));
+        System.out.println("IntegerData => " + metaData.getIntegerData());
+
+    }
+    /**
+     * 测试单个模拟元数据类型模拟
+     * 元数据类型包括40种
+     * 元数据类型不需提供Wrapper类，直接调用JMockData.mockMetaData()即可获取元数据类型模拟数据
+     */
+    @Test
+    public void mockTest_mockMetaDataSingle() {
+        JmockdataWrapperMetaDataSingle metaData=JMockData.mockMetaDataSingle();
+        System.out.println("StringData => " + metaData.getStringData());
+        System.out.println("StringArrayData => " + JSON.toJSONString(metaData.getStringArrayData(), true));
+        System.out.println("IntegerData => " + metaData.getIntegerData());
+
+    }
+
     /**
      * 测试模拟简单List<String>
      */
