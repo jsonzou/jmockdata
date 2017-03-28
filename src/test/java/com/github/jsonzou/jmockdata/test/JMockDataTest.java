@@ -33,10 +33,12 @@ public class JMockDataTest {
      */
     @Test
     public void mockTest_mockMetaDataAll() {
-        JmockdataWrapperMetaDataAll metaData=JMockData.mockMetaDataAll();
-        System.out.println("StringData => " + metaData.getStringData());
-        System.out.println("StringArrayData => " + JSON.toJSONString(metaData.getStringArrayData(), true));
-        System.out.println("IntegerData => " + metaData.getIntegerData());
+        JmockdataWrapperMetaDataAll metaDataMocker=JMockData.mockMetaDataAll();
+        System.out.println("StringData => " + metaDataMocker.getStringData());
+        System.out.println("StringArrayData => " + JSON.toJSONString(metaDataMocker.getStringArrayData(), true));
+        System.out.println("IntegerData => " + metaDataMocker.getIntegerData());
+        System.out.println("IntegerBoxingArrayData => " + JSON.toJSONString(metaDataMocker.getIntegerBoxingArrayData(), true));
+        System.out.println("IntegerUnboxingArrayData => " + JSON.toJSONString(metaDataMocker.getIntegerUnboxingArrayData(), true));
 
     }
     /**
@@ -46,10 +48,12 @@ public class JMockDataTest {
      */
     @Test
     public void mockTest_mockMetaDataSingle() {
-        JmockdataWrapperMetaDataSingle metaData=JMockData.mockMetaDataSingle();
-        System.out.println("StringData => " + metaData.getStringData());
-        System.out.println("StringArrayData => " + JSON.toJSONString(metaData.getStringArrayData(), true));
-        System.out.println("IntegerData => " + metaData.getIntegerData());
+        JmockdataWrapperMetaDataSingle metaDataMocker=JMockData.mockMetaDataSingle();
+        System.out.println("StringData => " + metaDataMocker.getStringData());
+        System.out.println("StringArrayData => " + JSON.toJSONString(metaDataMocker.getStringArrayData(), true));
+        System.out.println("IntegerData => " + metaDataMocker.getIntegerData());
+        System.out.println("IntegerBoxingArrayData => " + JSON.toJSONString(metaDataMocker.getIntegerBoxingArrayData(), true));
+        System.out.println("IntegerUnboxingArrayData => " + JSON.toJSONString(metaDataMocker.getIntegerUnboxingArrayData(), true));
 
     }
 
