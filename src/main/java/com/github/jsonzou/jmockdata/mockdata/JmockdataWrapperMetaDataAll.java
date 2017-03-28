@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import java.util.Date;
 
 /**
+ * 一次模拟所有元数据
  * Created by v_zoupengfei on 2017/3/27.
  */
 public class JmockdataWrapperMetaDataAll extends JmockDataWrapper {

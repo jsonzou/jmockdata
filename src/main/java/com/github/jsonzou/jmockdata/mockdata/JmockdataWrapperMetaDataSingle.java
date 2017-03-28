@@ -1,7 +1,4 @@
 
-/*
- * Copyright (C) 2017 Baidu, Inc. All Rights Reserved.
- */
 package com.github.jsonzou.jmockdata.mockdata;
 
 import java.math.BigDecimal;
@@ -9,6 +6,7 @@ import java.math.BigInteger;
 import java.util.Date;
 
 /**
+ * 模拟单个元数据，只有在调用具体数据时实时模拟此改数据类型的数据
  * Created by v_zoupengfei on 2017/3/27.
  */
 public class JmockdataWrapperMetaDataSingle {
