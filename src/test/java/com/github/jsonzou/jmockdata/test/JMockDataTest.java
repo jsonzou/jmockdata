@@ -34,14 +34,54 @@ public class JMockDataTest {
     @Test
     public void mockTest_mockMetaDataAll() {
         JmockdataWrapperMetaDataAll metaDataMocker=JMockData.mockMetaDataAll();
+        System.out.println("BigIntegerData => " + metaDataMocker.getBigIntegerData());
+        System.out.println("BigIntegerArrayData => " + JSON.toJSONString(metaDataMocker.getBigIntegerArrayData(), true));
+
+        System.out.println("BigDecimalData => " + metaDataMocker.getBigDecimalData());
+        System.out.println("BigDecimalArrayData => " + JSON.toJSONString(metaDataMocker.getBigDecimalArrayData(), true));
+
         System.out.println("StringData => " + metaDataMocker.getStringData());
         System.out.println("StringArrayData => " + JSON.toJSONString(metaDataMocker.getStringArrayData(), true));
+
+
+        System.out.println("StringData => " + metaDataMocker.getStringData());
+        System.out.println("StringArrayData => " + JSON.toJSONString(metaDataMocker.getStringArrayData(), true));
+
+        System.out.println("DateArrayData => " + metaDataMocker.getDateData());
+        System.out.println("DateArrayData => " + JSON.toJSONString(metaDataMocker.getDateArrayData(), true));
+
         System.out.println("IntegerData => " + metaDataMocker.getIntegerData());
         System.out.println("IntegerBoxingArrayData => " + JSON.toJSONString(metaDataMocker.getIntegerBoxingArrayData(), true));
         System.out.println("IntegerUnboxingArrayData => " + JSON.toJSONString(metaDataMocker.getIntegerUnboxingArrayData(), true));
-        System.out.println("DateArrayData => " + JSON.toJSONString(metaDataMocker.getDateArrayData(), true));
+
         System.out.println("ByteData => " +  metaDataMocker.getByteData());
+        System.out.println("ByteBoxingArrayData => " +  JSON.toJSONString(metaDataMocker.getByteBoxingArrayData(), true));
+        System.out.println("ByteUnboxingArrayData => " +  JSON.toJSONString(metaDataMocker.getByteUnboxingArrayData(), true));
+
+        System.out.println("CharacterData => " +  metaDataMocker.getCharacterData());
+        System.out.println("CharacterBoxingArrayData => " +  JSON.toJSONString(metaDataMocker.getCharacterBoxingArrayData(), true));
         System.out.println("CharacterUnboxingArrayData => " +  JSON.toJSONString(metaDataMocker.getCharacterUnboxingArrayData(), true));
+
+        System.out.println("BooleanData => " +  metaDataMocker.getBooleanData());
+        System.out.println("BooleanBoxingArrayData => " +  JSON.toJSONString(metaDataMocker.getBooleanBoxingArrayData(), true));
+        System.out.println("BooleanUnboxingArrayData => " +  JSON.toJSONString(metaDataMocker.getBooleanUnboxingArrayData(), true));
+
+
+        System.out.println("LongData => " +  metaDataMocker.getLongData());
+        System.out.println("LongBoxingArrayData => " +  JSON.toJSONString(metaDataMocker.getLongBoxingArrayData(), true));
+        System.out.println("LongUnboxingArrayData => " +  JSON.toJSONString(metaDataMocker.getLongUnboxingArrayData(), true));
+
+        System.out.println("FloatData => " +  metaDataMocker.getFloatData());
+        System.out.println("FloatBoxingArrayData => " +  JSON.toJSONString(metaDataMocker.getFloatBoxingArrayData(), true));
+        System.out.println("FloatUnboxingArrayData => " +  JSON.toJSONString(metaDataMocker.getFloatUnboxingArrayData(), true));
+
+        System.out.println("ShortData => " +  metaDataMocker.getShortData());
+        System.out.println("ShortBoxingArrayData => " +  JSON.toJSONString(metaDataMocker.getShortBoxingArrayData(), true));
+        System.out.println("ShortUnboxingArrayData => " +  JSON.toJSONString(metaDataMocker.getShortUnboxingArrayData(), true));
+
+        System.out.println("DoubleData => " +  metaDataMocker.getDoubleData());
+        System.out.println("DoubleBoxingArrayData => " +  JSON.toJSONString(metaDataMocker.getDoubleBoxingArrayData(), true));
+        System.out.println("DoubleUnboxingArrayData => " +  JSON.toJSONString(metaDataMocker.getDoubleUnboxingArrayData(), true));
 
     }
     /**
@@ -52,14 +92,56 @@ public class JMockDataTest {
     @Test
     public void mockTest_mockMetaDataSingle() {
         JmockdataWrapperMetaDataSingle metaDataMocker=JMockData.mockMetaDataSingle();
+        System.out.println("BigIntegerData => " + metaDataMocker.getBigIntegerData());
+        System.out.println("BigIntegerArrayData => " + JSON.toJSONString(metaDataMocker.getBigIntegerArrayData(), true));
+
+        System.out.println("BigDecimalData => " + metaDataMocker.getBigDecimalData());
+        System.out.println("BigDecimalArrayData => " + JSON.toJSONString(metaDataMocker.getBigDecimalArrayData(), true));
+        
         System.out.println("StringData => " + metaDataMocker.getStringData());
         System.out.println("StringArrayData => " + JSON.toJSONString(metaDataMocker.getStringArrayData(), true));
+        
+        
+        System.out.println("StringData => " + metaDataMocker.getStringData());
+        System.out.println("StringArrayData => " + JSON.toJSONString(metaDataMocker.getStringArrayData(), true));
+
+        System.out.println("DateArrayData => " + metaDataMocker.getDateData());
+        System.out.println("DateArrayData => " + JSON.toJSONString(metaDataMocker.getDateArrayData(), true));
+
         System.out.println("IntegerData => " + metaDataMocker.getIntegerData());
         System.out.println("IntegerBoxingArrayData => " + JSON.toJSONString(metaDataMocker.getIntegerBoxingArrayData(), true));
         System.out.println("IntegerUnboxingArrayData => " + JSON.toJSONString(metaDataMocker.getIntegerUnboxingArrayData(), true));
-        System.out.println("DateArrayData => " + JSON.toJSONString(metaDataMocker.getDateArrayData(), true));
+
         System.out.println("ByteData => " +  metaDataMocker.getByteData());
+        System.out.println("ByteBoxingArrayData => " +  JSON.toJSONString(metaDataMocker.getByteBoxingArrayData(), true));
+        System.out.println("ByteUnboxingArrayData => " +  JSON.toJSONString(metaDataMocker.getByteUnboxingArrayData(), true));
+
+        System.out.println("CharacterData => " +  metaDataMocker.getCharacterData());
+        System.out.println("CharacterBoxingArrayData => " +  JSON.toJSONString(metaDataMocker.getCharacterBoxingArrayData(), true));
         System.out.println("CharacterUnboxingArrayData => " +  JSON.toJSONString(metaDataMocker.getCharacterUnboxingArrayData(), true));
+
+        System.out.println("BooleanData => " +  metaDataMocker.getBooleanData());
+        System.out.println("BooleanBoxingArrayData => " +  JSON.toJSONString(metaDataMocker.getBooleanBoxingArrayData(), true));
+        System.out.println("BooleanUnboxingArrayData => " +  JSON.toJSONString(metaDataMocker.getBooleanUnboxingArrayData(), true));
+
+
+        System.out.println("LongData => " +  metaDataMocker.getLongData());
+        System.out.println("LongBoxingArrayData => " +  JSON.toJSONString(metaDataMocker.getLongBoxingArrayData(), true));
+        System.out.println("LongUnboxingArrayData => " +  JSON.toJSONString(metaDataMocker.getLongUnboxingArrayData(), true));
+
+        System.out.println("FloatData => " +  metaDataMocker.getFloatData());
+        System.out.println("FloatBoxingArrayData => " +  JSON.toJSONString(metaDataMocker.getFloatBoxingArrayData(), true));
+        System.out.println("FloatUnboxingArrayData => " +  JSON.toJSONString(metaDataMocker.getFloatUnboxingArrayData(), true));
+
+        System.out.println("ShortData => " +  metaDataMocker.getShortData());
+        System.out.println("ShortBoxingArrayData => " +  JSON.toJSONString(metaDataMocker.getShortBoxingArrayData(), true));
+        System.out.println("ShortUnboxingArrayData => " +  JSON.toJSONString(metaDataMocker.getShortUnboxingArrayData(), true));
+
+        System.out.println("DoubleData => " +  metaDataMocker.getDoubleData());
+        System.out.println("DoubleBoxingArrayData => " +  JSON.toJSONString(metaDataMocker.getDoubleBoxingArrayData(), true));
+        System.out.println("DoubleUnboxingArrayData => " +  JSON.toJSONString(metaDataMocker.getDoubleUnboxingArrayData(), true));
+
+
 
     }
 

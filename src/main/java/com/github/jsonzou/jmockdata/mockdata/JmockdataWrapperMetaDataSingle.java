@@ -16,7 +16,7 @@ public class JmockdataWrapperMetaDataSingle {
     private final BigInteger bigIntegerData=BigInteger.ZERO;
     private final BigInteger[] bigIntegerArrayData=new BigInteger[]{};
 
-    private final Boolean booleanDataData=Boolean.FALSE;
+    private final Boolean booleanData=Boolean.FALSE;
     private final boolean[] booleanUnboxingArrayData=new boolean[]{};
     private final Boolean[] booleanBoxingArrayData=new Boolean[]{};
 
@@ -78,9 +78,9 @@ public class JmockdataWrapperMetaDataSingle {
         return  JMockDataManager.getInstance().getMockDataBean(bigIntegerArrayData.getClass()).mock(context);
     }
 
-    public Boolean getBooleanDataData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(booleanDataData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(booleanDataData.getClass()).mock(context);
+    public Boolean getBooleanData() {
+        JmockDataContext context=JmockDataContext.newRootInstance(booleanData.getClass());
+        return  JMockDataManager.getInstance().getMockDataBean(booleanData.getClass()).mock(context);
     }
 
     public boolean[] getBooleanUnboxingArrayData() {

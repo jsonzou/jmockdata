@@ -16,7 +16,7 @@ public class JmockdataWrapperMetaDataAll extends JmockDataWrapper {
     private BigInteger bigIntegerData;
     private BigInteger[] bigIntegerArrayData;
 
-    private Boolean booleanDataData;
+    private Boolean booleanData;
     private boolean[] booleanUnboxingArrayData;
     private Boolean[] booleanBoxingArrayData;
 
@@ -88,12 +88,12 @@ public class JmockdataWrapperMetaDataAll extends JmockDataWrapper {
         this.bigIntegerArrayData = bigIntegerArrayData;
     }
 
-    public Boolean getBooleanDataData() {
-        return booleanDataData;
+    public Boolean getBooleanData() {
+        return booleanData;
     }
 
-    public void setBooleanDataData(Boolean booleanDataData) {
-        this.booleanDataData = booleanDataData;
+    public void setBooleanData(Boolean booleanData) {
+        this.booleanData = booleanData;
     }
 
     public boolean[] getBooleanUnboxingArrayData() {
