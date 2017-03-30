@@ -36,8 +36,8 @@ public class JMockDataTest {
      * 测试模拟简单POJO - User
      */
     @Test
-    public void mockTest_mockSimpleBean_mockPOJO() {
-          User user=JMockData.mockSimpleBean(User.class);
+    public void mockTest_mockSimpleType_mockPOJO() {
+          User user=JMockData.mockSimpleType(User.class);
           print(user);
     }
 
@@ -45,61 +45,61 @@ public class JMockDataTest {
      * 测试模拟any
      */
     @Test
-    public void mockTest_mockSimpleBean_mockAny() {
-        MockDemoBeanAnyData anyData=JMockData.mockSimpleBean(MockDemoBeanAnyData.class);
+    public void mockTest_mockSimpleType_mockAny() {
+        MockDemoBeanAnyData anyData=JMockData.mockSimpleType(MockDemoBeanAnyData.class);
         print(anyData);
     }
     /**
      * 测试模拟元数据类型
      */
     @Test
-    public void mockTest_mockSimpleBean_mockMeta() {
+    public void mockTest_mockSimpleType_mockMeta() {
 
-        System.out.println("BigIntegerData => " + JMockData.mockSimpleBean(BigInteger.class));
-        System.out.println("BigIntegerArrayData => " + JSON.toJSONString(JMockData.mockSimpleBean(BigInteger[].class), true));
+        System.out.println("BigIntegerData => " + JMockData.mockSimpleType(BigInteger.class));
+        System.out.println("BigIntegerArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(BigInteger[].class), true));
 
-        System.out.println("BigDecimalData => " + JMockData.mockSimpleBean(BigDecimal.class));
-        System.out.println("BigDecimalArrayData => " + JSON.toJSONString(JMockData.mockSimpleBean(BigDecimal[].class), true));
+        System.out.println("BigDecimalData => " + JMockData.mockSimpleType(BigDecimal.class));
+        System.out.println("BigDecimalArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(BigDecimal[].class), true));
 
-        System.out.println("StringData => " + JMockData.mockSimpleBean(String.class));
-        System.out.println("StringArrayData => " + JSON.toJSONString(JMockData.mockSimpleBean(String[].class), true));
-
-
-        System.out.println("DateData => " + JMockData.mockSimpleBean(Date.class));
-        System.out.println("DateArrayData => " + JSON.toJSONString(JMockData.mockSimpleBean(Date[].class), true));
-
-        System.out.println("IntegerData => " +JMockData.mockSimpleBean(Integer.class));
-        System.out.println("IntegerBoxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleBean(Integer[].class), true));
-        System.out.println("IntegerUnboxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleBean(int[].class), true));
-
-        System.out.println("ByteData => " +  JMockData.mockSimpleBean(Byte.class));
-        System.out.println("ByteBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(Byte[].class), true));
-        System.out.println("ByteUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(byte[].class), true));
-
-        System.out.println("CharacterData => " +  JMockData.mockSimpleBean(Character.class));
-        System.out.println("CharacterBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(Character[].class), true));
-        System.out.println("CharacterUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(char[].class), true));
-
-        System.out.println("BooleanData => " + JMockData.mockSimpleBean(Boolean.class));
-        System.out.println("BooleanBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(Boolean[].class), true));
-        System.out.println("BooleanUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(boolean[].class), true));
+        System.out.println("StringData => " + JMockData.mockSimpleType(String.class));
+        System.out.println("StringArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(String[].class), true));
 
 
-        System.out.println("LongData => " +  JMockData.mockSimpleBean(Long.class));
-        System.out.println("LongBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(Long[].class), true));
-        System.out.println("LongUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(long[].class), true));
+        System.out.println("DateData => " + JMockData.mockSimpleType(Date.class));
+        System.out.println("DateArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(Date[].class), true));
 
-        System.out.println("FloatData => " + JMockData.mockSimpleBean(Float.class));
-        System.out.println("FloatBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(Float[].class), true));
-        System.out.println("FloatUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(float[].class), true));
+        System.out.println("IntegerData => " +JMockData.mockSimpleType(Integer.class));
+        System.out.println("IntegerBoxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(Integer[].class), true));
+        System.out.println("IntegerUnboxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(int[].class), true));
 
-        System.out.println("ShortData => " + JMockData.mockSimpleBean(Short.class));
-        System.out.println("ShortBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(Short[].class), true));
-        System.out.println("ShortUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(short[].class), true));
+        System.out.println("ByteData => " +  JMockData.mockSimpleType(Byte.class));
+        System.out.println("ByteBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleType(Byte[].class), true));
+        System.out.println("ByteUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleType(byte[].class), true));
 
-        System.out.println("DoubleData => " +  JMockData.mockSimpleBean(Double.class));
-        System.out.println("DoubleBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(Double[].class), true));
-        System.out.println("DoubleUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(double[].class), true));
+        System.out.println("CharacterData => " +  JMockData.mockSimpleType(Character.class));
+        System.out.println("CharacterBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleType(Character[].class), true));
+        System.out.println("CharacterUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleType(char[].class), true));
+
+        System.out.println("BooleanData => " + JMockData.mockSimpleType(Boolean.class));
+        System.out.println("BooleanBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleType(Boolean[].class), true));
+        System.out.println("BooleanUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleType(boolean[].class), true));
+
+
+        System.out.println("LongData => " +  JMockData.mockSimpleType(Long.class));
+        System.out.println("LongBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleType(Long[].class), true));
+        System.out.println("LongUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleType(long[].class), true));
+
+        System.out.println("FloatData => " + JMockData.mockSimpleType(Float.class));
+        System.out.println("FloatBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleType(Float[].class), true));
+        System.out.println("FloatUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleType(float[].class), true));
+
+        System.out.println("ShortData => " + JMockData.mockSimpleType(Short.class));
+        System.out.println("ShortBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleType(Short[].class), true));
+        System.out.println("ShortUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleType(short[].class), true));
+
+        System.out.println("DoubleData => " +  JMockData.mockSimpleType(Double.class));
+        System.out.println("DoubleBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleType(Double[].class), true));
+        System.out.println("DoubleUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleType(double[].class), true));
     }
 
     /**

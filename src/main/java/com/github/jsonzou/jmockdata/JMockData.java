@@ -78,7 +78,7 @@ public class JMockData {
      * @param <T>
      * @return
      */
-    public static <T> T mockSimpleBean(Class<T> simpleType)  {
+    public static <T> T mockSimpleType(Class<T> simpleType)  {
         JmockDataContext context=JmockDataContext.newRootInstance(simpleType);
         T simple=JMockDataManager.getInstance().getMockDataBean(simpleType).mock(context);
         context.printTree();
