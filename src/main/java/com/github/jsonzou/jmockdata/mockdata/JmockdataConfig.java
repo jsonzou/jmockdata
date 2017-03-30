@@ -16,6 +16,7 @@ import com.github.jsonzou.jmockdata.utils.StringUtil;
  * Created by v_zoupengfei on 2017/1/18.
  */
 public class JmockdataConfig {
+    private Boolean printContext=false;
     // value[seed,seed,seed]
     private Character[] seedCharacter =
             {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
@@ -80,7 +81,9 @@ public class JmockdataConfig {
                         key = en.getKey().toString();
                         value = en.getValue().toString();
                         Object fValueObj = getValue(key);
-                        if (key.startsWith("arrsize")
+                        if ("printContext".equals(key)){
+                            setValue(key,Boolean.valueOf(fValueObj.toString()));
+                        } else if (key.startsWith("arrsize")
                                 || key.startsWith("rangeDate")
                                 || key.startsWith("rangeInteger")
                                 ) {
@@ -428,5 +431,13 @@ public class JmockdataConfig {
 
     public void setArrsizeString(Integer[] arrsizeString) {
         this.arrsizeString = arrsizeString;
+    }
+
+    public Boolean getPrintContext() {
+        return printContext;
+    }
+
+    public void setPrintContext(Boolean printContext) {
+        this.printContext = printContext;
     }
 }

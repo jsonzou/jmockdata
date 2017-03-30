@@ -2,21 +2,26 @@
 package com.github.jsonzou.jmockdata.test;
 
 import com.alibaba.fastjson.JSON;
-import com.github.jsonzou.jmockdata.mockdata.JmockdataWrapperMetaDataAll;
-import com.github.jsonzou.jmockdata.mockdata.JmockdataWrapperMetaDataSingle;
-import com.github.jsonzou.jmockdata.test.registermockdatabean.MockDataStringBuffer;
-import com.github.jsonzou.jmockdata.test.wrapperbean.MockDemoBeanAnyDataWrapper;
-import com.github.jsonzou.jmockdata.test.wrapperbean.MockDemoBeanConfigWrapper;
-import com.github.jsonzou.jmockdata.test.wrapperbean.MockDemoBeanSelfRefDataWrapper;
-import com.github.jsonzou.jmockdata.test.wrapperbean.MockDemoBeanSimpleDataWrapper;
-import com.github.jsonzou.jmockdata.test.wrapperbean.MockDemoCustomStringBufferWrapper;
-import com.github.jsonzou.jmockdata.test.wrapperbean.MockDemoSimpleListStringWrapper;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.mockdata.JMockDataManager;
+import com.github.jsonzou.jmockdata.mockdata.JmockdataWrapperMetaDataAll;
+import com.github.jsonzou.jmockdata.mockdata.JmockdataWrapperMetaDataSingle;
 import com.github.jsonzou.jmockdata.test.custommocktemplate.CustomJmockDataTemplate;
 import com.github.jsonzou.jmockdata.test.interceptor.OneJmockDataInterceptor;
-
+import com.github.jsonzou.jmockdata.test.registermockdatabean.MockDataStringBuffer;
+import com.github.jsonzou.jmockdata.test.testbean.MockDemoBeanAnyData;
+import com.github.jsonzou.jmockdata.test.testbean.User;
+import com.github.jsonzou.jmockdata.test.wrapperbean.*;
+import com.github.jsonzou.jmockdata.utils.TypeReference;
 import org.junit.Test;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 测试
@@ -26,6 +31,99 @@ import org.junit.Test;
  * @since 2016/12/26
  */
 public class JMockDataTest {
+
+    /**
+     * 测试模拟简单POJO - User
+     */
+    @Test
+    public void mockTest_mockSimpleBean_mockPOJO() {
+          User user=JMockData.mockSimpleBean(User.class);
+          print(user);
+    }
+
+    /**
+     * 测试模拟any
+     */
+    @Test
+    public void mockTest_mockSimpleBean_mockAny() {
+        MockDemoBeanAnyData anyData=JMockData.mockSimpleBean(MockDemoBeanAnyData.class);
+        print(anyData);
+    }
+    /**
+     * 测试模拟元数据类型
+     */
+    @Test
+    public void mockTest_mockSimpleBean_mockMeta() {
+
+        System.out.println("BigIntegerData => " + JMockData.mockSimpleBean(BigInteger.class));
+        System.out.println("BigIntegerArrayData => " + JSON.toJSONString(JMockData.mockSimpleBean(BigInteger[].class), true));
+
+        System.out.println("BigDecimalData => " + JMockData.mockSimpleBean(BigDecimal.class));
+        System.out.println("BigDecimalArrayData => " + JSON.toJSONString(JMockData.mockSimpleBean(BigDecimal[].class), true));
+
+        System.out.println("StringData => " + JMockData.mockSimpleBean(String.class));
+        System.out.println("StringArrayData => " + JSON.toJSONString(JMockData.mockSimpleBean(String[].class), true));
+
+
+        System.out.println("DateData => " + JMockData.mockSimpleBean(Date.class));
+        System.out.println("DateArrayData => " + JSON.toJSONString(JMockData.mockSimpleBean(Date[].class), true));
+
+        System.out.println("IntegerData => " +JMockData.mockSimpleBean(Integer.class));
+        System.out.println("IntegerBoxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleBean(Integer[].class), true));
+        System.out.println("IntegerUnboxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleBean(int[].class), true));
+
+        System.out.println("ByteData => " +  JMockData.mockSimpleBean(Byte.class));
+        System.out.println("ByteBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(Byte[].class), true));
+        System.out.println("ByteUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(byte[].class), true));
+
+        System.out.println("CharacterData => " +  JMockData.mockSimpleBean(Character.class));
+        System.out.println("CharacterBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(Character[].class), true));
+        System.out.println("CharacterUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(char[].class), true));
+
+        System.out.println("BooleanData => " + JMockData.mockSimpleBean(Boolean.class));
+        System.out.println("BooleanBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(Boolean[].class), true));
+        System.out.println("BooleanUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(boolean[].class), true));
+
+
+        System.out.println("LongData => " +  JMockData.mockSimpleBean(Long.class));
+        System.out.println("LongBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(Long[].class), true));
+        System.out.println("LongUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(long[].class), true));
+
+        System.out.println("FloatData => " + JMockData.mockSimpleBean(Float.class));
+        System.out.println("FloatBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(Float[].class), true));
+        System.out.println("FloatUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(float[].class), true));
+
+        System.out.println("ShortData => " + JMockData.mockSimpleBean(Short.class));
+        System.out.println("ShortBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(Short[].class), true));
+        System.out.println("ShortUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(short[].class), true));
+
+        System.out.println("DoubleData => " +  JMockData.mockSimpleBean(Double.class));
+        System.out.println("DoubleBoxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(Double[].class), true));
+        System.out.println("DoubleUnboxingArrayData => " +  JSON.toJSONString(JMockData.mockSimpleBean(double[].class), true));
+    }
+
+    /**
+     * 测试模拟
+     * List,Set,Map三种常见数据结构
+     */
+    @Test
+    public void mockTest_mockCollection() {
+        List<String> listStr=JMockData.mockCollection(new TypeReference<List<String>>(){});
+        List<User[]> listUser=JMockData.mockCollection(new TypeReference<List<User[]>>(){});
+        Set<String> setStr=JMockData.mockCollection(new TypeReference<Set<String>>(){});
+        Map<String,String> mapStr=JMockData.mockCollection(new TypeReference<Map<String,String>>(){});
+        Map<String,User> mapUser=JMockData.mockCollection(new TypeReference<Map<String,User>>(){});
+
+        print(listStr);
+        print(listUser);
+        print(setStr);
+        print(mapStr);
+        print(mapUser);
+
+    }
+
+
+
     /**
      * 测试一次模拟全部元数据类型JmockdataWrapperMetaDataAll
      * 元数据类型包括40种
@@ -44,10 +142,7 @@ public class JMockDataTest {
         System.out.println("StringArrayData => " + JSON.toJSONString(metaDataMocker.getStringArrayData(), true));
 
 
-        System.out.println("StringData => " + metaDataMocker.getStringData());
-        System.out.println("StringArrayData => " + JSON.toJSONString(metaDataMocker.getStringArrayData(), true));
-
-        System.out.println("DateArrayData => " + metaDataMocker.getDateData());
+        System.out.println("DateData => " + metaDataMocker.getDateData());
         System.out.println("DateArrayData => " + JSON.toJSONString(metaDataMocker.getDateArrayData(), true));
 
         System.out.println("IntegerData => " + metaDataMocker.getIntegerData());
@@ -102,10 +197,8 @@ public class JMockDataTest {
         System.out.println("StringArrayData => " + JSON.toJSONString(metaDataMocker.getStringArrayData(), true));
         
         
-        System.out.println("StringData => " + metaDataMocker.getStringData());
-        System.out.println("StringArrayData => " + JSON.toJSONString(metaDataMocker.getStringArrayData(), true));
 
-        System.out.println("DateArrayData => " + metaDataMocker.getDateData());
+        System.out.println("DateData => " + metaDataMocker.getDateData());
         System.out.println("DateArrayData => " + JSON.toJSONString(metaDataMocker.getDateArrayData(), true));
 
         System.out.println("IntegerData => " + metaDataMocker.getIntegerData());
@@ -229,6 +322,8 @@ public class JMockDataTest {
      * @param data
      */
     private void print(Object data) {
-        System.out.println(JSON.toJSONString(data, true));
+
+        System.out.println(JSON.toJSONStringWithDateFormat(data, "YYYY-MM-dd HH:mm:ss", SerializerFeature.PrettyFormat));
+     //   System.out.println(JSON.toJSONString(data, true));
     }
 }

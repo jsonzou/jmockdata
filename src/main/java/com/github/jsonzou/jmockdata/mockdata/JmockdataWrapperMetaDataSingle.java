@@ -1,6 +1,8 @@
 
 package com.github.jsonzou.jmockdata.mockdata;
 
+import com.github.jsonzou.jmockdata.JMockData;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
@@ -10,245 +12,159 @@ import java.util.Date;
  * Created by v_zoupengfei on 2017/3/27.
  */
 public class JmockdataWrapperMetaDataSingle {
-    private final BigDecimal bigDecimalData=BigDecimal.ZERO;
-    private final BigDecimal[] bigDecimalArrayData=new BigDecimal[]{};
-
-    private final BigInteger bigIntegerData=BigInteger.ZERO;
-    private final BigInteger[] bigIntegerArrayData=new BigInteger[]{};
-
-    private final Boolean booleanData=Boolean.FALSE;
-    private final boolean[] booleanUnboxingArrayData=new boolean[]{};
-    private final Boolean[] booleanBoxingArrayData=new Boolean[]{};
-
-    private final Byte byteData=0;
-    private final byte[] byteUnboxingArrayData=new byte[]{};
-    private final Byte[] byteBoxingArrayData=new Byte[]{};
-
-    private final Character characterData='0';
-    private final char[] characterUnboxingArrayData=new char[]{};
-    private final Character[] characterBoxingArrayData=new Character[]{};
-
-    private final Date dateData=new Date();
-    private final Date[] dateArrayData=new Date[]{};
-
-    private final Double doubleData=0.0d;
-    private final double[] doubleUnboxingArrayData=new double[] {};
-    private final Double[] doubleBoxingArrayData=new Double[]{};
-
-
-    private final Float floatData=0.0f;
-    private final float[] floatUnboxingArrayData=new float[]{};
-    private final Float[] floatBoxingArrayData=new Float[] {};
-
-
-    private final Integer integerData=0;
-    private final int[] integerUnboxingArrayData=new int[]{};
-    private final Integer[] integerBoxingArrayData=new Integer[]{};
-
-    private final Long longData=0l;
-    private final long[] longUnboxingArrayData=new long[] {};
-    private final Long[] longBoxingArrayData=new Long[] {};
-
-    private final Short shortData=0;
-    private final short[] shortUnboxingArrayData=new short[]{};
-    private final Short[] shortBoxingArrayData=new Short[]{};
-
-    private final String stringData="";
-    private final String[] stringArrayData=new String[]{};
-
     public BigDecimal getBigDecimalData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(bigDecimalData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(bigDecimalData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(BigDecimal.class);
     }
 
 
     public BigDecimal[] getBigDecimalArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(bigDecimalArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(bigDecimalArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(BigDecimal[].class);
     }
 
 
     public BigInteger getBigIntegerData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(bigIntegerData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(bigIntegerData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(BigInteger.class);
     }
 
     public BigInteger[] getBigIntegerArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(bigIntegerArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(bigIntegerArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(BigInteger[].class);
     }
 
     public Boolean getBooleanData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(booleanData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(booleanData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(Boolean.class);
     }
 
     public boolean[] getBooleanUnboxingArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(booleanUnboxingArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(booleanUnboxingArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(boolean[].class);
     }
 
 
-
     public Boolean[] getBooleanBoxingArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(booleanBoxingArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(booleanBoxingArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(Boolean[].class);
     }
 
 
     public Byte getByteData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(byteData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(byteData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(Byte.class);
     }
 
 
     public byte[] getByteUnboxingArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(byteUnboxingArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(byteUnboxingArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(byte[].class);
     }
 
 
-
     public Byte[] getByteBoxingArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(byteBoxingArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(byteBoxingArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(Byte[].class);
     }
 
 
     public Character getCharacterData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(characterData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(characterData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(Character.class);
     }
 
 
     public char[] getCharacterUnboxingArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(characterUnboxingArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(characterUnboxingArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(char[].class);
     }
-
 
 
     public Character[] getCharacterBoxingArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(characterBoxingArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(characterBoxingArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(Character[].class);
     }
 
 
-
     public Date getDateData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(dateData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(dateData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(Date.class);
     }
 
 
     public Date[] getDateArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(dateArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(dateArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(Date[].class);
     }
 
 
     public Double getDoubleData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(doubleData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(doubleData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(Double.class);
     }
 
 
     public double[] getDoubleUnboxingArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(doubleUnboxingArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(doubleUnboxingArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(double[].class);
     }
 
 
     public Double[] getDoubleBoxingArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(doubleBoxingArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(doubleBoxingArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(Double[].class);
     }
-
 
 
     public Float getFloatData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(floatData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(floatData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(Float.class);
     }
 
     public float[] getFloatUnboxingArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(floatUnboxingArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(floatUnboxingArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(float[].class);
     }
 
 
     public Float[] getFloatBoxingArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(floatBoxingArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(floatBoxingArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(Float[].class);
     }
 
 
     public Integer getIntegerData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(integerData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(integerData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(Integer.class);
     }
 
 
     public int[] getIntegerUnboxingArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(integerUnboxingArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(integerUnboxingArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(int[].class);
     }
 
 
-
     public Integer[] getIntegerBoxingArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(integerBoxingArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(integerBoxingArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(Integer[].class);
     }
 
 
     public Long getLongData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(longData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(longData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(Long.class);
     }
 
 
     public long[] getLongUnboxingArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(longUnboxingArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(longUnboxingArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(long[].class);
     }
 
 
     public Long[] getLongBoxingArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(longBoxingArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(longBoxingArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(Long[].class);
     }
 
 
     public Short getShortData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(shortData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(shortData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(Short.class);
     }
 
 
     public short[] getShortUnboxingArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(shortUnboxingArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(shortUnboxingArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(short[].class);
     }
-
 
 
     public Short[] getShortBoxingArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(shortBoxingArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(shortBoxingArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(Short[].class);
     }
 
 
-
     public String getStringData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(stringData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(stringData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(String.class);
     }
 
 
     public String[] getStringArrayData() {
-        JmockDataContext context=JmockDataContext.newRootInstance(stringArrayData.getClass());
-        return  JMockDataManager.getInstance().getMockDataBean(stringArrayData.getClass()).mock(context);
+        return JMockData.mockSimpleBean(String[].class);
     }
 
 

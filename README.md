@@ -5,8 +5,7 @@ Jmockdata插件通过随机算法模拟Java数据.
   
 示例可以参考单元测试内容，具体介绍和用法可以参考如下：
   
-0. 模拟数据入口方法 JMockData.mock(JmockDataWrapper)
-1. 被模拟数据必须继承JmockDataWrapper经过它的包装
+1. 模拟数据入口类Jmockdata
 2. 被模拟的数据最好是plain bean,只提供getter,setter,has,is方法的才可以被模拟
 3. 框架默认实现了40个元数据类型的数据模拟器包括：  
   ``` byte.class,Byte.class,byte[].class,Byte[].class,  
