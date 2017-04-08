@@ -47,6 +47,9 @@ public class JmockdataConfig {
     // range-boolean [false,true] / [fixed value]
     private Boolean[] rangeBoolean = {false, true};
 
+    // the decimal data scale number 小数位数
+    private Integer decimalScale = 2;
+
     // arrSizeRange[arrSizeRange-min,arrSizeRange-max] / [fixed size]
     private Integer[] arrsizeBean = {0, 10};
     private Integer[] arrsizeBigdecimal = {0, 10};
@@ -82,7 +85,9 @@ public class JmockdataConfig {
                         value = en.getValue().toString();
                         Object fValueObj = getValue(key);
                         if ("printContext".equals(key)){
-                            setValue(key,Boolean.valueOf(fValueObj.toString()));
+                            setValue(key,Boolean.valueOf(value));
+                        }else if ("decimalScale".equals(key)){
+                            setValue(key,Integer.valueOf(value));
                         } else if (key.startsWith("arrsize")
                                 || key.startsWith("rangeDate")
                                 || key.startsWith("rangeInteger")
@@ -439,5 +444,13 @@ public class JmockdataConfig {
 
     public void setPrintContext(Boolean printContext) {
         this.printContext = printContext;
+    }
+
+    public Integer getDecimalScale() {
+        return decimalScale;
+    }
+
+    public void setDecimalScale(Integer decimalScale) {
+        this.decimalScale = decimalScale;
     }
 }

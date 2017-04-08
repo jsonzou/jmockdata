@@ -26,7 +26,10 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
     }
 
     public BigDecimal mockBigDecimal(JmockDataContext context) {
-        return new BigDecimal(mockDouble(context));
+        return new BigDecimal(mockDouble(context)).setScale(
+                JMockDataManager.getInstance().config().getDecimalScale(),
+                BigDecimal.ROUND_DOWN
+        );
     }
 
     public BigDecimal[] mockBigDecimalArray(JmockDataContext context) {

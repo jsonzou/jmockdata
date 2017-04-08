@@ -261,6 +261,19 @@ public class JMockDataTest {
     }
 
     /**
+     * 测试配置文件 》 改变默认算法行为
+     */
+    @Test
+    public void mockTest_config_rangeMock() {
+        JMockDataManager.getInstance().config("config.properties");
+        System.out.println(JMockData.mockMetaDataSingle().getDoubleData());
+        System.out.println(JMockData.mockMetaDataSingle().getFloatData());
+        System.out.println(JMockData.mockMetaDataSingle().getIntegerData());
+        System.out.println(JMockData.mockMetaDataSingle().getLongData());
+    }
+
+
+    /**
      * 测试模拟任意类型的数据
      */
     @Test

@@ -54,7 +54,9 @@ public class JmockDataContext {
     }
 
     private void printTree(JmockDataContext ctx) {
-
+        if(!JMockDataManager.getInstance().getConfig().getPrintContext()){
+            return ;
+        }
         if (ctx == null) {
             printTree(this.getRoot());
         } else if (ctx == ctx.getRoot()) {
