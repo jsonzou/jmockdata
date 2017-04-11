@@ -37,6 +37,14 @@
         </developer>
     </developers>
 
+    <!-- 贡献者信息-->
+    <contributors>
+        <contributor>
+            <name>TaoYu</name>
+            <email>332309254@qq.com</email>
+        </contributor>
+    </contributors>
+
     <!-- SCM 信息-->
     <scm>
         <connection>scm:git:https://github.com/jsonzou/jmockdata.git</connection>
@@ -56,7 +64,6 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
-
 
     <dependencies>
         <dependency>
@@ -81,10 +88,10 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.6.1</version>
                     <configuration>
-                        <source>1.7</source>
-                        <target>1.7</target>
-                        <testSource>1.7</testSource>
-                        <testTarget>1.7</testTarget>
+                        <source>${jdk.version}</source>
+                        <target>${jdk.version}</target>
+                        <testSource>${jdk.version}</testSource>
+                        <testTarget>${jdk.version}</testTarget>
                         <encoding>UTF-8</encoding>
                         <optimize>true</optimize>
                         <!-- Slightly faster builds, see https://issues.apache.org/jira/browse/MCOMPILER-209 -->
@@ -119,7 +126,7 @@
                         <argLine>-Dfile.encoding=UTF-8</argLine>
                     </configuration>
                 </plugin>
-                <!-- Source -->
+                <!-- 源码 -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
@@ -133,7 +140,7 @@
                         </execution>
                     </executions>
                 </plugin>
-                <!-- Javadoc -->
+                <!-- 文档 -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
@@ -165,7 +172,6 @@
                     </executions>
                 </plugin>
                 <!--license插件,用于给每个文件生成头注释 https://github.com/mycila/license-maven-plugin-->
-                <!--mvn license:format-->
                 <plugin>
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
@@ -219,6 +225,7 @@
                 <artifactId>license-maven-plugin</artifactId>
             </plugin>
         </plugins>
+
     </build>
 
     <profiles>
