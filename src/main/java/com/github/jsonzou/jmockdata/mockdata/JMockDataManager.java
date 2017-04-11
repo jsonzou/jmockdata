@@ -1,7 +1,7 @@
 
 package com.github.jsonzou.jmockdata.mockdata;
 
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataDefaultNull;
+import com.github.jsonzou.jmockdata.mockdata.mocks.*;
 import com.github.jsonzou.jmockdata.utils.ReflectionUtil;
 
 import java.lang.reflect.Type;
@@ -12,41 +12,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataBean;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataBigDecimal;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataBigDecimalArray;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataBigInteger;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataBigIntegerArray;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataBoolean;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataBooleanBoxingArray;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataBooleanUnboxingArray;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataByte;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataByteBoxingArray;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataByteUnboxingArray;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataCharacter;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataCharacterBoxingArray;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataCharacterUnboxingArray;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataDate;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataDateArray;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataDouble;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataDoubleBoxingArray;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataDoubleUnboxingArray;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataFloat;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataFloatBoxingArray;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataFloatUnboxingArray;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataInteger;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataIntegerBoxingArray;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataIntegerUnboxingArray;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataLong;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataLongBoxingArray;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataLongUnboxingArray;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataProxy;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataShort;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataShortBoxingArray;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataShortUnboxingArray;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataString;
-import com.github.jsonzou.jmockdata.mockdata.mocks.MockDataStringArray;
 
 /**
  * <p>模拟数据管理类
@@ -68,7 +33,7 @@ public class JMockDataManager {
     private Map<String, MockData> mockDataMappings = new ConcurrentHashMap<String, MockData>();
     private List<JmockDataInterceptor> interceptors = new ArrayList<JmockDataInterceptor>();
     private JmockDataTemplate mockTemplate = new JmockDataTemplateDefault();
-    private JmockdataConfig config=new JmockdataConfig();
+    private JmockdataConfig config = new JmockdataConfig();
     private Integer maxSelfRefLevel = 3;
 
     private JMockDataManager() {
@@ -137,12 +102,12 @@ public class JMockDataManager {
     }
 
     /**
-     *
      * config
      */
     public void config(String configUnderClasspath) {
         JMockDataFactoryHolder.manager.getConfig().readConfig(configUnderClasspath);
     }
+
     public JmockdataConfig config() {
         return JMockDataFactoryHolder.manager.getConfig();
     }
@@ -151,7 +116,7 @@ public class JMockDataManager {
      * 获取模拟数据类型bean
      *
      * @param clazz clazz
-     * @param <T> any
+     * @param <T>   any
      * @return MockData
      */
     public <T> MockData<T> getMockDataBean(Class<T> clazz) {
@@ -165,10 +130,10 @@ public class JMockDataManager {
     /**
      * 获取模拟数据类型bean
      *
-     * @param clazz clazz
+     * @param clazz       clazz
      * @param genericType genericType
-     * @param <T> any
-     * @return  MockData
+     * @param <T>         any
+     * @return MockData
      */
     public <T> MockData<T> getMockDataBean(Class<T> clazz, Type genericType) {
         MockData mockData = mockDataMappings.get(ReflectionUtil.getClassName(clazz));
@@ -201,7 +166,7 @@ public class JMockDataManager {
     /**
      * 注册模拟类型bean
      *
-     * @param mockData mockData
+     * @param mockData      mockData
      * @param registerClazz registerClazz
      */
     public void registerMockData(MockData mockData, Class... registerClazz) {
@@ -225,7 +190,7 @@ public class JMockDataManager {
      * 注册拦截器
      *
      * @param interceptors interceptors
-     * @param <T> any
+     * @param <T>          any
      */
     public <T extends JmockDataInterceptor> void interceptors(Class<T>... interceptors) {
         if (interceptors != null && interceptors.length > 0) {

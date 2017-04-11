@@ -1,15 +1,15 @@
 
 package com.github.jsonzou.jmockdata.mockdata;
 
+import com.github.jsonzou.jmockdata.utils.MockUtil;
+import com.github.jsonzou.jmockdata.utils.RandomUtil;
+
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
-
-import com.github.jsonzou.jmockdata.utils.MockUtil;
-import com.github.jsonzou.jmockdata.utils.RandomUtil;
 
 /**
  * <p>默认提供模拟类型数据模板类默认实现</p>
@@ -34,7 +34,7 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
 
     public BigDecimal[] mockBigDecimalArray(JmockDataContext context) {
         BigDecimal[] mockDataArr = MockUtil.mockArray(BigDecimal.class,
-                getConfig().getArrsizeBigdecimal()[0],getConfig().getArrsizeBigdecimal()[1]);
+                getConfig().getArrsizeBigdecimal()[0], getConfig().getArrsizeBigdecimal()[1]);
         int len = mockDataArr.length;
         while (--len >= 0) {
             Array.set(mockDataArr, len, mockBigDecimal(context));
@@ -47,7 +47,7 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
     }
 
     public BigInteger[] mockBigIntegerArray(JmockDataContext context) {
-        BigInteger[] mockDataArr = MockUtil.mockArray(BigInteger.class,getConfig().getArrsizeBiginteger()[0],
+        BigInteger[] mockDataArr = MockUtil.mockArray(BigInteger.class, getConfig().getArrsizeBiginteger()[0],
                 getConfig().getArrsizeBiginteger()[1]);
         int len = mockDataArr.length;
         while (--len >= 0) {
@@ -57,7 +57,7 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
     }
 
     public Boolean mockBoolean(JmockDataContext context) {
-        if(getConfig().getRangeBoolean()[0].equals(getConfig().getRangeBoolean()[1])){
+        if (getConfig().getRangeBoolean()[0].equals(getConfig().getRangeBoolean()[1])) {
             return getConfig().getRangeBoolean()[0];
         }
         return random.nextBoolean();
@@ -74,7 +74,7 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
     }
 
     public Boolean[] mockBooleanBoxingArray(JmockDataContext context) {
-        Boolean[] mockDataArr = MockUtil.mockArray(Boolean.class,getConfig().getArrsizeBoolean()[0],getConfig()
+        Boolean[] mockDataArr = MockUtil.mockArray(Boolean.class, getConfig().getArrsizeBoolean()[0], getConfig()
                 .getArrsizeBoolean()[1]);
         int len = mockDataArr.length;
         while (--len >= 0) {
@@ -100,7 +100,7 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
     }
 
     public Byte[] mockByteBoxingArray(JmockDataContext context) {
-        Byte[] mockDataArr = MockUtil.mockArray(Byte.class,getConfig().getArrsizeByte()[0],getConfig().getArrsizeByte
+        Byte[] mockDataArr = MockUtil.mockArray(Byte.class, getConfig().getArrsizeByte()[0], getConfig().getArrsizeByte
                 ()[1]);
         int len = mockDataArr.length;
         while (--len >= 0) {
@@ -111,7 +111,7 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
 
     public Character mockCharacter(JmockDataContext context) {
         return JMockDataManager.getInstance().getConfig().getSeedCharacter()[RandomUtil
-           .randomInteger(JMockDataManager.getInstance().getConfig().getSeedCharacter().length)];
+                .randomInteger(JMockDataManager.getInstance().getConfig().getSeedCharacter().length)];
     }
 
     public char[] mockCharacterUnboxingArray(JmockDataContext context) {
@@ -125,7 +125,7 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
     }
 
     public Character[] mockCharacterBoxingArray(JmockDataContext context) {
-        Character[] mockDataArr = MockUtil.mockArray(Character.class,getConfig().getArrsizeCharacter()[0],getConfig()
+        Character[] mockDataArr = MockUtil.mockArray(Character.class, getConfig().getArrsizeCharacter()[0], getConfig()
                 .getArrsizeCharacter()[1]);
         int len = mockDataArr.length;
         while (--len >= 0) {
@@ -135,19 +135,19 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
     }
 
     public Date mockDate(JmockDataContext context) {
-        Calendar cld=Calendar.getInstance();
-        cld.set(RandomUtil.randomInteger(getConfig().getRangeDateY()[0],getConfig().getRangeDateY()[1]),
-                RandomUtil.randomInteger(getConfig().getRangeDateM()[0],getConfig().getRangeDateM()[1]),
-                RandomUtil.randomInteger(getConfig().getRangeDateD()[0],getConfig().getRangeDateD()[1]),
-                RandomUtil.randomInteger(getConfig().getRangeDateH()[0],getConfig().getRangeDateH()[1]),
-                RandomUtil.randomInteger(getConfig().getRangeDateMi()[0],getConfig().getRangeDateMi()[1]),
-                RandomUtil.randomInteger(getConfig().getRangeDateS()[0],getConfig().getRangeDateS()[1])
+        Calendar cld = Calendar.getInstance();
+        cld.set(RandomUtil.randomInteger(getConfig().getRangeDateY()[0], getConfig().getRangeDateY()[1]),
+                RandomUtil.randomInteger(getConfig().getRangeDateM()[0], getConfig().getRangeDateM()[1]),
+                RandomUtil.randomInteger(getConfig().getRangeDateD()[0], getConfig().getRangeDateD()[1]),
+                RandomUtil.randomInteger(getConfig().getRangeDateH()[0], getConfig().getRangeDateH()[1]),
+                RandomUtil.randomInteger(getConfig().getRangeDateMi()[0], getConfig().getRangeDateMi()[1]),
+                RandomUtil.randomInteger(getConfig().getRangeDateS()[0], getConfig().getRangeDateS()[1])
         );
         return cld.getTime();
     }
 
     public Date[] mockDateArray(JmockDataContext context) {
-        Date[] mockDataArr = MockUtil.mockArray(Date.class,getConfig().getArrsizeDate()[0],getConfig().getArrsizeDate
+        Date[] mockDataArr = MockUtil.mockArray(Date.class, getConfig().getArrsizeDate()[0], getConfig().getArrsizeDate
                 ()[1]);
         int len = mockDataArr.length;
         while (--len >= 0) {
@@ -157,7 +157,7 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
     }
 
     public Double mockDouble(JmockDataContext context) {
-        return RandomUtil.randomDouble( JMockDataManager.getInstance().getConfig()
+        return RandomUtil.randomDouble(JMockDataManager.getInstance().getConfig()
                 .getRangeDouble()[0], JMockDataManager.getInstance().getConfig().getRangeDouble()[1]);
     }
 
@@ -172,7 +172,7 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
     }
 
     public Double[] mockDoubleBoxingArray(JmockDataContext context) {
-        Double[] mockDataArr = MockUtil.mockArray(Double.class,getConfig().getArrsizeDouble()[0],getConfig()
+        Double[] mockDataArr = MockUtil.mockArray(Double.class, getConfig().getArrsizeDouble()[0], getConfig()
                 .getArrsizeDouble()[1]);
         int len = mockDataArr.length;
         while (--len >= 0) {
@@ -182,7 +182,7 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
     }
 
     public Float mockFloat(JmockDataContext context) {
-        return RandomUtil.randomFloat( JMockDataManager.getInstance().getConfig()
+        return RandomUtil.randomFloat(JMockDataManager.getInstance().getConfig()
                 .getRangeFloat()[0], JMockDataManager.getInstance().getConfig().getRangeFloat()[1]);
     }
 
@@ -197,7 +197,7 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
     }
 
     public Float[] mockFloatBoxingArray(JmockDataContext context) {
-        Float[] mockDataArr = MockUtil.mockArray(Float.class,getConfig().getArrsizeFloat()[0],getConfig()
+        Float[] mockDataArr = MockUtil.mockArray(Float.class, getConfig().getArrsizeFloat()[0], getConfig()
                 .getArrsizeFloat()[1]);
         int len = mockDataArr.length;
         while (--len >= 0) {
@@ -207,7 +207,7 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
     }
 
     public Integer mockInteger(JmockDataContext context) {
-        return RandomUtil.randomInteger( JMockDataManager.getInstance().getConfig()
+        return RandomUtil.randomInteger(JMockDataManager.getInstance().getConfig()
                 .getRangeInteger()[0], JMockDataManager.getInstance().getConfig().getRangeInteger()[1]);
     }
 
@@ -222,7 +222,7 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
     }
 
     public Integer[] mockIntegerBoxingArray(JmockDataContext context) {
-        Integer[] mockDataArr = MockUtil.mockArray(Integer.class,getConfig().getArrsizeInteger()[0],getConfig()
+        Integer[] mockDataArr = MockUtil.mockArray(Integer.class, getConfig().getArrsizeInteger()[0], getConfig()
                 .getArrsizeInteger()[1]);
         int len = mockDataArr.length;
         while (--len >= 0) {
@@ -232,7 +232,7 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
     }
 
     public Long mockLong(JmockDataContext context) {
-        return RandomUtil.randomLong( JMockDataManager.getInstance().getConfig()
+        return RandomUtil.randomLong(JMockDataManager.getInstance().getConfig()
                 .getRangeLong()[0], JMockDataManager.getInstance().getConfig().getRangeLong()[1]);
     }
 
@@ -247,7 +247,7 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
     }
 
     public Long[] mockLongBoxingArray(JmockDataContext context) {
-        Long[] mockDataArr = MockUtil.mockArray(Long.class,getConfig().getArrsizeLong()[0],getConfig().getArrsizeLong
+        Long[] mockDataArr = MockUtil.mockArray(Long.class, getConfig().getArrsizeLong()[0], getConfig().getArrsizeLong
                 ()[1]);
         int len = mockDataArr.length;
         while (--len >= 0) {
@@ -257,7 +257,7 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
     }
 
     public Short mockShort(JmockDataContext context) {
-        return RandomUtil.randomShort( JMockDataManager.getInstance().getConfig()
+        return RandomUtil.randomShort(JMockDataManager.getInstance().getConfig()
                 .getRangeShort()[0], JMockDataManager.getInstance().getConfig().getRangeShort()[1]);
     }
 
@@ -272,7 +272,7 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
     }
 
     public Short[] mockShortBoxingArray(JmockDataContext context) {
-        Short[] mockDataArr = MockUtil.mockArray(Short.class,getConfig().getArrsizeShort()[0],getConfig()
+        Short[] mockDataArr = MockUtil.mockArray(Short.class, getConfig().getArrsizeShort()[0], getConfig()
                 .getArrsizeShort()[1]);
         int len = mockDataArr.length;
         while (--len >= 0) {
@@ -286,13 +286,13 @@ public class JmockDataTemplateDefault implements JmockDataTemplate {
         int len = RandomUtil.randomInteger(10);
         for (int i = 0; i < len; i++) {
             sb.append(JMockDataManager.getInstance().getConfig().getSeedString()[RandomUtil
-                   .randomInteger(JMockDataManager.getInstance().getConfig().getSeedString().length)]).append(" ");
+                    .randomInteger(JMockDataManager.getInstance().getConfig().getSeedString().length)]).append(" ");
         }
         return sb.toString();
     }
 
     public String[] mockStringArray(JmockDataContext context) {
-        String[] mockDataArr = MockUtil.mockArray(String.class,getConfig().getArrsizeString()[0],getConfig()
+        String[] mockDataArr = MockUtil.mockArray(String.class, getConfig().getArrsizeString()[0], getConfig()
                 .getArrsizeString()[1]);
         int len = mockDataArr.length;
         while (--len >= 0) {

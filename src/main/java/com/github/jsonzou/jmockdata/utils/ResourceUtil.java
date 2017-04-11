@@ -13,6 +13,7 @@ import java.net.URL;
 public class ResourceUtil {
     public static final String CLASSPATH_URL_PREFIX = "classpath:";
     public static final String URL_PROTOCOL_FILE = "file";
+
     public static File getFile(String resourceLocation) throws FileNotFoundException {
         if (resourceLocation.startsWith(CLASSPATH_URL_PREFIX)) {
             String path = resourceLocation.substring(CLASSPATH_URL_PREFIX.length());
@@ -28,8 +29,7 @@ public class ResourceUtil {
         try {
             // try URL
             return getFile(new URL(resourceLocation));
-        }
-        catch (MalformedURLException ex) {
+        } catch (MalformedURLException ex) {
             // no URL -> treat as file path
             return new File(resourceLocation);
         }
@@ -48,15 +48,16 @@ public class ResourceUtil {
         }
         try {
             return new File(toURI(resourceUrl).getSchemeSpecificPart());
-        }
-        catch (URISyntaxException ex) {
+        } catch (URISyntaxException ex) {
             // Fallback for URLs that are not valid URIs (should hardly ever happen).
             return new File(resourceUrl.getFile());
         }
     }
+
     private static URI toURI(URL url) throws URISyntaxException {
         return toURI(url.toString());
     }
+
     private static URI toURI(String location) throws URISyntaxException {
         return new URI(StringUtil.replace(location, " ", "%20"));
     }

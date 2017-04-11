@@ -3,6 +3,7 @@ package com.github.jsonzou.jmockdata.mockdata;
 
 /**
  * <p>模拟数据结果包装类</p>
+ *
  * @author jsonzou(keko-boy@163.com)
  * @version 1.0
  * @since 2016/12/26

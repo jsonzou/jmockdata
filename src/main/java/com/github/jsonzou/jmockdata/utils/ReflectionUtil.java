@@ -3,6 +3,7 @@ package com.github.jsonzou.jmockdata.utils;
 import java.lang.reflect.*;
 import java.util.Collection;
 import java.util.Map;
+
 /**
  * Created by jsonzou on 2016/12/19.
  */

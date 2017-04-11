@@ -54,8 +54,8 @@ public class JmockDataContext {
     }
 
     private void printTree(JmockDataContext ctx) {
-        if(!JMockDataManager.getInstance().getConfig().getPrintContext()){
-            return ;
+        if (!JMockDataManager.getInstance().getConfig().getPrintContext()) {
+            return;
         }
         if (ctx == null) {
             printTree(this.getRoot());
@@ -165,7 +165,7 @@ public class JmockDataContext {
                 this.setSelfRefType(this.getParent().getSelfRefType());
             } else if (
                     ReflectionUtil.isComponeClassContains(this.getMockType(), this.getGenericType(), this.getParent().getMockType())
-                    || ReflectionUtil.isComponeClassContains(this.getMockType(), this.getGenericType(), this.getParent().getSelfRefType())) {
+                            || ReflectionUtil.isComponeClassContains(this.getMockType(), this.getGenericType(), this.getParent().getSelfRefType())) {
                 this.setSelfRefLevel(this.getParent().getSelfRefLevel() + 1);
                 this.setSelfRefType(this.getParent().getSelfRefType());
             }

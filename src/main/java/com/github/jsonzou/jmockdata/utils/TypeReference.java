@@ -9,12 +9,12 @@ public class TypeReference<T> {
     /**
      * Constructs a new type literal. Derives represented class from type
      * parameter.
-     *
+     * <p>
      * <p>Clients create an empty anonymous subclass. Doing so embeds the type
      * parameter in the anonymous class's type hierarchy so we can reconstitute it
      * at runtime despite erasure.
      */
-    protected TypeReference(){
+    protected TypeReference() {
         Type superClass = getClass().getGenericSuperclass();
         type = ((ParameterizedType) superClass).getActualTypeArguments()[0];
     }
