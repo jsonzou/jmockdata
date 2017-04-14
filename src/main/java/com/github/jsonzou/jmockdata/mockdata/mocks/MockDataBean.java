@@ -201,27 +201,28 @@ public class MockDataBean<E> implements MockData<E> {
                     return JMockDataManager.getInstance().getDefaultMockDataBean(clazz).mock(null);
                 }
                 mockData = (E) ReflectionUtil.newInstance(clazz);
-
-                Field[] fields = clazz.getDeclaredFields();
-                MockData mockDataFieldBean = null;
-                Method setMethod = null;
-                Method getMethod = null;
-                for (Field field : fields) {
-                    if (!field.isAccessible()) {
-                        field.setAccessible(true);
-                    }
-                    if (field.getName().equals("jmockDataContext")) {
-                        continue;
-                    }
-
-                    if (ReflectionUtil.isContainer(field.getType())) {
-                        if (field.getGenericType() == null) {
+                Class clazzParent=null;
+                for(clazzParent=clazz;clazzParent != Object.class;clazzParent = clazzParent.getSuperclass()){
+                    Field[] fields = clazzParent.getDeclaredFields();
+                    MockData mockDataFieldBean = null;
+                    Method setMethod = null;
+                    Method getMethod = null;
+                    for (Field field : fields) {
+                        if (!field.isAccessible()) {
+                            field.setAccessible(true);
+                        }
+                        if (field.getName().equals("jmockDataContext")) {
                             continue;
                         }
-                        types = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
-                        if (types == null || types.length == 0) {
-                            continue;
-                        }
+
+                        if (ReflectionUtil.isContainer(field.getType())) {
+                            if (field.getGenericType() == null) {
+                                continue;
+                            }
+                            types = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
+                            if (types == null || types.length == 0) {
+                                continue;
+                            }
                         /*
                         boolean isSelfGeneric = false;
                         for (Type type : types) {
@@ -233,16 +234,20 @@ public class MockDataBean<E> implements MockData<E> {
                         if (isSelfGeneric) {
                             continue;
                         }*/
+                        }
+                        setMethod = ReflectionUtil.getPlainSetMethod(clazzParent, field);
+                        getMethod = ReflectionUtil.getPlainGetMethod(clazzParent, field);
+                        if (setMethod != null && getMethod != null) { // 只对get,set方法的属性进行mock
+                            mockDataFieldBean =
+                                    JMockDataManager.getInstance().getMockDataBean(field.getType(), field.getGenericType());
+                            JmockDataContext vContext = JmockDataContext
+                                    .newInstance(context, field.getName(), field.getType(), field.getGenericType());
+                            setMethod.invoke(mockData, mockDataFieldBean.mock(vContext));
+                        }
                     }
-                    setMethod = ReflectionUtil.getPlainSetMethod(clazz, field);
-                    getMethod = ReflectionUtil.getPlainGetMethod(clazz, field);
-                    if (setMethod != null && getMethod != null) { // 只对get,set方法的属性进行mock
-                        mockDataFieldBean =
-                                JMockDataManager.getInstance().getMockDataBean(field.getType(), field.getGenericType());
-                        JmockDataContext vContext = JmockDataContext
-                                .newInstance(context, field.getName(), field.getType(), field.getGenericType());
-                        setMethod.invoke(mockData, mockDataFieldBean.mock(vContext));
-                    }
+
+
+
                 }
                 return mockData;
 
