@@ -1,3 +1,18 @@
+/**
+ * Copyright © 2017 jsonzou (keko-boy@163.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.github.jsonzou.jmockdata.utils;
 
 import java.io.File;
@@ -13,6 +28,7 @@ import java.net.URL;
 public class ResourceUtil {
     public static final String CLASSPATH_URL_PREFIX = "classpath:";
     public static final String URL_PROTOCOL_FILE = "file";
+
     public static File getFile(String resourceLocation) throws FileNotFoundException {
         if (resourceLocation.startsWith(CLASSPATH_URL_PREFIX)) {
             String path = resourceLocation.substring(CLASSPATH_URL_PREFIX.length());
@@ -28,8 +44,7 @@ public class ResourceUtil {
         try {
             // try URL
             return getFile(new URL(resourceLocation));
-        }
-        catch (MalformedURLException ex) {
+        } catch (MalformedURLException ex) {
             // no URL -> treat as file path
             return new File(resourceLocation);
         }
@@ -48,15 +63,16 @@ public class ResourceUtil {
         }
         try {
             return new File(toURI(resourceUrl).getSchemeSpecificPart());
-        }
-        catch (URISyntaxException ex) {
+        } catch (URISyntaxException ex) {
             // Fallback for URLs that are not valid URIs (should hardly ever happen).
             return new File(resourceUrl.getFile());
         }
     }
+
     private static URI toURI(URL url) throws URISyntaxException {
         return toURI(url.toString());
     }
+
     private static URI toURI(String location) throws URISyntaxException {
         return new URI(StringUtil.replace(location, " ", "%20"));
     }

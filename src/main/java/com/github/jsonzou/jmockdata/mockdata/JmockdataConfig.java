@@ -1,4 +1,22 @@
+/**
+ * Copyright © 2017 jsonzou (keko-boy@163.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.github.jsonzou.jmockdata.mockdata;
+
+import com.github.jsonzou.jmockdata.utils.ResourceUtil;
+import com.github.jsonzou.jmockdata.utils.StringUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,14 +27,11 @@ import java.util.Calendar;
 import java.util.Map;
 import java.util.Properties;
 
-import com.github.jsonzou.jmockdata.utils.ResourceUtil;
-import com.github.jsonzou.jmockdata.utils.StringUtil;
-
 /**
  * Created by v_zoupengfei on 2017/1/18.
  */
 public class JmockdataConfig {
-    private Boolean printContext=false;
+    private Boolean printContext = false;
     // value[seed,seed,seed]
     private Character[] seedCharacter =
             {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
@@ -68,7 +83,7 @@ public class JmockdataConfig {
     public JmockdataConfig() {
         // this.readConfig("config_default.properties");
         Calendar cld = Calendar.getInstance();
-        this.setRangeDateY(new Integer[] {cld.get(Calendar.YEAR), cld.get(Calendar.YEAR)});
+        this.setRangeDateY(new Integer[]{cld.get(Calendar.YEAR), cld.get(Calendar.YEAR)});
     }
 
     public void readConfig(String classpath) {
@@ -84,10 +99,10 @@ public class JmockdataConfig {
                         key = en.getKey().toString();
                         value = en.getValue().toString();
                         Object fValueObj = getValue(key);
-                        if ("printContext".equals(key)){
-                            setValue(key,Boolean.valueOf(value));
-                        }else if ("decimalScale".equals(key)){
-                            setValue(key,Integer.valueOf(value));
+                        if ("printContext".equals(key)) {
+                            setValue(key, Boolean.valueOf(value));
+                        } else if ("decimalScale".equals(key)) {
+                            setValue(key, Integer.valueOf(value));
                         } else if (key.startsWith("arrsize")
                                 || key.startsWith("rangeDate")
                                 || key.startsWith("rangeInteger")

@@ -1,4 +1,18 @@
-
+/**
+ * Copyright © 2017 jsonzou (keko-boy@163.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.github.jsonzou.jmockdata.mockdata;
 
 import com.github.jsonzou.jmockdata.utils.ReflectionUtil;
@@ -54,8 +68,8 @@ public class JmockDataContext {
     }
 
     private void printTree(JmockDataContext ctx) {
-        if(!JMockDataManager.getInstance().getConfig().getPrintContext()){
-            return ;
+        if (!JMockDataManager.getInstance().getConfig().getPrintContext()) {
+            return;
         }
         if (ctx == null) {
             printTree(this.getRoot());
@@ -165,7 +179,7 @@ public class JmockDataContext {
                 this.setSelfRefType(this.getParent().getSelfRefType());
             } else if (
                     ReflectionUtil.isComponeClassContains(this.getMockType(), this.getGenericType(), this.getParent().getMockType())
-                    || ReflectionUtil.isComponeClassContains(this.getMockType(), this.getGenericType(), this.getParent().getSelfRefType())) {
+                            || ReflectionUtil.isComponeClassContains(this.getMockType(), this.getGenericType(), this.getParent().getSelfRefType())) {
                 this.setSelfRefLevel(this.getParent().getSelfRefLevel() + 1);
                 this.setSelfRefType(this.getParent().getSelfRefType());
             }

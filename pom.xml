@@ -4,21 +4,20 @@
 
     <groupId>com.github.jsonzou</groupId>
     <artifactId>jmockdata</artifactId>
-    <version>2.3</version>
+    <version>Jmockdata-SNAPSHOT</version>
     <packaging>jar</packaging>
-
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jdk.version>1.7</jdk.version>
     </properties>
 
+    <inceptionYear>2017</inceptionYear>
 
     <!-- projectName,description,url等。-->
     <name>${project.groupId}:${project.artifactId}</name>
     <description>The plug-in of Jmockdata what through random algorithm mock java data</description>
     <url>https://github.com/jsonzou/jmockdata</url>
-
 
     <!--  license 信息-->
     <licenses>
@@ -39,14 +38,18 @@
         </developer>
     </developers>
 
+    <!-- 贡献者信息-->
+    <contributors>
+        <contributor>
+            <name>TaoYu</name>
+            <email>332309254@qq.com</email>
+        </contributor>
+    </contributors>
+
     <!-- SCM 信息-->
     <scm>
-        <connection>
-            scm:git:https://github.com/jsonzou/jmockdata.git
-        </connection>
-        <developerConnection>
-            scm:git:https://github.com/jsonzou/jmockdata.git
-        </developerConnection>
+        <connection>scm:git:https://github.com/jsonzou/jmockdata.git</connection>
+        <developerConnection>scm:git:https://github.com/jsonzou/jmockdata.git</developerConnection>
         <url>https://github.com/jsonzou/jmockdata</url>
         <tag>jmockdata</tag>
     </scm>
@@ -63,17 +66,13 @@
         </repository>
     </distributionManagement>
 
-
     <dependencies>
-
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.17</version>
             <scope>test</scope>
         </dependency>
-
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -81,23 +80,168 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!--编译-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.6.1</version>
+                    <configuration>
+                        <source>${jdk.version}</source>
+                        <target>${jdk.version}</target>
+                        <testSource>${jdk.version}</testSource>
+                        <testTarget>${jdk.version}</testTarget>
+                        <encoding>UTF-8</encoding>
+                        <optimize>true</optimize>
+                        <!-- Slightly faster builds, see https://issues.apache.org/jira/browse/MCOMPILER-209 -->
+                        <useIncrementalCompilation>false</useIncrementalCompilation>
+                    </configuration>
+                </plugin>
+                <!--本地打包-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>2.5.2</version>
+                </plugin>
+                <!--发布-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.2</version>
+                </plugin>
+                <!--清除-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <!--测试-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.19.1</version>
+                    <configuration>
+                        <forkMode>once</forkMode>
+                        <argLine>-Dfile.encoding=UTF-8</argLine>
+                    </configuration>
+                </plugin>
+                <!-- 源码 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>2.2.1</version>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- 文档 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.10.4</version>
+                    <configuration>
+                        <aggregate>true</aggregate>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- GPG -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.6</version>
+                    <executions>
+                        <execution>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>sign</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!--license插件,用于给每个文件生成头注释 https://github.com/mycila/license-maven-plugin-->
+                <plugin>
+                    <groupId>com.mycila</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>3.0</version>
+                    <configuration>
+                        <header>license.txt</header>
+                        <properties>
+                            <owner>jsonzou</owner>
+                            <email>keko-boy@163.com</email>
+                        </properties>
+                        <mapping>
+                            <xml.vm>XML_STYLE</xml.vm>
+                        </mapping>
+                        <excludes>
+                            <exclude>pom.xml</exclude>
+                            <exclude>.git**</exclude>
+                            <exclude>LICENSE</exclude>
+                            <exclude>README</exclude>
+                            <exclude>src/test/resources/**</exclude>
+                            <exclude>src/main/resources/**</exclude>
+                        </excludes>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>format</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.mycila</groupId>
+                            <artifactId>license-maven-plugin-git</artifactId>
+                            <version>3.0</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <!--覆盖率插件 https://github.com/trautonen/coveralls-maven-plugin-->
+                <plugin>
+                    <groupId>org.eluder.coveralls</groupId>
+                    <artifactId>coveralls-maven-plugin</artifactId>
+                    <version>4.3.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+    </build>
 
     <profiles>
+
+
+
         <profile>
             <id>release</id>
             <build>
                 <plugins>
                     <!-- jdk -->
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
-                        <version>3.5.1</version>
-                        <configuration>
-                            <source>${jdk.version}</source>
-                            <target>${jdk.version}</target>
-                            <encoding>UTF-8</encoding>
-                        </configuration>
                     </plugin>
-
                     <!-- Source -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -119,13 +263,10 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>2.10.2</version>
-                        <configuration>
-                            <aggregate>true</aggregate>
-                        </configuration>
+                        <version>2.10.3</version>
                         <executions>
                             <execution>
-                                <id>attach-javadocs</id>
+                                <phase>package</phase>
                                 <goals>
                                     <goal>jar</goal>
                                 </goals>
