@@ -1,7 +1,7 @@
 package com.github.jsonzou.jmockdata.kanyuxia.mocker;
 
+import com.github.jsonzou.jmockdata.JMock;
 import com.github.jsonzou.jmockdata.kanyuxia.BaseMocker;
-import com.github.jsonzou.jmockdata.kanyuxia.HandleMock;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.HashSet;
@@ -24,10 +24,10 @@ public class SetMocker extends BaseMocker<Set> {
       // 判断是否还有泛型
       if (genericType instanceof ParameterizedType) {
         ParameterizedType type = (ParameterizedType) genericType;
-        result.add(HandleMock.mockData((Class<?>) type.getRawType(), type.getActualTypeArguments()[0]));
+        result.add(new BeanMocker((Class<?>) type.getRawType(), type.getActualTypeArguments()[0]).mockData());
         continue;
       }
-      result.add(HandleMock.mockData((Class<?>) genericType));
+      result.add(JMock.mockData((Class<?>) genericType));
     }
     return result;
   }

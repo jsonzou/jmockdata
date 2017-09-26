@@ -46,7 +46,7 @@ public class MockerManage {
     }
   }
 
-  static Mocker getMocker(Class<?> clazz) {
+  public static Mocker getMocker(Class<?> clazz) {
     return mockCache.get(clazz);
   }
 }

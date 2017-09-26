@@ -1,7 +1,9 @@
 package com.github.jsonzou.jmockdata.kanyuxia.mocker;
 
+import com.github.jsonzou.jmockdata.JMock;
 import com.github.jsonzou.jmockdata.kanyuxia.BaseMocker;
-import com.github.jsonzou.jmockdata.kanyuxia.HandleMock;
+import com.github.jsonzou.jmockdata.kanyuxia.Mocker;
+import com.github.jsonzou.jmockdata.kanyuxia.MockerManage;
 import com.github.jsonzou.jmockdata.kanyuxia.utils.ReflectionUtils;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -53,9 +55,13 @@ public class BeanMocker<T> extends BaseMocker<T> {
         if (ReflectionUtils.hasGeneric(fieldClass)) {
           // 模拟有泛型的数据
           Type[] types = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
-          value = HandleMock.mockData(fieldClass, types);
+          Mocker mocker = MockerManage.getMocker(fieldClass);
+          if (mocker == null) {
+            mocker = new BeanMocker(fieldClass, types);
+          }
+          value = mocker.mockData();
         } else {
-          value = HandleMock.mockData(fieldClass);
+          value = JMock.mockData(fieldClass);
         }
         ReflectionUtils.setRefValue(result, method, value);
       }

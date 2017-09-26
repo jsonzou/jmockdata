@@ -1,7 +1,7 @@
 package com.github.jsonzou.jmockdata.kanyuxia.mocker;
 
+import com.github.jsonzou.jmockdata.JMock;
 import com.github.jsonzou.jmockdata.kanyuxia.BaseMocker;
-import com.github.jsonzou.jmockdata.kanyuxia.HandleMock;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -31,16 +31,16 @@ public class MapMocker extends BaseMocker<Map> {
       // 判断key是否还有泛型
       if (keyType instanceof ParameterizedType) {
         ParameterizedType type = (ParameterizedType) keyType;
-        key = HandleMock.mockData((Class<?>) type.getRawType(), type.getActualTypeArguments()[0]);
+        key = new BeanMocker((Class<?>) type.getRawType(), type.getActualTypeArguments()[0]).mockData();
       } else {
-        key = HandleMock.mockData((Class<?>) keyType);
+        key = JMock.mockData((Class<?>) keyType);
       }
       // 判断value是否还有泛型
       if (valueType instanceof ParameterizedType) {
         ParameterizedType type = (ParameterizedType) valueType;
-        value = HandleMock.mockData((Class<?>) type.getRawType(), type.getActualTypeArguments()[0]);
+        value = new BeanMocker((Class<?>) type.getRawType(), type.getActualTypeArguments()[0]).mockData();
       } else {
-        value = HandleMock.mockData((Class<?>) valueType);
+        value = JMock.mockData((Class<?>) valueType);
       }
       result.put(key, value);
     }
