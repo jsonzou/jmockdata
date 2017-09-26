@@ -34,7 +34,7 @@ public interface JmockDataInterceptor {
     Boolean before(MockData mockData, JmockDataContext context);
 
     /**
-     * mock 数据之后，返回mock数据之前执行
+     * mockData 数据之后，返回mock数据之前执行
      *
      * @param mockData mockData
      * @param context  context

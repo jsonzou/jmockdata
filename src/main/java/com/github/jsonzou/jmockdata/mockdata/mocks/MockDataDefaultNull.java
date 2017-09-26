@@ -20,7 +20,7 @@ import com.github.jsonzou.jmockdata.mockdata.MockData;
 import com.github.jsonzou.jmockdata.mockdata.constants.MockType;
 
 /**
- *  mock the NULL
+ *  mockData the NULL
  * Created by jsonzou on 2016/12/16.
  */
 public class MockDataDefaultNull<E> implements MockData<E> {

@@ -1,17 +1,14 @@
 /**
  * Copyright © 2017 jsonzou (keko-boy@163.com)
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may
+ * obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
+ * and limitations under the License.
  */
 package com.github.jsonzou.jmockdata;
 
@@ -47,76 +44,77 @@ import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
  * @since 2016/12/16
  */
 public class JMockData {
-    private static final JmockdataWrapperMetaDataSingle jmockdataWrapperMetaDataSingle = new JmockdataWrapperMetaDataSingle();
 
-    public static <T extends JmockDataWrapper> T mock(Class<T> mockType) {
-        JmockDataContext context = JmockDataContext.newRootInstance(mockType);
-        JmockDataWrapper data = JMockDataManager.getInstance().getMockDataBean(mockType).mock(context);
-        data.setJmockDataContext(context);
-        context.printTree();
-        return (T) data;
-    }
+  private static final JmockdataWrapperMetaDataSingle jmockdataWrapperMetaDataSingle = new JmockdataWrapperMetaDataSingle();
 
-    /**
-     * mock collections
-     * List
-     * Map
-     * Set
-     *
-     * @param type
-     * @param <T>
-     * @return
-     */
-    public static <T> T mockCollection(TypeReference<T> type) {
-        ParameterizedTypeImpl dtype = (ParameterizedTypeImpl) type.getType();
-        try {
-            if (!ReflectionUtil.isContainer(ReflectionUtil.getClass(dtype))) {
-                return null;
-            }
-            JmockDataContext context = JmockDataContext.newRootInstance(ReflectionUtil.getClass(dtype));
-            MockData md = JMockDataManager.getInstance().getMockDataBean(ReflectionUtil.getClass(dtype),
-                    ReflectionUtil.getParameterizedType(dtype));
-            T data = (T) md.mock(context);
-            context.printTree();
-            return data;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+  public static <T extends JmockDataWrapper> T mock(Class<T> mockType) {
+    JmockDataContext context = JmockDataContext.newRootInstance(mockType);
+    JmockDataWrapper data = JMockDataManager.getInstance().getMockDataBean(mockType).mock(context);
+    data.setJmockDataContext(context);
+    context.printTree();
+    return (T) data;
+  }
 
+  /**
+   * mockData collections
+   * List
+   * Map
+   * Set
+   *
+   * @param type
+   * @param <T>
+   * @return
+   */
+  public static <T> T mockCollection(TypeReference<T> type) {
+    ParameterizedTypeImpl dtype = (ParameterizedTypeImpl) type.getType();
+    try {
+      if (!ReflectionUtil.isContainer(ReflectionUtil.getClass(dtype))) {
         return null;
-
+      }
+      JmockDataContext context = JmockDataContext.newRootInstance(ReflectionUtil.getClass(dtype));
+      MockData md = JMockDataManager.getInstance().getMockDataBean(ReflectionUtil.getClass(dtype),
+          ReflectionUtil.getParameterizedType(dtype));
+      T data = (T) md.mock(context);
+      context.printTree();
+      return data;
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
     }
 
-    /**
-     * Mock POJO
-     * Mock 元数据
-     *
-     * @param simpleType
-     * @param <T>
-     * @return
-     */
-    public static <T> T mockSimpleType(Class<T> simpleType) {
-        JmockDataContext context = JmockDataContext.newRootInstance(simpleType);
-        T simple = JMockDataManager.getInstance().getMockDataBean(simpleType).mock(context);
-        context.printTree();
-        return simple;
-    }
+    return null;
 
-    /**
-     * mock 全部元数据
-     *
-     * @return
-     */
-    public static JmockdataWrapperMetaDataAll mockMetaDataAll() {
-        return mock(JmockdataWrapperMetaDataAll.class);
-    }
+  }
 
-    /**
-     * mock 单个元数据
-     *
-     * @return
-     */
-    public static JmockdataWrapperMetaDataSingle mockMetaDataSingle() {
-        return jmockdataWrapperMetaDataSingle;
-    }
+  /**
+   * Mocker POJO
+   * Mocker 元数据
+   *
+   * @param simpleType
+   * @param <T>
+   * @return
+   */
+  public static <T> T mockSimpleType(Class<T> simpleType) {
+    JmockDataContext context = JmockDataContext.newRootInstance(simpleType);
+    T simple = JMockDataManager.getInstance().getMockDataBean(simpleType).mock(context);
+    context.printTree();
+    return simple;
+  }
+
+  /**
+   * mockData 全部元数据
+   *
+   * @return
+   */
+  public static JmockdataWrapperMetaDataAll mockMetaDataAll() {
+    return mock(JmockdataWrapperMetaDataAll.class);
+  }
+
+  /**
+   * mockData 单个元数据
+   *
+   * @return
+   */
+  public static JmockdataWrapperMetaDataSingle mockMetaDataSingle() {
+    return jmockdataWrapperMetaDataSingle;
+  }
 }

@@ -21,7 +21,7 @@ import com.github.jsonzou.jmockdata.mockdata.MockData;
 import com.github.jsonzou.jmockdata.mockdata.constants.MockType;
 
 /**
- *  mock the Short data
+ *  mockData the Short data
  * Created by v_zoupengfei on 2016/12/16.
  */
 public class MockDataShortUnboxingArray implements MockData<short[]> {

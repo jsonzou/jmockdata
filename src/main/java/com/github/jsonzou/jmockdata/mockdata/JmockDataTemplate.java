@@ -1,17 +1,14 @@
 /**
  * Copyright © 2017 jsonzou (keko-boy@163.com)
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may
+ * obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
+ * and limitations under the License.
  */
 package com.github.jsonzou.jmockdata.mockdata;
 
@@ -27,69 +24,70 @@ import java.util.Date;
  * @since 2016/12/26
  */
 public interface JmockDataTemplate {
-    BigDecimal mockBigDecimal(JmockDataContext context);
 
-    BigDecimal[] mockBigDecimalArray(JmockDataContext context);
+  BigDecimal mockBigDecimal(JmockDataContext context);
 
-    BigInteger mockBigInteger(JmockDataContext context);
+  BigDecimal[] mockBigDecimalArray(JmockDataContext context);
 
-    BigInteger[] mockBigIntegerArray(JmockDataContext context);
+  BigInteger mockBigInteger(JmockDataContext context);
 
-    Boolean mockBoolean(JmockDataContext context);
+  BigInteger[] mockBigIntegerArray(JmockDataContext context);
 
-    boolean[] mockBooleanUnboxingArray(JmockDataContext context);
+  Boolean mockBoolean(JmockDataContext context);
 
-    Boolean[] mockBooleanBoxingArray(JmockDataContext context);
+  boolean[] mockBooleanUnboxingArray(JmockDataContext context);
 
-    Byte mockByte(JmockDataContext context);
+  Boolean[] mockBooleanBoxingArray(JmockDataContext context);
 
-    byte[] mockByteUnboxingArray(JmockDataContext context);
+  Byte mockByte(JmockDataContext context);
 
-    Byte[] mockByteBoxingArray(JmockDataContext context);
+  byte[] mockByteUnboxingArray(JmockDataContext context);
 
-    Character mockCharacter(JmockDataContext context);
+  Byte[] mockByteBoxingArray(JmockDataContext context);
 
-    char[] mockCharacterUnboxingArray(JmockDataContext context);
+  Character mockCharacter(JmockDataContext context);
 
-    Character[] mockCharacterBoxingArray(JmockDataContext context);
+  char[] mockCharacterUnboxingArray(JmockDataContext context);
 
-    Date mockDate(JmockDataContext context);
+  Character[] mockCharacterBoxingArray(JmockDataContext context);
 
-    Date[] mockDateArray(JmockDataContext context);
+  Date mockDate(JmockDataContext context);
 
-    Double mockDouble(JmockDataContext context);
+  Date[] mockDateArray(JmockDataContext context);
 
-    double[] mockDoubleUnboxingArray(JmockDataContext context);
+  Double mockDouble(JmockDataContext context);
 
-    Double[] mockDoubleBoxingArray(JmockDataContext context);
+  double[] mockDoubleUnboxingArray(JmockDataContext context);
 
-    Float mockFloat(JmockDataContext context);
+  Double[] mockDoubleBoxingArray(JmockDataContext context);
 
-    float[] mockFloatUnboxingArray(JmockDataContext context);
+  Float mockFloat(JmockDataContext context);
 
-    Float[] mockFloatBoxingArray(JmockDataContext context);
+  float[] mockFloatUnboxingArray(JmockDataContext context);
 
-    Integer mockInteger(JmockDataContext context);
+  Float[] mockFloatBoxingArray(JmockDataContext context);
 
-    int[] mockIntegerUnboxingArray(JmockDataContext context);
+  Integer mockInteger(JmockDataContext context);
 
-    Integer[] mockIntegerBoxingArray(JmockDataContext context);
+  int[] mockIntegerUnboxingArray(JmockDataContext context);
 
-    Long mockLong(JmockDataContext context);
+  Integer[] mockIntegerBoxingArray(JmockDataContext context);
 
-    long[] mockLongUnboxingArray(JmockDataContext context);
+  Long mockLong(JmockDataContext context);
 
-    Long[] mockLongBoxingArray(JmockDataContext context);
+  long[] mockLongUnboxingArray(JmockDataContext context);
 
-    Short mockShort(JmockDataContext context);
+  Long[] mockLongBoxingArray(JmockDataContext context);
 
-    short[] mockShortUnboxingArray(JmockDataContext context);
+  Short mockShort(JmockDataContext context);
 
-    Short[] mockShortBoxingArray(JmockDataContext context);
+  short[] mockShortUnboxingArray(JmockDataContext context);
 
-    String mockString(JmockDataContext context);
+  Short[] mockShortBoxingArray(JmockDataContext context);
 
-    String[] mockStringArray(JmockDataContext context);
+  String mockString(JmockDataContext context);
 
-    JmockdataConfig getConfig();
+  String[] mockStringArray(JmockDataContext context);
+
+  JmockdataConfig getConfig();
 }

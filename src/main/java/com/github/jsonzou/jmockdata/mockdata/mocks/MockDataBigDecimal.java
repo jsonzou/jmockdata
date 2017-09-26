@@ -23,7 +23,7 @@ import com.github.jsonzou.jmockdata.mockdata.constants.MockType;
 import java.math.BigDecimal;
 
 /**
- *  mock the BigDecimal data
+ *  mockData the BigDecimal data
  * Created by jsonzou on 2016/12/16.
  */
 public class MockDataBigDecimal implements MockData<BigDecimal> {

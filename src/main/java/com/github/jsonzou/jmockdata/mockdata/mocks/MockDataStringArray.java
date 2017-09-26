@@ -21,7 +21,7 @@ import com.github.jsonzou.jmockdata.mockdata.MockData;
 import com.github.jsonzou.jmockdata.mockdata.constants.MockType;
 
 /**
- *  mock the String data
+ *  mockData the String data
  * Created by jsonzou on 2016/12/16.
  */
 public class MockDataStringArray implements MockData<String[]> {

@@ -22,7 +22,7 @@ import com.github.jsonzou.jmockdata.mockdata.MockData;
 import com.github.jsonzou.jmockdata.mockdata.constants.MockType;
 
 /**
- *  the mock proxy of intercept
+ *  the mockData proxy of intercept
  * Created by jsonzou on 2016/12/16.
  */
 public class MockDataProxy<E> implements MockData<E>,JmockDataInterceptor{

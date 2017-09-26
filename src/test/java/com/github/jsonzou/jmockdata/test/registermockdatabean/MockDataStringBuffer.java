@@ -22,7 +22,7 @@ import com.github.jsonzou.jmockdata.mockdata.constants.MockType;
 import com.github.jsonzou.jmockdata.utils.RandomUtil;
 
 /**
- *  mock the StringBuffer data
+ *  mockData the StringBuffer data
  * Created by jsonzou on 2016/12/16.
  */
 public class MockDataStringBuffer implements MockData<StringBuffer> {

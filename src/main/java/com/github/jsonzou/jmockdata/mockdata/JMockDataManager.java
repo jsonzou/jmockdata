@@ -131,7 +131,7 @@ public class JMockDataManager {
      *
      * @param clazz clazz
      * @param <T>   any
-     * @return MockData
+     * @return Mocker
      */
     public <T> MockData<T> getMockDataBean(Class<T> clazz) {
         MockData mockData = mockDataMappings.get(ReflectionUtil.getClassName(clazz));
@@ -147,7 +147,7 @@ public class JMockDataManager {
      * @param clazz       clazz
      * @param genericType genericType
      * @param <T>         any
-     * @return MockData
+     * @return Mocker
      */
     public <T> MockData<T> getMockDataBean(Class<T> clazz, Type genericType) {
         MockData mockData = mockDataMappings.get(ReflectionUtil.getClassName(clazz));
@@ -161,7 +161,7 @@ public class JMockDataManager {
      * 获取默认模拟数据类型bean
      *
      * @param clazz Class
-     * @return MockData
+     * @return Mocker
      */
     public <T> MockData<T> getDefaultMockDataBean(Class<T> clazz) {
         return new MockDataDefaultNull<T>();

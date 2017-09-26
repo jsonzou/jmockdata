@@ -23,7 +23,7 @@ import com.github.jsonzou.jmockdata.mockdata.MockData;
 import com.github.jsonzou.jmockdata.mockdata.constants.MockType;
 
 /**
- *  mock the Date data
+ *  mockData the Date data
  * Created by jsonzou on 2016/12/16.
  */
 public class MockDataDate implements MockData<Date> {
