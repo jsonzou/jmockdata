@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * 模拟器管理
  */
-public class MockerManage {
+public class MockerManager {
 
   private static Map<Class<?>, Mocker> mockCache = new HashMap<>();
 
@@ -40,7 +40,7 @@ public class MockerManage {
     registerMocker(DateMocker.INSTANCE, Date.class);
   }
 
-  public static void registerMocker(Mocker mockData, Class<?>... classes) {
+  private static void registerMocker(Mocker mockData, Class<?>... classes) {
     for (Class<?> clazz : classes) {
       mockCache.put(clazz, mockData);
     }

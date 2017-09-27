@@ -1,17 +1,18 @@
 package com.github.jsonzou.jmockdata.kanyuxia.mocker;
 
-import com.github.jsonzou.jmockdata.kanyuxia.BaseMocker;
+import com.github.jsonzou.jmockdata.kanyuxia.MockConfig;
+import com.github.jsonzou.jmockdata.kanyuxia.Mocker;
 import java.math.BigDecimal;
 import org.apache.commons.lang3.RandomUtils;
 
 /**
  * BigDecimal对象模拟器
  */
-public class BigDecimalMocker extends BaseMocker<BigDecimal> {
+public class BigDecimalMocker implements Mocker<BigDecimal> {
 
   public static final BigDecimalMocker INSTANCE = new BigDecimalMocker();
 
-  public BigDecimal mockData() throws Exception {
-    return BigDecimal.valueOf(RandomUtils.nextDouble(config.getDoubleRange()[0], config.getDoubleRange()[1]));
+  public BigDecimal mockData(final MockConfig mockConfig) throws Exception {
+    return BigDecimal.valueOf(RandomUtils.nextDouble(mockConfig.getDoubleRange()[0], mockConfig.getDoubleRange()[1]));
   }
 }

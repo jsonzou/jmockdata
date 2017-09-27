@@ -1,16 +1,17 @@
 package com.github.jsonzou.jmockdata.kanyuxia.mocker;
 
-import com.github.jsonzou.jmockdata.kanyuxia.BaseMocker;
+import com.github.jsonzou.jmockdata.kanyuxia.MockConfig;
+import com.github.jsonzou.jmockdata.kanyuxia.Mocker;
 import org.apache.commons.lang3.RandomUtils;
 
 /**
  * Integer对象模拟器
  */
-public class IntegerMocker extends BaseMocker<Integer> {
+public class IntegerMocker implements Mocker<Integer> {
 
   public static final IntegerMocker INSTANCE = new IntegerMocker();
 
-  public Integer mockData() {
-    return RandomUtils.nextInt(config.getIntRange()[0], config.getIntRange()[1]);
+  public Integer mockData(final MockConfig mockConfig) {
+    return RandomUtils.nextInt(mockConfig.getIntRange()[0], mockConfig.getIntRange()[1]);
   }
 }

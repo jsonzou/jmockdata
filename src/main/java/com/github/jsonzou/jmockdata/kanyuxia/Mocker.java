@@ -5,5 +5,5 @@ package com.github.jsonzou.jmockdata.kanyuxia;
  */
 public interface Mocker<T> {
 
-  T mockData() throws Exception;
+  T mockData(MockConfig mockConfig) throws Exception;
 }

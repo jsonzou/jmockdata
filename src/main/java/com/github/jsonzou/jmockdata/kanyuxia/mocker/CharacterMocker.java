@@ -1,17 +1,18 @@
 package com.github.jsonzou.jmockdata.kanyuxia.mocker;
 
-import com.github.jsonzou.jmockdata.kanyuxia.BaseMocker;
+import com.github.jsonzou.jmockdata.kanyuxia.MockConfig;
+import com.github.jsonzou.jmockdata.kanyuxia.Mocker;
 import org.apache.commons.lang3.RandomUtils;
 
 /**
  * Character对象模拟器
  */
-public class CharacterMocker extends BaseMocker<Character> {
+public class CharacterMocker implements Mocker<Character> {
 
   public static final CharacterMocker INSTANCE = new CharacterMocker();
 
-  public Character mockData() throws Exception {
-    char[] charSeed = config.getCharSeed();
+  public Character mockData(final MockConfig mockConfig) throws Exception {
+    char[] charSeed = mockConfig.getCharSeed();
     return charSeed[RandomUtils.nextInt(0, charSeed.length - 1)];
   }
 }

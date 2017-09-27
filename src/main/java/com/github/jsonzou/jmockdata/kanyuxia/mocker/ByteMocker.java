@@ -1,16 +1,17 @@
 package com.github.jsonzou.jmockdata.kanyuxia.mocker;
 
-import com.github.jsonzou.jmockdata.kanyuxia.BaseMocker;
+import com.github.jsonzou.jmockdata.kanyuxia.MockConfig;
+import com.github.jsonzou.jmockdata.kanyuxia.Mocker;
 import org.apache.commons.lang3.RandomUtils;
 
 /**
  * Byte对象模拟器
  */
-public class ByteMocker extends BaseMocker<Byte> {
+public class ByteMocker implements Mocker<Byte> {
 
   public static final ByteMocker INSTANCE = new ByteMocker();
 
-  public Byte mockData() throws Exception {
-    return (byte) RandomUtils.nextInt(config.getByteRange()[0], config.getByteRange()[1]);
+  public Byte mockData(final MockConfig mockConfig) throws Exception {
+    return (byte) RandomUtils.nextInt(mockConfig.getByteRange()[0], mockConfig.getByteRange()[1]);
   }
 }
