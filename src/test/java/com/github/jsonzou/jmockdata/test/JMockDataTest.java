@@ -51,8 +51,8 @@ public class JMockDataTest {
    * 测试模拟简单POJO - User
    */
   @Test
-  public void mockTest_mockSimpleType_mockPOJO() {
-    User user = JMockData.mockSimpleType(User.class);
+  public void mockTest_mock_mockPOJO() {
+    User user = JMockData.mock(User.class);
     print(user);
   }
 
@@ -60,8 +60,8 @@ public class JMockDataTest {
    * 测试模拟any
    */
   @Test
-  public void mockTest_mockSimpleType_mockAny() {
-    MockDemoBeanAnyData anyData = JMockData.mockSimpleType(MockDemoBeanAnyData.class);
+  public void mockTest_mock_mockAny() {
+    MockDemoBeanAnyData anyData = JMockData.mock(MockDemoBeanAnyData.class);
     print(anyData);
   }
 
@@ -69,67 +69,67 @@ public class JMockDataTest {
    * 测试模拟元数据类型
    */
   @Test
-  public void mockTest_mockSimpleType_mockMeta() {
+  public void mockTest_mock_mockMeta() {
 
-    System.out.println("BigIntegerData => " + JMockData.mockSimpleType(BigInteger.class));
-    System.out.println("BigIntegerArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(BigInteger[].class), true));
+    System.out.println("BigIntegerData => " + JMockData.mock(BigInteger.class));
+    System.out.println("BigIntegerArrayData => " + JSON.toJSONString(JMockData.mock(BigInteger[].class), true));
 
-    System.out.println("BigDecimalData => " + JMockData.mockSimpleType(BigDecimal.class));
-    System.out.println("BigDecimalArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(BigDecimal[].class), true));
+    System.out.println("BigDecimalData => " + JMockData.mock(BigDecimal.class));
+    System.out.println("BigDecimalArrayData => " + JSON.toJSONString(JMockData.mock(BigDecimal[].class), true));
 
-    System.out.println("StringData => " + JMockData.mockSimpleType(String.class));
-    System.out.println("StringArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(String[].class), true));
+    System.out.println("StringData => " + JMockData.mock(String.class));
+    System.out.println("StringArrayData => " + JSON.toJSONString(JMockData.mock(String[].class), true));
 
-    System.out.println("DateData => " + JMockData.mockSimpleType(Date.class));
-    System.out.println("DateArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(Date[].class), true));
+    System.out.println("DateData => " + JMockData.mock(Date.class));
+    System.out.println("DateArrayData => " + JSON.toJSONString(JMockData.mock(Date[].class), true));
 
-    System.out.println("IntegerData => " + JMockData.mockSimpleType(Integer.class));
-    System.out.println("IntegerBoxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(Integer[].class), true));
-    System.out.println("IntegerUnboxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(int[].class), true));
+    System.out.println("IntegerData => " + JMockData.mock(Integer.class));
+    System.out.println("IntegerBoxingArrayData => " + JSON.toJSONString(JMockData.mock(Integer[].class), true));
+    System.out.println("IntegerUnboxingArrayData => " + JSON.toJSONString(JMockData.mock(int[].class), true));
 
-    System.out.println("ByteData => " + JMockData.mockSimpleType(Byte.class));
-    System.out.println("ByteBoxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(Byte[].class), true));
-    System.out.println("ByteUnboxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(byte[].class), true));
+    System.out.println("ByteData => " + JMockData.mock(Byte.class));
+    System.out.println("ByteBoxingArrayData => " + JSON.toJSONString(JMockData.mock(Byte[].class), true));
+    System.out.println("ByteUnboxingArrayData => " + JSON.toJSONString(JMockData.mock(byte[].class), true));
 
-    System.out.println("CharacterData => " + JMockData.mockSimpleType(Character.class));
-    System.out.println("CharacterBoxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(Character[].class), true));
-    System.out.println("CharacterUnboxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(char[].class), true));
+    System.out.println("CharacterData => " + JMockData.mock(Character.class));
+    System.out.println("CharacterBoxingArrayData => " + JSON.toJSONString(JMockData.mock(Character[].class), true));
+    System.out.println("CharacterUnboxingArrayData => " + JSON.toJSONString(JMockData.mock(char[].class), true));
 
-    System.out.println("BooleanData => " + JMockData.mockSimpleType(Boolean.class));
-    System.out.println("BooleanBoxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(Boolean[].class), true));
-    System.out.println("BooleanUnboxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(boolean[].class), true));
+    System.out.println("BooleanData => " + JMockData.mock(Boolean.class));
+    System.out.println("BooleanBoxingArrayData => " + JSON.toJSONString(JMockData.mock(Boolean[].class), true));
+    System.out.println("BooleanUnboxingArrayData => " + JSON.toJSONString(JMockData.mock(boolean[].class), true));
 
-    System.out.println("LongData => " + JMockData.mockSimpleType(Long.class));
-    System.out.println("LongBoxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(Long[].class), true));
-    System.out.println("LongUnboxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(long[].class), true));
+    System.out.println("LongData => " + JMockData.mock(Long.class));
+    System.out.println("LongBoxingArrayData => " + JSON.toJSONString(JMockData.mock(Long[].class), true));
+    System.out.println("LongUnboxingArrayData => " + JSON.toJSONString(JMockData.mock(long[].class), true));
 
-    System.out.println("FloatData => " + JMockData.mockSimpleType(Float.class));
-    System.out.println("FloatBoxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(Float[].class), true));
-    System.out.println("FloatUnboxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(float[].class), true));
+    System.out.println("FloatData => " + JMockData.mock(Float.class));
+    System.out.println("FloatBoxingArrayData => " + JSON.toJSONString(JMockData.mock(Float[].class), true));
+    System.out.println("FloatUnboxingArrayData => " + JSON.toJSONString(JMockData.mock(float[].class), true));
 
-    System.out.println("ShortData => " + JMockData.mockSimpleType(Short.class));
-    System.out.println("ShortBoxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(Short[].class), true));
-    System.out.println("ShortUnboxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(short[].class), true));
+    System.out.println("ShortData => " + JMockData.mock(Short.class));
+    System.out.println("ShortBoxingArrayData => " + JSON.toJSONString(JMockData.mock(Short[].class), true));
+    System.out.println("ShortUnboxingArrayData => " + JSON.toJSONString(JMockData.mock(short[].class), true));
 
-    System.out.println("DoubleData => " + JMockData.mockSimpleType(Double.class));
-    System.out.println("DoubleBoxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(Double[].class), true));
-    System.out.println("DoubleUnboxingArrayData => " + JSON.toJSONString(JMockData.mockSimpleType(double[].class), true));
+    System.out.println("DoubleData => " + JMockData.mock(Double.class));
+    System.out.println("DoubleBoxingArrayData => " + JSON.toJSONString(JMockData.mock(Double[].class), true));
+    System.out.println("DoubleUnboxingArrayData => " + JSON.toJSONString(JMockData.mock(double[].class), true));
   }
 
   /**
    * 测试模拟 List,Set,Map三种常见数据结构
    */
   @Test
-  public void mockTest_mockCollection() {
-    List<String> listStr = JMockData.mockCollection(new TypeReference<List<String>>(){});
-    List<User[]> listUser = JMockData.mockCollection(new TypeReference<List<User[]>>() {
+  public void mockTest_mock() {
+    List<String> listStr = JMockData.mock(new TypeReference<List<String>>(){});
+    List<User[]> listUser = JMockData.mock(new TypeReference<List<User[]>>() {
 
     });
-    Set<String> setStr = JMockData.mockCollection(new TypeReference<Set<String>>() {
+    Set<String> setStr = JMockData.mock(new TypeReference<Set<String>>() {
     });
-    Map<String, String> mapStr = JMockData.mockCollection(new TypeReference<Map<String, String>>() {
+    Map<String, String> mapStr = JMockData.mock(new TypeReference<Map<String, String>>() {
     });
-    Map<String, User> mapUser = JMockData.mockCollection(new TypeReference<Map<String, User>>() {
+    Map<String, User> mapUser = JMockData.mock(new TypeReference<Map<String, User>>() {
     });
 
     print(listStr);

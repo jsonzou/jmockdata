@@ -24,7 +24,7 @@ import java.lang.reflect.Field;
 public class ExtendTest {
 
     public static void main(String[] args) {
-        B b = JMockData.mockSimpleType(B.class);
+        B b = JMockData.mock(B.class);
         System.out.println(JSON.toJSONStringWithDateFormat(b, "YYYY-MM-dd HH:mm:ss", SerializerFeature.PrettyFormat));
 
     }

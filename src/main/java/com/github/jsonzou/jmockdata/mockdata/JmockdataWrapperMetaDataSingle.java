@@ -28,130 +28,130 @@ import java.util.Date;
 public class JmockdataWrapperMetaDataSingle {
 
     public BigDecimal getBigDecimalData() {
-        return JMockData.mockSimpleType(BigDecimal.class);
+        return JMockData.mock(BigDecimal.class);
     }
 
     public BigDecimal[] getBigDecimalArrayData() {
-        return JMockData.mockSimpleType(BigDecimal[].class);
+        return JMockData.mock(BigDecimal[].class);
     }
 
     public BigInteger getBigIntegerData() {
-        return JMockData.mockSimpleType(BigInteger.class);
+        return JMockData.mock(BigInteger.class);
     }
 
     public BigInteger[] getBigIntegerArrayData() {
-        return JMockData.mockSimpleType(BigInteger[].class);
+        return JMockData.mock(BigInteger[].class);
     }
 
     public Boolean getBooleanData() {
-        return JMockData.mockSimpleType(Boolean.class);
+        return JMockData.mock(Boolean.class);
     }
 
     public boolean[] getBooleanUnboxingArrayData() {
-        return JMockData.mockSimpleType(boolean[].class);
+        return JMockData.mock(boolean[].class);
     }
 
     public Boolean[] getBooleanBoxingArrayData() {
-        return JMockData.mockSimpleType(Boolean[].class);
+        return JMockData.mock(Boolean[].class);
     }
 
     public Byte getByteData() {
-        return JMockData.mockSimpleType(Byte.class);
+        return JMockData.mock(Byte.class);
     }
 
     public byte[] getByteUnboxingArrayData() {
-        return JMockData.mockSimpleType(byte[].class);
+        return JMockData.mock(byte[].class);
     }
 
     public Byte[] getByteBoxingArrayData() {
-        return JMockData.mockSimpleType(Byte[].class);
+        return JMockData.mock(Byte[].class);
     }
 
     public Character getCharacterData() {
-        return JMockData.mockSimpleType(Character.class);
+        return JMockData.mock(Character.class);
     }
 
     public char[] getCharacterUnboxingArrayData() {
-        return JMockData.mockSimpleType(char[].class);
+        return JMockData.mock(char[].class);
     }
 
     public Character[] getCharacterBoxingArrayData() {
-        return JMockData.mockSimpleType(Character[].class);
+        return JMockData.mock(Character[].class);
     }
 
     public Date getDateData() {
-        return JMockData.mockSimpleType(Date.class);
+        return JMockData.mock(Date.class);
     }
 
     public Date[] getDateArrayData() {
-        return JMockData.mockSimpleType(Date[].class);
+        return JMockData.mock(Date[].class);
     }
 
     public Double getDoubleData() {
-        return JMockData.mockSimpleType(Double.class);
+        return JMockData.mock(Double.class);
     }
 
     public double[] getDoubleUnboxingArrayData() {
-        return JMockData.mockSimpleType(double[].class);
+        return JMockData.mock(double[].class);
     }
 
     public Double[] getDoubleBoxingArrayData() {
-        return JMockData.mockSimpleType(Double[].class);
+        return JMockData.mock(Double[].class);
     }
 
     public Float getFloatData() {
-        return JMockData.mockSimpleType(Float.class);
+        return JMockData.mock(Float.class);
     }
 
     public float[] getFloatUnboxingArrayData() {
-        return JMockData.mockSimpleType(float[].class);
+        return JMockData.mock(float[].class);
     }
 
     public Float[] getFloatBoxingArrayData() {
-        return JMockData.mockSimpleType(Float[].class);
+        return JMockData.mock(Float[].class);
     }
 
     public Integer getIntegerData() {
-        return JMockData.mockSimpleType(Integer.class);
+        return JMockData.mock(Integer.class);
     }
 
     public int[] getIntegerUnboxingArrayData() {
-        return JMockData.mockSimpleType(int[].class);
+        return JMockData.mock(int[].class);
     }
 
     public Integer[] getIntegerBoxingArrayData() {
-        return JMockData.mockSimpleType(Integer[].class);
+        return JMockData.mock(Integer[].class);
     }
 
     public Long getLongData() {
-        return JMockData.mockSimpleType(Long.class);
+        return JMockData.mock(Long.class);
     }
 
     public long[] getLongUnboxingArrayData() {
-        return JMockData.mockSimpleType(long[].class);
+        return JMockData.mock(long[].class);
     }
 
     public Long[] getLongBoxingArrayData() {
-        return JMockData.mockSimpleType(Long[].class);
+        return JMockData.mock(Long[].class);
     }
 
     public Short getShortData() {
-        return JMockData.mockSimpleType(Short.class);
+        return JMockData.mock(Short.class);
     }
 
     public short[] getShortUnboxingArrayData() {
-        return JMockData.mockSimpleType(short[].class);
+        return JMockData.mock(short[].class);
     }
 
     public Short[] getShortBoxingArrayData() {
-        return JMockData.mockSimpleType(Short[].class);
+        return JMockData.mock(Short[].class);
     }
 
     public String getStringData() {
-        return JMockData.mockSimpleType(String.class);
+        return JMockData.mock(String.class);
     }
 
     public String[] getStringArrayData() {
-        return JMockData.mockSimpleType(String[].class);
+        return JMockData.mock(String[].class);
     }
 }

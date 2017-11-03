@@ -47,6 +47,7 @@ public class JMockData {
 
   private static final JmockdataWrapperMetaDataSingle jmockdataWrapperMetaDataSingle = new JmockdataWrapperMetaDataSingle();
 
+  /*
   public static <T extends JmockDataWrapper> T mock(Class<T> mockType) {
     JmockDataContext context = JmockDataContext.newRootInstance(mockType);
     JmockDataWrapper data = JMockDataManager.getInstance().getMockDataBean(mockType).mock(context);
@@ -54,6 +55,7 @@ public class JMockData {
     context.printTree();
     return (T) data;
   }
+  */
 
   /**
    * mockData collections
@@ -65,7 +67,7 @@ public class JMockData {
    * @param <T>
    * @return
    */
-  public static <T> T mockCollection(TypeReference<T> type) {
+  public static <T> T mock(TypeReference<T> type) {
     ParameterizedTypeImpl dtype = (ParameterizedTypeImpl) type.getType();
     try {
       if (!ReflectionUtil.isContainer(ReflectionUtil.getClass(dtype))) {
@@ -93,7 +95,7 @@ public class JMockData {
    * @param <T>
    * @return
    */
-  public static <T> T mockSimpleType(Class<T> simpleType) {
+  public static <T> T mock(Class<T> simpleType) {
     JmockDataContext context = JmockDataContext.newRootInstance(simpleType);
     T simple = JMockDataManager.getInstance().getMockDataBean(simpleType).mock(context);
     context.printTree();
