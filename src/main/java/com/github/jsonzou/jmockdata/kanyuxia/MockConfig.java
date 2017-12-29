@@ -1,11 +1,9 @@
 package com.github.jsonzou.jmockdata.kanyuxia;
 
-import lombok.Getter;
 
 /**
  * 模拟数据配置类
  */
-@Getter
 public class MockConfig {
 
   // valueRange[min,max] / [fixed value]
