@@ -14,28 +14,31 @@ public class MockDataTest {
   @Test
   @SuppressWarnings("unchecked")
   public void test() throws Exception {
+//  小试牛刀
     People people1 = JMock.mockData(People.class);
     System.out.println(people1);
-    System.out.println(  JMock.mockData(int.class));
-    System.out.println(  JMock.mockData(int[].class));
+    System.out.println(JMock.mockData(int.class));
+    System.out.println(JMock.mockData(int[].class));
 
+//  改变默认配置
     MockConfig mockConfig = new MockConfig();
     mockConfig.setStringSeed("hello", "world");
-    // 任何类型
-//    MockDemoBeanAnyData mockDemoBeanAnyData = JMock.mockData(MockDemoBeanAnyData.class, mockConfig);
-//    System.out.println(mockDemoBeanAnyData);
 
-    // 自引用
-    //MockDemoBeanSelfRefData mockDemoBeanSelfRefData = JMock.mockData(MockDemoBeanSelfRefData.class, mockConfig);
-    //System.out.println(mockDemoBeanSelfRefData);
+//  任何类型
+//  MockDemoBeanAnyData mockDemoBeanAnyData = JMock.mockData(MockDemoBeanAnyData.class, mockConfig);
+//  System.out.println(mockDemoBeanAnyData);
 
-    // 继承-有getter,setter
-    //BxA bxa = JMock.mockData(BxA.class, mockConfig);
-    //System.out.println(bxa);
+//  自引用
+//  MockDemoBeanSelfRefData mockDemoBeanSelfRefData = JMock.mockData(MockDemoBeanSelfRefData.class, mockConfig);
+//  System.out.println(mockDemoBeanSelfRefData);
 
-    // 继承-无getter,setter
-        Teacher teacher = JMock.mockData(Teacher.class,mockConfig);
-        System.out.println(teacher);
+//   继承-有getter,setter
+//   BxA bxa = JMock.mockData(BxA.class, mockConfig);
+//   System.out.println(bxa);
+
+// 继承-无getter,setter
+     Teacher teacher = JMock.mockData(Teacher.class,mockConfig);
+     System.out.println(teacher);
   }
 
 }
