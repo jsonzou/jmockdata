@@ -19,6 +19,9 @@ public class MockDataTest {
     System.out.println(people1);
     System.out.println(JMock.mockData(int.class));
     System.out.println(JMock.mockData(int[].class));
+   // System.out.println(JMock.mockData(List<String>));
+   // System.out.println(JMock.mockData(Set<String>));
+   // System.out.println(JMock.mockData(Map<String,String>));
 
 //  改变默认配置
     MockConfig mockConfig = new MockConfig();
