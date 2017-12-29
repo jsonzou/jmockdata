@@ -31,7 +31,7 @@ public class JMock {
    * @return 模拟数据对象
    * @throws Exception 模拟数据异常
    */
-  public static <T> T mockData(final Class<?> clazz, final MockConfig mockConfig) throws Exception {
+  public static <T> T mockData(final Class<T> clazz, final MockConfig mockConfig) throws Exception {
     Mocker mocker = MockerManager.getMocker(clazz);
     if (mocker == null) {
       mocker = new BeanMocker(clazz);

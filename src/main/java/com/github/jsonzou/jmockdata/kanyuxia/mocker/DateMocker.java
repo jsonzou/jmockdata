@@ -14,7 +14,7 @@ import org.apache.commons.lang3.RandomUtils;
 public class DateMocker implements Mocker<Date> {
 
   public static final DateMocker INSTANCE = new DateMocker();
-
+  @Override
   public Date mockData(final MockConfig mockConfig) throws Exception {
     return random(mockConfig.getDateRange()[0], mockConfig.getDateRange()[1]);
   }
@@ -26,4 +26,5 @@ public class DateMocker implements Mocker<Date> {
     long randomTime = RandomUtils.nextLong(startDate.getTime(), endDate.getTime());
     return new Date(randomTime);
   }
+
 }

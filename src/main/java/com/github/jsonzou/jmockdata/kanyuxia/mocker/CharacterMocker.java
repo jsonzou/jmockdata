@@ -10,7 +10,7 @@ import org.apache.commons.lang3.RandomUtils;
 public class CharacterMocker implements Mocker<Character> {
 
   public static final CharacterMocker INSTANCE = new CharacterMocker();
-
+  @Override
   public Character mockData(final MockConfig mockConfig) throws Exception {
     char[] charSeed = mockConfig.getCharSeed();
     return charSeed[RandomUtils.nextInt(0, charSeed.length - 1)];

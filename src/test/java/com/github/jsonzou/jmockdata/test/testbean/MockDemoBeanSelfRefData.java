@@ -15,6 +15,8 @@
  */
 package com.github.jsonzou.jmockdata.test.testbean;
 
+import com.github.jsonzou.jmockdata.test.SuperToString;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +24,7 @@ import java.util.Map;
 /**
  * Created by jsonzou on 2016/12/31.
  */
-public class MockDemoBeanSelfRefData {
+public class MockDemoBeanSelfRefData extends SuperToString{
     private String id;
     private String aString;
     private Integer aInteger;

@@ -28,10 +28,10 @@ public class MockConfig {
           "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
 
   // dateRange[min, max]
-  private final String[] dateRange = {"2000-01-01", "2017-9-26"};
+  private final String[] dateRange = {"1970-01-02", "2100-12-31"};
 
   // list、set、map sizeRange[min,max] / [fixed value]
-  private final int[] sizeRange = {0, 5};
+  private final int[] sizeRange = {1, 5};
 
 
   // -------------------------------- 设置模拟数据配置的值 ------------------------------------ //
@@ -85,5 +85,49 @@ public class MockConfig {
   public void setSizeRange(int min, int max) {
     sizeRange[0] = min;
     sizeRange[1] = max;
+  }
+
+  public byte[] getByteRange() {
+    return byteRange;
+  }
+
+  public short[] getShortRange() {
+    return shortRange;
+  }
+
+  public int[] getIntRange() {
+    return intRange;
+  }
+
+  public float[] getFloatRange() {
+    return floatRange;
+  }
+
+  public double[] getDoubleRange() {
+    return doubleRange;
+  }
+
+  public long[] getLongRange() {
+    return longRange;
+  }
+
+  public boolean[] getBooleanRange() {
+    return booleanRange;
+  }
+
+  public char[] getCharSeed() {
+    return charSeed;
+  }
+
+  public String[] getStringSeed() {
+    return stringSeed;
+  }
+
+  public String[] getDateRange() {
+    return dateRange;
+  }
+
+  public int[] getSizeRange() {
+    return sizeRange;
   }
 }

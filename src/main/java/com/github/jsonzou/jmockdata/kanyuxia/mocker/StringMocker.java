@@ -10,7 +10,7 @@ import org.apache.commons.lang3.RandomUtils;
 public class StringMocker implements Mocker<String> {
 
   public static final StringMocker INSTANCE = new StringMocker();
-
+  @Override
   public String mockData(final MockConfig mockConfig) throws Exception {
     String[] stringSeed = mockConfig.getStringSeed();
     return stringSeed[RandomUtils.nextInt(0, stringSeed.length - 1)];

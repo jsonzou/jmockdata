@@ -10,7 +10,7 @@ import org.apache.commons.lang3.RandomUtils;
 public class ShortMocker implements Mocker<Short> {
 
   public static final ShortMocker INSTANCE = new ShortMocker();
-
+  @Override
   public Short mockData(final MockConfig mockConfig) throws Exception {
     return (short) RandomUtils.nextInt(mockConfig.getShortRange()[0], mockConfig.getShortRange()[1]);
   }

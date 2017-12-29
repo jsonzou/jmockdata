@@ -17,7 +17,7 @@ public class SetMocker implements Mocker<Set> {
     this.genericType = genericType;
   }
 
-  @SuppressWarnings("unchecked")
+  @Override
   public Set mockData(final MockConfig mockConfig) throws Exception {
     int size = RandomUtils.nextInt(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1]);
     Set result = new HashSet(size);

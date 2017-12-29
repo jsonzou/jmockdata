@@ -28,7 +28,7 @@ public class BeanMocker<T> implements Mocker<T> {
     this.clazz = clazz;
     this.genericTypes = genericTypes;
   }
-
+  @Override
   public T mockData(final MockConfig mockConfig) throws Exception {
     if (clazz.isArray()) {
       return (T) new ArrayMocker(clazz.getComponentType()).mockData(mockConfig);

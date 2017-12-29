@@ -20,7 +20,7 @@ public class MapMocker implements Mocker<Map> {
   MapMocker(Type[] genericTypes) {
     this.genericTypes = genericTypes;
   }
-
+  @Override
   public Map mockData(final MockConfig mockConfig) throws Exception {
     int size = RandomUtils.nextInt(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1]);
     Map result = new HashMap(size);

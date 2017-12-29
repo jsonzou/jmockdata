@@ -10,7 +10,7 @@ import org.apache.commons.lang3.RandomUtils;
 public class LongMocker implements Mocker<Long> {
 
   public static final LongMocker INSTANCE = new LongMocker();
-
+  @Override
   public Long mockData(final MockConfig mockConfig) throws Exception {
     return RandomUtils.nextLong(mockConfig.getLongRange()[0], mockConfig.getLongRange()[1]);
   }

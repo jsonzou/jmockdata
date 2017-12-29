@@ -15,6 +15,9 @@
  */
 package com.github.jsonzou.jmockdata.test.testbean;
 
+import com.github.jsonzou.jmockdata.test.SuperToString;
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
@@ -25,7 +28,8 @@ import java.util.Set;
 /**
  * Created by jsonzou on 2016/12/16.
  */
-public class MockDemoBeanAnyData {
+
+public class MockDemoBeanAnyData extends SuperToString{
     private Integer vIntegerBoxing;
     private Long vLongBoxing;
     private Double vDoubleBoxing;
