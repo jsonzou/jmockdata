@@ -16,17 +16,26 @@ public class MockDataTest {
   public void test() throws Exception {
     People people1 = JMock.mockData(People.class);
     System.out.println(people1);
+    System.out.println(  JMock.mockData(int.class));
+    System.out.println(  JMock.mockData(int[].class));
+
     MockConfig mockConfig = new MockConfig();
     mockConfig.setStringSeed("hello", "world");
-    MockDemoBeanAnyData mockDemoBeanAnyData = JMock.mockData(MockDemoBeanAnyData.class, mockConfig);
-    //System.out.println(JSON.toJSONString(mockDemoBeanAnyData,true));
-   // MockDemoBeanSelfRefData mockDemoBeanSelfRefData = JMock.mockData(MockDemoBeanSelfRefData.class, mockConfig);
-    //System.out.println(JSON.toJSONString(mockDemoBeanSelfRefData,true));
+    // 任何类型
+//    MockDemoBeanAnyData mockDemoBeanAnyData = JMock.mockData(MockDemoBeanAnyData.class, mockConfig);
+//    System.out.println(mockDemoBeanAnyData);
+
+    // 自引用
+    //MockDemoBeanSelfRefData mockDemoBeanSelfRefData = JMock.mockData(MockDemoBeanSelfRefData.class, mockConfig);
+    //System.out.println(mockDemoBeanSelfRefData);
+
+    // 继承-有getter,setter
     //BxA bxa = JMock.mockData(BxA.class, mockConfig);
-    //System.out.println(JSON.toJSONString(bxa,true));
-    System.out.println(  JMock.mockData(int[].class));
-    Teacher teacher = JMock.mockData(Teacher.class,mockConfig);
-    System.out.println(JSON.toJSONString(teacher,true));
+    //System.out.println(bxa);
+
+    // 继承-无getter,setter
+        Teacher teacher = JMock.mockData(Teacher.class,mockConfig);
+        System.out.println(teacher);
   }
 
 }
