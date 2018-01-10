@@ -6,6 +6,8 @@ package com.github.jsonzou.jmockdata.kanyuxia;
  */
 public class MockConfig {
 
+  public static final MockConfig DEFAULT_MOCK_CONFIG =new MockConfig();
+
   // valueRange[min,max] / [fixed value]
   private final byte[] byteRange = {0, 100};
   private final short[] shortRange = {0, 100};
@@ -13,8 +15,6 @@ public class MockConfig {
   private final float[] floatRange = {0.0f, 100.00f};
   private final double[] doubleRange = {0.0, 100.00};// Double & BigDecimal
   private final long[] longRange = {0L, 100L};// Double & BigInteger
-  private boolean[] booleanRange = {true, false};
-
   // value[seed,seed,seed]
   private char[] charSeed =
       {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
@@ -30,7 +30,6 @@ public class MockConfig {
 
   // list、set、map sizeRange[min,max] / [fixed value]
   private final int[] sizeRange = {1, 5};
-
 
   // -------------------------------- 设置模拟数据配置的值 ------------------------------------ //
   public void setByteRange(byte min, byte max) {
@@ -61,10 +60,6 @@ public class MockConfig {
   public void setLongRange(long min, long max) {
     longRange[0] = min;
     longRange[1] = max;
-  }
-
-  public void setBooleanRange(boolean... booleanRange) {
-    this.booleanRange = booleanRange;
   }
 
   public void setCharSeed(char... charSeed) {
@@ -107,10 +102,6 @@ public class MockConfig {
 
   public long[] getLongRange() {
     return longRange;
-  }
-
-  public boolean[] getBooleanRange() {
-    return booleanRange;
   }
 
   public char[] getCharSeed() {

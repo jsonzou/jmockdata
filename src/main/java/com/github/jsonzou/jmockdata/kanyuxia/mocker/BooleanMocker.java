@@ -12,7 +12,6 @@ public class BooleanMocker implements Mocker<Boolean> {
   public static final BooleanMocker INSTANCE = new BooleanMocker();
   @Override
   public Boolean mockData(final MockConfig mockConfig) throws Exception {
-    boolean[] booleanRange = mockConfig.getBooleanRange();
-    return booleanRange[RandomUtils.nextInt(0, booleanRange.length - 1)];
+    return RandomUtils.nextBoolean();
   }
 }
