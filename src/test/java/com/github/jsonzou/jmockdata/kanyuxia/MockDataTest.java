@@ -1,12 +1,8 @@
 package com.github.jsonzou.jmockdata.kanyuxia;
 
-import com.alibaba.fastjson.JSON;
-import com.github.jsonzou.jmockdata.JMockData;
-import com.github.jsonzou.jmockdata.kanyuxia.bean.BxA;
 import com.github.jsonzou.jmockdata.kanyuxia.bean.People;
 import com.github.jsonzou.jmockdata.kanyuxia.bean.Teacher;
-import com.github.jsonzou.jmockdata.test.testbean.MockDemoBeanAnyData;
-import com.github.jsonzou.jmockdata.test.testbean.MockDemoBeanSelfRefData;
+import java.util.Arrays;
 import org.junit.Test;
 
 public class MockDataTest {
@@ -18,14 +14,11 @@ public class MockDataTest {
     People people1 = JMock.mockData(People.class);
     System.out.println(people1);
     System.out.println(JMock.mockData(int.class));
-    System.out.println(JMock.mockData(int[].class));
+    System.out.println(Arrays.toString(JMock.mockData(int[].class)));
    // System.out.println(JMock.mockData(List<String>));
    // System.out.println(JMock.mockData(Set<String>));
    // System.out.println(JMock.mockData(Map<String,String>));
 
-//  改变默认配置
-    MockConfig mockConfig = new MockConfig();
-    mockConfig.setStringSeed("hello", "world");
 
 //  任何类型
 //  MockDemoBeanAnyData mockDemoBeanAnyData = JMock.mockData(MockDemoBeanAnyData.class, mockConfig);
@@ -40,7 +33,7 @@ public class MockDataTest {
 //   System.out.println(bxa);
 
 // 继承-无getter,setter
-     Teacher teacher = JMock.mockData(Teacher.class,mockConfig);
+     Teacher teacher = JMock.mockData(Teacher.class, new MockConfig().setStringSeed("hello", "world").setSizeRange(1, 2));
      System.out.println(teacher);
   }
 

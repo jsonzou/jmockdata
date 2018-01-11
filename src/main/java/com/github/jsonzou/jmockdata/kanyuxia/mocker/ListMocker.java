@@ -32,7 +32,7 @@ public class ListMocker implements Mocker<List> {
         result.add(new BeanMocker((Class<?>) type.getRawType(), type.getActualTypeArguments()[0]).mockData(mockConfig));
         continue;
       }
-      result.add(JMock.mockData((Class<?>) genericType));
+      result.add(JMock.mockData((Class<?>) genericType, mockConfig));
     }
     return result;
   }

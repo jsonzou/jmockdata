@@ -43,7 +43,7 @@ public class MapMocker implements Mocker<Map> {
         ParameterizedType type = (ParameterizedType) valueType;
         value = new BeanMocker((Class<?>) type.getRawType(), type.getActualTypeArguments()[0]).mockData(mockConfig);
       } else {
-        value = JMock.mockData((Class<?>) valueType);
+        value = JMock.mockData((Class<?>) valueType, mockConfig);
       }
       result.put(key, value);
       index = result.size() - 1;

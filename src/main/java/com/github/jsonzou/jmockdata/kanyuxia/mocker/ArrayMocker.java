@@ -22,7 +22,7 @@ public class ArrayMocker implements Mocker<Object> {
     int size = RandomUtils.nextInt(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1] + 1);
     Object result = Array.newInstance(componentClass, size);
     for (int index = 0; index < size; index++) {
-      Object value = JMock.mockData(componentClass);
+      Object value = JMock.mockData(componentClass, mockConfig);
       Array.set(result, index, value);
     }
     return result;
