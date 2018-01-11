@@ -20,13 +20,15 @@ public class MapMocker implements Mocker<Map> {
   MapMocker(Type[] genericTypes) {
     this.genericTypes = genericTypes;
   }
+
   @Override
   public Map mockData(final MockConfig mockConfig) throws Exception {
-    int size = RandomUtils.nextInt(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1]);
+    int size = RandomUtils.nextInt(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1] + 1);
     Map result = new HashMap(size);
     Type keyType = genericTypes[0];
     Type valueType = genericTypes[1];
-    while (size-- > 0) {
+    int index = 0;
+    while (index < size) {
       Object key;
       Object value;
       // 判断key是否还有泛型
@@ -44,6 +46,7 @@ public class MapMocker implements Mocker<Map> {
         value = JMock.mockData((Class<?>) valueType);
       }
       result.put(key, value);
+      index = result.size() - 1;
     }
     return result;
   }

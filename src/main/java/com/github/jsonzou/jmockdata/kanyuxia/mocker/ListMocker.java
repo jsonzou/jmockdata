@@ -20,9 +20,10 @@ public class ListMocker implements Mocker<List> {
   public ListMocker(Type genericType) {
     this.genericType = genericType;
   }
+
   @Override
   public List mockData(final MockConfig mockConfig) throws Exception {
-    int size = RandomUtils.nextInt(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1]);
+    int size = RandomUtils.nextInt(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1] + 1);
     List result = new ArrayList(size);
     while (size-- > 0) {
       // 判断是否还有泛型

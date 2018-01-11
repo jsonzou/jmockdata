@@ -11,8 +11,9 @@ import org.apache.commons.lang3.RandomUtils;
 public class BigDecimalMocker implements Mocker<BigDecimal> {
 
   public static final BigDecimalMocker INSTANCE = new BigDecimalMocker();
+
   @Override
   public BigDecimal mockData(final MockConfig mockConfig) throws Exception {
-    return BigDecimal.valueOf(RandomUtils.nextDouble(mockConfig.getDoubleRange()[0], mockConfig.getDoubleRange()[1]));
+    return BigDecimal.valueOf(RandomUtils.nextDouble(mockConfig.getDoubleRange()[0], mockConfig.getDoubleRange()[1] + 1));
   }
 }

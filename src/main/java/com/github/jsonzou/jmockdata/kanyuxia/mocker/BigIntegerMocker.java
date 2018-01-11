@@ -13,6 +13,6 @@ public class BigIntegerMocker implements Mocker<BigInteger> {
   public static final BigIntegerMocker INSTANCE = new BigIntegerMocker();
   @Override
   public BigInteger mockData(final MockConfig mockConfig) throws Exception {
-    return BigInteger.valueOf(RandomUtils.nextLong(mockConfig.getLongRange()[0], mockConfig.getLongRange()[1]));
+    return BigInteger.valueOf(RandomUtils.nextLong(mockConfig.getLongRange()[0], mockConfig.getLongRange()[1] + 1));
   }
 }

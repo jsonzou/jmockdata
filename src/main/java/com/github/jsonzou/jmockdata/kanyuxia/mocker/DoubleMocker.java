@@ -10,8 +10,9 @@ import org.apache.commons.lang3.RandomUtils;
 public class DoubleMocker implements Mocker<Double> {
 
   public static final DoubleMocker INSTANCE = new DoubleMocker();
+
   @Override
   public Double mockData(final MockConfig mockConfig) throws Exception {
-    return RandomUtils.nextDouble(mockConfig.getDoubleRange()[0], mockConfig.getDoubleRange()[1]);
+    return RandomUtils.nextDouble(mockConfig.getDoubleRange()[0], mockConfig.getDoubleRange()[1] + 1);
   }
 }

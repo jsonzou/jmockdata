@@ -16,9 +16,10 @@ public class ArrayMocker implements Mocker<Object> {
   ArrayMocker(Class<?> clazz) {
     this.componentClass = clazz;
   }
+
   @Override
   public Object mockData(final MockConfig mockConfig) throws Exception {
-    int size = RandomUtils.nextInt(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1]);
+    int size = RandomUtils.nextInt(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1] + 1);
     Object result = Array.newInstance(componentClass, size);
     for (int index = 0; index < size; index++) {
       Object value = JMock.mockData(componentClass);

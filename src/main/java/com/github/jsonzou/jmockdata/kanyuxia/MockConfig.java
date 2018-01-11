@@ -28,56 +28,66 @@ public class MockConfig {
   // dateRange[min, max]
   private final String[] dateRange = {"1970-01-02", "2100-12-31"};
 
-  // list、set、map sizeRange[min,max] / [fixed value]
+  // list、set、map sizeRange[min,max]
   private final int[] sizeRange = {1, 5};
 
   // -------------------------------- 设置模拟数据配置的值 ------------------------------------ //
-  public void setByteRange(byte min, byte max) {
+  public MockConfig setByteRange(byte min, byte max) {
     byteRange[0] = min;
     byteRange[1] = max;
+    return this;
   }
 
-  public void setShortRange(short min, short max) {
+  public MockConfig setShortRange(short min, short max) {
     shortRange[0] = min;
     shortRange[1] = max;
+    return this;
   }
 
-  public void setIntRange(int min, int max) {
+  public MockConfig setIntRange(int min, int max) {
     intRange[0] = min;
     intRange[1] = max;
+    return this;
   }
 
-  public void setFloatRange(float min, float max) {
+  public MockConfig setFloatRange(float min, float max) {
     floatRange[0] = min;
     floatRange[1] = max;
+    return this;
   }
 
-  public void setDoubleRange(double min, double max) {
+  public MockConfig setDoubleRange(double min, double max) {
     doubleRange[0] = min;
     doubleRange[1] = max;
+    return this;
   }
 
-  public void setLongRange(long min, long max) {
+  public MockConfig setLongRange(long min, long max) {
     longRange[0] = min;
     longRange[1] = max;
+    return this;
   }
 
-  public void setCharSeed(char... charSeed) {
+  public MockConfig setCharSeed(char... charSeed) {
     this.charSeed = charSeed;
+    return this;
   }
 
-  public void setStringSeed(String... stringSeed) {
+  public MockConfig setStringSeed(String... stringSeed) {
     this.stringSeed = stringSeed;
+    return this;
   }
 
-  public void setDateRange(String min, String max) {
+  public MockConfig setDateRange(String min, String max) {
     dateRange[0] = min;
     dateRange[1] = max;
+    return this;
   }
 
-  public void setSizeRange(int min, int max) {
+  public MockConfig setSizeRange(int min, int max) {
     sizeRange[0] = min;
     sizeRange[1] = max;
+    return this;
   }
 
   public byte[] getByteRange() {

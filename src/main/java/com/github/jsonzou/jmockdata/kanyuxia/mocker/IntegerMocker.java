@@ -10,8 +10,9 @@ import org.apache.commons.lang3.RandomUtils;
 public class IntegerMocker implements Mocker<Integer> {
 
   public static final IntegerMocker INSTANCE = new IntegerMocker();
+
   @Override
   public Integer mockData(final MockConfig mockConfig) {
-    return RandomUtils.nextInt(mockConfig.getIntRange()[0], mockConfig.getIntRange()[1]);
+    return RandomUtils.nextInt(mockConfig.getIntRange()[0], mockConfig.getIntRange()[1] + 1);
   }
 }

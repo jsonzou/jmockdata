@@ -10,8 +10,9 @@ import org.apache.commons.lang3.RandomUtils;
 public class FloatMocker implements Mocker<Float> {
 
   public static final FloatMocker INSTANCE = new FloatMocker();
+
   @Override
   public Float mockData(final MockConfig mockConfig) throws Exception {
-    return RandomUtils.nextFloat(mockConfig.getFloatRange()[0], mockConfig.getFloatRange()[1]);
+    return RandomUtils.nextFloat(mockConfig.getFloatRange()[0], mockConfig.getFloatRange()[1] + 1);
   }
 }
