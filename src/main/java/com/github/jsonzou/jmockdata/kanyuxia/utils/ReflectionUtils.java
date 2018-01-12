@@ -49,10 +49,10 @@ public class ReflectionUtils {
   }
 
   /**
-   * 有setter、getter方法的字段及其setter方法
+   * 有setter方法的字段及其setter方法
    *
    * @param clazz Class对象
-   * @return 字段及其setter方法
+   * @return 有setter方法的 字段及其setter方法
    * @throws IntrospectionException 内省异常
    */
   public static Map<Field, Method> fieldAndSetterMethod(Class clazz) throws IntrospectionException {
@@ -61,7 +61,7 @@ public class ReflectionUtils {
     PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
     for (Field field : clazz.getDeclaredFields()) {
       for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
-        if (propertyDescriptor.getName().equals(field.getName()) && propertyDescriptor.getReadMethod() != null) {
+        if (propertyDescriptor.getName().equals(field.getName()) && propertyDescriptor.getWriteMethod() != null) {
           map.put(field, propertyDescriptor.getWriteMethod());
         }
       }

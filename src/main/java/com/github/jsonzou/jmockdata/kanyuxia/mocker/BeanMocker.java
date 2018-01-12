@@ -28,6 +28,7 @@ public class BeanMocker<T> implements Mocker<T> {
     this.clazz = clazz;
     this.genericTypes = genericTypes;
   }
+
   @Override
   public T mockData(final MockConfig mockConfig) throws Exception {
     if (clazz.isArray()) {
@@ -42,10 +43,23 @@ public class BeanMocker<T> implements Mocker<T> {
     if (Set.class.isAssignableFrom(clazz)) {
       return (T) new SetMocker(genericTypes[0]).mockData(mockConfig);
     }
+    // 从缓存中取已经构造的Bean
+    Map<String, Object> beanCache = mockConfig.getBeanCache();
+    if (beanCache.containsKey(clazz.getName())) {
+      return (T) beanCache.get(clazz.getName());
+    }
+    // 模拟Bean
+    return mockBean(mockConfig);
+  }
+
+  private T mockBean(MockConfig mockConfig) throws Exception {
+    // 构造Bean
     T result = (T) clazz.newInstance();
+    Map<String, Object> beanCache = mockConfig.getBeanCache();
+    beanCache.put(clazz.getName(), result);
     // 从子对象向上依次模拟
     for (Class<?> currentClass = clazz; currentClass != Object.class; currentClass = currentClass.getSuperclass()) {
-      // 模拟有setter、getter方法的字段
+      // 模拟有setter方法的字段
       for (Entry<Field, Method> entry : ReflectionUtils.fieldAndSetterMethod(currentClass).entrySet()) {
         Field field = entry.getKey();
         Method method = entry.getValue();

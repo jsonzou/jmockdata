@@ -1,12 +1,18 @@
 package com.github.jsonzou.jmockdata.kanyuxia;
 
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * 模拟数据配置类
  */
 public class MockConfig {
 
-  public static final MockConfig DEFAULT_MOCK_CONFIG =new MockConfig();
+  public static final MockConfig DEFAULT_MOCK_CONFIG = new MockConfig();
+
+  // Bean缓存
+  private final Map<String, Object> beanCache = new ConcurrentHashMap<>(16);
 
   // valueRange[min,max] / [fixed value]
   private final byte[] byteRange = {0, 100};
@@ -15,6 +21,10 @@ public class MockConfig {
   private final float[] floatRange = {0.0f, 100.00f};
   private final double[] doubleRange = {0.0, 100.00};// Double & BigDecimal
   private final long[] longRange = {0L, 100L};// Double & BigInteger
+  // dateRange[min, max]
+  private final String[] dateRange = {"1970-01-02", "2100-12-31"};
+  // list、set、map sizeRange[min,max]
+  private final int[] sizeRange = {1, 5};
   // value[seed,seed,seed]
   private char[] charSeed =
       {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
@@ -25,11 +35,9 @@ public class MockConfig {
           "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F",
           "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
 
-  // dateRange[min, max]
-  private final String[] dateRange = {"1970-01-02", "2100-12-31"};
-
-  // list、set、map sizeRange[min,max]
-  private final int[] sizeRange = {1, 5};
+  public Map<String, Object> getBeanCache() {
+    return beanCache;
+  }
 
   // -------------------------------- 设置模拟数据配置的值 ------------------------------------ //
   public MockConfig setByteRange(byte min, byte max) {
@@ -65,16 +73,6 @@ public class MockConfig {
   public MockConfig setLongRange(long min, long max) {
     longRange[0] = min;
     longRange[1] = max;
-    return this;
-  }
-
-  public MockConfig setCharSeed(char... charSeed) {
-    this.charSeed = charSeed;
-    return this;
-  }
-
-  public MockConfig setStringSeed(String... stringSeed) {
-    this.stringSeed = stringSeed;
     return this;
   }
 
@@ -118,8 +116,18 @@ public class MockConfig {
     return charSeed;
   }
 
+  public MockConfig setCharSeed(char... charSeed) {
+    this.charSeed = charSeed;
+    return this;
+  }
+
   public String[] getStringSeed() {
     return stringSeed;
+  }
+
+  public MockConfig setStringSeed(String... stringSeed) {
+    this.stringSeed = stringSeed;
+    return this;
   }
 
   public String[] getDateRange() {
