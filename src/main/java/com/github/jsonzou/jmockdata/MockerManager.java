@@ -23,9 +23,26 @@ import java.util.Map;
  */
 public class MockerManager {
 
-  private static final Map<Class<?>, Mocker> MOCKER_MAP = new HashMap<>();
+  public static final ThreadLocal<MockerManager> MOCKER_MANAGER = new ThreadLocal<MockerManager>() {
+    @Override
+    protected MockerManager initialValue() {
+      return new MockerManager();
+    }
+  };
 
-  static {
+   public static MockerManager local(){
+    return MOCKER_MANAGER.get();
+  }
+
+  private final Map<Class<?>, Mocker> map = new HashMap<>();
+
+  private MockConfig mockConfig = new MockConfig();
+
+  private MockerManager() {
+    init();
+  }
+
+  private void init() {
     registerMocker(ByteMocker.INSTANCE, byte.class, Byte.class);
     registerMocker(BooleanMocker.INSTANCE, boolean.class, Boolean.class);
     registerMocker(CharacterMocker.INSTANCE, char.class, Character.class);
@@ -40,13 +57,17 @@ public class MockerManager {
     registerMocker(DateMocker.INSTANCE, Date.class);
   }
 
-  private static void registerMocker(Mocker mocker, Class<?>... clazzs) {
+  private void registerMocker(Mocker mocker, Class<?>... clazzs) {
     for (Class<?> clazz : clazzs) {
-      MOCKER_MAP.put(clazz, mocker);
+      map.put(clazz, mocker);
     }
   }
 
-  public static Mocker getMocker(Class<?> clazz) {
-    return MOCKER_MAP.get(clazz);
+  public Mocker getMocker(Class<?> clazz) {
+    return map.get(clazz);
+  }
+
+  public MockConfig config() {
+    return mockConfig;
   }
 }

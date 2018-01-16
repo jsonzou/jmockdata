@@ -4,9 +4,9 @@ import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.MockException;
 import com.github.jsonzou.jmockdata.Mocker;
-import com.github.jsonzou.jmockdata.MockerManager;
 import com.github.jsonzou.jmockdata.util.ReflectionUtils;
 import java.lang.reflect.Field;
+import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -24,7 +24,7 @@ public class BeanMocker<T> implements Mocker<T> {
 
   private Type[] genericTypes;
 
-  public BeanMocker(final Class<?> clazz, final Type... genericTypes) {
+  public BeanMocker(Class<?> clazz, Type... genericTypes) {
     this.clazz = clazz;
     this.genericTypes = genericTypes;
   }
@@ -32,16 +32,16 @@ public class BeanMocker<T> implements Mocker<T> {
   @Override
   public T mock(MockConfig mockConfig) {
     if (clazz.isArray()) {
-      return (T) new ArrayMocker(clazz.getComponentType()).mock(mockConfig);
+      return (T) new ArrayMocker(clazz, genericTypes.length == 0 ? clazz.getComponentType() : genericTypes[0]).mock(mockConfig);
     } else if (Map.class.isAssignableFrom(clazz)) {
       return (T) new MapMocker(genericTypes).mock(mockConfig);
     } else if (Collection.class.isAssignableFrom(clazz)) {
       return (T) new CollectionMocker(clazz, genericTypes[0]).mock(mockConfig);
     }
     // 从缓存中取已经构造的Bean
-    Map<String, Object> beanCache = mockConfig.getBeanCache();
-    if (beanCache.containsKey(clazz.getName())) {
-      return (T) beanCache.get(clazz.getName());
+    Object cacheBean = mockConfig.getCacheObject(clazz.getName());
+    if (cacheBean != null) {
+      return (T) cacheBean;
     }
     // 模拟Bean
     return mockBean(mockConfig);
@@ -51,8 +51,7 @@ public class BeanMocker<T> implements Mocker<T> {
     try {
       // 构造Bean
       T result = (T) clazz.newInstance();
-      Map<String, Object> beanCache = mockConfig.getBeanCache();
-      beanCache.put(clazz.getName(), result);
+      mockConfig.addCache(clazz.getName(), result);
       // 从子对象向上依次模拟
       for (Class<?> currentClass = clazz; currentClass != Object.class; currentClass = currentClass.getSuperclass()) {
         // 模拟有setter方法的字段
@@ -61,16 +60,27 @@ public class BeanMocker<T> implements Mocker<T> {
           Method method = entry.getValue();
           Class<?> fieldClass = field.getType();
           Object value;
-          // 判断是否有泛型参数
-          if (ReflectionUtils.hasGeneric(fieldClass)) {
-            // 模拟有泛型的数据
-            Mocker mocker = MockerManager.getMocker(fieldClass);
-            if (mocker == null) {
-              mocker = new BeanMocker(fieldClass, ((ParameterizedType) field.getGenericType()).getActualTypeArguments());
+          // 判断字段是否是Map or Collection
+          if (Map.class.isAssignableFrom(fieldClass) || Collection.class.isAssignableFrom(fieldClass)) {
+            Type[] types = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
+            Mocker mocker = new BeanMocker(fieldClass, types);
+            value = mocker.mock(mockConfig);
+            // 判断字段是否是数组
+          } else if (fieldClass.isArray()) {
+            Type componentType;
+            Type type = field.getGenericType();
+            // 字段是数组类型(一维数组)
+            if (type instanceof GenericArrayType) {
+              GenericArrayType arrayType = (GenericArrayType) type;
+              componentType = arrayType.getGenericComponentType();
+            } else {
+              // 字段是多维数组
+              componentType = ((Class) type).getComponentType();
             }
+            Mocker mocker = new BeanMocker(fieldClass, componentType);
             value = mocker.mock(mockConfig);
           } else {
-            value = JMockData.mock(fieldClass, mockConfig);
+            value = JMockData.mock(fieldClass);
           }
           ReflectionUtils.setRefValue(result, method, value);
         }

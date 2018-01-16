@@ -16,15 +16,16 @@ import java.util.Set;
 /**
  * @author TaoYu
  */
+@SuppressWarnings("unchecked")
 public class CollectionMocker implements Mocker<Collection> {
 
   private Class<?> clazz;
 
-  private Type genericType;
+  private Type type;
 
-  public CollectionMocker(Class<?> clazz, Type genericType) {
+  public CollectionMocker(Class<?> clazz, Type type) {
     this.clazz = clazz;
-    this.genericType = genericType;
+    this.type = type;
   }
 
   @Override
@@ -39,12 +40,15 @@ public class CollectionMocker implements Mocker<Collection> {
       throw new MockException("暂时不支持的collection类型");
     }
     while (size-- > 0) {
-      if (genericType instanceof ParameterizedType) {
-        ParameterizedType type = (ParameterizedType) genericType;
-        result.add(new BeanMocker((Class<?>) type.getRawType(), type.getActualTypeArguments()[0]).mock(mockConfig));
-        continue;
+      Object value;
+      if (type instanceof ParameterizedType) {
+        ParameterizedType parameterizedType = (ParameterizedType) type;
+        value = new BeanMocker((Class<?>) parameterizedType.getRawType(),
+            parameterizedType.getActualTypeArguments()[0]).mock(mockConfig);
+      } else {
+        value = JMockData.mock((Class<?>) type);
       }
-      result.add(JMockData.mock((Class<?>) genericType, mockConfig));
+      result.add(value);
     }
     return result;
   }

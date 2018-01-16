@@ -22,7 +22,6 @@ public class MockConfig {
   private long[] longRange = {0L, 100L};
   private String[] dateRange = {"1970-01-02", "2100-12-31"};
   private int[] sizeRange = {1, 5};
-  private int selfLevel = 3;
   private char[] charSeed =
       {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
           'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F',
@@ -32,8 +31,12 @@ public class MockConfig {
           "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F",
           "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
 
-  public Map<String, Object> getBeanCache() {
-    return beanCache;
+  public void addCache(String name, Object object) {
+    beanCache.put(name, object);
+  }
+
+  public Object getCacheObject(String name) {
+    return beanCache.get(name);
   }
 
   public MockConfig byteRange(byte min, byte max) {
@@ -84,8 +87,13 @@ public class MockConfig {
     return this;
   }
 
-  public MockConfig selfLevel(int selfLevel) {
-    this.selfLevel = selfLevel;
+  public MockConfig stringSeed(String... stringSeed) {
+    this.stringSeed = stringSeed;
+    return this;
+  }
+
+  public MockConfig charSeed(char... charSeed) {
+    this.charSeed = charSeed;
     return this;
   }
 
@@ -119,10 +127,6 @@ public class MockConfig {
 
   public int[] getSizeRange() {
     return sizeRange;
-  }
-
-  public int getSelfLevel() {
-    return selfLevel;
   }
 
   public char[] getCharSeed() {

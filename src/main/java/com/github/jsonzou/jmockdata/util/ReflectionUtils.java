@@ -6,7 +6,6 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -70,16 +69,6 @@ public final class ReflectionUtils {
       }
     }
     return map;
-  }
-
-  /**
-   * 该Class对象是否有泛型
-   *
-   * @param clazz Class对象
-   * @return true or false
-   */
-  public static boolean hasGeneric(Class<?> clazz) {
-    return Map.class.isAssignableFrom(clazz) || Collection.class.isAssignableFrom(clazz);
   }
 
 }

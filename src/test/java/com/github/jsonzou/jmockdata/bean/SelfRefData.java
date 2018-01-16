@@ -29,11 +29,21 @@ public class SelfRefData {
   private List<SelfRefData[]> listArray;
   private List<List<SelfRefData[]>> listListArray;
   private List<SelfRefData>[] arrayList;
+
+  private SelfRefData[][][] data;
   private Map<SelfRefData, SelfRefData[]> mapArray;
   private Map<SelfRefData, List<SelfRefData>> mapList;
   private Map<SelfRefData, List<SelfRefData[]>> mapListArray;
 
-  public String getId() {
+  public SelfRefData[][][] getData() {
+    return data;
+  }
+
+  public void setData(SelfRefData[][][] data) {
+    this.data = data;
+  }
+
+    public String getId() {
     return id;
   }
 
