@@ -29,7 +29,7 @@ public class JMockDataTest {
   @Test
   public void testSelf() {
     SelfRefData selfRefData = JMockData.mock(SelfRefData.class);
-    System.out.println(JSON.toJSONString(selfRefData));
+    System.out.println(selfRefData);
   }
 
   @Test
@@ -48,4 +48,5 @@ public class JMockDataTest {
     System.out.println(JSON.toJSONString(stringSet));
     System.out.println(JSON.toJSONString(map));
   }
+
 }
