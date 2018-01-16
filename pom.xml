@@ -1,4 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -14,12 +14,10 @@
 
   <inceptionYear>2017</inceptionYear>
 
-  <!-- projectName,description,url等。-->
   <name>${project.groupId}:${project.artifactId}</name>
   <description>The plug-in of Jmockdata what through random algorithm mock java data</description>
   <url>https://github.com/jsonzou/jmockdata</url>
 
-  <!--  license 信息-->
   <licenses>
     <license>
       <name>The Apache License, Version 2.0</name>
@@ -27,8 +25,6 @@
     </license>
   </licenses>
 
-
-  <!-- 开发者信息-->
   <developers>
     <developer>
       <name>jsonzou</name>
@@ -38,7 +34,6 @@
     </developer>
   </developers>
 
-  <!-- 贡献者信息-->
   <contributors>
     <contributor>
       <name>TaoYu</name>
@@ -46,7 +41,6 @@
     </contributor>
   </contributors>
 
-  <!-- SCM 信息-->
   <scm>
     <connection>scm:git:https://github.com/jsonzou/jmockdata.git</connection>
     <developerConnection>scm:git:https://github.com/jsonzou/jmockdata.git</developerConnection>
@@ -54,7 +48,6 @@
     <tag>jmockdata</tag>
   </scm>
 
-  <!-- 部署 -->
   <distributionManagement>
     <snapshotRepository>
       <id>ossrh</id>
@@ -68,28 +61,22 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.16.18</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>fastjson</artifactId>
-      <version>1.2.17</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.44</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
+
   <build>
     <pluginManagement>
       <plugins>
-        <!--编译-->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
@@ -101,29 +88,24 @@
             <testTarget>${jdk.version}</testTarget>
             <encoding>UTF-8</encoding>
             <optimize>true</optimize>
-            <!-- Slightly faster builds, see https://issues.apache.org/jira/browse/MCOMPILER-209 -->
             <useIncrementalCompilation>false</useIncrementalCompilation>
           </configuration>
         </plugin>
-        <!--本地打包-->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-install-plugin</artifactId>
           <version>2.5.2</version>
         </plugin>
-        <!--发布-->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-deploy-plugin</artifactId>
           <version>2.8.2</version>
         </plugin>
-        <!--清除-->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
-        <!--测试-->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
@@ -132,51 +114,6 @@
             <forkMode>once</forkMode>
             <argLine>-Dfile.encoding=UTF-8</argLine>
           </configuration>
-        </plugin>
-        <!-- 源码 -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-source-plugin</artifactId>
-          <version>2.2.1</version>
-          <executions>
-            <execution>
-              <phase>package</phase>
-              <goals>
-                <goal>jar-no-fork</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-        <!-- 文档 -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-javadoc-plugin</artifactId>
-          <version>2.10.4</version>
-          <configuration>
-            <aggregate>true</aggregate>
-          </configuration>
-          <executions>
-            <execution>
-              <id>attach-javadocs</id>
-              <goals>
-                <goal>jar</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-        <!-- GPG -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-gpg-plugin</artifactId>
-          <version>1.6</version>
-          <executions>
-            <execution>
-              <phase>verify</phase>
-              <goals>
-                <goal>sign</goal>
-              </goals>
-            </execution>
-          </executions>
         </plugin>
         <!--license插件,用于给每个文件生成头注释 https://github.com/mycila/license-maven-plugin-->
         <plugin>
@@ -192,14 +129,9 @@
             <mapping>
               <xml.vm>XML_STYLE</xml.vm>
             </mapping>
-            <excludes>
-              <exclude>pom.xml</exclude>
-              <exclude>.git**</exclude>
-              <exclude>LICENSE</exclude>
-              <exclude>README</exclude>
-              <exclude>src/test/resources/**</exclude>
-              <exclude>src/main/resources/**</exclude>
-            </excludes>
+            <includes>
+              <include>src/main/java</include>
+            </includes>
           </configuration>
           <executions>
             <execution>
@@ -217,12 +149,6 @@
             </dependency>
           </dependencies>
         </plugin>
-        <!--覆盖率插件 https://github.com/trautonen/coveralls-maven-plugin-->
-        <plugin>
-          <groupId>org.eluder.coveralls</groupId>
-          <artifactId>coveralls-maven-plugin</artifactId>
-          <version>4.3.0</version>
-        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -232,30 +158,21 @@
         <artifactId>license-maven-plugin</artifactId>
       </plugin>
     </plugins>
-
   </build>
 
   <profiles>
-
-
-
     <profile>
       <id>release</id>
       <build>
         <plugins>
-          <!-- jdk -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
           </plugin>
-          <!-- Source -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-source-plugin</artifactId>
-            <version>2.2.1</version>
-            <configuration>
-
-            </configuration>
+            <version>3.0.1</version>
             <executions>
               <execution>
                 <phase>package</phase>
@@ -265,25 +182,26 @@
               </execution>
             </executions>
           </plugin>
-          <!-- Javadoc -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>2.10.3</version>
+            <version>2.10.4</version>
+            <configuration>
+              <aggregate>true</aggregate>
+            </configuration>
             <executions>
               <execution>
-                <phase>package</phase>
+                <id>attach-javadocs</id>
                 <goals>
                   <goal>jar</goal>
                 </goals>
               </execution>
             </executions>
           </plugin>
-          <!-- GPG -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.5</version>
+            <version>1.6</version>
             <executions>
               <execution>
                 <phase>verify</phase>
