@@ -1,4 +1,7 @@
 # Jmockdata
+[![Build Status](https://www.travis-ci.org/jsonzou/jmockdata.svg?branch=dev)](https://www.travis-ci.org/jsonzou/jmockdata)
+[![Maven central](https://maven-badges.herokuapp.com/maven-central/com.github.jsonzou/jmockdata/badge.svg)](http://mvnrepository.com/artifact/com.github.jsonzou/jmockdata)
+[![License](http://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 Jmockdta是一款实现模拟JAVA类型或对象的实例化并随机初始化对象的数据的工具框架。单元测试的利器。    
 The plug-in of Jmockdata what through random algorithm mock java data.  
 Jmockdata插件通过随机算法模拟Java数据.  
