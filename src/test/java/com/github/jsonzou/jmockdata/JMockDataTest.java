@@ -7,6 +7,8 @@ import com.github.jsonzou.jmockdata.bean.BasicData;
 import com.github.jsonzou.jmockdata.bean.SelfRefData;
 import com.github.jsonzou.jmockdata.bean.circular.AXB;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import org.junit.Test;
 
 public class JMockDataTest {
@@ -32,11 +34,18 @@ public class JMockDataTest {
 
   @Test
   public void testTypeRefrence() {
-    Integer integerNum = JMockData.mock(new TypeReference<Integer>() {
-    });
-    List<String> stringList = JMockData.mock(new TypeReference<List<String>>() {
-    });
+    Integer integerNum = JMockData.mock(new TypeReference<Integer>() {});
+    assertNotNull(integerNum);
+    Integer[] integerArray = JMockData.mock(new TypeReference<Integer[]>() {});
+    assertNotNull(integerArray);
+    List<Integer[]> integerArrayList = JMockData.mock(new TypeReference< List<Integer[]>>() {});
+    assertNotNull(integerArrayList);
+    List<Integer>[] integerListArray = JMockData.mock(new TypeReference< List<Integer>[]>() {});
+    assertNotNull(integerListArray);
+    Map<String,Integer> map = JMockData.mock(new TypeReference<Map<String,Integer>>() {});
+    assertNotNull(map);
+    Map<List<Map<Integer,String[][]>>,Map<Set<String>,Double[]>> some = JMockData.mock(new TypeReference<Map<List<Map<Integer,String[][]>>,Map<Set<String>,Double[]>>>(){});
+    assertNotNull(some);
   }
-
 
 }

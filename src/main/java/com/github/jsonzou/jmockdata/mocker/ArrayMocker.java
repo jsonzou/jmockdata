@@ -18,7 +18,7 @@ public class ArrayMocker implements Mocker<Object> {
 
   private Type componentType;
 
-  ArrayMocker(Class<?> clazz, Type componentType) {
+  public ArrayMocker(Class<?> clazz, Type componentType) {
     this.clazz = clazz;
     this.componentType = componentType;
   }
@@ -26,14 +26,13 @@ public class ArrayMocker implements Mocker<Object> {
   @Override
   public Object mock(MockConfig mockConfig) {
     int size = RandomUtils.nextInt(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1] + 1);
-    Object result = Array.newInstance(clazz.getComponentType(), size);
+    Object result = Array.newInstance(clazz, size);
     for (int index = 0; index < size; index++) {
       Object value;
       // 数组元素是参数化类型，如Collection<E>
       if (componentType instanceof ParameterizedType) {
         ParameterizedType parameterizedType = (ParameterizedType) this.componentType;
-        value = new BeanMocker((Class<?>) parameterizedType.getRawType(),
-            parameterizedType.getActualTypeArguments()[0]).mock(mockConfig);
+        value = new BeanMocker((Class<?>) parameterizedType.getRawType(), parameterizedType.getActualTypeArguments()[0]).mock(mockConfig);
       } else {
         value = JMockData.mock((Class<?>) componentType, mockConfig);
       }

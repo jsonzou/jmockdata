@@ -1,7 +1,10 @@
 package com.github.jsonzou.jmockdata;
 
+import com.github.jsonzou.jmockdata.mocker.ArrayMocker;
 import com.github.jsonzou.jmockdata.mocker.BeanMocker;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import sun.reflect.generics.reflectiveObjects.GenericArrayTypeImpl;
 import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 /**
@@ -38,10 +41,18 @@ public class JMockData {
     Type type = typeReference.getType();
     Mocker mocker;
     if (type instanceof Class) {
-      mocker = MockerManager.getMocker((Class<?>) type);
-    } else {
+      Class<?> clazz = (Class<?>) type;
+      mocker = MockerManager.getMocker(clazz);
+      if (mocker==null){
+        mocker=new BeanMocker(clazz);
+      }
+    } else if(type instanceof ParameterizedType) {
       ParameterizedTypeImpl parameterizedType = (ParameterizedTypeImpl) type;
       mocker = new BeanMocker<T>(parameterizedType.getRawType(), parameterizedType.getActualTypeArguments());
+    }else {
+      GenericArrayTypeImpl genericArrayType = (GenericArrayTypeImpl) type;
+      ParameterizedTypeImpl parameterizedType =(ParameterizedTypeImpl)  genericArrayType.getGenericComponentType();
+      mocker = new ArrayMocker(parameterizedType.getRawType(), parameterizedType);
     }
     return (T) mocker.mock(mockConfig);
   }

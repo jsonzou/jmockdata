@@ -34,7 +34,7 @@ public class MapMocker implements Mocker<Map> {
   private Object mockType(MockConfig mockConfig, Type type) {
     if (type instanceof ParameterizedType) {
       ParameterizedType parameterizedType = (ParameterizedType) type;
-      return new BeanMocker((Class<?>) parameterizedType.getRawType(), parameterizedType.getActualTypeArguments()[0]).mock(mockConfig);
+      return new BeanMocker((Class<?>) parameterizedType.getRawType(), parameterizedType.getActualTypeArguments()).mock(mockConfig);
     }
     return JMockData.mock((Class<?>) type, mockConfig);
   }
