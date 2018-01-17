@@ -34,14 +34,6 @@ public class JMockDataTest {
   public void testTypeRefrence() {
     Integer integerNum = JMockData.mock(new TypeReference<Integer>() {
     });
-    Float floatNum = JMockData.mock(new TypeReference<Float>() {
-    });
-    Long longNum = JMockData.mock(new TypeReference<Long>() {
-    });
-    Double doubleNum = JMockData.mock(new TypeReference<Double>() {
-    });
-    String string = JMockData.mock(new TypeReference<String>() {
-    });
     List<String> stringList = JMockData.mock(new TypeReference<List<String>>() {
     });
   }

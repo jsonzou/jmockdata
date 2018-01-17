@@ -36,10 +36,12 @@ public class JMockData {
 
   public static <T> T mock(TypeReference<T> typeReference, MockConfig mockConfig) {
     Type type = typeReference.getType();
-    Mocker mocker = MockerManager.getMocker((Class<?>) type);
-    if (mocker == null) {
+    Mocker mocker;
+    if (type instanceof Class) {
+      mocker = MockerManager.getMocker((Class<?>) type);
+    } else {
       ParameterizedTypeImpl parameterizedType = (ParameterizedTypeImpl) type;
-      return new BeanMocker<T>(parameterizedType.getRawType(), parameterizedType.getActualTypeArguments()).mock(mockConfig);
+      mocker = new BeanMocker<T>(parameterizedType.getRawType(), parameterizedType.getActualTypeArguments());
     }
     return (T) mocker.mock(mockConfig);
   }

@@ -3,15 +3,17 @@ package com.github.jsonzou.jmockdata.bean;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class SelfRefData {
 
-//  private String id;
-//  private String string;
-//  private Integer Integer;
-//  private Date date;
+  private String id;
+  private String string;
+  private Integer Integer;
+  private Date date;
   private SelfRefData parent;
   private Map<SelfRefData, SelfRefData> parentMap;
   private SelfRefData[] parentArray;
