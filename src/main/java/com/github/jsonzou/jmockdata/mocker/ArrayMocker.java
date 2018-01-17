@@ -35,7 +35,7 @@ public class ArrayMocker implements Mocker<Object> {
         value = new BeanMocker((Class<?>) parameterizedType.getRawType(),
             parameterizedType.getActualTypeArguments()[0]).mock(mockConfig);
       } else {
-        value = JMockData.mock((Class<?>) componentType);
+        value = JMockData.mock((Class<?>) componentType, mockConfig);
       }
       Array.set(result, index, value);
     }

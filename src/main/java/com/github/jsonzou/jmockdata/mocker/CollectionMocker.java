@@ -46,7 +46,7 @@ public class CollectionMocker implements Mocker<Collection> {
         value = new BeanMocker((Class<?>) parameterizedType.getRawType(),
             parameterizedType.getActualTypeArguments()[0]).mock(mockConfig);
       } else {
-        value = JMockData.mock((Class<?>) type);
+        value = JMockData.mock((Class<?>) type, mockConfig);
       }
       result.add(value);
     }
