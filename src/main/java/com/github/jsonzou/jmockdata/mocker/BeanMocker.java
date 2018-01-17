@@ -13,6 +13,7 @@ import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
+import sun.reflect.generics.reflectiveObjects.TypeVariableImpl;
 
 /**
  * Bean模拟器
@@ -49,13 +50,18 @@ public class BeanMocker<T> implements Mocker<T> {
       T result = (T) clazz.newInstance();
       mockConfig.addCache(clazz.getName(), result);
       // 从子对象向上依次模拟
+      int start = 0;
       for (Class<?> currentClass = clazz; currentClass != Object.class; currentClass = currentClass.getSuperclass()) {
         // 模拟有setter方法的字段
         for (Entry<Field, Method> entry : ReflectionUtils.fieldAndSetterMethod(currentClass).entrySet()) {
           Field field = entry.getKey();
+          Type genericType = field.getGenericType();
           Method method = entry.getValue();
           Class<?> fieldClass = field.getType();
           Object value;
+          if (genericType instanceof TypeVariableImpl) {
+            fieldClass = (Class<?>) genericTypes[start++];
+          }
           // 判断字段是否是Map or Collection
           if (Map.class.isAssignableFrom(fieldClass) || Collection.class.isAssignableFrom(fieldClass)) {
             Type[] types = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
@@ -75,7 +81,7 @@ public class BeanMocker<T> implements Mocker<T> {
             }
             value = new BeanMocker(fieldClass, componentType).mock(mockConfig);
           } else {
-            value = JMockData.mock(fieldClass,mockConfig);
+            value = JMockData.mock(fieldClass, mockConfig);
           }
           ReflectionUtils.setRefValue(result, method, value);
         }

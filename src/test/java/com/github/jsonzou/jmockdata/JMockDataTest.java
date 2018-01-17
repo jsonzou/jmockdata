@@ -16,7 +16,7 @@ import org.junit.Test;
 public class JMockDataTest {
   @Test
   public void testGenericData() {
-    GenericData<BasicData> genericData = JMockData.mock(new TypeReference<GenericData<BasicData>>());
+    GenericData<String,BasicData> genericData = JMockData.mock(new TypeReference<GenericData<String,BasicData>>(){});
     System.out.println(JSON.toJSONString(genericData,true));
     assertNotNull(genericData);
   }
