@@ -3,7 +3,9 @@ package com.github.jsonzou.jmockdata;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 
+import com.alibaba.fastjson.JSON;
 import com.github.jsonzou.jmockdata.bean.BasicData;
+import com.github.jsonzou.jmockdata.bean.GenericData;
 import com.github.jsonzou.jmockdata.bean.SelfRefData;
 import com.github.jsonzou.jmockdata.bean.circular.AXB;
 import java.util.List;
@@ -12,6 +14,12 @@ import java.util.Set;
 import org.junit.Test;
 
 public class JMockDataTest {
+  @Test
+  public void testGenericData() {
+    GenericData<BasicData> genericData = JMockData.mock(new TypeReference<GenericData<BasicData>>());
+    System.out.println(JSON.toJSONString(genericData,true));
+    assertNotNull(genericData);
+  }
 
   @Test
   public void testBasicData() {
