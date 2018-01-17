@@ -13,6 +13,6 @@ public class DoubleMocker implements Mocker<Double> {
 
   @Override
   public Double mock(MockConfig mockConfig) {
-    return RandomUtils.nextDouble(mockConfig.getDoubleRange()[0], mockConfig.getDoubleRange()[1] + 1);
+    return RandomUtils.nextDouble(mockConfig.getDoubleRange()[0], mockConfig.getDoubleRange()[1]);
   }
 }

@@ -40,11 +40,7 @@ public class BeanMocker<T> implements Mocker<T> {
     }
     // 从缓存中取已经构造的Bean
     Object cacheBean = mockConfig.getCacheObject(clazz.getName());
-    if (cacheBean != null) {
-      return (T) cacheBean;
-    }
-    // 模拟Bean
-    return mockBean(mockConfig);
+    return cacheBean != null ? (T) cacheBean : mockBean(mockConfig);
   }
 
   private T mockBean(MockConfig mockConfig) {
@@ -77,8 +73,7 @@ public class BeanMocker<T> implements Mocker<T> {
               // 字段是多维数组
               componentType = ((Class) type).getComponentType();
             }
-            Mocker mocker = new BeanMocker(fieldClass, componentType);
-            value = mocker.mock(mockConfig);
+            value =  new BeanMocker(fieldClass, componentType).mock(mockConfig);
           } else {
             value = JMockData.mock(fieldClass);
           }

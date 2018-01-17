@@ -13,6 +13,6 @@ public class FloatMocker implements Mocker<Float> {
 
   @Override
   public Float mock(MockConfig mockConfig) {
-    return RandomUtils.nextFloat(mockConfig.getFloatRange()[0], mockConfig.getFloatRange()[1] + 1);
+    return RandomUtils.nextFloat(mockConfig.getFloatRange()[0], mockConfig.getFloatRange()[1]);
   }
 }

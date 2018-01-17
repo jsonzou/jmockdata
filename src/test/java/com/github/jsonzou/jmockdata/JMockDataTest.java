@@ -33,20 +33,26 @@ public class JMockDataTest {
   }
 
   @Test
-  public void testModifyConfig() {
-    MockerManager.local().config().stringSeed("hello", "world");
-    AnyData anyData = JMockData.mock(AnyData.class);
-    System.out.println(JSON.toJSONString(anyData));
+  public void testTypeRefrence() {
+    List<AXB> selfRefData = JMockData.mock(new TypeReference<List<AXB>>());
+    System.out.println(selfRefData);
   }
 
-  @Test
-  public void testMockInterface() {
-    List<String> stringList = JMockData.mockList(String.class);
-    Set<String> stringSet = JMockData.mockSet(String.class);
-    Map<String, String> map = JMockData.mockMap(String.class, String.class);
-    System.out.println(JSON.toJSONString(stringList));
-    System.out.println(JSON.toJSONString(stringSet));
-    System.out.println(JSON.toJSONString(map));
-  }
+//  @Test
+//  public void testModifyConfig() {
+//    MockerManager.local().config().stringSeed("hello", "world");
+//    AnyData anyData = JMockData.mock(AnyData.class);
+//    System.out.println(JSON.toJSONString(anyData));
+//  }
+//
+//  @Test
+//  public void testMockInterface() {
+//    List<String> stringList = JMockData.mockList(String.class);
+//    Set<String> stringSet = JMockData.mockSet(String.class);
+//    Map<String, String> map = JMockData.mockMap(String.class, String.class);
+//    System.out.println(JSON.toJSONString(stringList));
+//    System.out.println(JSON.toJSONString(stringSet));
+//    System.out.println(JSON.toJSONString(map));
+//  }
 
 }

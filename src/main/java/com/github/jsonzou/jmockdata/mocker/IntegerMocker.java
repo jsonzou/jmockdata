@@ -15,4 +15,5 @@ public class IntegerMocker implements Mocker<Integer> {
   public Integer mock(MockConfig mockConfig) {
     return RandomUtils.nextInt(mockConfig.getIntRange()[0], mockConfig.getIntRange()[1] + 1);
   }
+
 }
