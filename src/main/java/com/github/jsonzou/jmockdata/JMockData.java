@@ -1,12 +1,7 @@
 package com.github.jsonzou.jmockdata;
 
 import com.github.jsonzou.jmockdata.mocker.BeanMocker;
-import com.github.jsonzou.jmockdata.mocker.CollectionMocker;
-import com.github.jsonzou.jmockdata.mocker.MapMocker;
 import java.lang.reflect.Type;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 /**
@@ -24,10 +19,10 @@ public class JMockData {
    * @return 模拟数据对象
    */
   public static <T> T mock(Class<T> clazz) {
- return mock(clazz,new MockConfig());
+    return mock(clazz, new MockConfig());
   }
 
-  public static <T> T mock(Class<T> clazz,MockConfig mockConfig) {
+  public static <T> T mock(Class<T> clazz, MockConfig mockConfig) {
     Mocker mocker = MockerManager.getMocker(clazz);
     if (mocker == null) {
       mocker = new BeanMocker(clazz);
@@ -36,9 +31,17 @@ public class JMockData {
   }
 
   public static <T> T mock(TypeReference<T> typeReference) {
-    ParameterizedTypeImpl type = (ParameterizedTypeImpl) typeReference.getType();
-    return null;
+    return mock(typeReference, new MockConfig());
   }
 
+  public static <T> T mock(TypeReference<T> typeReference, MockConfig mockConfig) {
+    Type type = typeReference.getType();
+    Mocker mocker = MockerManager.getMocker((Class<?>) type);
+    if (mocker == null) {
+      ParameterizedTypeImpl parameterizedType = (ParameterizedTypeImpl) type;
+      return new BeanMocker<T>(parameterizedType.getRawType(), parameterizedType.getActualTypeArguments()).mock(mockConfig);
+    }
+    return (T) mocker.mock(mockConfig);
+  }
 
 }

@@ -73,9 +73,9 @@ public class BeanMocker<T> implements Mocker<T> {
               // 字段是多维数组
               componentType = ((Class) type).getComponentType();
             }
-            value =  new BeanMocker(fieldClass, componentType).mock(mockConfig);
+            value = new BeanMocker(fieldClass, componentType).mock(mockConfig);
           } else {
-            value = JMockData.mock(fieldClass);
+            value = JMockData.mock(fieldClass,mockConfig);
           }
           ReflectionUtils.setRefValue(result, method, value);
         }

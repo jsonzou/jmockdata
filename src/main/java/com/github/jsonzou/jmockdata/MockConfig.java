@@ -1,6 +1,8 @@
 package com.github.jsonzou.jmockdata;
 
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -13,7 +15,6 @@ public class MockConfig {
    * Bean缓存
    */
   private Map<String, Object> beanCache = new ConcurrentHashMap<>(16);
-
   private byte[] byteRange = {0, 100};
   private short[] shortRange = {0, 100};
   private int[] intRange = {0, 100};

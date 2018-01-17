@@ -1,58 +1,50 @@
 package com.github.jsonzou.jmockdata;
 
-import com.alibaba.fastjson.JSON;
-import com.github.jsonzou.jmockdata.bean.AnyData;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
+
+import com.github.jsonzou.jmockdata.bean.BasicData;
 import com.github.jsonzou.jmockdata.bean.SelfRefData;
 import com.github.jsonzou.jmockdata.bean.circular.AXB;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import org.junit.Assert;
 import org.junit.Test;
 
 public class JMockDataTest {
 
   @Test
-  public void testAll() {
-    AnyData anyData = JMockData.mock(AnyData.class);
-    System.out.println(JSON.toJSONString(anyData));
+  public void testBasicData() {
+    BasicData basicData = JMockData.mock(BasicData.class);
+    assertNotNull(basicData);
   }
 
   @Test
   public void testCircular() {
     AXB axb = JMockData.mock(AXB.class);
     AXB circularAxb = axb.getBXA().getAXB();
-    Assert.assertSame(axb, circularAxb);
-    System.out.println(JSON.toJSONString(axb));
+    assertSame(axb, circularAxb);
   }
 
   @Test
   public void testSelf() {
     SelfRefData selfRefData = JMockData.mock(SelfRefData.class);
-    System.out.println(selfRefData);
+    assertSame(selfRefData.getParent(), selfRefData);
   }
 
   @Test
   public void testTypeRefrence() {
-    List<AXB> selfRefData = JMockData.mock(new TypeReference<List<AXB>>());
-    System.out.println(selfRefData);
+    Integer integerNum = JMockData.mock(new TypeReference<Integer>() {
+    });
+    Float floatNum = JMockData.mock(new TypeReference<Float>() {
+    });
+    Long longNum = JMockData.mock(new TypeReference<Long>() {
+    });
+    Double doubleNum = JMockData.mock(new TypeReference<Double>() {
+    });
+    String string = JMockData.mock(new TypeReference<String>() {
+    });
+    List<String> stringList = JMockData.mock(new TypeReference<List<String>>() {
+    });
   }
 
-//  @Test
-//  public void testModifyConfig() {
-//    MockerManager.local().config().stringSeed("hello", "world");
-//    AnyData anyData = JMockData.mock(AnyData.class);
-//    System.out.println(JSON.toJSONString(anyData));
-//  }
-//
-//  @Test
-//  public void testMockInterface() {
-//    List<String> stringList = JMockData.mockList(String.class);
-//    Set<String> stringSet = JMockData.mockSet(String.class);
-//    Map<String, String> map = JMockData.mockMap(String.class, String.class);
-//    System.out.println(JSON.toJSONString(stringList));
-//    System.out.println(JSON.toJSONString(stringSet));
-//    System.out.println(JSON.toJSONString(map));
-//  }
 
 }

@@ -5,9 +5,9 @@ import java.lang.reflect.Type;
 
 public class TypeReference<T> {
 
-  protected final Type type;
+  private final Type type;
 
-  protected TypeReference() {
+  public TypeReference() {
     Type superClass = getClass().getGenericSuperclass();
     type = ((ParameterizedType) superClass).getActualTypeArguments()[0];
   }
@@ -15,4 +15,5 @@ public class TypeReference<T> {
   public Type getType() {
     return type;
   }
+
 }
