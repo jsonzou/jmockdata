@@ -3,7 +3,6 @@ package com.github.jsonzou.jmockdata;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 
-import com.alibaba.fastjson.JSON;
 import com.github.jsonzou.jmockdata.bean.BasicData;
 import com.github.jsonzou.jmockdata.bean.GenericData;
 import com.github.jsonzou.jmockdata.bean.SelfRefData;
@@ -14,13 +13,6 @@ import java.util.Set;
 import org.junit.Test;
 
 public class JMockDataTest {
-
-  @Test
-  public void testGenericData() {
-    GenericData<String, BasicData> genericData = JMockData.mock(new TypeReference<GenericData<String, BasicData>>() {
-    });
-    assertNotNull(genericData);
-  }
 
   @Test
   public void testBasicData() {
@@ -62,6 +54,13 @@ public class JMockDataTest {
         .mock(new TypeReference<Map<List<Map<Integer, String[][]>>, Map<Set<String>, Double[]>>>() {
         });
     assertNotNull(some);
+  }
+
+  @Test
+  public void testGenericData() {
+    GenericData<String, BasicData> genericData = JMockData.mock(new TypeReference<GenericData<String, BasicData>>() {
+    });
+    assertNotNull(genericData);
   }
 
 }

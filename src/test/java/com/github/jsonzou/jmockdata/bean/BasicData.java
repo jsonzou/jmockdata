@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import lombok.Data;
 
@@ -158,4 +159,7 @@ public class BasicData {
   private Set<Date[][]> dateDoubleArraySet;
   private Set<String[][]> stringDoubleArraySet;
 
+  private Map<String, Integer> basicMap;
+  //fixme 不能模拟
+//  private Map<String,Integer>[] arrayMap;
 }
