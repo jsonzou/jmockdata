@@ -1,6 +1,6 @@
 # Jmockdata
 [![Build Status](https://www.travis-ci.org/jsonzou/jmockdata.svg?branch=master)](https://www.travis-ci.org/jsonzou/jmockdata)
-[![Coverage Status](https://coveralls.io/repos/github/jsonzou/jmockdata/badge.svg?branch=dev)](https://coveralls.io/github/jsonzou/jmockdata?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/jsonzou/jmockdata/badge.svg)](https://coveralls.io/github/jsonzou/jmockdata)
 [![Maven central](https://maven-badges.herokuapp.com/maven-central/com.github.jsonzou/jmockdata/badge.svg)](http://mvnrepository.com/artifact/com.github.jsonzou/jmockdata)
 [![License](http://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
