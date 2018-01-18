@@ -19,7 +19,6 @@ public class JMockDataTest {
   public void testGenericData() {
     GenericData<String, BasicData> genericData = JMockData.mock(new TypeReference<GenericData<String, BasicData>>() {
     });
-    System.out.println(JSON.toJSONString(genericData, true));
     assertNotNull(genericData);
   }
 
