@@ -4,7 +4,7 @@
 
   <groupId>com.github.jsonzou</groupId>
   <artifactId>jmockdata</artifactId>
-  <version>2.4</version>
+  <version>3.0</version>
   <packaging>jar</packaging>
 
   <properties>
