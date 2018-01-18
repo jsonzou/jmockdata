@@ -5,14 +5,18 @@ import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.MockException;
 import com.github.jsonzou.jmockdata.Mocker;
 import com.github.jsonzou.jmockdata.util.ReflectionUtils;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import java.lang.reflect.Field;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import sun.reflect.generics.reflectiveObjects.TypeVariableImpl;
 
 /**
  * Bean模拟器
@@ -24,9 +28,15 @@ public class BeanMocker<T> implements Mocker<T> {
 
   private Type[] genericTypes;
 
+  private Map<String, Type> map = new HashMap<>();
+
   public BeanMocker(Class<?> clazz, Type... genericTypes) {
     this.clazz = clazz;
     this.genericTypes = genericTypes;
+    TypeVariable<? extends Class<?>>[] typeVariables = clazz.getTypeParameters();
+    for (int i = 0; i < typeVariables.length; i++) {
+      map.put(typeVariables[i].getName(), genericTypes[i]);
+    }
   }
 
   @Override
@@ -58,6 +68,10 @@ public class BeanMocker<T> implements Mocker<T> {
           Method method = entry.getValue();
           Class<?> fieldClass = field.getType();
           Object value;
+          if(genericType instanceof TypeVariableImpl){
+            Type type = map.get(((TypeVariableImpl) genericType).getName());
+            //todo 判断type解决
+          }
           // 判断字段是否是Map or Collection
           if (Map.class.isAssignableFrom(fieldClass) || Collection.class.isAssignableFrom(fieldClass)) {
             Type[] types = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();

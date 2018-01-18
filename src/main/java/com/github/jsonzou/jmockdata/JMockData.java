@@ -70,7 +70,7 @@ public class JMockData {
       }
     } else if (type instanceof ParameterizedType) {
       ParameterizedTypeImpl parameterizedType = (ParameterizedTypeImpl) type;
-      mocker = new GenericMocker(parameterizedType.getRawType(), parameterizedType.getActualTypeArguments());
+      mocker = new BeanMocker(parameterizedType.getRawType(), parameterizedType.getActualTypeArguments());
     } else {
       GenericArrayTypeImpl genericArrayType = (GenericArrayTypeImpl) type;
       ParameterizedTypeImpl parameterizedType = (ParameterizedTypeImpl) genericArrayType.getGenericComponentType();
