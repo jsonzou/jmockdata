@@ -37,8 +37,8 @@ int[] integerArrData1 = JMockData.mock(int[].class);
 Integer integerData2 = JMockData.mock(Integer.class);
 Integer[] integerArrData2 = JMockData.mock(Integer[].class);
 
+//常用类型模拟
 String stringData = JMockData.mock(String.class);
-
 Date dateData = JMockData.mock(Date.class);
 
 //模拟Bean
