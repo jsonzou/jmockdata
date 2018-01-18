@@ -32,8 +32,11 @@ Jmockdata插件通过随机算法模拟Java数据.
 ```java
 
 //基本类型直接模拟
-Integer integerData = JMockData.mock(Integer.class);
-Integer[] integerArrData = JMockData.mock(Integer[].class);
+int integerData1 = JMockData.mock(int.class);
+int[] integerArrData1 = JMockData.mock(int[].class);
+Integer integerData2 = JMockData.mock(Integer.class);
+Integer[] integerArrData2 = JMockData.mock(Integer[].class);
+
 
 //模拟Bean
 public class BasicData {
