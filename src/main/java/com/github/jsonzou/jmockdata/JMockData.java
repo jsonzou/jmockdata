@@ -2,6 +2,7 @@ package com.github.jsonzou.jmockdata;
 
 import com.github.jsonzou.jmockdata.mocker.ArrayMocker;
 import com.github.jsonzou.jmockdata.mocker.BeanMocker;
+import com.github.jsonzou.jmockdata.mocker.GenericMocker;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import sun.reflect.generics.reflectiveObjects.GenericArrayTypeImpl;
@@ -69,7 +70,7 @@ public class JMockData {
       }
     } else if (type instanceof ParameterizedType) {
       ParameterizedTypeImpl parameterizedType = (ParameterizedTypeImpl) type;
-      mocker = new BeanMocker<T>(parameterizedType.getRawType(), parameterizedType.getActualTypeArguments());
+      mocker = new GenericMocker(parameterizedType.getRawType(), parameterizedType.getActualTypeArguments());
     } else {
       GenericArrayTypeImpl genericArrayType = (GenericArrayTypeImpl) type;
       ParameterizedTypeImpl parameterizedType = (ParameterizedTypeImpl) genericArrayType.getGenericComponentType();

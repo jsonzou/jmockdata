@@ -32,7 +32,7 @@ public class ArrayMocker implements Mocker<Object> {
       // 数组元素是参数化类型，如Collection<E>
       if (componentType instanceof ParameterizedType) {
         ParameterizedType parameterizedType = (ParameterizedType) this.componentType;
-        value = new BeanMocker((Class<?>) parameterizedType.getRawType(), parameterizedType.getActualTypeArguments()[0]).mock(mockConfig);
+        value = new BeanMocker((Class<?>) parameterizedType.getRawType(), parameterizedType.getActualTypeArguments()).mock(mockConfig);
       } else {
         value = JMockData.mock((Class<?>) componentType, mockConfig);
       }

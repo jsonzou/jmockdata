@@ -160,6 +160,5 @@ public class BasicData {
   private Set<String[][]> stringDoubleArraySet;
 
   private Map<String, Integer> basicMap;
-  //fixme 不能模拟
-//  private Map<String,Integer>[] arrayMap;
+  private Map<String, Integer>[] arrayMap;
 }
