@@ -16,7 +16,7 @@ Jmockdata插件通过随机算法模拟Java数据.
 
 ## Feature
 
-* 模拟数据类型多，基本类型，基本包装类型，数组，多维数组，集合，泛型包装，泛型继承等。
+* 模拟数据类型多，基本类型，基本包装类型，数组，多维数组，集合，MAP，泛型包装，泛型继承等。
 * 循环依赖，自依赖支持。
 * 改变mockConfig自定义模拟数据范围。
 * 支持JDK1.7+，无任何第三方依赖。
@@ -28,7 +28,6 @@ Jmockdata插件通过随机算法模拟Java数据.
 模拟bean，被模拟的数据必须是plain bean，底层采用了java自带的内省方法来获取字段和对应的setter方法。
 
 ```java
-@Data
 public class BasicData {
 
   //基本类型
@@ -178,7 +177,7 @@ public class BasicData {
   private Set<BigInteger[][]> bigIntegerDoubleArraySet;
   private Set<Date[][]> dateDoubleArraySet;
   private Set<String[][]> stringDoubleArraySet;
-
+  //getter setter省略...
 }
 //调用模拟数据的方法
 BasicData basicData = JMockData.mock(BasicData.class);
@@ -187,15 +186,15 @@ BasicData basicData = JMockData.mock(BasicData.class);
 ### 循环依赖对象
 
 ```java
-@Data
 public class AXB {
   private BXA BXA;
   private String name;
+  //getter setter省略...
 }
-@Data
 public class BXA {
   private AXB AXB;
   private String name;
+  //getter setter省略...
 }
 @Test
 public void testCircular() {
@@ -208,8 +207,6 @@ public void testCircular() {
 ### 自依赖对象
 
 ```java
-Getter
-@Setter
 public class SelfRefData {
 
   private Integer id;
@@ -226,7 +223,7 @@ public class SelfRefData {
   private Map<SelfRefData, SelfRefData[]> mapArray;
   private Map<SelfRefData, List<SelfRefData>> mapList;
   private Map<SelfRefData, List<SelfRefData[]>> mapListArray;
-
+  //getter setter省略...
 }
 @Test
 public void testSelf() {
@@ -241,25 +238,17 @@ public void testSelf() {
  @Test
 //注意TypeReference要加{}才能模拟
   public void testTypeRefrence() {
-    Integer integerNum = JMockData.mock(new TypeReference<Integer>() {
-    });
+    Integer integerNum = JMockData.mock(new TypeReference<Integer>(){});
     assertNotNull(integerNum);
-    Integer[] integerArray = JMockData.mock(new TypeReference<Integer[]>() {
-    });
+    Integer[] integerArray = JMockData.mock(new TypeReference<Integer[]>(){});
     assertNotNull(integerArray);
-    List<Integer[]> integerArrayList = JMockData.mock(new TypeReference<List<Integer[]>>() {
-    });
+    List<Integer[]> integerArrayList = JMockData.mock(new TypeReference<List<Integer[]>>(){});
     assertNotNull(integerArrayList);
-    List<Integer>[] integerListArray = JMockData.mock(new TypeReference<List<Integer>[]>() {
-    });
+    List<Integer>[] integerListArray = JMockData.mock(new TypeReference<List<Integer>[]>(){});
     assertNotNull(integerListArray);
-    Map<String, Integer> map = JMockData.mock(new TypeReference<Map<String, Integer>>() {
-    });
+    Map<String, Integer> map = JMockData.mock(new TypeReference<Map<String, Integer>>(){});
     assertNotNull(map);
-    Map<List<Map<Integer, String[][]>>, Map<Set<String>, Double[]>> some = JMockData
-        .mock(new TypeReference<Map<List<Map<Integer, String[][]>>, Map<Set<String>, Double[]>>>() {
-        });
+    Map<List<Map<Integer, String[][]>>, Map<Set<String>, Double[]>> some = JMockData.mock(new TypeReference<Map<List<Map<Integer, String[][]>>, Map<Set<String>, Double[]>>>(){});
     assertNotNull(some);
   }
 ```
-
