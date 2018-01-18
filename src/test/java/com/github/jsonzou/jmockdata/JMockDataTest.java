@@ -14,10 +14,12 @@ import java.util.Set;
 import org.junit.Test;
 
 public class JMockDataTest {
+
   @Test
   public void testGenericData() {
-    GenericData<String,BasicData> genericData = JMockData.mock(new TypeReference<GenericData<String,BasicData>>(){});
-    System.out.println(JSON.toJSONString(genericData,true));
+    GenericData<String, BasicData> genericData = JMockData.mock(new TypeReference<GenericData<String, BasicData>>() {
+    });
+    System.out.println(JSON.toJSONString(genericData, true));
     assertNotNull(genericData);
   }
 
@@ -42,17 +44,24 @@ public class JMockDataTest {
 
   @Test
   public void testTypeRefrence() {
-    Integer integerNum = JMockData.mock(new TypeReference<Integer>() {});
+    Integer integerNum = JMockData.mock(new TypeReference<Integer>() {
+    });
     assertNotNull(integerNum);
-    Integer[] integerArray = JMockData.mock(new TypeReference<Integer[]>() {});
+    Integer[] integerArray = JMockData.mock(new TypeReference<Integer[]>() {
+    });
     assertNotNull(integerArray);
-    List<Integer[]> integerArrayList = JMockData.mock(new TypeReference< List<Integer[]>>() {});
+    List<Integer[]> integerArrayList = JMockData.mock(new TypeReference<List<Integer[]>>() {
+    });
     assertNotNull(integerArrayList);
-    List<Integer>[] integerListArray = JMockData.mock(new TypeReference< List<Integer>[]>() {});
+    List<Integer>[] integerListArray = JMockData.mock(new TypeReference<List<Integer>[]>() {
+    });
     assertNotNull(integerListArray);
-    Map<String,Integer> map = JMockData.mock(new TypeReference<Map<String,Integer>>() {});
+    Map<String, Integer> map = JMockData.mock(new TypeReference<Map<String, Integer>>() {
+    });
     assertNotNull(map);
-    Map<List<Map<Integer,String[][]>>,Map<Set<String>,Double[]>> some = JMockData.mock(new TypeReference<Map<List<Map<Integer,String[][]>>,Map<Set<String>,Double[]>>>(){});
+    Map<List<Map<Integer, String[][]>>, Map<Set<String>, Double[]>> some = JMockData
+        .mock(new TypeReference<Map<List<Map<Integer, String[][]>>, Map<Set<String>, Double[]>>>() {
+        });
     assertNotNull(some);
   }
 

@@ -6,8 +6,10 @@ import lombok.Data;
  * Created by jsonzou on 2018/1/17.
  */
 @Data
-public class GenericData<A,B> {
+public class GenericData<A, B> {
+
   private Integer id;
-   private A message;
-   private B data;
+  private A message;
+  private B data;
+
 }

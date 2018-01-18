@@ -33,7 +33,8 @@ public class BeanMocker<T> implements Mocker<T> {
   @Override
   public T mock(MockConfig mockConfig) {
     if (clazz.isArray()) {
-      return (T) new ArrayMocker(clazz.getComponentType(), genericTypes.length == 0 ? clazz.getComponentType() : genericTypes[0]).mock(mockConfig);
+      return (T) new ArrayMocker(clazz.getComponentType(), genericTypes.length == 0 ? clazz.getComponentType() : genericTypes[0])
+          .mock(mockConfig);
     } else if (Map.class.isAssignableFrom(clazz)) {
       return (T) new MapMocker(genericTypes).mock(mockConfig);
     } else if (Collection.class.isAssignableFrom(clazz)) {
