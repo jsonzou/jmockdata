@@ -16,9 +16,9 @@ Jmockdata插件通过随机算法模拟Java数据.
 
 ## Feature
 
-* 模拟数据类型多，基本类型，基本包装类型，数组，多维数组，集合，MAP，泛型包装，泛型继承等。
-* 循环依赖，自依赖支持。
-* 改变mockConfig自定义模拟数据范围。
+* 模拟数据类型多：基本类型、基本包装类型、数组、多维数组、集合、MAP、泛型包装、泛型继承等。
+* 循环依赖、自依赖支持。
+* 改变mockConfig自定义模拟数据策略。
 * 支持JDK1.7+，无任何第三方依赖。
 
 ## Usage 
@@ -28,6 +28,12 @@ Jmockdata插件通过随机算法模拟Java数据.
 模拟bean，被模拟的数据必须是plain bean，底层采用了java自带的内省方法来获取字段和对应的setter方法。
 
 ```java
+
+//基本类型直接模拟
+Integer integerData = JMockData.mock(Integer.class);
+Integer[] integerArrData = JMockData.mock(Integer[].class);
+
+//模拟Bean
 public class BasicData {
 
   //基本类型
@@ -179,7 +185,7 @@ public class BasicData {
   private Set<String[][]> stringDoubleArraySet;
   //getter setter省略...
 }
-//调用模拟数据的方法
+//调用模拟数据的方法模拟bean
 BasicData basicData = JMockData.mock(BasicData.class);
 ```
 
