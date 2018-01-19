@@ -4,7 +4,7 @@ import java.util.Random;
 
 public final class RandomUtils {
 
-  private static final Random RANDOM = new Random();
+  private final static Random RANDOM = new Random();
 
   private RandomUtils() {
   }
@@ -13,33 +13,24 @@ public final class RandomUtils {
     return RANDOM.nextBoolean();
   }
 
-  public static int nextInt(final int startInclusive, final int endExclusive) {
-    if (startInclusive == endExclusive) {
-      return startInclusive;
-    }
+  public static int nextInt(int startInclusive, int endExclusive) {
     return startInclusive + RANDOM.nextInt(endExclusive - startInclusive);
   }
 
-  public static long nextLong(final long startInclusive, final long endExclusive) {
-    if (startInclusive == endExclusive) {
-      return startInclusive;
-    }
+  public static long nextLong(long startInclusive, long endExclusive) {
     return (long) nextDouble(startInclusive, endExclusive);
   }
 
-  public static float nextFloat(final float startInclusive, final float endInclusive) {
-    if (startInclusive == endInclusive) {
-      return startInclusive;
-    }
+  public static float nextFloat(float startInclusive, float endInclusive) {
     return startInclusive + ((endInclusive - startInclusive) * RANDOM.nextFloat());
   }
 
-  public static double nextDouble(final double startInclusive, final double endInclusive) {
-    if (startInclusive == endInclusive) {
-      return startInclusive;
-    }
+  public static double nextDouble(double startInclusive, double endInclusive) {
     return startInclusive + ((endInclusive - startInclusive) * RANDOM.nextDouble());
   }
 
+  public static int nextSize(int startInclusive, int endInclusive) {
+    return startInclusive + RANDOM.nextInt(endInclusive - startInclusive + 1);
+  }
 
 }

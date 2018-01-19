@@ -13,14 +13,14 @@ public class MockConfig {
    * Bean缓存
    */
   private Map<String, Object> beanCache = new ConcurrentHashMap<>(16);
-  private byte[] byteRange = {0, 100};
-  private short[] shortRange = {0, 100};
-  private int[] intRange = {0, 100};
-  private float[] floatRange = {0.0f, 100.00f};
-  private double[] doubleRange = {0.0, 100.00};
-  private long[] longRange = {0L, 100L};
+  private byte[] byteRange = {0, 127};
+  private short[] shortRange = {0, 1000};
+  private int[] intRange = {0, 10000};
+  private float[] floatRange = {0.0f, 10000.00f};
+  private double[] doubleRange = {0.0, 10000.00};
+  private long[] longRange = {0L, 10000L};
   private String[] dateRange = {"1970-01-02", "2100-12-31"};
-  private int[] sizeRange = {1, 5};
+  private int[] sizeRange = {1, 10};
   private char[] charSeed =
       {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
           'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F',
@@ -135,4 +135,5 @@ public class MockConfig {
   public String[] getStringSeed() {
     return stringSeed;
   }
+
 }

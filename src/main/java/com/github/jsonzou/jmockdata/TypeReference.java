@@ -9,7 +9,7 @@ public class TypeReference<T> {
 
   public TypeReference() {
     Type superClass = getClass().getGenericSuperclass();
-    if (Object.class.equals(superClass.getClass())) {
+    if (superClass instanceof Class) {
       throw new MockException("不支持的类型或者检查参数是否已经添加{},eg: JMockData.mock(new TypeReference<Integer>(){})");
     }
     type = ((ParameterizedType) superClass).getActualTypeArguments()[0];

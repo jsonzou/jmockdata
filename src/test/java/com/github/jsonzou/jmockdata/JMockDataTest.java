@@ -2,6 +2,7 @@ package com.github.jsonzou.jmockdata;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.fail;
 
 import com.github.jsonzou.jmockdata.bean.BasicBean;
 import com.github.jsonzou.jmockdata.bean.GenericData;
@@ -89,6 +90,12 @@ public class JMockDataTest {
         .mock(new TypeReference<Map<List<Map<Integer, String[][]>>, Map<Set<String>, Double[]>>>() {
         });
     assertNotNull(some);
+
+    try {
+      JMockData.mock(new TypeReference<Integer>());
+      fail();
+    } catch (Exception e) {
+    }
   }
 
   @Test
@@ -96,6 +103,29 @@ public class JMockDataTest {
     GenericData<Integer, String, BasicBean> genericData = JMockData.mock(new TypeReference<GenericData<Integer, String, BasicBean>>() {
     });
     assertNotNull(genericData);
+  }
+
+  @Test
+  public void testMockConfig() {
+    MockConfig mockConfig = new MockConfig()
+        .byteRange((byte) 0, Byte.MAX_VALUE)
+        .shortRange((short) 0, Short.MAX_VALUE)
+        .intRange(0, Integer.MAX_VALUE)
+        .floatRange(0.0f, Float.MAX_EXPONENT)
+        .doubleRange(0.0, Double.MAX_VALUE)
+        .longRange(0, Long.MAX_VALUE)
+        .dateRange("2010-01-01", "2020-12-30")
+        .sizeRange(5, 10)
+        .stringSeed("a", "b", "c")
+        .charSeed((char) 97, (char) 98);
+    BasicBean basicBean = JMockData.mock(BasicBean.class, mockConfig);
+    assertNotNull(basicBean);
+
+    try {
+      JMockData.mock(BasicBean.class, new MockConfig().dateRange("20100101", "20301230"));
+      fail();
+    } catch (Exception e) {
+    }
   }
 
 }

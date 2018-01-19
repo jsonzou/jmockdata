@@ -23,7 +23,7 @@ public class ArrayMocker implements Mocker<Object> {
 
   @Override
   public Object mock(MockConfig mockConfig) {
-    int size = RandomUtils.nextInt(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1] + 1);
+    int size = RandomUtils.nextSize(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1]);
     Object result = Array.newInstance(clazz, size);
     for (int index = 0; index < size; index++) {
       Array.set(result, index, new GenericMocker(componentType).mock(mockConfig));

@@ -13,7 +13,7 @@ public class IntegerMocker implements Mocker<Integer> {
 
   @Override
   public Integer mock(MockConfig mockConfig) {
-    return RandomUtils.nextInt(mockConfig.getIntRange()[0], mockConfig.getIntRange()[1] + 1);
+    return RandomUtils.nextInt(mockConfig.getIntRange()[0], mockConfig.getIntRange()[1]);
   }
 
 }

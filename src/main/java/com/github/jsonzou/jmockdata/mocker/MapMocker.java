@@ -21,7 +21,7 @@ public class MapMocker implements Mocker<Map> {
 
   @Override
   public Map mock(MockConfig mockConfig) {
-    int size = RandomUtils.nextInt(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1] + 1);
+    int size = RandomUtils.nextSize(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1]);
     Map result = new HashMap(size);
     while (size-- > 0) {
       result.put(mockType(genericTypes[0], mockConfig), mockType(genericTypes[1], mockConfig));

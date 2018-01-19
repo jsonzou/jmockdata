@@ -28,7 +28,7 @@ public class CollectionMocker implements Mocker<Collection> {
 
   @Override
   public Collection mock(MockConfig mockConfig) {
-    int size = RandomUtils.nextInt(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1] + 1);
+    int size = RandomUtils.nextSize(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1]);
     Collection result = initCollection(size);
     while (size-- > 0) {
       result.add(new GenericMocker(type).mock(mockConfig));
