@@ -1,11 +1,9 @@
 package com.github.jsonzou.jmockdata.mocker;
 
-import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.Mocker;
 import com.github.jsonzou.jmockdata.util.RandomUtils;
 import java.lang.reflect.Array;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 /**
@@ -28,15 +26,7 @@ public class ArrayMocker implements Mocker<Object> {
     int size = RandomUtils.nextInt(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1] + 1);
     Object result = Array.newInstance(clazz, size);
     for (int index = 0; index < size; index++) {
-      Object value;
-      // 数组元素是参数化类型，如Collection<E>
-      if (componentType instanceof ParameterizedType) {
-        ParameterizedType parameterizedType = (ParameterizedType) this.componentType;
-        value = new BeanMocker((Class<?>) parameterizedType.getRawType(), parameterizedType.getActualTypeArguments()).mock(mockConfig);
-      } else {
-        value = JMockData.mock((Class<?>) componentType, mockConfig);
-      }
-      Array.set(result, index, value);
+      Array.set(result, index, new GenericMocker(componentType).mock(mockConfig));
     }
     return result;
   }

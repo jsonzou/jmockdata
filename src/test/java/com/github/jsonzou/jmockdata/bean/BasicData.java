@@ -161,4 +161,11 @@ public class BasicData {
 
   private Map<String, Integer> basicMap;
   private Map<String, Integer>[] arrayMap;
+  private Map<String[], Integer> keyArrayMap;
+  private Map<String, Integer[]> valueArrayMap;
+  private Map<String[], Integer[]> keyValueArrayMap;
+  private Map<String[][], Integer[][]> keyValueDoubleArrayMap;
+  private Map<List<String>, Map<String,Integer>> keyListValueMapMap;
+  private Map<List<String>[], Map<String,Integer>[]> keyArrayListValueArrayMapMap;
+
 }

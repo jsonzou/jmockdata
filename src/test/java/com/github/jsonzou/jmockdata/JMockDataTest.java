@@ -58,8 +58,9 @@ public class JMockDataTest {
 
   @Test
   public void testGenericData() {
-    GenericData<String, List<BasicData>> genericData = JMockData.mock(new TypeReference<GenericData<String, List<BasicData>>>() {
-    });
+    GenericData<String[], List<List<BasicData>>> genericData = JMockData
+        .mock(new TypeReference<GenericData<String[], List<List<BasicData>>>>() {
+        });
     assertNotNull(genericData);
   }
 

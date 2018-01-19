@@ -1,11 +1,9 @@
 package com.github.jsonzou.jmockdata.mocker;
 
-import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.MockException;
 import com.github.jsonzou.jmockdata.Mocker;
 import com.github.jsonzou.jmockdata.util.RandomUtils;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,23 +29,25 @@ public class CollectionMocker implements Mocker<Collection> {
   @Override
   public Collection mock(MockConfig mockConfig) {
     int size = RandomUtils.nextInt(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1] + 1);
+    Collection result = initCollection(size);
+    while (size-- > 0) {
+      result.add(new GenericMocker(type).mock(mockConfig));
+    }
+    return result;
+  }
+
+  private Collection initCollection(int size) {
     Collection result;
     if (List.class.isAssignableFrom(clazz)) {
       result = new ArrayList(size);
     } else if (Set.class.isAssignableFrom(clazz)) {
       result = new HashSet(size);
     } else {
-      throw new MockException("暂时不支持的collection类型");
-    }
-    while (size-- > 0) {
-      Object value;
-      if (type instanceof ParameterizedType) {
-        ParameterizedType parameterizedType = (ParameterizedType) type;
-        value = new BeanMocker((Class<?>) parameterizedType.getRawType(), parameterizedType.getActualTypeArguments()).mock(mockConfig);
-      } else {
-        value = JMockData.mock((Class<?>) type, mockConfig);
+      try {
+        result = (Collection) clazz.newInstance();
+      } catch (Exception e) {
+        throw new MockException("暂时不支持的collection类型", e);
       }
-      result.add(value);
     }
     return result;
   }

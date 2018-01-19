@@ -1,11 +1,9 @@
 package com.github.jsonzou.jmockdata.mocker;
 
-import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.MockException;
 import com.github.jsonzou.jmockdata.Mocker;
 import com.github.jsonzou.jmockdata.util.ReflectionUtils;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import java.lang.reflect.Field;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.Method;
@@ -16,7 +14,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import sun.reflect.generics.reflectiveObjects.TypeVariableImpl;
 
 /**
  * Bean模拟器
@@ -28,22 +25,25 @@ public class BeanMocker<T> implements Mocker<T> {
 
   private Type[] genericTypes;
 
-  private Map<String, Type> map = new HashMap<>();
+  private Map<String, Type> typeVariableMap;
 
   public BeanMocker(Class<?> clazz, Type... genericTypes) {
     this.clazz = clazz;
     this.genericTypes = genericTypes;
-    TypeVariable<? extends Class<?>>[] typeVariables = clazz.getTypeParameters();
-    for (int i = 0; i < typeVariables.length; i++) {
-      map.put(typeVariables[i].getName(), genericTypes[i]);
+    TypeVariable<?>[] typeVariables = clazz.getTypeParameters();
+    if (typeVariables != null && typeVariables.length > 0) {
+      typeVariableMap = new HashMap<>();
+      for (int i = 0; i < typeVariables.length; i++) {
+        typeVariableMap.put(typeVariables[i].getName(), genericTypes[i]);
+      }
     }
   }
 
   @Override
   public T mock(MockConfig mockConfig) {
     if (clazz.isArray()) {
-      return (T) new ArrayMocker(clazz.getComponentType(), genericTypes.length == 0 ? clazz.getComponentType() : genericTypes[0])
-          .mock(mockConfig);
+      Type componentType = genericTypes.length == 0 ? clazz.getComponentType() : genericTypes[0];
+      return (T) new ArrayMocker(clazz.getComponentType(), componentType).mock(mockConfig);
     } else if (Map.class.isAssignableFrom(clazz)) {
       return (T) new MapMocker(genericTypes).mock(mockConfig);
     } else if (Collection.class.isAssignableFrom(clazz)) {
@@ -56,10 +56,8 @@ public class BeanMocker<T> implements Mocker<T> {
 
   private T mockBean(MockConfig mockConfig) {
     try {
-      // 构造Bean
       T result = (T) clazz.newInstance();
       mockConfig.addCache(clazz.getName(), result);
-      // 从子对象向上依次模拟
       for (Class<?> currentClass = clazz; currentClass != Object.class; currentClass = currentClass.getSuperclass()) {
         // 模拟有setter方法的字段
         for (Entry<Field, Method> entry : ReflectionUtils.fieldAndSetterMethod(currentClass).entrySet()) {
@@ -67,31 +65,28 @@ public class BeanMocker<T> implements Mocker<T> {
           Type genericType = field.getGenericType();
           Method method = entry.getValue();
           Class<?> fieldClass = field.getType();
-          Object value;
-          if(genericType instanceof TypeVariableImpl){
-            Type type = map.get(((TypeVariableImpl) genericType).getName());
-            //todo 判断type解决
-          }
-          // 判断字段是否是Map or Collection
-          if (Map.class.isAssignableFrom(fieldClass) || Collection.class.isAssignableFrom(fieldClass)) {
-            Type[] types = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
-            Mocker mocker = new BeanMocker(fieldClass, types);
-            value = mocker.mock(mockConfig);
-            // 判断字段是否是数组
-          } else if (fieldClass.isArray()) {
-            Type componentType;
-            Type type = field.getGenericType();
-            // 字段是数组类型(一维数组)
-            if (type instanceof GenericArrayType) {
-              GenericArrayType arrayType = (GenericArrayType) type;
-              componentType = arrayType.getGenericComponentType();
-            } else {
-              // 字段是多维数组
-              componentType = ((Class) type).getComponentType();
-            }
-            value = new BeanMocker(fieldClass, componentType).mock(mockConfig);
+          Object value = null;
+          if (genericType instanceof TypeVariable) {
+            value = new GenericMocker(typeVariableMap.get(((TypeVariable) genericType).getName())).mock(mockConfig);
           } else {
-            value = JMockData.mock(fieldClass, mockConfig);
+            // 判断字段是否是Map or Collection
+            if (Map.class.isAssignableFrom(fieldClass) || Collection.class.isAssignableFrom(fieldClass)) {
+              value = new BeanMocker(fieldClass, ((ParameterizedType) field.getGenericType()).getActualTypeArguments()).mock(mockConfig);
+              // 判断字段是否是数组
+            } else if (fieldClass.isArray()) {
+              Type componentType;
+              Type type = field.getGenericType();
+              // 字段是数组类型(一维数组)
+              if (type instanceof GenericArrayType) {
+                componentType = ((GenericArrayType) type).getGenericComponentType();
+              } else {
+                // 字段是多维数组
+                componentType = ((Class) type).getComponentType();
+              }
+              value = new BeanMocker(fieldClass, componentType).mock(mockConfig);
+            } else {
+              value = new ClassMocker(fieldClass).mock(mockConfig);
+            }
           }
           ReflectionUtils.setRefValue(result, method, value);
         }
