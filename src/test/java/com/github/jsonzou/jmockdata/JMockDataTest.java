@@ -3,10 +3,13 @@ package com.github.jsonzou.jmockdata;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 
-import com.github.jsonzou.jmockdata.bean.BasicData;
+import com.github.jsonzou.jmockdata.bean.BasicBean;
 import com.github.jsonzou.jmockdata.bean.GenericData;
 import com.github.jsonzou.jmockdata.bean.SelfRefData;
 import com.github.jsonzou.jmockdata.bean.circular.AXB;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,9 +18,31 @@ import org.junit.Test;
 public class JMockDataTest {
 
   @Test
+  public void testBasic() {
+    //基本类型模拟
+    int intNum = JMockData.mock(int.class);
+    assertNotNull(intNum);
+    int[] intArray = JMockData.mock(int[].class);
+    assertNotNull(intArray);
+    Integer integer = JMockData.mock(Integer.class);
+    assertNotNull(integer);
+    Integer[] integerArray = JMockData.mock(Integer[].class);
+    assertNotNull(integerArray);
+    //常用类型模拟
+    BigDecimal bigDecimal = JMockData.mock(BigDecimal.class);
+    assertNotNull(bigDecimal);
+    BigInteger bigInteger = JMockData.mock(BigInteger.class);
+    assertNotNull(bigInteger);
+    Date date = JMockData.mock(Date.class);
+    assertNotNull(date);
+    String str = JMockData.mock(String.class);
+    assertNotNull(str);
+  }
+
+  @Test
   public void testBasicData() {
-    BasicData basicData = JMockData.mock(BasicData.class);
-    assertNotNull(basicData);
+    BasicBean basicBean = JMockData.mock(BasicBean.class);
+    assertNotNull(basicBean);
   }
 
   @Test
@@ -34,22 +59,32 @@ public class JMockDataTest {
   }
 
   @Test
+  //******注意TypeReference要加{}才能模拟******
   public void testTypeRefrence() {
+    //模拟基础类型，不建议使用这种方式，参考基础类型章节直接模拟。
     Integer integerNum = JMockData.mock(new TypeReference<Integer>() {
     });
     assertNotNull(integerNum);
     Integer[] integerArray = JMockData.mock(new TypeReference<Integer[]>() {
     });
     assertNotNull(integerArray);
+    //模拟集合
+    List<Integer> integerList = JMockData.mock(new TypeReference<List<Integer>>() {
+    });
+    assertNotNull(integerList);
+    //模拟数组集合
     List<Integer[]> integerArrayList = JMockData.mock(new TypeReference<List<Integer[]>>() {
     });
     assertNotNull(integerArrayList);
+    //模拟集合数组
     List<Integer>[] integerListArray = JMockData.mock(new TypeReference<List<Integer>[]>() {
     });
     assertNotNull(integerListArray);
-    Map<String, Integer> map = JMockData.mock(new TypeReference<Map<String, Integer>>() {
+    //模拟集合实体
+    List<BasicBean> basicBeanList = JMockData.mock(new TypeReference<List<BasicBean>>() {
     });
-    assertNotNull(map);
+    assertNotNull(basicBeanList);
+    //各种组合忽略。。。。map同理。下面模拟一个不知道什么类型的map
     Map<List<Map<Integer, String[][]>>, Map<Set<String>, Double[]>> some = JMockData
         .mock(new TypeReference<Map<List<Map<Integer, String[][]>>, Map<Set<String>, Double[]>>>() {
         });
@@ -58,9 +93,8 @@ public class JMockDataTest {
 
   @Test
   public void testGenericData() {
-    GenericData<String[], List<List<BasicData>>> genericData = JMockData
-        .mock(new TypeReference<GenericData<String[], List<List<BasicData>>>>() {
-        });
+    GenericData<Integer, String, BasicBean> genericData = JMockData.mock(new TypeReference<GenericData<Integer, String, BasicBean>>() {
+    });
     assertNotNull(genericData);
   }
 
