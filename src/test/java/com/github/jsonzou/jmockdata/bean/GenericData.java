@@ -1,5 +1,6 @@
 package com.github.jsonzou.jmockdata.bean;
 
+import java.util.List;
 import lombok.Data;
 
 /**
@@ -8,8 +9,8 @@ import lombok.Data;
 @Data
 public class GenericData<A, B> {
 
-  private Integer id;
-  private A message;
+//  private Integer id;
+  private List<A[]> message;
   private B data;
 
 }
