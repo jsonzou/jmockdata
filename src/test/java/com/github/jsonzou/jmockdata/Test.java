@@ -9,8 +9,8 @@ public class Test {
 
   @org.junit.Test
   public void test() {
-    Map<List<Integer>, Float>[][] data = MockData.mock(new TypeReference<Map<List<Integer>, Float>[][]>() {
-    });
+//    Map<List<Integer>, Float>[][] data = MockData.mock(new TypeReference<Map<List<Integer>, Float>[][]>() {
+//    });
   }
 
   @org.junit.Test
