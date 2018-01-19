@@ -206,23 +206,23 @@ BasicBean basicBean = JMockData.mock(BasicBean.class);
 ### 任意类型（LIST,SET,MAP）
 
 ```java
- @Test
-  //******注意TypeReference要加{}才能模拟******
-  public void testTypeRefrence() {
-    //模拟基础类型，不建议使用这种方式，参考基础类型章节直接模拟。
-    Integer integerNum = JMockData.mock(new TypeReference<Integer>(){});
-    Integer[] integerArray = JMockData.mock(new TypeReference<Integer[]>(){});
-    //模拟集合
-    List<Integer> integerList = JMockData.mock(new TypeReference<List<Integer>>(){});
-    //模拟数组集合
-    List<Integer[]> integerArrayList = JMockData.mock(new TypeReference<List<Integer[]>>(){});
-    //模拟集合数组
-    List<Integer>[] integerListArray = JMockData.mock(new TypeReference<List<Integer>[]>(){});
-    //模拟集合实体
-    List<BasicBean> basicBeanList = JMockData.mock(new TypeReference<List<BasicBean>>(){});
-    //各种组合忽略。。。。map同理。下面模拟一个不知道什么类型的map
-    Map<List<Map<Integer, String[][]>>, Map<Set<String>, Double[]>> some = JMockData.mock(new TypeReference<Map<List<Map<Integer, String[][]>>, Map<Set<String>, Double[]>>>(){});
-  }
+@Test
+//******注意TypeReference要加{}才能模拟******
+public void testTypeRefrence() {
+  //模拟基础类型，不建议使用这种方式，参考基础类型章节直接模拟。
+  Integer integerNum = JMockData.mock(new TypeReference<Integer>(){});
+  Integer[] integerArray = JMockData.mock(new TypeReference<Integer[]>(){});
+  //模拟集合
+  List<Integer> integerList = JMockData.mock(new TypeReference<List<Integer>>(){});
+  //模拟数组集合
+  List<Integer[]> integerArrayList = JMockData.mock(new TypeReference<List<Integer[]>>(){});
+  //模拟集合数组
+  List<Integer>[] integerListArray = JMockData.mock(new TypeReference<List<Integer>[]>(){});
+  //模拟集合实体
+  List<BasicBean> basicBeanList = JMockData.mock(new TypeReference<List<BasicBean>>(){});
+  //各种组合忽略。。。。map同理。下面模拟一个不知道什么类型的map
+  Map<List<Map<Integer, String[][]>>, Map<Set<String>, Double[]>> some = JMockData.mock(new TypeReference<Map<List<Map<Integer, String[][]>>, Map<Set<String>, Double[]>>>(){});
+}
 ```
 
 ## 高级特性

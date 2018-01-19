@@ -25,8 +25,8 @@ public class GenericMocker implements Mocker<Object> {
       ParameterizedType parameterizedType = (ParameterizedType) type;
       mocker = new BeanMocker((Class<?>) parameterizedType.getRawType(), parameterizedType.getActualTypeArguments());
     } else if (type instanceof GenericArrayType) {
-      ParameterizedTypeImpl parameterizedType = (ParameterizedTypeImpl) ((GenericArrayTypeImpl) type).getGenericComponentType();
-      mocker = new ArrayMocker(parameterizedType.getRawType(), parameterizedType);
+      ParameterizedType parameterizedType = (ParameterizedType) ((GenericArrayType) type).getGenericComponentType();
+      mocker = new ArrayMocker((Class<?>) parameterizedType.getRawType(), parameterizedType);
     } else {
       mocker = new ClassMocker((Class<?>) type);
     }
