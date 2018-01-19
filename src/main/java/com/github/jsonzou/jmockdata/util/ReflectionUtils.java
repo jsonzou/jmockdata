@@ -30,27 +30,6 @@ public final class ReflectionUtils {
   }
 
   /**
-   * 有setter、getter方法的字段及其getter方法
-   *
-   * @param clazz Class对象
-   * @return 字段及其getter方法
-   * @throws IntrospectionException 内省异常
-   */
-  public static Map<Field, Method> fieldAndGetterMethod(Class clazz) throws IntrospectionException {
-    Map<Field, Method> map = new LinkedHashMap<>();
-    BeanInfo beanInfo = Introspector.getBeanInfo(clazz, Object.class);
-    PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
-    for (Field field : clazz.getDeclaredFields()) {
-      for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
-        if (propertyDescriptor.getName().equals(field.getName()) && propertyDescriptor.getWriteMethod() != null) {
-          map.put(field, propertyDescriptor.getReadMethod());
-        }
-      }
-    }
-    return map;
-  }
-
-  /**
    * 有setter方法的字段及其setter方法
    *
    * @param clazz Class对象

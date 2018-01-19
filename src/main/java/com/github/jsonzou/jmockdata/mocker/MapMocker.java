@@ -1,10 +1,8 @@
 package com.github.jsonzou.jmockdata.mocker;
 
-import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.Mocker;
 import com.github.jsonzou.jmockdata.util.RandomUtils;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,19 +21,16 @@ public class MapMocker implements Mocker<Map> {
 
   @Override
   public Map mock(MockConfig mockConfig) {
-    int size = RandomUtils.nextInt(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1] + 1);
+    int size = RandomUtils.nextSize(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1]);
     Map result = new HashMap(size);
     while (size-- > 0) {
-      result.put(mockType(mockConfig, genericTypes[0]), mockType(mockConfig, genericTypes[1]));
+      result.put(mockType(genericTypes[0], mockConfig), mockType(genericTypes[1], mockConfig));
     }
     return result;
   }
 
-  private Object mockType(MockConfig mockConfig, Type type) {
-    if (type instanceof ParameterizedType) {
-      ParameterizedType parameterizedType = (ParameterizedType) type;
-      return new BeanMocker((Class<?>) parameterizedType.getRawType(), parameterizedType.getActualTypeArguments()).mock(mockConfig);
-    }
-    return JMockData.mock((Class<?>) type, mockConfig);
+  private Object mockType(Type type, MockConfig mockConfig) {
+    return new GenericMocker(type).mock(mockConfig);
   }
+
 }

@@ -13,6 +13,6 @@ public class LongMocker implements Mocker<Long> {
 
   @Override
   public Long mock(MockConfig mockConfig) {
-    return RandomUtils.nextLong(mockConfig.getLongRange()[0], mockConfig.getLongRange()[1] + 1);
+    return RandomUtils.nextLong(mockConfig.getLongRange()[0], mockConfig.getLongRange()[1]);
   }
 }
