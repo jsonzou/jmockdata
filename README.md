@@ -225,6 +225,22 @@ public void testTypeRefrence() {
 }
 ```
 
+### 更改随机范围
+```java
+MockConfig mockConfig = new MockConfig()
+    .byteRange((byte) 0, Byte.MAX_VALUE)
+    .shortRange((short) 0, Short.MAX_VALUE)
+    .intRange(0, Integer.MAX_VALUE)
+    .floatRange(0.0f, Float.MAX_EXPONENT)
+    .doubleRange(0.0, Double.MAX_VALUE)
+    .longRange(0, Long.MAX_VALUE)
+    .dateRange("2010-01-01", "2020-12-30")
+    .sizeRange(5, 10)
+    .stringSeed("a", "b", "c")
+    .charSeed((char) 97, (char) 98);
+BasicBean basicBean = JMockData.mock(BasicBean.class, mockConfig);
+```
+
 ## 高级特性
 
 ### 循环依赖
