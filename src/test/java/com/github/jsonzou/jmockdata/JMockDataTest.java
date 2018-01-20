@@ -106,6 +106,13 @@ public class JMockDataTest {
   }
 
   @Test
+  public void testGenericDatas() {
+    GenericData<Integer, String, BasicBean> genericData = JMockData.mock(new TypeReference<GenericData<Integer, String, BasicBean>>() {
+    });
+    assertNotNull(genericData);
+  }
+
+  @Test
   public void testMockConfig() {
     MockConfig mockConfig = new MockConfig()
         .byteRange((byte) 0, Byte.MAX_VALUE)

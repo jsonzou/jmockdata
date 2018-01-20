@@ -1,8 +1,11 @@
 package com.github.jsonzou.jmockdata;
 
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 模拟数据配置类
@@ -12,7 +15,11 @@ public class MockConfig {
   /**
    * Bean缓存
    */
-  private Map<String, Object> beanCache = new ConcurrentHashMap<>(16);
+  private Map<String, Object> beanCache = new HashMap<>();
+  /**
+   * TypeVariable缓存
+   */
+  private Map<String, Type> typeVariableCache = new HashMap<>();
   private byte[] byteRange = {0, 127};
   private short[] shortRange = {0, 1000};
   private int[] intRange = {0, 10000};
@@ -30,12 +37,33 @@ public class MockConfig {
           "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F",
           "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
 
-  public void addCache(String name, Object object) {
+  public MockConfig() {
+  }
+
+  public void addBeanCache(String name, Object object) {
     beanCache.put(name, object);
   }
 
-  public Object getCacheObject(String name) {
+  public Object getBeanCacheObject(String name) {
     return beanCache.get(name);
+  }
+
+  public MockConfig init(Type type) {
+    if (type instanceof ParameterizedType) {
+      Class clazz = (Class) ((ParameterizedType) type).getRawType();
+      Type[] types = ((ParameterizedType) type).getActualTypeArguments();
+      TypeVariable[] typeVariables = clazz.getTypeParameters();
+      if (typeVariables != null && typeVariables.length > 0) {
+        for (int index = 0; index < typeVariables.length; index++) {
+          typeVariableCache.put(typeVariables[index].getName(), types[index]);
+        }
+      }
+    }
+    return this;
+  }
+
+  public Type getVariableType(String name) {
+    return typeVariableCache.get(name);
   }
 
   public MockConfig byteRange(byte min, byte max) {

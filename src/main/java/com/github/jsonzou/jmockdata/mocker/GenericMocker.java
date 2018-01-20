@@ -2,33 +2,24 @@ package com.github.jsonzou.jmockdata.mocker;
 
 import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.Mocker;
-import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-@SuppressWarnings("unchecked")
+/**
+ * 模拟泛型
+ */
 public class GenericMocker implements Mocker<Object> {
 
-  private Type type;
+  private ParameterizedType type;
 
-  public GenericMocker(Type type) {
+  GenericMocker(ParameterizedType type) {
     this.type = type;
   }
 
-
   @Override
   public Object mock(MockConfig mockConfig) {
-    Mocker<?> mocker;
-    if (type instanceof ParameterizedType) {
-      ParameterizedType parameterizedType = (ParameterizedType) type;
-      mocker = new BeanMocker((Class<?>) parameterizedType.getRawType(), parameterizedType.getActualTypeArguments());
-    } else if (type instanceof GenericArrayType) {
-      ParameterizedType parameterizedType = (ParameterizedType) ((GenericArrayType) type).getGenericComponentType();
-      mocker = new ArrayMocker((Class<?>) parameterizedType.getRawType(), parameterizedType);
-    } else {
-      mocker = new ClassMocker((Class<?>) type);
-    }
-    return mocker.mock(mockConfig);
+    Type rawType = type.getRawType();
+    Type[] argumentTypes = type.getActualTypeArguments();
+    return new BaseMocker(rawType, argumentTypes).mock(mockConfig);
   }
-
 }

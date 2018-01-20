@@ -300,6 +300,11 @@ public class GenericData<A, B, C> {
   private A a;
   private B b;
   private C c;
+  private A[] aArray;
+  private List<B> bList;
+  private Map<A, B> map;
+  private List<C>[] cArray;
+  private Map<Map<A, B>, List<C>>[] d;
   //getter setter省略...
 }
 
