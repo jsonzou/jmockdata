@@ -23,6 +23,25 @@ Jmockdata插件通过随机算法模拟Java数据.
 * 支持改变mockConfig来自定义模拟数据策略
 * 支持JDK1.7+，无任何第三方依赖
 
+## Download
+
+> 
+### _Jmockdata-3.0.0_
+#### Jar
+> [Jmockdata-3.0.0](http://repo.maven.apache.org/maven2/com/github/jsonzou/jmockdata/3.0.0/jmockdata-3.0.0.jar)
+#### Maven
+ ```
+   <dependency>
+      <groupId>com.github.jsonzou</groupId>
+      <artifactId>jmockdata</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+  ```
+#### Gradle
+ ```
+   compile group: 'com.github.jsonzou', name: 'jmockdata', version: '3.0.0'
+  ```
+
 ## Usage 
 
 ### 基础类型
