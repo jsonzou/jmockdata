@@ -1,7 +1,6 @@
 package com.github.jsonzou.jmockdata;
 
-import com.github.jsonzou.jmockdata.mocker.ClassMocker;
-import com.github.jsonzou.jmockdata.mocker.GenericMocker;
+import com.github.jsonzou.jmockdata.mocker.BaseMocker;
 
 /**
  * 模拟对象门面类
@@ -30,7 +29,7 @@ public class JMockData {
    * @return 模拟数据对象
    */
   public static <T> T mock(Class<T> clazz, MockConfig mockConfig) {
-    return new ClassMocker<>(clazz).mock(mockConfig);
+    return new BaseMocker<T>(clazz).mock(mockConfig);
   }
 
   /**
@@ -57,7 +56,7 @@ public class JMockData {
    * @return 模拟数据对象
    */
   public static <T> T mock(TypeReference<T> typeReference, MockConfig mockConfig) {
-    return (T) new GenericMocker(typeReference.getType()).mock(mockConfig);
+    return new BaseMocker<T>(typeReference.getType()).mock(mockConfig.init(typeReference.getType()));
   }
 
 }

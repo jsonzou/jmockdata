@@ -1,7 +1,6 @@
 package com.github.jsonzou.jmockdata.mocker;
 
 import com.github.jsonzou.jmockdata.MockConfig;
-import com.github.jsonzou.jmockdata.MockException;
 import com.github.jsonzou.jmockdata.Mocker;
 import com.github.jsonzou.jmockdata.util.RandomUtils;
 import java.lang.reflect.Type;
@@ -9,45 +8,33 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
- * @author TaoYu
+ * 模拟Collection
  */
-@SuppressWarnings("unchecked")
-public class CollectionMocker implements Mocker<Collection> {
+public class CollectionMocker implements Mocker<Object> {
 
-  private Class<?> clazz;
+  private Class clazz;
 
-  private Type type;
+  private Type genericType;
 
-  public CollectionMocker(Class<?> clazz, Type type) {
+  CollectionMocker(Class clazz, Type genericType) {
     this.clazz = clazz;
-    this.type = type;
+    this.genericType = genericType;
   }
 
   @Override
-  public Collection mock(MockConfig mockConfig) {
+  public Object mock(MockConfig mockConfig) {
     int size = RandomUtils.nextSize(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1]);
-    Collection result = initCollection(size);
-    while (size-- > 0) {
-      result.add(new GenericMocker(type).mock(mockConfig));
-    }
-    return result;
-  }
-
-  private Collection initCollection(int size) {
-    Collection result;
+    Collection<Object> result;
     if (List.class.isAssignableFrom(clazz)) {
-      result = new ArrayList(size);
-    } else if (Set.class.isAssignableFrom(clazz)) {
-      result = new HashSet(size);
+      result = new ArrayList<>(size);
     } else {
-      try {
-        result = (Collection) clazz.newInstance();
-      } catch (Exception e) {
-        throw new MockException("暂时不支持的collection类型", e);
-      }
+      result = new HashSet<>(size);
+    }
+    for (int index = 0; index < size; index++) {
+      Object value = new BaseMocker(genericType).mock(mockConfig);
+      result.add(value);
     }
     return result;
   }

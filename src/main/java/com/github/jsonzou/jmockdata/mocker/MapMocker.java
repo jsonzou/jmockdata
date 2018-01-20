@@ -10,27 +10,23 @@ import java.util.Map;
 /**
  * 模拟Map
  */
-@SuppressWarnings("unchecked")
-public class MapMocker implements Mocker<Map> {
+public class MapMocker implements Mocker<Object> {
 
-  private Type[] genericTypes;
+  private Type[] types;
 
-  public MapMocker(Type[] genericTypes) {
-    this.genericTypes = genericTypes;
+  MapMocker(Type[] types) {
+    this.types = types;
   }
 
   @Override
-  public Map mock(MockConfig mockConfig) {
+  public Object mock(MockConfig mockConfig) {
     int size = RandomUtils.nextSize(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1]);
-    Map result = new HashMap(size);
-    while (size-- > 0) {
-      result.put(mockType(genericTypes[0], mockConfig), mockType(genericTypes[1], mockConfig));
+    Map<Object, Object> result = new HashMap<>(size);
+    for (int index = 0; index < size; index++) {
+      Object key = new BaseMocker(types[0]).mock(mockConfig);
+      Object value = new BaseMocker(types[1]).mock(mockConfig);
+      result.put(key, value);
     }
     return result;
   }
-
-  private Object mockType(Type type, MockConfig mockConfig) {
-    return new GenericMocker(type).mock(mockConfig);
-  }
-
 }

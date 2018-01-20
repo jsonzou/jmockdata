@@ -5,6 +5,12 @@ package com.github.jsonzou.jmockdata;
  */
 public interface Mocker<T> {
 
+  /**
+   * 模拟数据
+   *
+   * @param mockConfig 模拟数据配置
+   * @return 模拟数据对象
+   */
   T mock(MockConfig mockConfig);
 
 }
