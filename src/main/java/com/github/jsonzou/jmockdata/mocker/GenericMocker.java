@@ -5,8 +5,6 @@ import com.github.jsonzou.jmockdata.Mocker;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import sun.reflect.generics.reflectiveObjects.GenericArrayTypeImpl;
-import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 @SuppressWarnings("unchecked")
 public class GenericMocker implements Mocker<Object> {

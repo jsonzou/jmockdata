@@ -34,7 +34,10 @@ public class JMockData {
   }
 
   /**
-   * 模拟数据</br> 注意typeReference必须以{}结尾
+   * 模拟数据
+   * <pre>
+   * 注意typeReference必须以{}结尾
+   * </pre>
    *
    * @param typeReference 模拟数据包装类型
    * @return 模拟数据对象
@@ -44,7 +47,10 @@ public class JMockData {
   }
 
   /**
-   * 模拟数据</br> 注意typeReference必须以{}结尾
+   * 模拟数据
+   * <pre>
+   * 注意typeReference必须以{}结尾
+   * </pre>
    *
    * @param typeReference 模拟数据类型
    * @param mockConfig 模拟数据配置
