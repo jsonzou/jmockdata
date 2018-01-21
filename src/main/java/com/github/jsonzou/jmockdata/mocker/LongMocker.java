@@ -9,10 +9,9 @@ import com.github.jsonzou.jmockdata.util.RandomUtils;
  */
 public class LongMocker implements Mocker<Long> {
 
-  public static final LongMocker INSTANCE = new LongMocker();
-
   @Override
   public Long mock(MockConfig mockConfig) {
     return RandomUtils.nextLong(mockConfig.getLongRange()[0], mockConfig.getLongRange()[1]);
   }
+
 }

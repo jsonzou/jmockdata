@@ -2,7 +2,6 @@ package com.github.jsonzou.jmockdata.mocker;
 
 import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.Mocker;
-import com.github.jsonzou.jmockdata.MockerManager;
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Map;
@@ -28,11 +27,12 @@ public class ClassMocker implements Mocker<Object> {
     } else if (Collection.class.isAssignableFrom(clazz)) {
       mocker = new CollectionMocker(clazz, genericTypes[0]);
     } else {
-      mocker = MockerManager.getMocker(clazz);
+      mocker = mockConfig.getMocker(clazz);
       if (mocker == null) {
         mocker = new BeanMocker(clazz);
       }
     }
     return mocker.mock(mockConfig);
   }
+
 }

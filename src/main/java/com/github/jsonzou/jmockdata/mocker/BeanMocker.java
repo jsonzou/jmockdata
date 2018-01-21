@@ -6,7 +6,6 @@ import com.github.jsonzou.jmockdata.Mocker;
 import com.github.jsonzou.jmockdata.util.ReflectionUtils;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.lang.reflect.Type;
 import java.util.Map.Entry;
 
 public class BeanMocker implements Mocker<Object> {
@@ -31,11 +30,7 @@ public class BeanMocker implements Mocker<Object> {
       for (Class<?> currentClass = clazz; currentClass != Object.class; currentClass = currentClass.getSuperclass()) {
         // 模拟有setter方法的字段
         for (Entry<Field, Method> entry : ReflectionUtils.fieldAndSetterMethod(currentClass).entrySet()) {
-          Field field = entry.getKey();
-          Method method = entry.getValue();
-          Type genericType = field.getGenericType();
-          Object value = new BaseMocker(genericType).mock(mockConfig);
-          ReflectionUtils.setRefValue(result, method, value);
+          ReflectionUtils.setRefValue(result, entry.getValue(), new BaseMocker(entry.getKey().getGenericType()).mock(mockConfig));
         }
       }
       return result;
@@ -43,4 +38,5 @@ public class BeanMocker implements Mocker<Object> {
       throw new MockException(e);
     }
   }
+
 }

@@ -22,11 +22,12 @@ public class MapMocker implements Mocker<Object> {
   public Object mock(MockConfig mockConfig) {
     int size = RandomUtils.nextSize(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1]);
     Map<Object, Object> result = new HashMap<>(size);
+    BaseMocker keyMocker = new BaseMocker(types[0]);
+    BaseMocker valueMocker = new BaseMocker(types[1]);
     for (int index = 0; index < size; index++) {
-      Object key = new BaseMocker(types[0]).mock(mockConfig);
-      Object value = new BaseMocker(types[1]).mock(mockConfig);
-      result.put(key, value);
+      result.put(keyMocker.mock(mockConfig), valueMocker.mock(mockConfig));
     }
     return result;
   }
+
 }

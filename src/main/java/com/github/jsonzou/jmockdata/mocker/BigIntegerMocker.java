@@ -10,10 +10,9 @@ import java.math.BigInteger;
  */
 public class BigIntegerMocker implements Mocker<BigInteger> {
 
-  public static final BigIntegerMocker INSTANCE = new BigIntegerMocker();
-
   @Override
   public BigInteger mock(MockConfig mockConfig) {
     return BigInteger.valueOf(RandomUtils.nextLong(mockConfig.getLongRange()[0], mockConfig.getLongRange()[1]));
   }
+
 }

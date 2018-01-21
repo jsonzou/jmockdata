@@ -9,8 +9,6 @@ import com.github.jsonzou.jmockdata.util.RandomUtils;
  */
 public class IntegerMocker implements Mocker<Integer> {
 
-  public static final IntegerMocker INSTANCE = new IntegerMocker();
-
   @Override
   public Integer mock(MockConfig mockConfig) {
     return RandomUtils.nextInt(mockConfig.getIntRange()[0], mockConfig.getIntRange()[1]);

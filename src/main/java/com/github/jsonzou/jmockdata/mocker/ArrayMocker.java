@@ -18,7 +18,6 @@ import java.util.Map.Entry;
  * 数组模拟器
  */
 @SuppressWarnings("unchecked")
-// TODO 2018/1/20 代码还需要整理
 public class ArrayMocker implements Mocker<Object> {
 
   private Type type;
@@ -40,13 +39,14 @@ public class ArrayMocker implements Mocker<Object> {
     int size = RandomUtils.nextSize(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1]);
     Class componentClass = ((Class) type).getComponentType();
     Object result = Array.newInstance(componentClass, size);
+    BaseMocker baseMocker = new BaseMocker(componentClass);
     for (int index = 0; index < size; index++) {
-      Object value = new BaseMocker(componentClass).mock(mockConfig);
-      Array.set(result, index, value);
+      Array.set(result, index, baseMocker.mock(mockConfig));
     }
     return result;
   }
 
+  // TODO 代码还需要整理
   // 由于GenericArrayType无法获得Class，所以递归创建多维数组
   private Object createGenericArray(MockConfig mockConfig) {
     GenericArrayType genericArrayType = (GenericArrayType) this.type;
@@ -103,4 +103,5 @@ public class ArrayMocker implements Mocker<Object> {
     result.put(dimension, map);
     return result;
   }
+
 }

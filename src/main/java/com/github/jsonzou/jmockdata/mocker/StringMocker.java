@@ -9,8 +9,6 @@ import com.github.jsonzou.jmockdata.util.RandomUtils;
  */
 public class StringMocker implements Mocker<String> {
 
-  public static final StringMocker INSTANCE = new StringMocker();
-
   @Override
   public String mock(MockConfig mockConfig) {
     int size = RandomUtils.nextSize(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1]);
@@ -21,4 +19,5 @@ public class StringMocker implements Mocker<String> {
     }
     return sb.toString();
   }
+
 }

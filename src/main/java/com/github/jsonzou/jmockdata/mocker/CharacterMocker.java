@@ -9,11 +9,10 @@ import com.github.jsonzou.jmockdata.util.RandomUtils;
  */
 public class CharacterMocker implements Mocker<Character> {
 
-  public static final CharacterMocker INSTANCE = new CharacterMocker();
-
   @Override
   public Character mock(MockConfig mockConfig) {
     char[] charSeed = mockConfig.getCharSeed();
     return charSeed[RandomUtils.nextInt(0, charSeed.length)];
   }
+
 }
