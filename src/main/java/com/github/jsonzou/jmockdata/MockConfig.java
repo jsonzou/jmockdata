@@ -48,6 +48,10 @@ public class MockConfig {
    * TypeVariable缓存
    */
   private Map<String, Type> typeVariableCache = new HashMap<>();
+  /**
+   * enum缓存
+   */
+  private Map<String, Enum[]> enumCache = new HashMap<>();
   private Map<Class<?>, Mocker> mockerContext = new HashMap<>();
   private byte[] byteRange = {0, 127};
   private short[] shortRange = {0, 1000};
@@ -82,12 +86,20 @@ public class MockConfig {
     registerMocker(DATE_MOCKER, Date.class);
   }
 
-  public void addBeanCache(String name, Object object) {
-    beanCache.put(name, object);
+  public void cacheBean(String name, Object bean) {
+    beanCache.put(name, bean);
   }
 
-  public Object getBeanCacheObject(String name) {
-    return beanCache.get(name);
+  public Object getcacheBean(String beanClassName) {
+    return beanCache.get(beanClassName);
+  }
+
+  public void cacheEnum(String name, Enum[] enums) {
+    enumCache.put(name, enums);
+  }
+
+  public Enum[] getcacheEnum(String enumClassName) {
+    return enumCache.get(enumClassName);
   }
 
   public MockConfig init(Type type) {

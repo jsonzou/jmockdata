@@ -26,7 +26,9 @@ public class ClassMocker implements Mocker<Object> {
       mocker = new MapMocker(genericTypes);
     } else if (Collection.class.isAssignableFrom(clazz)) {
       mocker = new CollectionMocker(clazz, genericTypes[0]);
-    } else {
+    } else if(clazz.isEnum()){
+      mocker=new EnumMocker(clazz);
+    }else {
       mocker = mockConfig.getMocker(clazz);
       if (mocker == null) {
         mocker = new BeanMocker(clazz);
