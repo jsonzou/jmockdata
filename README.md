@@ -16,7 +16,7 @@ Jmockdata插件通过随机算法模拟Java数据.
 
 ## Feature
 
-* 支持丰富多样的数据类型模拟，包括：Java基本类型、字符串、日期、数组、多维数组、集合[List|Set|Map]、Java对象等
+* 支持丰富多样的数据类型模拟，包括：Java基本类型、字符串、日期、数组、多维数组、集合[List|Set|Map]、枚举、Java对象等
 * 支持泛型
 * 支持继承
 * 支持循环依赖、自依赖
@@ -31,13 +31,10 @@ Jmockdata插件通过随机算法模拟Java数据.
 
 | 描述     | 类型                                       |
 | ------ | ---------------------------------------- |
-| 基础类型   | byte     boolean     char               short     int             long      float      double |
-| 包装类型包装 | Byte     Boolean     Character     Short     Integer     Long     Float     Double |
-| 基础类型数组 | byte[]   boolean[]  char[]            short[]   int[]           long[]   float[]   double[] |
-| 包装类型数组 | Byte[]   Boolean[]  Character[]   Short[]  Integer[]  Long[]   Float[]  Double[] |
-| 常用类型   | BigDecimal        BigInteger        Date        String |
-| 常用类型数组 | BigDecimal[]      BigInteger[]     Date[]      String[] |
-| 二维数组   | 以上所有基础类型的二维数组                            |
+| 基础类型   | ```byte```     ```boolean```     ```char```     ```short```     ```int```     ```long```     ```float```     ```double``` |
+| 包装类型包装 | ```Byte```     ```Boolean```     ```Character```     ```Short```     ```Integer```     ```Long```     ```Float```     ```Double``` |
+| 常用类型   | ```BigDecimal```        ```BigInteger```        ```Date```        ```String```      枚举 |
+| 多维数组   | 以上所有类型的多维数组  如：```int[]```      ```int[][]```  ```int[][][]```  .... 等 |
 
 ```java
 //基本类型模拟
