@@ -9,6 +9,8 @@ import com.github.jsonzou.jmockdata.bean.ErrorBean;
 import com.github.jsonzou.jmockdata.bean.GenericData;
 import com.github.jsonzou.jmockdata.bean.SelfRefData;
 import com.github.jsonzou.jmockdata.bean.circular.AXB;
+import com.github.jsonzou.jmockdata.bean.enums.DayEnum;
+import com.github.jsonzou.jmockdata.bean.enums.ErrorEnum;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
@@ -39,6 +41,14 @@ public class JMockDataTest {
     assertNotNull(date);
     String str = JMockData.mock(String.class);
     assertNotNull(str);
+    DayEnum dayEnum = JMockData.mock(DayEnum.class);
+    assertNotNull(dayEnum);
+
+    try {
+      JMockData.mock(ErrorEnum.class);
+      fail();
+    } catch (Exception e) {
+    }
   }
 
   @Test
