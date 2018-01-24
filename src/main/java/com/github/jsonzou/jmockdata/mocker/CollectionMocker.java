@@ -32,10 +32,11 @@ public class CollectionMocker implements Mocker<Object> {
     } else {
       result = new HashSet<>(size);
     }
+    BaseMocker baseMocker = new BaseMocker(genericType);
     for (int index = 0; index < size; index++) {
-      Object value = new BaseMocker(genericType).mock(mockConfig);
-      result.add(value);
+      result.add(baseMocker.mock(mockConfig));
     }
     return result;
   }
+
 }

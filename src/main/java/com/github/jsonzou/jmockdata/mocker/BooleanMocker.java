@@ -9,10 +9,9 @@ import com.github.jsonzou.jmockdata.util.RandomUtils;
  */
 public class BooleanMocker implements Mocker<Boolean> {
 
-  public static final BooleanMocker INSTANCE = new BooleanMocker();
-
   @Override
   public Boolean mock(MockConfig mockConfig) {
     return RandomUtils.nextBoolean();
   }
+
 }

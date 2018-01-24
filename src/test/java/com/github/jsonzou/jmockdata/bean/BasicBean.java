@@ -1,11 +1,13 @@
 package com.github.jsonzou.jmockdata.bean;
 
+import com.github.jsonzou.jmockdata.bean.enums.DayEnum;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import lombok.Data;
 
 @Data
@@ -70,16 +72,20 @@ public class BasicBean {
   private BigInteger bigInteger;
   private Date date;
   private String string;
+  private DayEnum dayEnum;
+  private TimeUnit timeUnit;
   //其他常用类型数组
   private BigDecimal[] bigDecimalArray;
   private BigInteger[] bigIntegerArray;
   private Date[] dateArray;
   private String[] stringArray;
+  private DayEnum[] dayEnumArray;
   //其他常用类型二维数组
   private BigDecimal[][] bigDecimalDoubleArray;
   private BigInteger[][] bigIntegerDoubleArray;
   private Date[][] dateDoubleArray;
   private String[][] stringDoubleArray;
+  private DayEnum[][] dayEnumDoubleArray;
   //集合、MAP数组
   private List<Integer>[] listArray;
   private Set<Integer>[] setArray;

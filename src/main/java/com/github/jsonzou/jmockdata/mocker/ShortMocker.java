@@ -9,10 +9,9 @@ import com.github.jsonzou.jmockdata.util.RandomUtils;
  */
 public class ShortMocker implements Mocker<Short> {
 
-  public static final ShortMocker INSTANCE = new ShortMocker();
-
   @Override
   public Short mock(MockConfig mockConfig) {
     return (short) RandomUtils.nextInt(mockConfig.getShortRange()[0], mockConfig.getShortRange()[1]);
   }
+
 }

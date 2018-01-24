@@ -9,10 +9,9 @@ import com.github.jsonzou.jmockdata.util.RandomUtils;
  */
 public class ByteMocker implements Mocker<Byte> {
 
-  public static final ByteMocker INSTANCE = new ByteMocker();
-
   @Override
   public Byte mock(MockConfig mockConfig) {
     return (byte) RandomUtils.nextInt(mockConfig.getByteRange()[0], mockConfig.getByteRange()[1]);
   }
+
 }

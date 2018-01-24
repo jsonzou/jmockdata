@@ -1,9 +1,24 @@
 package com.github.jsonzou.jmockdata;
 
 
+import com.github.jsonzou.jmockdata.mocker.BigDecimalMocker;
+import com.github.jsonzou.jmockdata.mocker.BigIntegerMocker;
+import com.github.jsonzou.jmockdata.mocker.BooleanMocker;
+import com.github.jsonzou.jmockdata.mocker.ByteMocker;
+import com.github.jsonzou.jmockdata.mocker.CharacterMocker;
+import com.github.jsonzou.jmockdata.mocker.DateMocker;
+import com.github.jsonzou.jmockdata.mocker.DoubleMocker;
+import com.github.jsonzou.jmockdata.mocker.FloatMocker;
+import com.github.jsonzou.jmockdata.mocker.IntegerMocker;
+import com.github.jsonzou.jmockdata.mocker.LongMocker;
+import com.github.jsonzou.jmockdata.mocker.ShortMocker;
+import com.github.jsonzou.jmockdata.mocker.StringMocker;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +26,19 @@ import java.util.Map;
  * 模拟数据配置类
  */
 public class MockConfig {
+
+  private static final ByteMocker BYTE_MOCKER = new ByteMocker();
+  private static final BooleanMocker BOOLEAN_MOCKER = new BooleanMocker();
+  private static final CharacterMocker CHARACTER_MOCKER = new CharacterMocker();
+  private static final ShortMocker SHORT_MOCKER = new ShortMocker();
+  private static final IntegerMocker INTEGER_MOCKER = new IntegerMocker();
+  private static final LongMocker LONG_MOCKER = new LongMocker();
+  private static final FloatMocker FLOAT_MOCKER = new FloatMocker();
+  private static final DoubleMocker DOUBLE_MOCKER = new DoubleMocker();
+  private static final BigIntegerMocker BIG_INTEGER_MOCKER = new BigIntegerMocker();
+  private static final BigDecimalMocker BIG_DECIMAL_MOCKER = new BigDecimalMocker();
+  private static final StringMocker STRING_MOCKER = new StringMocker();
+  private static final DateMocker DATE_MOCKER = new DateMocker("1970-01-01", "2100-12-31");
 
   /**
    * Bean缓存
@@ -20,14 +48,20 @@ public class MockConfig {
    * TypeVariable缓存
    */
   private Map<String, Type> typeVariableCache = new HashMap<>();
+  /**
+   * enum缓存
+   */
+  private Map<String, Enum[]> enumCache = new HashMap<>();
+  private Map<Class<?>, Mocker> mockerContext = new HashMap<>();
   private byte[] byteRange = {0, 127};
   private short[] shortRange = {0, 1000};
   private int[] intRange = {0, 10000};
   private float[] floatRange = {0.0f, 10000.00f};
   private double[] doubleRange = {0.0, 10000.00};
   private long[] longRange = {0L, 10000L};
-  private String[] dateRange = {"1970-01-02", "2100-12-31"};
+  private String[] dateRange = {"1970-01-01", "2100-12-31"};
   private int[] sizeRange = {1, 10};
+
   private char[] charSeed =
       {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
           'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F',
@@ -38,14 +72,34 @@ public class MockConfig {
           "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
 
   public MockConfig() {
+    registerMocker(BYTE_MOCKER, byte.class, Byte.class);
+    registerMocker(BOOLEAN_MOCKER, boolean.class, Boolean.class);
+    registerMocker(CHARACTER_MOCKER, char.class, Character.class);
+    registerMocker(SHORT_MOCKER, short.class, Short.class);
+    registerMocker(INTEGER_MOCKER, Integer.class, int.class);
+    registerMocker(LONG_MOCKER, long.class, Long.class);
+    registerMocker(FLOAT_MOCKER, float.class, Float.class);
+    registerMocker(DOUBLE_MOCKER, double.class, Double.class);
+    registerMocker(BIG_INTEGER_MOCKER, BigInteger.class);
+    registerMocker(BIG_DECIMAL_MOCKER, BigDecimal.class);
+    registerMocker(STRING_MOCKER, String.class);
+    registerMocker(DATE_MOCKER, Date.class);
   }
 
-  public void addBeanCache(String name, Object object) {
-    beanCache.put(name, object);
+  public void cacheBean(String name, Object bean) {
+    beanCache.put(name, bean);
   }
 
-  public Object getBeanCacheObject(String name) {
-    return beanCache.get(name);
+  public Object getcacheBean(String beanClassName) {
+    return beanCache.get(beanClassName);
+  }
+
+  public void cacheEnum(String name, Enum[] enums) {
+    enumCache.put(name, enums);
+  }
+
+  public Enum[] getcacheEnum(String enumClassName) {
+    return enumCache.get(enumClassName);
   }
 
   public MockConfig init(Type type) {
@@ -105,6 +159,7 @@ public class MockConfig {
   public MockConfig dateRange(String min, String max) {
     this.dateRange[0] = min;
     this.dateRange[1] = max;
+    registerMocker(new DateMocker(min, max), Date.class);
     return this;
   }
 
@@ -148,10 +203,6 @@ public class MockConfig {
     return longRange;
   }
 
-  public String[] getDateRange() {
-    return dateRange;
-  }
-
   public int[] getSizeRange() {
     return sizeRange;
   }
@@ -162,6 +213,16 @@ public class MockConfig {
 
   public String[] getStringSeed() {
     return stringSeed;
+  }
+
+  public void registerMocker(Mocker mocker, Class<?>... clazzs) {
+    for (Class<?> clazz : clazzs) {
+      mockerContext.put(clazz, mocker);
+    }
+  }
+
+  public Mocker getMocker(Class<?> clazz) {
+    return mockerContext.get(clazz);
   }
 
 }

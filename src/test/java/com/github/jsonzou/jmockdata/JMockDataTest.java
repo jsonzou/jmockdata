@@ -5,6 +5,7 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import com.github.jsonzou.jmockdata.bean.BasicBean;
+import com.github.jsonzou.jmockdata.bean.ErrorBean;
 import com.github.jsonzou.jmockdata.bean.GenericData;
 import com.github.jsonzou.jmockdata.bean.SelfRefData;
 import com.github.jsonzou.jmockdata.bean.circular.AXB;
@@ -44,6 +45,12 @@ public class JMockDataTest {
   public void testBasicData() {
     BasicBean basicBean = JMockData.mock(BasicBean.class);
     assertNotNull(basicBean);
+
+    try {
+      JMockData.mock(ErrorBean.class);
+      fail();
+    } catch (Exception e) {
+    }
   }
 
   @Test
@@ -100,13 +107,6 @@ public class JMockDataTest {
 
   @Test
   public void testGenericData() {
-    GenericData<Integer, String, BasicBean> genericData = JMockData.mock(new TypeReference<GenericData<Integer, String, BasicBean>>() {
-    });
-    assertNotNull(genericData);
-  }
-
-  @Test
-  public void testGenericDatas() {
     GenericData<Integer, String, BasicBean> genericData = JMockData.mock(new TypeReference<GenericData<Integer, String, BasicBean>>() {
     });
     assertNotNull(genericData);
