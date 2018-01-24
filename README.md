@@ -16,7 +16,7 @@ Jmockdata插件通过随机算法模拟Java数据.
 
 ## Feature
 
-* 支持丰富多样的数据类型模拟，包括：Java基本类型、字符串、日期、数组、多维数组、集合[List|Set|Map]、枚举、Java对象等
+* 支持丰富多样的数据类型模拟，包括：Java基本类型、字符串、枚举、日期、数组、多维数组、集合[List|Set|Map]、枚举、Java对象等
 * 支持泛型
 * 支持继承
 * 支持循环依赖、自依赖
@@ -24,6 +24,24 @@ Jmockdata插件通过随机算法模拟Java数据.
 * 支持JDK1.7+，无任何第三方依赖
 
 ## Download
+
+> 
+### _Jmockdata-3.0.1_
+#### Jar
+> [Jmockdata-3.0.1](http://repo.maven.apache.org/maven2/com/github/jsonzou/jmockdata/3.0.1/jmockdata-3.0.1.jar)
+#### Maven
+ ```
+   <dependency>
+      <groupId>com.github.jsonzou</groupId>
+      <artifactId>jmockdata</artifactId>
+      <version>3.0.1</version>
+    </dependency>
+  ```
+#### Gradle
+ ```
+   compile group: 'com.github.jsonzou', name: 'jmockdata', version: '3.0.1'
+  ```
+
 
 > 
 ### _Jmockdata-3.0.0_
