@@ -121,8 +121,9 @@ public class MockConfig {
     return enabledCircle;
   }
 
-  public void setEnabledCircle(boolean enabledCircle) {
+  public MockConfig setEnabledCircle(boolean enabledCircle) {
     this.enabledCircle = enabledCircle;
+    return this;
   }
 
   public Type getVariableType(String name) {

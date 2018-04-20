@@ -2,6 +2,7 @@ package com.github.jsonzou.jmockdata.mocker;
 
 import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.Mocker;
+import com.github.jsonzou.jmockdata.annotation.MockIgnore;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

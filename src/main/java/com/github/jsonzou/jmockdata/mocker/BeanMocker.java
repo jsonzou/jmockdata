@@ -3,6 +3,7 @@ package com.github.jsonzou.jmockdata.mocker;
 import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.MockException;
 import com.github.jsonzou.jmockdata.Mocker;
+import com.github.jsonzou.jmockdata.annotation.MockIgnore;
 import com.github.jsonzou.jmockdata.util.ReflectionUtils;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -31,8 +32,12 @@ public class BeanMocker implements Mocker<Object> {
       for (Class<?> currentClass = clazz; currentClass != Object.class; currentClass = currentClass.getSuperclass()) {
         // 模拟有setter方法的字段
         for (Entry<Field, Method> entry : ReflectionUtils.fieldAndSetterMethod(currentClass).entrySet()) {
+          Field field = entry.getKey();
+          if (field.isAnnotationPresent(MockIgnore.class)) {
+            continue;
+          }
           ReflectionUtils
-              .setRefValue(result, entry.getValue(), new BaseMocker(entry.getKey().getGenericType()).mock(mockConfig));
+              .setRefValue(result, entry.getValue(), new BaseMocker(field.getGenericType()).mock(mockConfig));
         }
       }
       return result;
