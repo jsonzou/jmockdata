@@ -4,7 +4,7 @@
 
   <groupId>com.github.jsonzou</groupId>
   <artifactId>jmockdata</artifactId>
-  <version>3.0.0</version>
+  <version>3.0.1</version>
   <packaging>jar</packaging>
 
   <properties>
@@ -44,7 +44,7 @@
     </contributor>
     <contributor>
       <name>TaoYu</name>
-      <email>332309254@qq.com</email>
+      <email>tracy5546@gmail.com</email>
     </contributor>
     <contributor>
       <name>KanYuXia</name>
@@ -155,7 +155,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.0.0</version>
+            <version>2.10.4</version>
             <executions>
               <execution>
                 <id>attach-javadocs</id>
