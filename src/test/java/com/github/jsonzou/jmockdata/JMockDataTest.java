@@ -65,14 +65,16 @@ public class JMockDataTest {
 
   @Test
   public void testCircular() {
-    AXB axb = JMockData.mock(AXB.class);
+    MockConfig mockConfig = new MockConfig().setEnabledCircle(true);
+    AXB axb = JMockData.mock(AXB.class,mockConfig);
     AXB circularAxb = axb.getBXA().getAXB();
     assertSame(axb, circularAxb);
   }
 
   @Test
   public void testSelf() {
-    SelfRefData selfRefData = JMockData.mock(SelfRefData.class);
+    MockConfig mockConfig = new MockConfig().setEnabledCircle(true);
+    SelfRefData selfRefData = JMockData.mock(SelfRefData.class,mockConfig);
     assertSame(selfRefData.getParent(), selfRefData);
   }
 

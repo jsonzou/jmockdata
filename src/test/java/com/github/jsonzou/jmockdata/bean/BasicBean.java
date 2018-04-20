@@ -1,5 +1,6 @@
 package com.github.jsonzou.jmockdata.bean;
 
+import com.github.jsonzou.jmockdata.annotation.MockIgnore;
 import com.github.jsonzou.jmockdata.bean.enums.DayEnum;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -14,6 +15,7 @@ import lombok.Data;
 public class BasicBean {
 
   //基本类型
+  @MockIgnore
   private byte byteNum;
   private boolean booleanNum;
   private char charNum;
@@ -23,6 +25,7 @@ public class BasicBean {
   private float floatNum;
   private double doubleNum;
   //基本包装类型
+  @MockIgnore
   private Byte byteBoxing;
   private Boolean booleanBoxing;
   private Character charBoxing;
@@ -32,6 +35,7 @@ public class BasicBean {
   private Float floatBoxing;
   private Double doubleBoxing;
   //基本类型数组
+  @MockIgnore
   private byte[] byteNumArray;
   private boolean[] booleanNumArray;
   private char[] charNumArray;
@@ -41,6 +45,7 @@ public class BasicBean {
   private float[] floatNumArray;
   private double[] doubleNumArray;
   //基本类型二维数组
+  @MockIgnore
   private byte[][] byteNumDoubleArray;
   private boolean[][] booleanNumDoubleArray;
   private char[][] charNumDoubleArray;
@@ -50,6 +55,7 @@ public class BasicBean {
   private float[][] floatNumDoubleArray;
   private double[][] doubleNumDoubleArray;
   //基本包装类型数组
+  @MockIgnore
   private Byte[] byteBoxingArray;
   private Boolean[] booleanBoxingArray;
   private Character[] charBoxingArray;
@@ -59,6 +65,7 @@ public class BasicBean {
   private Float[] floatBoxingArray;
   private Double[] doubleBoxingArray;
   //基本包装类型二维数组
+  @MockIgnore
   private Byte[][] byteBoxingDoubleArray;
   private Boolean[][] booleanBoxingDoubleArray;
   private Character[][] charBoxingDoubleArray;
@@ -68,6 +75,7 @@ public class BasicBean {
   private Float[][] floatBoxingDoubleArray;
   private Double[][] doubleBoxingDoubleArray;
   //其他常用类型
+  @MockIgnore
   private BigDecimal bigDecimal;
   private BigInteger bigInteger;
   private Date date;
@@ -75,34 +83,41 @@ public class BasicBean {
   private DayEnum dayEnum;
   private TimeUnit timeUnit;
   //其他常用类型数组
+  @MockIgnore
   private BigDecimal[] bigDecimalArray;
   private BigInteger[] bigIntegerArray;
   private Date[] dateArray;
   private String[] stringArray;
   private DayEnum[] dayEnumArray;
   //其他常用类型二维数组
+  @MockIgnore
   private BigDecimal[][] bigDecimalDoubleArray;
   private BigInteger[][] bigIntegerDoubleArray;
   private Date[][] dateDoubleArray;
   private String[][] stringDoubleArray;
   private DayEnum[][] dayEnumDoubleArray;
   //集合、MAP数组
+  @MockIgnore
   private List<Integer>[] listArray;
   private Set<Integer>[] setArray;
   private Map<Integer, String>[] mapArray;
   //集合、MAP二维数组
+  @MockIgnore
   private List<Integer>[][] listDoubleArray;
   private Set<Integer>[][] setDoubleArray;
   private Map<Integer, String>[][] mapDoubleArray;
   //集合、MAP二维数组(内部数组)
+  @MockIgnore
   private List<Integer[]>[][] listInnerArrayDoubleArray;
   private Set<Integer[]>[][] setInnerArrayDoubleArray;
   private Map<Integer[], String[]>[][] mapInnerArrayDoubleArray;
   //集合、MAP二维数组(内部二维数组)
+  @MockIgnore
   private List<Integer[][]>[][] listInnerDoubleArrayDoubleArray;
   private Set<Integer[][]>[][] setInnerDoubleArrayDoubleArray;
   private Map<Integer[][], String[][]>[][] mapInnerDoubleArrayDoubleArray;
   //LIST
+  @MockIgnore
   private List<Byte> byteBoxingList;
   private List<Boolean> booleanBoxingList;
   private List<Character> charBoxingList;
@@ -119,6 +134,7 @@ public class BasicBean {
   private List<Set<String>> stringSetList;
   private List<Map<Integer, String>> mapList;
   //数组LIST
+  @MockIgnore
   private List<Byte[]> byteBoxingArrayList;
   private List<Boolean[]> booleanBoxingArrayList;
   private List<Character[]> charBoxingArrayList;
@@ -132,6 +148,7 @@ public class BasicBean {
   private List<Date[]> dateArrayList;
   private List<String[]> stringArrayList;
   //二维数组LIST
+  @MockIgnore
   private List<Byte[][]> byteBoxingDoubleArrayList;
   private List<Boolean[][]> booleanBoxingDoubleArrayList;
   private List<Character[][]> charBoxingDoubleArrayList;
@@ -145,6 +162,7 @@ public class BasicBean {
   private List<Date[][]> dateDoubleArrayList;
   private List<String[][]> stringDoubleArrayList;
   //SET
+  @MockIgnore
   private Set<Byte> byteBoxingSet;
   private Set<Boolean> booleanBoxingSet;
   private Set<Character> charBoxingSet;
@@ -161,6 +179,7 @@ public class BasicBean {
   private Set<Set<String>> stringSetSet;
   private Set<Map<Integer, String>> mapSet;
   //数组SET
+  @MockIgnore
   private Set<Byte[]> byteBoxingArraySet;
   private Set<Boolean[]> booleanBoxingArraySet;
   private Set<Character[]> charBoxingArraySet;
@@ -174,6 +193,7 @@ public class BasicBean {
   private Set<Date[]> dateArraySet;
   private Set<String[]> stringArraySet;
   //二维数组SET
+  @MockIgnore
   private Set<Byte[][]> byteBoxingDoubleArraySet;
   private Set<Boolean[][]> booleanBoxingDoubleArraySet;
   private Set<Character[][]> charBoxingDoubleArraySet;
@@ -187,6 +207,7 @@ public class BasicBean {
   private Set<Date[][]> dateDoubleArraySet;
   private Set<String[][]> stringDoubleArraySet;
   //Map
+  @MockIgnore
   private Map<String, Integer> basicMap;
   private Map<String[], Integer> keyArrayMap;
   private Map<String, Integer[]> valueArrayMap;
