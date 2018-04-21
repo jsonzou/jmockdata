@@ -111,7 +111,7 @@ public class JMockDataTest {
     assertNotNull(some);
 
     try {
-      JMockData.mock(new TypeReference<Integer>());
+      JMockData.mock(new TypeReference<Integer>(){});
       fail();
     } catch (Exception e) {
     }
