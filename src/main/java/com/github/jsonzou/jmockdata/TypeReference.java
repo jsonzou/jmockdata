@@ -3,7 +3,7 @@ package com.github.jsonzou.jmockdata;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-public class TypeReference<T> {
+public abstract class TypeReference<T> {
 
   private final Type type;
 
