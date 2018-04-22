@@ -43,43 +43,17 @@ Jmockdata插件通过随机算法模拟Java数据.
  ```
    compile group: 'com.github.jsonzou', name: 'jmockdata', version: '3.1.0'
   ```
+## History version
+- 1.0
+- 2.0
+- 2.1
+- 2.2
+- 2.3
+- 2.4
+- 3.0.0
+- 3.0.1
+- 3.1.0
 
-
-
-> 
-### _Jmockdata-3.0.1_
-#### Jar
-> [Jmockdata-3.0.1](http://repo.maven.apache.org/maven2/com/github/jsonzou/jmockdata/3.0.1/jmockdata-3.0.1.jar)
-#### Maven
- ```
-   <dependency>
-      <groupId>com.github.jsonzou</groupId>
-      <artifactId>jmockdata</artifactId>
-      <version>3.0.1</version>
-    </dependency>
-  ```
-#### Gradle
- ```
-   compile group: 'com.github.jsonzou', name: 'jmockdata', version: '3.0.1'
-  ```
-
-
-> 
-### _Jmockdata-3.0.0_
-#### Jar
-> [Jmockdata-3.0.0](http://repo.maven.apache.org/maven2/com/github/jsonzou/jmockdata/3.0.0/jmockdata-3.0.0.jar)
-#### Maven
- ```
-   <dependency>
-      <groupId>com.github.jsonzou</groupId>
-      <artifactId>jmockdata</artifactId>
-      <version>3.0.0</version>
-    </dependency>
-  ```
-#### Gradle
- ```
-   compile group: 'com.github.jsonzou', name: 'jmockdata', version: '3.0.0'
-  ```
 
 ## Usage 
 
