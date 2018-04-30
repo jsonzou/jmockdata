@@ -109,12 +109,6 @@ public class JMockDataTest {
         .mock(new TypeReference<Map<List<Map<Integer, String[][]>>, Map<Set<String>, Double[]>>>() {
         });
     assertNotNull(some);
-
-    try {
-      JMockData.mock(new TypeReference<Integer>(){});
-      fail();
-    } catch (Exception e) {
-    }
   }
 
   @Test
