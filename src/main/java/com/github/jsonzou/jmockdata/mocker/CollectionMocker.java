@@ -1,5 +1,6 @@
 package com.github.jsonzou.jmockdata.mocker;
 
+import com.github.jsonzou.jmockdata.DataConfig;
 import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.Mocker;
 import com.github.jsonzou.jmockdata.util.RandomUtils;
@@ -24,8 +25,8 @@ public class CollectionMocker implements Mocker<Object> {
   }
 
   @Override
-  public Object mock(MockConfig mockConfig) {
-    int size = RandomUtils.nextSize(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1]);
+  public Object mock(DataConfig mockConfig) {
+    int size = RandomUtils.nextSize(mockConfig.sizeRange()[0], mockConfig.sizeRange()[1]);
     Collection<Object> result;
     if (List.class.isAssignableFrom(clazz)) {
       result = new ArrayList<>(size);

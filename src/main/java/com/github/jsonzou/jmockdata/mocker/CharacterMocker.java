@@ -1,5 +1,6 @@
 package com.github.jsonzou.jmockdata.mocker;
 
+import com.github.jsonzou.jmockdata.DataConfig;
 import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.Mocker;
 import com.github.jsonzou.jmockdata.util.RandomUtils;
@@ -10,8 +11,8 @@ import com.github.jsonzou.jmockdata.util.RandomUtils;
 public class CharacterMocker implements Mocker<Character> {
 
   @Override
-  public Character mock(MockConfig mockConfig) {
-    char[] charSeed = mockConfig.getCharSeed();
+  public Character mock(DataConfig mockConfig) {
+    char[] charSeed = mockConfig.charSeed();
     return charSeed[RandomUtils.nextInt(0, charSeed.length)];
   }
 

@@ -11,6 +11,6 @@ public interface Mocker<T> {
    * @param mockConfig 模拟数据配置
    * @return 模拟数据对象
    */
-  T mock(MockConfig mockConfig);
+  T mock(DataConfig mockConfig);
 
 }

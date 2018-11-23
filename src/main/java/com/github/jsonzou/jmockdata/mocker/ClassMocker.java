@@ -1,5 +1,6 @@
 package com.github.jsonzou.jmockdata.mocker;
 
+import com.github.jsonzou.jmockdata.DataConfig;
 import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.Mocker;
 import java.lang.reflect.Type;
@@ -18,7 +19,7 @@ public class ClassMocker implements Mocker<Object> {
   }
 
   @Override
-  public Object mock(MockConfig mockConfig) {
+  public Object mock(DataConfig mockConfig) {
     Mocker mocker;
     if (clazz.isArray()) {
       mocker = new ArrayMocker(clazz);
@@ -29,7 +30,7 @@ public class ClassMocker implements Mocker<Object> {
     } else if (clazz.isEnum()) {
       mocker = new EnumMocker(clazz);
     } else {
-      mocker = mockConfig.getMocker(clazz);
+      mocker = mockConfig.switchGlobalConfig().getMocker(clazz);
       if (mocker == null) {
         mocker = new BeanMocker(clazz);
       }

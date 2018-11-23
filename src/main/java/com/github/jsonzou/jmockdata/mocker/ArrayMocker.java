@@ -1,5 +1,6 @@
 package com.github.jsonzou.jmockdata.mocker;
 
+import com.github.jsonzou.jmockdata.DataConfig;
 import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.Mocker;
 import com.github.jsonzou.jmockdata.util.RandomUtils;
@@ -27,7 +28,7 @@ public class ArrayMocker implements Mocker<Object> {
   }
 
   @Override
-  public Object mock(MockConfig mockConfig) {
+  public Object mock(DataConfig mockConfig) {
     // 创建有参数化的数组
     if (type instanceof GenericArrayType) {
       return createGenericArray(mockConfig);
@@ -35,8 +36,8 @@ public class ArrayMocker implements Mocker<Object> {
     return array(mockConfig);
   }
 
-  private Object array(MockConfig mockConfig) {
-    int size = RandomUtils.nextSize(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1]);
+  private Object array(DataConfig mockConfig) {
+    int size = RandomUtils.nextSize(mockConfig.sizeRange()[0], mockConfig.sizeRange()[1]);
     Class componentClass = ((Class) type).getComponentType();
     Object result = Array.newInstance(componentClass, size);
     BaseMocker baseMocker = new BaseMocker(componentClass);
@@ -48,7 +49,7 @@ public class ArrayMocker implements Mocker<Object> {
 
   // TODO 代码还需要整理
   // 由于GenericArrayType无法获得Class，所以递归创建多维数组
-  private Object createGenericArray(MockConfig mockConfig) {
+  private Object createGenericArray(DataConfig mockConfig) {
     GenericArrayType genericArrayType = (GenericArrayType) this.type;
     // 递归获取该数组的维数，以及最后的Class类型
     Map<Integer, Map<Class, Type[]>> map = map(mockConfig, genericArrayType, 0);
@@ -56,7 +57,7 @@ public class ArrayMocker implements Mocker<Object> {
     Entry<Class, Type[]> baseEntry = entry.getValue().entrySet().iterator().next();
     int[] dimensions = new int[entry.getKey()];
     for (int index = 0; index < dimensions.length; index++) {
-      dimensions[index] = RandomUtils.nextSize(mockConfig.getSizeRange()[0], mockConfig.getSizeRange()[1]);
+      dimensions[index] = RandomUtils.nextSize(mockConfig.sizeRange()[0], mockConfig.sizeRange()[1]);
     }
     // 创建多维数组每种维度的对象
     List<Object> list = new ArrayList<>(dimensions.length);
@@ -78,7 +79,7 @@ public class ArrayMocker implements Mocker<Object> {
     return baseResult;
   }
 
-  private Map<Integer, Map<Class, Type[]>> map(MockConfig mockConfig, GenericArrayType genericArrayType, int dimension) {
+  private Map<Integer, Map<Class, Type[]>> map(DataConfig mockConfig, GenericArrayType genericArrayType, int dimension) {
     Map<Integer, Map<Class, Type[]>> result = new HashMap<>();
     Type componentType = genericArrayType.getGenericComponentType();
     dimension++;
@@ -94,7 +95,7 @@ public class ArrayMocker implements Mocker<Object> {
     }
     if (componentType instanceof TypeVariable) {
       Map<Class, Type[]> map = new HashMap<>();
-      map.put((Class) mockConfig.getVariableType(((TypeVariable) componentType).getName()), null);
+      map.put((Class) mockConfig.switchGlobalConfig().getVariableType(((TypeVariable) componentType).getName()), null);
       result.put(dimension, map);
       return result;
     }

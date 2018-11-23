@@ -1,5 +1,6 @@
 package com.github.jsonzou.jmockdata.mocker;
 
+import com.github.jsonzou.jmockdata.DataConfig;
 import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.Mocker;
 import com.github.jsonzou.jmockdata.util.RandomUtils;
@@ -10,8 +11,8 @@ import com.github.jsonzou.jmockdata.util.RandomUtils;
 public class LongMocker implements Mocker<Long> {
 
   @Override
-  public Long mock(MockConfig mockConfig) {
-    return RandomUtils.nextLong(mockConfig.getLongRange()[0], mockConfig.getLongRange()[1]);
+  public Long mock(DataConfig mockConfig) {
+    return RandomUtils.nextLong(mockConfig.longRange()[0], mockConfig.longRange()[1]);
   }
 
 }

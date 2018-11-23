@@ -1,5 +1,6 @@
 package com.github.jsonzou.jmockdata.mocker;
 
+import com.github.jsonzou.jmockdata.DataConfig;
 import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.Mocker;
 import com.github.jsonzou.jmockdata.util.RandomUtils;
@@ -10,7 +11,7 @@ import com.github.jsonzou.jmockdata.util.RandomUtils;
 public class BooleanMocker implements Mocker<Boolean> {
 
   @Override
-  public Boolean mock(MockConfig mockConfig) {
+  public Boolean mock(DataConfig mockConfig) {
     return RandomUtils.nextBoolean();
   }
 
