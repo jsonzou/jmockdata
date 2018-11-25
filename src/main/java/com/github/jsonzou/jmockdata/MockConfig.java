@@ -1,6 +1,7 @@
 package com.github.jsonzou.jmockdata;
 
 
+import com.github.jsonzou.jmockdata.annotation.MockIgnore;
 import com.github.jsonzou.jmockdata.mocker.*;
 
 import java.lang.reflect.ParameterizedType;
@@ -8,9 +9,7 @@ import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 模拟数据配置类
@@ -49,12 +48,18 @@ public class MockConfig {
    * 数据模拟范围全局配置
    */
   private DataConfig GLOBAL_DATA_CONFIG=new DataConfig(this);
+
   /**
    * 数据模拟范围局部特定配置
    * [key] = ClassName[_Field]
    * [value] = DataConfig
    */
   private Map<String,DataConfig> partDataConfig = new HashMap<>();
+
+  /**
+   * 排除模拟对象
+   */
+  private Map<Class<?>, List<String>> excludeConfig = new HashMap<>();
 
 
   public MockConfig() {
@@ -195,6 +200,65 @@ public class MockConfig {
     return GLOBAL_DATA_CONFIG;
   }
 
+  /**
+   * 排除模拟的配置属性名称
+   */
+  public MockConfig excludes(Class<?> clazz,String... fieldName){
+    excludeConfig.put(clazz, Arrays.asList(fieldName));
+    return this;
+  }
+  public MockConfig excludes(String... fieldNames){
+    excludeConfig.put(MockIgnore.class, Arrays.asList(fieldNames));
+    return this;
+  }
+  /**
+   * 是否排除模拟某个类
+   */
+  public boolean isConfigExcludeMock(Class<?>clazz){
+    return this.excludeConfig.get(clazz)!=null && this.excludeConfig.get(clazz).size()==0;
+  }
+
+  /**
+   * 是否排除模拟某个类的属性
+   */
+  public boolean isConfigExcludeMock(Class<?>clazz,String fieldName){
+    List<String> fieldsConfig1=this.excludeConfig.get(clazz);
+    List<String> fieldsConfig2=this.excludeConfig.get(MockIgnore.class);
+    List<String> fieldsConfig = new ArrayList<>();
+    if(fieldsConfig1!=null){
+      fieldsConfig.addAll(fieldsConfig1);
+    }
+    if(fieldsConfig2!=null){
+      fieldsConfig.addAll(fieldsConfig2);
+    }
+    if(fieldsConfig.contains(fieldName)){
+      return true;
+    }else{
+      boolean isExclude=false;
+      for(String fieldPattern:fieldsConfig){
+        if(fieldPattern.startsWith("*") && fieldPattern.endsWith("*")){
+          isExclude = fieldName.toLowerCase().contains(fieldPattern.toLowerCase().replaceAll("\\*",""));
+        }
+        if(isExclude){
+          return true;
+        }
+        if(fieldPattern.startsWith("*")){
+          isExclude = fieldName.toLowerCase().endsWith(fieldPattern.toLowerCase().replace("*",""));
+        }
+        if(isExclude){
+          return true;
+        }
+        if(fieldPattern.endsWith("*")){
+          isExclude = fieldName.toLowerCase().startsWith(fieldPattern.toLowerCase().replace("*",""));
+        }
+        if(isExclude){
+          return true;
+        }
+      }
+      return isExclude;
+    }
+
+  }
 
   /**
    * ********************************
@@ -297,6 +361,7 @@ public class MockConfig {
   public char[] charSeed() {
     return GLOBAL_DATA_CONFIG.charSeed();
   }
+
 
 
 }

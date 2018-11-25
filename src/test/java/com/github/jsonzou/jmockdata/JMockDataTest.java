@@ -4,6 +4,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
+import com.alibaba.fastjson.JSON;
 import com.github.jsonzou.jmockdata.bean.BasicBean;
 import com.github.jsonzou.jmockdata.bean.ErrorBean;
 import com.github.jsonzou.jmockdata.bean.GenericData;
@@ -139,6 +140,62 @@ public class JMockDataTest {
       fail();
     } catch (Exception e) {
     }
+  }
+  @Test
+  public void testPartConfig(){
+    MockConfig mockConfig = new MockConfig()
+            .byteRange((byte) 0, Byte.MAX_VALUE)
+            .shortRange((short) 0, Short.MAX_VALUE)
+            .switchPartConfig(BasicBean.class,"integerNum")
+            .intRange(10, 11)
+            .switchPartConfig(BasicBean.class,"floatNum")
+            .floatRange(1.22f, 1.50f)
+            .switchPartConfig(BasicBean.class,"doubleNum")
+            .doubleRange(1.50,1.99)
+            .switchPartConfig(BasicBean.class,"longNum")
+            .longRange(12, 13)
+            .switchPartConfig(BasicBean.class,"integerNumArray")
+            .sizeRange(14, 14)
+            .switchPartConfig(BasicBean.class,"date")
+            .dateRange("2018-11-20", "2018-11-30")
+            .switchPartConfig(BasicBean.class,"string")
+            .stringSeed("SAVED", "REJECT", "APPROVED")
+            .sizeRange(1,1)
+            .switchPartConfig(BasicBean.class,"charNum")
+            .charSeed((char) 97, (char) 98)
+            .switchGlobalConfig();
+    BasicBean basicBean = JMockData.mock(BasicBean.class, mockConfig);
+    assertNotNull(basicBean);
+    System.out.println(JSON.toJSONString(basicBean,true));
+  }
+  @Test
+  public void testExcludeConfig(){
+    MockConfig mockConfig = new MockConfig()
+            .byteRange((byte) 0, Byte.MAX_VALUE)
+            .shortRange((short) 0, Short.MAX_VALUE)
+            .switchPartConfig(BasicBean.class,"integerNum")
+            .intRange(10, 11)
+            .switchPartConfig(BasicBean.class,"floatNum")
+            .floatRange(1.22f, 1.50f)
+            .switchPartConfig(BasicBean.class,"doubleNum")
+            .doubleRange(1.50,1.99)
+            .switchPartConfig(BasicBean.class,"longNum")
+            .longRange(12, 13)
+            .switchPartConfig(BasicBean.class,"integerNumArray")
+            .sizeRange(14, 14)
+            .switchPartConfig(BasicBean.class,"date")
+            .dateRange("2018-11-20", "2018-11-30")
+            .switchPartConfig(BasicBean.class,"string")
+            .stringSeed("SAVED", "REJECT", "APPROVED")
+            .sizeRange(1,1)
+            .switchPartConfig(BasicBean.class,"charNum")
+            .charSeed((char) 97, (char) 98)
+            .switchGlobalConfig()
+            .excludes("*Array*")
+            .excludes(BasicBean.class,"*list*","*set*","*map*");
+    BasicBean basicBean = JMockData.mock(BasicBean.class, mockConfig);
+    assertNotNull(basicBean);
+    System.out.println(JSON.toJSONString(basicBean,true));
   }
 
 }

@@ -8,6 +8,9 @@ import com.github.jsonzou.jmockdata.annotation.MockIgnore;
 import com.github.jsonzou.jmockdata.util.ReflectionUtils;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 public class BeanMocker implements Mocker<Object> {
@@ -20,6 +23,7 @@ public class BeanMocker implements Mocker<Object> {
 
   @Override
   public Object mock(DataConfig mockConfig) {
+
     try {
       // fixme 解决方案不够优雅
       if (mockConfig.switchGlobalConfig().isEnabledCircle()) {
@@ -30,6 +34,13 @@ public class BeanMocker implements Mocker<Object> {
       }
       Object result = clazz.newInstance();
       mockConfig.switchGlobalConfig().cacheBean(clazz.getName(), result);
+      /**
+       * 是否配置排除整个类
+       */
+
+      if(mockConfig.switchGlobalConfig().isConfigExcludeMock(clazz)){
+        return result;
+      }
       for (Class<?> currentClass = clazz; currentClass != Object.class; currentClass = currentClass.getSuperclass()) {
         // 模拟有setter方法的字段
         for (Entry<Field, Method> entry : ReflectionUtils.fieldAndSetterMethod(currentClass).entrySet()) {
@@ -37,8 +48,14 @@ public class BeanMocker implements Mocker<Object> {
           if (field.isAnnotationPresent(MockIgnore.class)) {
             continue;
           }
+          /**
+           * 是否配置排除这个属性
+           */
+          if(mockConfig.switchGlobalConfig().isConfigExcludeMock(clazz,field.getName())){
+             continue;
+          }
           ReflectionUtils
-              .setRefValue(result, entry.getValue(), new BaseMocker(field.getGenericType()).mock(mockConfig));
+              .setRefValue(result, entry.getValue(), new BaseMocker(field.getGenericType()).mock(mockConfig.switchGlobalConfig().getDataConfig(currentClass,field.getName())));
         }
       }
       return result;
