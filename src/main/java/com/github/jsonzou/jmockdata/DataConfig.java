@@ -1,7 +1,7 @@
 package com.github.jsonzou.jmockdata;
 
 /**
- * @Auther: jsonzou
+ * @Author: jsonzou
  * @Date: 2018/10/29 13:24
  * @Description:
  */
