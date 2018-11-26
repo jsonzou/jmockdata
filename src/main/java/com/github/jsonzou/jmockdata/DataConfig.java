@@ -29,7 +29,7 @@ public class DataConfig {
     }
 
     /**
-     * 置转路器 - 设置全局配置
+     * 配置转路器 - 设置全局配置
      * @return
      */
     public MockConfig globalConfig(){
