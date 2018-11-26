@@ -95,7 +95,7 @@ public class ArrayMocker implements Mocker<Object> {
     }
     if (componentType instanceof TypeVariable) {
       Map<Class, Type[]> map = new HashMap<>();
-      map.put((Class) mockConfig.switchGlobalConfig().getVariableType(((TypeVariable) componentType).getName()), null);
+      map.put((Class) mockConfig.globalConfig().getVariableType(((TypeVariable) componentType).getName()), null);
       result.put(dimension, map);
       return result;
     }

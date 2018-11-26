@@ -32,15 +32,24 @@ public class DataConfig {
      * 置转路器 - 设置全局配置
      * @return
      */
-    public MockConfig switchGlobalConfig(){
+    public MockConfig globalConfig(){
         return this.config;
     }
+
+    /**
+     * 配置转路器 - 切换设置全局字段模拟配置
+     * @return
+     */
+    public DataConfig subConfig(String... fieldNames){
+        return this.config.subConfig(fieldNames);
+    }
+
     /**
      * 配置转路器 - 设置局部配置
      * @return
      */
-    public DataConfig switchPartConfig(Class<?> clazz,String... fieldName){
-        return this.config.switchPartConfig(clazz,fieldName);
+    public DataConfig subConfig(Class<?> clazz,String... fieldName){
+        return this.config.subConfig(clazz,fieldName);
     }
 
     public DataConfig byteRange(byte min, byte max) {

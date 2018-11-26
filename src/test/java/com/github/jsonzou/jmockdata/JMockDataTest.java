@@ -12,6 +12,9 @@ import com.github.jsonzou.jmockdata.bean.SelfRefData;
 import com.github.jsonzou.jmockdata.bean.circular.AXB;
 import com.github.jsonzou.jmockdata.bean.enums.DayEnum;
 import com.github.jsonzou.jmockdata.bean.enums.ErrorEnum;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
@@ -141,61 +144,45 @@ public class JMockDataTest {
     } catch (Exception e) {
     }
   }
+
+  /**
+   * 自定义配置测试
+   * 排除字段测试
+   */
   @Test
-  public void testPartConfig(){
+  public void testCustomDataConfigAndExclude(){
     MockConfig mockConfig = new MockConfig()
+            // 全局配置
+            .globalConfig()
+            .sizeRange(1,1)
+            .charSeed((char) 97, (char) 98)
             .byteRange((byte) 0, Byte.MAX_VALUE)
             .shortRange((short) 0, Short.MAX_VALUE)
-            .switchPartConfig(BasicBean.class,"integerNum")
+            // 某些字段（名等于integerNum的字段、包含float的字段、double开头的字段）配置
+            .subConfig("integerNum","*float*","double*")
             .intRange(10, 11)
-            .switchPartConfig(BasicBean.class,"floatNum")
             .floatRange(1.22f, 1.50f)
-            .switchPartConfig(BasicBean.class,"doubleNum")
             .doubleRange(1.50,1.99)
-            .switchPartConfig(BasicBean.class,"longNum")
+            // 某个类的某些字段（long开头的字段、date结尾的字段、包含string的字段）配置。
+            .subConfig(BasicBean.class,"long*","*date","*string*")
             .longRange(12, 13)
-            .switchPartConfig(BasicBean.class,"integerNumArray")
-            .sizeRange(14, 14)
-            .switchPartConfig(BasicBean.class,"date")
             .dateRange("2018-11-20", "2018-11-30")
-            .switchPartConfig(BasicBean.class,"string")
             .stringSeed("SAVED", "REJECT", "APPROVED")
             .sizeRange(1,1)
-            .switchPartConfig(BasicBean.class,"charNum")
-            .charSeed((char) 97, (char) 98)
-            .switchGlobalConfig();
+            // 全局配置
+            .globalConfig()
+            // 排除所有包含list/set/map字符的字段。表达式不区分大小写。
+            .excludes("*List*","*Set*","*Map*")
+            // 排除所有Array开头/Boxing结尾的字段。表达式不区分大小写。
+            .excludes(BasicBean.class,"*Array","Boxing*");
     BasicBean basicBean = JMockData.mock(BasicBean.class, mockConfig);
     assertNotNull(basicBean);
+    List<BasicBean> basicBeans = JMockData.mock(new TypeReference<List<BasicBean>>(){}, mockConfig);
+    assertNotNull(basicBeans);
     System.out.println(JSON.toJSONString(basicBean,true));
+    System.out.println("==============================");
+    System.out.println(JSON.toJSONString(basicBeans,true));
   }
-  @Test
-  public void testExcludeConfig(){
-    MockConfig mockConfig = new MockConfig()
-            .byteRange((byte) 0, Byte.MAX_VALUE)
-            .shortRange((short) 0, Short.MAX_VALUE)
-            .switchPartConfig(BasicBean.class,"integerNum")
-            .intRange(10, 11)
-            .switchPartConfig(BasicBean.class,"floatNum")
-            .floatRange(1.22f, 1.50f)
-            .switchPartConfig(BasicBean.class,"doubleNum")
-            .doubleRange(1.50,1.99)
-            .switchPartConfig(BasicBean.class,"longNum")
-            .longRange(12, 13)
-            .switchPartConfig(BasicBean.class,"integerNumArray")
-            .sizeRange(14, 14)
-            .switchPartConfig(BasicBean.class,"date")
-            .dateRange("2018-11-20", "2018-11-30")
-            .switchPartConfig(BasicBean.class,"string")
-            .stringSeed("SAVED", "REJECT", "APPROVED")
-            .sizeRange(1,1)
-            .switchPartConfig(BasicBean.class,"charNum")
-            .charSeed((char) 97, (char) 98)
-            .switchGlobalConfig()
-            .excludes("*Array*")
-            .excludes(BasicBean.class,"*list*","*set*","*map*");
-    BasicBean basicBean = JMockData.mock(BasicBean.class, mockConfig);
-    assertNotNull(basicBean);
-    System.out.println(JSON.toJSONString(basicBean,true));
-  }
+
 
 }

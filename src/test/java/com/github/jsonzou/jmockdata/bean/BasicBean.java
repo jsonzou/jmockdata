@@ -1,5 +1,6 @@
 package com.github.jsonzou.jmockdata.bean;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.github.jsonzou.jmockdata.annotation.MockIgnore;
 import com.github.jsonzou.jmockdata.bean.enums.DayEnum;
 import java.math.BigDecimal;
@@ -9,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
+import com.github.jsonzou.jmockdata.util.DateTool;
 import lombok.Data;
 
 @Data
@@ -78,6 +81,7 @@ public class BasicBean {
   @MockIgnore
   private BigDecimal bigDecimal;
   private BigInteger bigInteger;
+  @JSONField(format="yyyy-MM-dd")
   private Date date;
   private String string;
   private DayEnum dayEnum;

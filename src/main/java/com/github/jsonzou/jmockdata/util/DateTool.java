@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * @Description:
  */
 public class DateTool {
-    enum DatePattern{
+   public enum DatePattern{
         yyyy_MM_dd(Pattern.compile("\\d{4}-\\d{2}-\\d{2}"),"yyyy-MM-dd"),
         yyyy_MM_dd__HH$mm$ss(Pattern.compile("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}"),"yyyy-MM-dd HH:mm:ss"),
         yyyylMMldd(Pattern.compile("\\d{4}/\\d{2}/\\d{2}"),"yyyy/MM/dd"),

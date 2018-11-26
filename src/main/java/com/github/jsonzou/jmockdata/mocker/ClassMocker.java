@@ -30,7 +30,7 @@ public class ClassMocker implements Mocker<Object> {
     } else if (clazz.isEnum()) {
       mocker = new EnumMocker(clazz);
     } else {
-      mocker = mockConfig.switchGlobalConfig().getMocker(clazz);
+      mocker = mockConfig.globalConfig().getMocker(clazz);
       if (mocker == null) {
         mocker = new BeanMocker(clazz);
       }

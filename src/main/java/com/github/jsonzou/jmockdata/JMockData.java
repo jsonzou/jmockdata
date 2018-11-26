@@ -58,7 +58,7 @@ public class JMockData {
    */
   public static <T> T mock(TypeReference<T> typeReference, MockConfig mockConfig) {
     mockConfig.init(typeReference.getType());
-    DataConfig config=mockConfig.globalConfig();
+    DataConfig config=mockConfig.globalDataConfig();
     return new BaseMocker<T>(typeReference.getType()).mock(config);
   }
 

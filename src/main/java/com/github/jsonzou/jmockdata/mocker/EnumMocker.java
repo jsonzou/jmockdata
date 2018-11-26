@@ -20,7 +20,7 @@ public class EnumMocker<T extends Enum> implements Mocker<Object> {
 
   @Override
   public T mock(DataConfig mockConfig) {
-    Enum[] enums = mockConfig.switchGlobalConfig().getcacheEnum(clazz.getName());
+    Enum[] enums = mockConfig.globalConfig().getcacheEnum(clazz.getName());
     if (enums == null) {
       try {
         Field field = clazz.getDeclaredField("$VALUES");
@@ -29,7 +29,7 @@ public class EnumMocker<T extends Enum> implements Mocker<Object> {
         if (enums.length == 0) {
           throw new MockException("空的enum不能模拟");
         }
-        mockConfig.switchGlobalConfig().cacheEnum(clazz.getName(), enums);
+        mockConfig.globalConfig().cacheEnum(clazz.getName(), enums);
       } catch (NoSuchFieldException | IllegalAccessException e) {
         throw new MockException(e);
       }

@@ -3,6 +3,7 @@ package com.github.jsonzou.jmockdata;
 
 import com.github.jsonzou.jmockdata.annotation.MockIgnore;
 import com.github.jsonzou.jmockdata.mocker.*;
+import com.github.jsonzou.jmockdata.util.FieldMatchingResolver;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -143,23 +144,37 @@ public class MockConfig {
    * 配置转路器 - 切换设置全局配置
    * @return
      */
-  public MockConfig switchGlobalConfig(){
+  public MockConfig globalConfig(){
     return this;
   }
+
   /**
-   * 配置转路器 - 切换设置局部配置
+   * 配置转路器 - 切换设置全局字段模拟配置
    * @return
    */
-  public DataConfig switchPartConfig(Class<?> clazz,String... fieldNames){
+  public DataConfig subConfig(String... fieldNames){
+    return this.subConfig(DataConfig.class,fieldNames);
+  }
+  /**
+   * 配置转路器 - 切换设置局部Class字段模拟配置
+   * @return
+   */
+  public DataConfig subConfig(Class<?> clazz,String... fieldNames){
+    /**
+     * fieldNames 长度为0 代表是对某各类所有字段的配置
+     */
     String clazzName=clazz.getName();
     DataConfig config=partDataConfig.get(clazzName);
-    if(fieldNames==null || fieldNames.length==0){
+    if(fieldNames.length==0){
          if(config==null){
            config=new DataConfig(this);
            partDataConfig.put(clazzName,config);
          }
          return config;
     }
+    /**
+     * fieldNames 长度不为0 代表是对某各类某几个字段的配置
+     */
     config=null;
     for (String fieldName : fieldNames) {
       config=partDataConfig.get(clazzName+"#"+fieldName);
@@ -182,11 +197,64 @@ public class MockConfig {
    * @return
      */
   public DataConfig getDataConfig(Class<?> clazz,String fieldName){
+
+    Set<String> configKeys=partDataConfig.keySet();
     String clazzName=clazz.getName();
+    /**
+     * 如果字段为空，则返回累的配置
+     */
+    if(fieldName==null){
+      return  partDataConfig.get(clazzName)==null?GLOBAL_DATA_CONFIG:partDataConfig.get(clazzName);
+    }
+
+    /**
+     * 优先级1 ： clazz + fieldName
+     */
     DataConfig config=partDataConfig.get(clazzName+"#"+fieldName);
+    /**
+     * 查找不到则模式匹配
+     */
+    if(config==null){
+      for(String fieldPatternKey:configKeys){
+        if(fieldPatternKey.startsWith(clazzName+"#")){
+          if(FieldMatchingResolver.isMatchPattern(fieldName,fieldPatternKey.split("#")[1])){
+            return partDataConfig.get(fieldPatternKey);
+          }
+        }
+      }
+    }
+
+
+    /**
+     * 优先级2 ： clazz
+     */
     if(config==null){
       config=partDataConfig.get(clazzName);
     }
+
+    /**
+     * 优先级3 ： DataConfig.class + fieldName
+     */
+    if(config==null){
+      clazzName=DataConfig.class.getName();
+      config=partDataConfig.get(clazzName+"#"+fieldName);
+    }
+    /**
+     * 查找不到则模式匹配
+     */
+    if(config==null){
+      for(String fieldPatternKey:configKeys){
+        if(fieldPatternKey.startsWith(clazzName+"#")){
+          if(FieldMatchingResolver.isMatchPattern(fieldName,fieldPatternKey.split("#")[1])){
+            return partDataConfig.get(fieldPatternKey);
+          }
+        }
+      }
+    }
+
+    /**
+     * 优先级4 ： GLOBAL CONFIG
+     */
     if(config==null){
       config=GLOBAL_DATA_CONFIG;
     }
@@ -194,34 +262,43 @@ public class MockConfig {
   }
   /**
    * 获取全局配置
-   *
+   * @return
    */
-  public DataConfig globalConfig(){
-    return GLOBAL_DATA_CONFIG;
+  public DataConfig globalDataConfig(){
+    return this.GLOBAL_DATA_CONFIG;
   }
-
   /**
-   * 排除模拟的配置属性名称
+   * 模拟数据排除某各类的某几个字段
    */
   public MockConfig excludes(Class<?> clazz,String... fieldName){
     excludeConfig.put(clazz, Arrays.asList(fieldName));
     return this;
   }
+
+  /**
+   * 模拟数据全局排除某些字段名
+   * @param fieldNames
+   * @return
+     */
   public MockConfig excludes(String... fieldNames){
     excludeConfig.put(MockIgnore.class, Arrays.asList(fieldNames));
     return this;
   }
   /**
-   * 是否排除模拟某个类
+   * 判断是否排除模拟某个类
    */
   public boolean isConfigExcludeMock(Class<?>clazz){
     return this.excludeConfig.get(clazz)!=null && this.excludeConfig.get(clazz).size()==0;
   }
 
+
   /**
-   * 是否排除模拟某个类的属性
+   * 判断是否排除模拟某个类的属性
    */
   public boolean isConfigExcludeMock(Class<?>clazz,String fieldName){
+    /**
+     * 优先配全字段名称
+     */
     List<String> fieldsConfig1=this.excludeConfig.get(clazz);
     List<String> fieldsConfig2=this.excludeConfig.get(MockIgnore.class);
     List<String> fieldsConfig = new ArrayList<>();
@@ -236,24 +313,10 @@ public class MockConfig {
     }else{
       boolean isExclude=false;
       for(String fieldPattern:fieldsConfig){
-        if(fieldPattern.startsWith("*") && fieldPattern.endsWith("*")){
-          isExclude = fieldName.toLowerCase().contains(fieldPattern.toLowerCase().replaceAll("\\*",""));
-        }
-        if(isExclude){
-          return true;
-        }
-        if(fieldPattern.startsWith("*")){
-          isExclude = fieldName.toLowerCase().endsWith(fieldPattern.toLowerCase().replace("*",""));
-        }
-        if(isExclude){
-          return true;
-        }
-        if(fieldPattern.endsWith("*")){
-          isExclude = fieldName.toLowerCase().startsWith(fieldPattern.toLowerCase().replace("*",""));
-        }
-        if(isExclude){
-          return true;
-        }
+            isExclude = FieldMatchingResolver.isMatchPattern(fieldName,fieldPattern);
+            if(isExclude){
+              return isExclude;
+            }
       }
       return isExclude;
     }

@@ -26,19 +26,19 @@ public class BeanMocker implements Mocker<Object> {
 
     try {
       // fixme 解决方案不够优雅
-      if (mockConfig.switchGlobalConfig().isEnabledCircle()) {
-        Object cacheBean = mockConfig.switchGlobalConfig().getcacheBean(clazz.getName());
+      if (mockConfig.globalConfig().isEnabledCircle()) {
+        Object cacheBean = mockConfig.globalConfig().getcacheBean(clazz.getName());
         if (cacheBean != null) {
           return cacheBean;
         }
       }
       Object result = clazz.newInstance();
-      mockConfig.switchGlobalConfig().cacheBean(clazz.getName(), result);
+      mockConfig.globalConfig().cacheBean(clazz.getName(), result);
       /**
        * 是否配置排除整个类
        */
 
-      if(mockConfig.switchGlobalConfig().isConfigExcludeMock(clazz)){
+      if(mockConfig.globalConfig().isConfigExcludeMock(clazz)){
         return result;
       }
       for (Class<?> currentClass = clazz; currentClass != Object.class; currentClass = currentClass.getSuperclass()) {
@@ -51,11 +51,11 @@ public class BeanMocker implements Mocker<Object> {
           /**
            * 是否配置排除这个属性
            */
-          if(mockConfig.switchGlobalConfig().isConfigExcludeMock(clazz,field.getName())){
+          if(mockConfig.globalConfig().isConfigExcludeMock(clazz,field.getName())){
              continue;
           }
           ReflectionUtils
-              .setRefValue(result, entry.getValue(), new BaseMocker(field.getGenericType()).mock(mockConfig.switchGlobalConfig().getDataConfig(currentClass,field.getName())));
+              .setRefValue(result, entry.getValue(), new BaseMocker(field.getGenericType()).mock(mockConfig.globalConfig().getDataConfig(currentClass,field.getName())));
         }
       }
       return result;
