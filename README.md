@@ -28,7 +28,7 @@ Jmockdata插件通过随机算法模拟Java数据.
 ## Download
 
 > 
-### _Jmockdata-4.0.0(发布准备中...)_
+### _Jmockdata-4.0.0_
 #### Jar
 > [Jmockdata-4.0.0](http://repo.maven.apache.org/maven2/com/github/jsonzou/jmockdata/4.0.0/jmockdata-4.0.0.jar)
 #### Maven
