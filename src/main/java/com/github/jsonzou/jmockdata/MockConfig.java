@@ -333,6 +333,10 @@ public class MockConfig {
      GLOBAL_DATA_CONFIG.byteRange(min,max);
      return this;
   }
+  public MockConfig booleanSeed(boolean... booleanSeed) {
+     GLOBAL_DATA_CONFIG.booleanSeed(booleanSeed);
+     return this;
+  }
 
   public MockConfig shortRange(short min, short max) {
     GLOBAL_DATA_CONFIG.shortRange(min,max);
@@ -386,7 +390,10 @@ public class MockConfig {
      */
 
   public byte[] byteRange() {
-    return this.byteRange();
+    return GLOBAL_DATA_CONFIG.byteRange();
+  }
+  public boolean[] booleanSeed() {
+    return GLOBAL_DATA_CONFIG.booleanSeed();
   }
 
   public short[] shortRange() {

@@ -186,6 +186,16 @@ public class JMockDataTest {
     System.out.println("==============================");
     System.out.println(JSON.toJSONString(basicBeans,true));
   }
-
+  @Test
+  public void testBooleanMock() {
+    MockConfig mockConfig = new MockConfig()
+           // .booleanSeed(true,true)
+            .subConfig(Boolean.class)
+           // .booleanSeed(false,false)
+            .globalConfig();
+    for (int i=0;i<100;i++){
+      System.out.print(JMockData.mock(Boolean.class,mockConfig)+" ");
+    }
+  }
 
 }

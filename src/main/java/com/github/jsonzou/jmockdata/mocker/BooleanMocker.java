@@ -12,7 +12,8 @@ public class BooleanMocker implements Mocker<Boolean> {
 
   @Override
   public Boolean mock(DataConfig mockConfig) {
-    return RandomUtils.nextBoolean();
+    boolean[] booleanSeed = mockConfig.booleanSeed();
+    return booleanSeed[RandomUtils.nextInt(0, booleanSeed.length)];
   }
 
 }

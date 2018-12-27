@@ -8,6 +8,7 @@ package com.github.jsonzou.jmockdata;
 public class DataConfig {
     private MockConfig config;
     private byte[] byteRange = {0, 127};
+    private boolean[] booleanSeed = {true, false};
     private short[] shortRange = {0, 1000};
     private int[] intRange = {0, 10000};
     private float[] floatRange = {0.0f, 10000.00f};
@@ -55,6 +56,10 @@ public class DataConfig {
     public DataConfig byteRange(byte min, byte max) {
         this.byteRange[0] = min;
         this.byteRange[1] = max;
+        return this;
+    }
+    public DataConfig booleanSeed(boolean... booleanSeed) {
+        this.booleanSeed = booleanSeed;
         return this;
     }
 
@@ -113,6 +118,9 @@ public class DataConfig {
 
     public byte[] byteRange() {
         return this.byteRange;
+    }
+    public boolean[] booleanSeed() {
+        return this.booleanSeed;
     }
 
     public short[] shortRange() {
