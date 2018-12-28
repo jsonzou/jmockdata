@@ -8,7 +8,7 @@ import com.github.jsonzou.jmockdata.util.RandomUtils;
 import java.lang.reflect.Field;
 
 /**
- * Double对象模拟器
+ * Enum对象模拟器
  */
 public class EnumMocker<T extends Enum> implements Mocker<Object> {
 
