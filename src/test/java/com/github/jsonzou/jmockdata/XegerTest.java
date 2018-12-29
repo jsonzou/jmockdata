@@ -1,22 +1,19 @@
 package com.github.jsonzou.jmockdata;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
 import com.github.jsonzou.jmockdata.util.Xeger;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import static org.junit.Assert.assertTrue;
 
 /**
- * @Auther: jsonzou
+ * @Author: jsonzou
  * @Date: 2018/12/29 13:05
  * @Description:
  */
 public class XegerTest {
     @Test
-    public void should163Email() {
-        String regex = "[a-z]{5,15}\\@163\\.com";
+    public void should1Email() {
+        String regex = "[a-z0-9]{5,15}\\@(qq|163|sina)\\.(com|cn|com\\.cn)";
         Xeger generator = new Xeger(regex);
         for (int i = 0; i < 100; i++) {
             String text = generator.generate();

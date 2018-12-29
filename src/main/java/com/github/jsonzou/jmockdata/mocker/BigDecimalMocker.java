@@ -13,6 +13,9 @@ public class BigDecimalMocker implements Mocker<BigDecimal> {
 
   @Override
   public BigDecimal mock(DataConfig mockConfig) {
+    if(mockConfig.numberXeger()!=null){
+      return new BigDecimal(mockConfig.numberXeger().generate());
+    }
     return BigDecimal.valueOf(RandomUtils.nextDouble(mockConfig.doubleRange()[0], mockConfig.doubleRange()[1]));
   }
 

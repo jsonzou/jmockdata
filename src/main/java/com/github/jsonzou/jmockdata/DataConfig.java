@@ -1,5 +1,7 @@
 package com.github.jsonzou.jmockdata;
 
+import com.github.jsonzou.jmockdata.util.Xeger;
+
 /**
  * @Author: jsonzou
  * @Date: 2018/10/29 13:24
@@ -25,6 +27,12 @@ public class DataConfig {
             {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
                     "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F",
                     "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+
+    private String numberRegex = null;
+    private String stringRegex = null;
+    private Xeger numberXeger = null;
+    private Xeger stringXeger = null;
+
     public DataConfig(MockConfig config) {
         this.config = config;
     }
@@ -114,6 +122,16 @@ public class DataConfig {
         this.charSeed = charSeed;
         return this;
     }
+    public DataConfig numberXeger(String numberRegex) {
+        this.numberRegex = numberRegex;
+        this.numberXeger = new Xeger(numberRegex);
+        return this;
+    }
+    public DataConfig stringXeger(String stringRegex) {
+        this.stringRegex = stringRegex;
+        this.stringXeger = new Xeger(stringRegex);
+        return this;
+    }
 
 
     public byte[] byteRange() {
@@ -158,6 +176,11 @@ public class DataConfig {
     public char[] charSeed() {
         return this.charSeed;
     }
-
+    public Xeger numberXeger() {
+       return this.numberXeger ;
+    }
+    public Xeger stringXeger() {
+       return this.stringXeger ;
+    }
 
 }

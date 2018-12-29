@@ -12,6 +12,9 @@ public class ShortMocker implements Mocker<Short> {
 
   @Override
   public Short mock(DataConfig mockConfig) {
+    if(mockConfig.numberXeger()!=null){
+      return Short.valueOf(mockConfig.numberXeger().generate());
+    }
     return (short) RandomUtils.nextInt(mockConfig.shortRange()[0], mockConfig.shortRange()[1]);
   }
 

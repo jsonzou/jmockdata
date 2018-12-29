@@ -5,10 +5,8 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import com.alibaba.fastjson.JSON;
-import com.github.jsonzou.jmockdata.bean.BasicBean;
-import com.github.jsonzou.jmockdata.bean.ErrorBean;
-import com.github.jsonzou.jmockdata.bean.GenericData;
-import com.github.jsonzou.jmockdata.bean.SelfRefData;
+import com.alibaba.fastjson.JSONObject;
+import com.github.jsonzou.jmockdata.bean.*;
 import com.github.jsonzou.jmockdata.bean.circular.AXB;
 import com.github.jsonzou.jmockdata.bean.enums.DayEnum;
 import com.github.jsonzou.jmockdata.bean.enums.ErrorEnum;
@@ -196,6 +194,31 @@ public class JMockDataTest {
     for (int i=0;i<100;i++){
       System.out.print(JMockData.mock(Boolean.class,mockConfig)+" ");
     }
+  }
+
+  /**
+   * 根据正则模拟数据
+   */
+  @Test
+  public void testXegerMock() {
+    MockConfig mockConfig = new MockConfig()
+            .stringXeger("I'am a nice man\\.And I write somethine like:[0-9a-zA-Z]{50}")
+            .subConfig(XgerTestDataBean.class,"userEmail")
+            .stringXeger("[a-z0-9]{5,15}\\@(qq|163|sina)\\.(com|cn|com\\.cn)")
+            .subConfig(XgerTestDataBean.class,"userName")
+            .stringXeger("[a-zA-Z_]{1}[a-z0-9_]{5,15}")
+            .subConfig(XgerTestDataBean.class,"userAge")
+            .numberXeger("[1-9]{1}[0-9]?")
+            .subConfig(XgerTestDataBean.class,"userMoney")
+            .numberXeger("[1-9]{1}(\\.[0-9]{2})?")
+            .subConfig(XgerTestDataBean.class,"userScore")
+            .numberXeger("([1-9]{1}([0-9]{1})?|0|100)")
+            .subConfig(XgerTestDataBean.class,"userValue")
+            .numberXeger("[1-9]{1}([0-9]{3,9})(\\.[0-9]{2})?")
+            .globalConfig();
+
+    System.out.println(JSONObject.toJSONString(JMockData.mock(XgerTestDataBean.class,mockConfig),true));
+
   }
 
 }

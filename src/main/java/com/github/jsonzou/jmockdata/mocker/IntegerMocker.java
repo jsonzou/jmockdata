@@ -12,6 +12,9 @@ public class IntegerMocker implements Mocker<Integer> {
 
   @Override
   public Integer mock(DataConfig mockConfig) {
+    if(mockConfig.numberXeger()!=null){
+      return Integer.valueOf(mockConfig.numberXeger().generate());
+    }
     return RandomUtils.nextInt(mockConfig.intRange()[0], mockConfig.intRange()[1]);
   }
 

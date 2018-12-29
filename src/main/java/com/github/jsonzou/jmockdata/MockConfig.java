@@ -4,6 +4,7 @@ package com.github.jsonzou.jmockdata;
 import com.github.jsonzou.jmockdata.annotation.MockIgnore;
 import com.github.jsonzou.jmockdata.mocker.*;
 import com.github.jsonzou.jmockdata.util.FieldMatchingResolver;
+import com.github.jsonzou.jmockdata.util.Xeger;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -362,7 +363,6 @@ public class MockConfig {
     GLOBAL_DATA_CONFIG.longRange(min,max);
     return this;
   }
-
   public MockConfig dateRange(String min, String max) {
     GLOBAL_DATA_CONFIG.dateRange(min,max);
     return this;
@@ -383,6 +383,27 @@ public class MockConfig {
     return this;
   }
 
+  /**
+   * 根据正则表达是模拟数字类型，
+   * 全局慎用，小数、整数、短整数等都会使用此表达式，
+   *  建议通过转路器指定特定的字段或类型使用此功能
+   * @param numberRegex
+   * @return
+     */
+  public MockConfig numberXeger(String numberRegex) {
+    GLOBAL_DATA_CONFIG.numberXeger(numberRegex);
+    return this;
+  }
+
+  /**
+   * 根据正则表达是模拟字符串类型，
+   * @param stringRegex
+   * @return
+     */
+  public MockConfig stringXeger(String stringRegex) {
+    GLOBAL_DATA_CONFIG.stringXeger(stringRegex);
+    return this;
+  }
   /**
    * ********************************
    * 获取全局配置
@@ -432,6 +453,11 @@ public class MockConfig {
     return GLOBAL_DATA_CONFIG.charSeed();
   }
 
-
+  public Xeger numberXeger() {
+    return GLOBAL_DATA_CONFIG.numberXeger() ;
+  }
+  public Xeger stringXeger() {
+    return GLOBAL_DATA_CONFIG.stringXeger() ;
+  }
 
 }

@@ -12,6 +12,9 @@ public class LongMocker implements Mocker<Long> {
 
   @Override
   public Long mock(DataConfig mockConfig) {
+    if(mockConfig.numberXeger()!=null){
+      return Long.valueOf(mockConfig.numberXeger().generate());
+    }
     return RandomUtils.nextLong(mockConfig.longRange()[0], mockConfig.longRange()[1]);
   }
 
