@@ -301,6 +301,7 @@ MockConfig mockConfig = new MockConfig()
 
    /**
     * 根据正则模拟数据
+    * 正则优先于其他规则
     */
    @Test
    public void testXegerMock() {
