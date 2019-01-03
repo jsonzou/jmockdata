@@ -12,9 +12,13 @@ public class StringMocker implements Mocker<String> {
 
   @Override
   public String mock(DataConfig mockConfig) {
+    /**
+     * 若根据正则模拟
+     */
     if(mockConfig.stringXeger()!=null){
-      return mockConfig.stringXeger().generate();
+      return RandomUtils.nextStringFromXeger(mockConfig.stringXeger());
     }
+
     int size = RandomUtils.nextSize(mockConfig.sizeRange()[0], mockConfig.sizeRange()[1]);
     String[] stringSeed = mockConfig.stringSeed();
     StringBuilder sb = new StringBuilder(size);

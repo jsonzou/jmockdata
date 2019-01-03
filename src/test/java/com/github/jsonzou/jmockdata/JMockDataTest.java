@@ -202,17 +202,24 @@ public class JMockDataTest {
   @Test
   public void testXegerMock() {
     MockConfig mockConfig = new MockConfig()
-            .stringXeger("I'am a nice man\\.And I write somethine like:[0-9a-zA-Z]{50}")
+            // 随机段落字符串
+            .stringXeger("I'am a nice man\\.And I'll just scribble the characters, like：([0-9a-zA-Z]{3,5} {1}[0-9a-zA-Z]{3,5}){10,20}")
+            // 邮箱 name@sit.com|sit.cn|sit.com.cn
             .subConfig(XgerTestDataBean.class,"userEmail")
             .stringXeger("[a-z0-9]{5,15}\\@(qq|163|sina)\\.(com|cn|com\\.cn)")
+            // 用户名规则
             .subConfig(XgerTestDataBean.class,"userName")
             .stringXeger("[a-zA-Z_]{1}[a-z0-9_]{5,15}")
+            // 年龄1-99
             .subConfig(XgerTestDataBean.class,"userAge")
             .numberXeger("[1-9]{1}[0-9]?")
+            // 用户现金11 - 99.99
             .subConfig(XgerTestDataBean.class,"userMoney")
-            .numberXeger("[1-9]{1}(\\.[0-9]{2})?")
+            .numberXeger("[1-9]{2}(\\.[0-9]{2})?")
+            // 用户的得分 10 - 100
             .subConfig(XgerTestDataBean.class,"userScore")
             .numberXeger("([1-9]{1}([0-9]{1})?|0|100)")
+            // 用户身价 1000 - 9999999999.99
             .subConfig(XgerTestDataBean.class,"userValue")
             .numberXeger("[1-9]{1}([0-9]{3,9})(\\.[0-9]{2})?")
             .globalConfig();

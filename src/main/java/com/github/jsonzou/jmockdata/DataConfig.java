@@ -62,6 +62,9 @@ public class DataConfig {
     }
 
     public DataConfig byteRange(byte min, byte max) {
+        if(min<Byte.MIN_VALUE || max >Byte.MAX_VALUE){
+            throw new MockException("Out Of The Range Of Byte Data.");
+        }
         this.byteRange[0] = min;
         this.byteRange[1] = max;
         return this;
@@ -72,30 +75,45 @@ public class DataConfig {
     }
 
     public DataConfig shortRange(short min, short max) {
+        if(min<Short.MIN_VALUE || max >Short.MAX_VALUE){
+            throw new MockException("Out Of The Range Of Short Data.");
+        }
         this.shortRange[0] = min;
         this.shortRange[1] = max;
         return this;
     }
 
     public DataConfig intRange(int min, int max) {
+        if(min<Integer.MIN_VALUE || max >Integer.MAX_VALUE){
+            throw new MockException("Out Of The Range Of Integer Data.");
+        }
         this.intRange[0] = min;
         this.intRange[1] = max;
         return this;
     }
 
     public DataConfig floatRange(float min, float max) {
+        if(min<Float.MIN_VALUE || max >Float.MAX_VALUE){
+            throw new MockException("Out Of The Range Of Float Data.");
+        }
         this.floatRange[0] = min;
         this.floatRange[1] = max;
         return this;
     }
 
     public DataConfig doubleRange(double min, double max) {
+        if(min<Double.MIN_VALUE || max >Double.MAX_VALUE){
+            throw new MockException("Out Of The Range Of Double Data.");
+        }
         this.doubleRange[0] = min;
         this.doubleRange[1] = max;
         return this;
     }
 
     public DataConfig longRange(long min, long max) {
+        if(min<Long.MIN_VALUE || max >Long.MAX_VALUE){
+            throw new MockException("Out Of The Range Of Long Data.");
+        }
         this.longRange[0] = min;
         this.longRange[1] = max;
         return this;
@@ -108,6 +126,9 @@ public class DataConfig {
     }
 
     public DataConfig sizeRange(int min, int max) {
+        if(min<Integer.MIN_VALUE || max >Integer.MAX_VALUE){
+            throw new MockException("The Size Is Out Of The Range Of Integer Data.");
+        }
         this.sizeRange[0] = min;
         this.sizeRange[1] = max;
         return this;

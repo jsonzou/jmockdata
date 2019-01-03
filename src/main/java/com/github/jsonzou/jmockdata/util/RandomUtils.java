@@ -1,5 +1,6 @@
 package com.github.jsonzou.jmockdata.util;
 
+import java.math.BigDecimal;
 import java.util.Random;
 
 public final class RandomUtils {
@@ -31,6 +32,15 @@ public final class RandomUtils {
 
   public static int nextSize(int startInclusive, int endInclusive) {
     return startInclusive + RANDOM.nextInt(endInclusive - startInclusive + 1);
+  }
+
+  public static BigDecimal nextNumberFromXeger(Xeger xeger) {
+    String numberStr = xeger.generate();
+
+    return new BigDecimal(numberStr);
+  }
+  public static String nextStringFromXeger(Xeger xeger) {
+    return xeger.generate();
   }
 
 }

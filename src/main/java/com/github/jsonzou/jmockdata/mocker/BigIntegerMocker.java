@@ -12,13 +12,9 @@ import java.math.BigInteger;
  * BigInteger对象模拟器
  */
 public class BigIntegerMocker implements Mocker<BigInteger> {
-
   @Override
   public BigInteger mock(DataConfig mockConfig) {
-    if(mockConfig.numberXeger()!=null){
-      return new BigInteger(mockConfig.numberXeger().generate());
-    }
-    return BigInteger.valueOf(RandomUtils.nextLong(mockConfig.longRange()[0], mockConfig.longRange()[1]));
+   return BigInteger.valueOf(mockConfig.globalConfig().getMocker(Long.class).mock(mockConfig));
   }
 
 }

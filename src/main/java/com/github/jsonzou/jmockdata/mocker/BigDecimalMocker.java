@@ -5,6 +5,7 @@ import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.Mocker;
 import com.github.jsonzou.jmockdata.util.RandomUtils;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 /**
  * BigDecimal对象模拟器
@@ -13,10 +14,7 @@ public class BigDecimalMocker implements Mocker<BigDecimal> {
 
   @Override
   public BigDecimal mock(DataConfig mockConfig) {
-    if(mockConfig.numberXeger()!=null){
-      return new BigDecimal(mockConfig.numberXeger().generate());
-    }
-    return BigDecimal.valueOf(RandomUtils.nextDouble(mockConfig.doubleRange()[0], mockConfig.doubleRange()[1]));
+    return BigDecimal.valueOf(mockConfig.globalConfig().getMocker(Double.class).mock(mockConfig));
   }
 
 }

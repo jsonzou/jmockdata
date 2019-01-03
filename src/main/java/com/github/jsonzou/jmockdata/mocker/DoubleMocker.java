@@ -14,10 +14,12 @@ public class DoubleMocker implements Mocker<Double> {
 
   @Override
   public Double mock(DataConfig mockConfig) {
+    /**
+     * 若根据正则模拟
+     */
     if(mockConfig.numberXeger()!=null){
-      return Double.valueOf(mockConfig.numberXeger().generate());
+      return RandomUtils.nextNumberFromXeger(mockConfig.numberXeger()).doubleValue();
     }
     return RandomUtils.nextDouble(mockConfig.doubleRange()[0], mockConfig.doubleRange()[1]);
   }
-
 }

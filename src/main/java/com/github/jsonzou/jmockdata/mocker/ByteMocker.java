@@ -12,6 +12,12 @@ public class ByteMocker implements Mocker<Byte> {
 
   @Override
   public Byte mock(DataConfig mockConfig) {
+    /**
+     * 若根据正则模拟
+     */
+    if(mockConfig.numberXeger()!=null){
+      return RandomUtils.nextNumberFromXeger(mockConfig.numberXeger()).byteValue();
+    }
     return (byte) RandomUtils.nextInt(mockConfig.byteRange()[0], mockConfig.byteRange()[1]);
   }
 

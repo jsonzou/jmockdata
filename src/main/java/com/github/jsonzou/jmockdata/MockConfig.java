@@ -131,13 +131,13 @@ public class MockConfig {
   }
 
 
-  public void registerMocker(Mocker mocker, Class<?>... clazzs) {
-    for (Class<?> clazz : clazzs) {
+  public <T> void registerMocker(Mocker mocker, Class<T>... clazzs) {
+    for (Class<T> clazz : clazzs) {
       mockerContext.put(clazz, mocker);
     }
   }
 
-  public Mocker getMocker(Class<?> clazz) {
+  public <T> Mocker<T> getMocker(Class<T> clazz) {
     return mockerContext.get(clazz);
   }
 
@@ -160,7 +160,7 @@ public class MockConfig {
    * 配置转路器 - 切换设置局部Class字段模拟配置
    * @return
    */
-  public DataConfig subConfig(Class<?> clazz,String... fieldNames){
+  public <T> DataConfig subConfig(Class<T> clazz,String... fieldNames){
     /**
      * fieldNames 长度为0 代表是对某各类所有字段的配置
      */
@@ -197,7 +197,7 @@ public class MockConfig {
    * @param clazz
    * @return
      */
-  public DataConfig getDataConfig(Class<?> clazz,String fieldName){
+  public <T> DataConfig getDataConfig(Class<T> clazz,String fieldName){
 
     Set<String> configKeys=partDataConfig.keySet();
     String clazzName=clazz.getName();
@@ -271,7 +271,7 @@ public class MockConfig {
   /**
    * 模拟数据排除某各类的某几个字段
    */
-  public MockConfig excludes(Class<?> clazz,String... fieldName){
+  public <T> MockConfig excludes(Class<T> clazz,String... fieldName){
     excludeConfig.put(clazz, Arrays.asList(fieldName));
     return this;
   }
@@ -288,7 +288,7 @@ public class MockConfig {
   /**
    * 判断是否排除模拟某个类
    */
-  public boolean isConfigExcludeMock(Class<?>clazz){
+  public <T> boolean isConfigExcludeMock(Class<T>clazz){
     return this.excludeConfig.get(clazz)!=null && this.excludeConfig.get(clazz).size()==0;
   }
 
@@ -296,7 +296,7 @@ public class MockConfig {
   /**
    * 判断是否排除模拟某个类的属性
    */
-  public boolean isConfigExcludeMock(Class<?>clazz,String fieldName){
+  public <T> boolean isConfigExcludeMock(Class<T>clazz,String fieldName){
     /**
      * 优先配全字段名称
      */
@@ -385,8 +385,8 @@ public class MockConfig {
 
   /**
    * 根据正则表达是模拟数字类型，
-   * 全局慎用，小数、整数、短整数等都会使用此表达式，
-   *  建议通过转路器指定特定的字段或类型使用此功能
+   * 全局慎用，小数、整数、短整数等都会使用此表达式生成，有可能会超范围，
+   * 建议通过转路器指定特定的字段或类型使用此功能
    * @param numberRegex
    * @return
      */
