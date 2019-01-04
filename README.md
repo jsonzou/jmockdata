@@ -45,7 +45,7 @@ Jmockdata插件通过随机算法模拟Java数据.
  ```
    compile group: 'com.github.jsonzou', name: 'jmockdata', version: '4.1.0'
   ```
-#### 更过已发布版本下载
+#### 更多已发布版本下载
  > [https://github.com/jsonzou/jmockdata/releases](https://github.com/jsonzou/jmockdata/releases)
  
 ## History version
