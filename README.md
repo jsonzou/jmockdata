@@ -61,7 +61,7 @@ Jmockdata插件通过随机算法模拟Java数据.
 - 4.0.0
 - 4.0.1
 - 4.1.0
-  - 从这个版本开始支持正则模拟数据，需要依赖automaton
+  - 从这个版本开始支持正则模拟数据，需要依赖[automaton](http://central.maven.org/maven2/dk/brics/automaton/automaton/1.11-8/automaton-1.11-8.jar)
    ```xml
      <dependency>
            <groupId>dk.brics.automaton</groupId>
