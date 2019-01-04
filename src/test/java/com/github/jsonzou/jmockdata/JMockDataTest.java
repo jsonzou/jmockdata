@@ -227,5 +227,4 @@ public class JMockDataTest {
     System.out.println(JSONObject.toJSONString(JMockData.mock(XgerTestDataBean.class,mockConfig),true));
 
   }
-
 }

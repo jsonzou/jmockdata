@@ -23,6 +23,7 @@ Jmockdata插件通过随机算法模拟Java数据.
 * 支持循环依赖、自依赖(手动开启enabledCircle)
 * 支持忽略字段
 * 支持改变mockConfig来自定义模拟数据策略
+* 支持自定义Mocker类
 * 支持JDK1.7+
 
 
@@ -403,6 +404,14 @@ public void testGenericData() {
     GenericData<Integer, String, BasicBean> genericData = JMockData.mock(new TypeReference<GenericData<Integer, String, BasicBean>>() {});
     assertNotNull(genericData);
   }
+```
+
+### 自定义Mocker类
+
+```java
+MockConfig mockConfig = new MockConfig()
+            .registerMocker(Mocker mocker, Class<T>... clazzs)
+
 ```
 
 
