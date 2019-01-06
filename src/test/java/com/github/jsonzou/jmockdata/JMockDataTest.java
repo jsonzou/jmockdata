@@ -234,11 +234,12 @@ public class JMockDataTest {
   @Test
   public void testDecimalScaleMock() {
     MockConfig mockConfig = new MockConfig()
-            .doubleRange(1.1d,9999.9d)
-            .floatRange(1.11111f,1.99999f)
+            .doubleRange(-1.1d,9999.99999d)
+            .floatRange(-1.11111f,9999.99999f)
             .decimalScale(3)
             .globalConfig();
     for (int i=0;i<100;i++){
+      System.out.print(JMockData.mock(BigDecimal.class,mockConfig)+" ");
       System.out.print(JMockData.mock(Double.class,mockConfig)+" ");
       System.out.println(JMockData.mock(Float.class,mockConfig)+" ");
     }
