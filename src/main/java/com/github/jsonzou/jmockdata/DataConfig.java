@@ -15,6 +15,7 @@ public class DataConfig {
     private int[] intRange = {0, 10000};
     private float[] floatRange = {0.0f, 10000.00f};
     private double[] doubleRange = {0.0, 10000.00};
+    private int decimalScale = 2;
     private long[] longRange = {0L, 10000L};
     private String[] dateRange = {"1970-01-01", "2100-12-31"};
     private int[] sizeRange = {1, 10};
@@ -62,7 +63,7 @@ public class DataConfig {
     }
 
     public DataConfig byteRange(byte min, byte max) {
-        if(min<Byte.MIN_VALUE || max >Byte.MAX_VALUE){
+        if(Math.abs(min)>Byte.MAX_VALUE || Math.abs(max) >Byte.MAX_VALUE  || min> max){
             throw new MockException("Out Of The Range Of Byte Data.");
         }
         this.byteRange[0] = min;
@@ -75,7 +76,7 @@ public class DataConfig {
     }
 
     public DataConfig shortRange(short min, short max) {
-        if(min<Short.MIN_VALUE || max >Short.MAX_VALUE){
+        if(Math.abs(min)>Short.MAX_VALUE || Math.abs(max) >Short.MAX_VALUE || min> max){
             throw new MockException("Out Of The Range Of Short Data.");
         }
         this.shortRange[0] = min;
@@ -84,7 +85,7 @@ public class DataConfig {
     }
 
     public DataConfig intRange(int min, int max) {
-        if(min<Integer.MIN_VALUE || max >Integer.MAX_VALUE){
+        if(Math.abs(min)>Integer.MAX_VALUE || Math.abs(max) >Integer.MAX_VALUE || min> max){
             throw new MockException("Out Of The Range Of Integer Data.");
         }
         this.intRange[0] = min;
@@ -93,7 +94,7 @@ public class DataConfig {
     }
 
     public DataConfig floatRange(float min, float max) {
-        if(min<Float.MIN_VALUE || max >Float.MAX_VALUE){
+        if(Math.abs(min)> Float.MAX_VALUE || Math.abs(max)> Float.MAX_VALUE || min> max){
             throw new MockException("Out Of The Range Of Float Data.");
         }
         this.floatRange[0] = min;
@@ -102,16 +103,20 @@ public class DataConfig {
     }
 
     public DataConfig doubleRange(double min, double max) {
-        if(min<Double.MIN_VALUE || max >Double.MAX_VALUE){
+        if(Math.abs(min)> Double.MAX_VALUE || Math.abs(max) >Double.MAX_VALUE || min> max){
             throw new MockException("Out Of The Range Of Double Data.");
         }
         this.doubleRange[0] = min;
         this.doubleRange[1] = max;
         return this;
     }
+    public DataConfig decimalScale(int scale) {
+        this.decimalScale = scale;
+        return this;
+    }
 
     public DataConfig longRange(long min, long max) {
-        if(min<Long.MIN_VALUE || max >Long.MAX_VALUE){
+        if(Math.abs(min)> Long.MAX_VALUE || Math.abs(max) >Long.MAX_VALUE || min> max){
             throw new MockException("Out Of The Range Of Long Data.");
         }
         this.longRange[0] = min;
@@ -126,7 +131,7 @@ public class DataConfig {
     }
 
     public DataConfig sizeRange(int min, int max) {
-        if(min<Integer.MIN_VALUE || max >Integer.MAX_VALUE){
+        if(Math.abs(min)> Integer.MAX_VALUE || Math.abs(max) >Integer.MAX_VALUE || min> max){
             throw new MockException("The Size Is Out Of The Range Of Integer Data.");
         }
         this.sizeRange[0] = min;
@@ -177,7 +182,9 @@ public class DataConfig {
     public double[] doubleRange() {
         return this.doubleRange;
     }
-
+    public int decimalScale() {
+        return this.decimalScale;
+    }
     public long[] longRange() {
         return this.longRange;
     }

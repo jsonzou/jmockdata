@@ -358,7 +358,10 @@ public class MockConfig {
      GLOBAL_DATA_CONFIG.doubleRange(min,max);
      return this;
   }
-
+  public MockConfig decimalScale(int scale) {
+    GLOBAL_DATA_CONFIG.decimalScale(scale);
+    return this;
+  }
   public MockConfig longRange(long min, long max) {
     GLOBAL_DATA_CONFIG.longRange(min,max);
     return this;
@@ -432,7 +435,9 @@ public class MockConfig {
   public double[] doubleRange() {
     return GLOBAL_DATA_CONFIG.doubleRange();
   }
-
+  public int decimalScale() {
+    return GLOBAL_DATA_CONFIG.decimalScale();
+  }
   public long[] longRange() {
     return GLOBAL_DATA_CONFIG.longRange();
   }

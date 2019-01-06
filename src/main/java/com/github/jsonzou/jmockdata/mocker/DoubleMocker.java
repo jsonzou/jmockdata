@@ -18,8 +18,8 @@ public class DoubleMocker implements Mocker<Double> {
      * 若根据正则模拟
      */
     if(mockConfig.numberXeger()!=null){
-      return RandomUtils.nextNumberFromXeger(mockConfig.numberXeger()).doubleValue();
+      return RandomUtils.nextNumberFromXeger(mockConfig.numberXeger()).setScale(mockConfig.decimalScale(),BigDecimal.ROUND_FLOOR).doubleValue();
     }
-    return RandomUtils.nextDouble(mockConfig.doubleRange()[0], mockConfig.doubleRange()[1]);
+    return new BigDecimal(RandomUtils.nextDouble(mockConfig.doubleRange()[0], mockConfig.doubleRange()[1])).setScale(mockConfig.decimalScale(),BigDecimal.ROUND_FLOOR).doubleValue();
   }
 }
