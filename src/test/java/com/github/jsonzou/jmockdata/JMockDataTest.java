@@ -236,7 +236,7 @@ public class JMockDataTest {
     MockConfig mockConfig = new MockConfig()
             .doubleRange(-1.1d,9999.99999d)
             .floatRange(-1.11111f,9999.99999f)
-            .decimalScale(3)
+            .decimalScale(3) // 设置小数位数为3，默认是2
             .globalConfig();
     for (int i=0;i<100;i++){
       System.out.print(JMockData.mock(BigDecimal.class,mockConfig)+" ");

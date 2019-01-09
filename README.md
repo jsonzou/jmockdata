@@ -30,20 +30,20 @@ Jmockdata插件通过随机算法模拟Java数据.
 ## Download
 
 > 
-### _Jmockdata-4.1.0_
+### _Jmockdata-4.1.1_
 #### Jar
-> [Jmockdata-4.1.0](http://repo.maven.apache.org/maven2/com/github/jsonzou/jmockdata/4.1.0/jmockdata-4.1.0.jar)
+> [Jmockdata-4.1.1](http://repo.maven.apache.org/maven2/com/github/jsonzou/jmockdata/4.1.1/jmockdata-4.1.1.jar)
 #### Maven
  ```
    <dependency>
       <groupId>com.github.jsonzou</groupId>
       <artifactId>jmockdata</artifactId>
-      <version>4.1.0</version>
+      <version>4.1.1</version>
     </dependency>
   ```
 #### Gradle
  ```
-   compile group: 'com.github.jsonzou', name: 'jmockdata', version: '4.1.0'
+   compile group: 'com.github.jsonzou', name: 'jmockdata', version: '4.1.1'
   ```
 #### 更多已发布版本下载
  > [https://github.com/jsonzou/jmockdata/releases](https://github.com/jsonzou/jmockdata/releases)
@@ -304,6 +304,17 @@ MockConfig mockConfig = new MockConfig()
 ```
 
 ## 高级特性
+### 设置小数位数
+```java
+ public void testDecimalScaleMock() {
+    MockConfig mockConfig = new MockConfig()
+            .doubleRange(-1.1d,9999.99999d)
+            .floatRange(-1.11111f,9999.99999f)
+            .decimalScale(3) // 设置小数位数为3，默认是2
+            .globalConfig();
+    JMockData.mock(BigDecimal.class,mockConfig);
+  }
+ ```
 
 ### 根据正则模拟数据
 
