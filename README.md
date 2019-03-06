@@ -425,7 +425,7 @@ public void testGenericData() {
   }
 ```
 
-### 自定义Mocker类
+### 自定义Mocker类注册
 
 ```java
 MockConfig mockConfig = new MockConfig()
