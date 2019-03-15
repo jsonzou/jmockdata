@@ -11,8 +11,6 @@ import com.github.jsonzou.jmockdata.bean.circular.AXB;
 import com.github.jsonzou.jmockdata.bean.enums.DayEnum;
 import com.github.jsonzou.jmockdata.bean.enums.ErrorEnum;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
@@ -50,6 +48,7 @@ public class JMockDataTest {
       JMockData.mock(ErrorEnum.class);
       fail();
     } catch (Exception e) {
+      // Ignore
     }
   }
 
@@ -62,6 +61,7 @@ public class JMockDataTest {
       JMockData.mock(ErrorBean.class);
       fail();
     } catch (Exception e) {
+      // Ignore
     }
   }
 
@@ -140,6 +140,7 @@ public class JMockDataTest {
       JMockData.mock(BasicBean.class, new MockConfig().dateRange("20100101", "20301230"));
       fail();
     } catch (Exception e) {
+      // Ignore
     }
   }
 
@@ -203,28 +204,28 @@ public class JMockDataTest {
   public void testXegerMock() {
     MockConfig mockConfig = new MockConfig()
             // 随机段落字符串
-            .stringXeger("I'am a nice man\\.And I'll just scribble the characters, like：([0-9a-zA-Z]{3,5} {1}[0-9a-zA-Z]{3,5}){10,20}")
-            // 邮箱 name@sit.com|sit.cn|sit.com.cn
-            .subConfig(XgerTestDataBean.class,"userEmail")
-            .stringXeger("[a-z0-9]{5,15}\\@(qq|163|sina)\\.(com|cn|com\\.cn)")
+            .stringRegex("I'am a nice man\\.And I'll just scribble the characters, like：[0-9a-zA-Z]{3,5}[0-9a-zA-Z]{10,20}")
+            // 邮箱
+            .subConfig(RegexTestDataBean.class,"userEmail")
+            .stringRegex("[a-z0-9]{5,15}\\@\\w{3,5}\\.[a-z]{2,3}")
             // 用户名规则
-            .subConfig(XgerTestDataBean.class,"userName")
-            .stringXeger("[a-zA-Z_]{1}[a-z0-9_]{5,15}")
-            // 年龄1-99
-            .subConfig(XgerTestDataBean.class,"userAge")
-            .numberXeger("[1-9]{1}[0-9]?")
-            // 用户现金11 - 99.99
-            .subConfig(XgerTestDataBean.class,"userMoney")
-            .numberXeger("[1-9]{2}(\\.[0-9]{2})?")
-            // 用户的得分 10 - 100
-            .subConfig(XgerTestDataBean.class,"userScore")
-            .numberXeger("([1-9]{1}([0-9]{1})?|0|100)")
-            // 用户身价 1000 - 9999999999.99
-            .subConfig(XgerTestDataBean.class,"userValue")
-            .numberXeger("[1-9]{1}([0-9]{3,9})(\\.[0-9]{2})?")
+            .subConfig(RegexTestDataBean.class,"userName")
+            .stringRegex("[a-zA-Z_]{1}[a-z0-9_]{5,15}")
+            // 年龄
+            .subConfig(RegexTestDataBean.class,"userAge")
+            .numberRegex("[1-9]{1}[0-9]?")
+            // 用户现金
+            .subConfig(RegexTestDataBean.class,"userMoney")
+            .numberRegex("[1-9]{2}\\.[0-9]?")
+            // 用户的得分
+            .subConfig(RegexTestDataBean.class,"userScore")
+            .numberRegex("[1-9]{1}[0-9]{1}")
+            // 用户身价
+            .subConfig(RegexTestDataBean.class,"userValue")
+            .numberRegex("[1-9]{1}[0-9]{3,8}")
             .globalConfig();
 
-    System.out.println(JSONObject.toJSONString(JMockData.mock(XgerTestDataBean.class,mockConfig),true));
+    System.out.println(JSONObject.toJSONString(JMockData.mock(RegexTestDataBean.class,mockConfig),true));
 
   }
 
@@ -244,4 +245,26 @@ public class JMockDataTest {
       System.out.println(JMockData.mock(Float.class,mockConfig)+" ");
     }
   }
+
+  /**
+   * 测试无域对象
+   */
+  @Test
+  public void testNoneFieldBeanMock() {
+    NoneFieldObject noneFieldObject = JMockData.mock(NoneFieldObject.class);
+    System.out.println(noneFieldObject);
+  }
+
+  /**
+   * 测试无域对象
+   */
+  @Test
+  public void testInnerBeanMock() {
+    InnerBeanObject innerBeanObject = JMockData.mock(InnerBeanObject.class);
+    InnerBeanObject.InnerBean innerBean = JMockData.mock(InnerBeanObject.InnerBean.class);
+    System.out.println(innerBeanObject);
+    System.out.println(innerBean);
+  }
+
+
 }

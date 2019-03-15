@@ -1,7 +1,5 @@
 package com.github.jsonzou.jmockdata;
 
-import com.github.jsonzou.jmockdata.util.Xeger;
-
 /**
  * @Author: jsonzou
  * @Date: 2018/10/29 13:24
@@ -31,8 +29,6 @@ public class DataConfig {
 
     private String numberRegex = null;
     private String stringRegex = null;
-    private Xeger numberXeger = null;
-    private Xeger stringXeger = null;
 
     public DataConfig(MockConfig config) {
         this.config = config;
@@ -148,14 +144,21 @@ public class DataConfig {
         this.charSeed = charSeed;
         return this;
     }
+    @Deprecated
     public DataConfig numberXeger(String numberRegex) {
+       return numberRegex(numberRegex);
+    }
+    @Deprecated
+    public DataConfig stringXeger(String stringRegex) {
+        return stringRegex(stringRegex);
+    }
+
+    public DataConfig numberRegex(String numberRegex) {
         this.numberRegex = numberRegex;
-        this.numberXeger = new Xeger(numberRegex);
         return this;
     }
-    public DataConfig stringXeger(String stringRegex) {
+    public DataConfig stringRegex(String stringRegex) {
         this.stringRegex = stringRegex;
-        this.stringXeger = new Xeger(stringRegex);
         return this;
     }
 
@@ -204,11 +207,11 @@ public class DataConfig {
     public char[] charSeed() {
         return this.charSeed;
     }
-    public Xeger numberXeger() {
-       return this.numberXeger ;
+    public String numberRegex() {
+       return this.numberRegex ;
     }
-    public Xeger stringXeger() {
-       return this.stringXeger ;
+    public String stringRegex() {
+       return this.stringRegex ;
     }
 
 }

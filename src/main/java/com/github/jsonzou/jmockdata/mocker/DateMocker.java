@@ -1,7 +1,6 @@
 package com.github.jsonzou.jmockdata.mocker;
 
 import com.github.jsonzou.jmockdata.DataConfig;
-import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.MockException;
 import com.github.jsonzou.jmockdata.Mocker;
 import com.github.jsonzou.jmockdata.util.DateTool;

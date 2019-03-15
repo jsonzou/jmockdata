@@ -1,13 +1,24 @@
 package com.github.jsonzou.jmockdata.util;
 
+import com.github.jsonzou.jmockdata.util.randomstring.RandomStringGenerator;
+
 import java.math.BigDecimal;
 import java.util.Random;
 
 public final class RandomUtils {
 
-  private final static Random RANDOM = new Random();
+  private final static Random RANDOM;
+  private final static RandomStringGenerator REGEX_GENERATOR;
 
+  /**
+   * Init The Random & Regex Generator
+   */
+  static{
+    RANDOM = new Random();
+    REGEX_GENERATOR = new RandomStringGenerator(RANDOM,8);
+  }
   private RandomUtils() {
+
   }
 
   public static boolean nextBoolean() {
@@ -34,13 +45,12 @@ public final class RandomUtils {
     return startInclusive + RANDOM.nextInt(endInclusive - startInclusive + 1);
   }
 
-  public static BigDecimal nextNumberFromXeger(Xeger xeger) {
-    String numberStr = xeger.generate();
-
+  public static BigDecimal nextNumberFromRegex(String regex) {
+    String numberStr = REGEX_GENERATOR.generateByRegex(regex);
     return new BigDecimal(numberStr);
   }
-  public static String nextStringFromXeger(Xeger xeger) {
-    return xeger.generate();
+  public static String nextStringFromRegex(String regex) {
+    return REGEX_GENERATOR.generateByRegex(regex);
   }
 
 }

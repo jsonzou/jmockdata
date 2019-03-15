@@ -4,7 +4,6 @@ package com.github.jsonzou.jmockdata;
 import com.github.jsonzou.jmockdata.annotation.MockIgnore;
 import com.github.jsonzou.jmockdata.mocker.*;
 import com.github.jsonzou.jmockdata.util.FieldMatchingResolver;
-import com.github.jsonzou.jmockdata.util.Xeger;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -393,8 +392,13 @@ public class MockConfig {
    * @param numberRegex
    * @return
      */
+  @Deprecated
   public MockConfig numberXeger(String numberRegex) {
     GLOBAL_DATA_CONFIG.numberXeger(numberRegex);
+    return this;
+  }
+  public MockConfig numberRegex(String numberRegex) {
+    GLOBAL_DATA_CONFIG.numberRegex(numberRegex);
     return this;
   }
 
@@ -403,8 +407,13 @@ public class MockConfig {
    * @param stringRegex
    * @return
      */
+  @Deprecated
   public MockConfig stringXeger(String stringRegex) {
     GLOBAL_DATA_CONFIG.stringXeger(stringRegex);
+    return this;
+  }
+  public MockConfig stringRegex(String stringRegex) {
+    GLOBAL_DATA_CONFIG.stringRegex(stringRegex);
     return this;
   }
   /**
@@ -458,11 +467,11 @@ public class MockConfig {
     return GLOBAL_DATA_CONFIG.charSeed();
   }
 
-  public Xeger numberXeger() {
-    return GLOBAL_DATA_CONFIG.numberXeger() ;
+  public String numberRegex() {
+    return GLOBAL_DATA_CONFIG.numberRegex() ;
   }
-  public Xeger stringXeger() {
-    return GLOBAL_DATA_CONFIG.stringXeger() ;
+  public String stringRegex() {
+    return GLOBAL_DATA_CONFIG.stringRegex() ;
   }
 
 }

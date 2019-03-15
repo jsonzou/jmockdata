@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  * @Date: 2018/12/29 15:53
  * @Description:
  */
-public class XgerTestDataBean {
+public class RegexTestDataBean {
     private String userEmail;
     private String userName;
     private String someThineDesc;
