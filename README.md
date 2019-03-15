@@ -30,46 +30,39 @@ Jmockdata插件通过随机算法模拟Java数据.
 ## Download
 
 > 
-### _Jmockdata-4.1.1_
+### _Jmockdata-4.1.2_
 #### Jar
-> [Jmockdata-4.1.1](http://repo.maven.apache.org/maven2/com/github/jsonzou/jmockdata/4.1.1/jmockdata-4.1.1.jar)
+> [Jmockdata-4.1.2](http://repo.maven.apache.org/maven2/com/github/jsonzou/jmockdata/4.1.2/jmockdata-4.1.2.jar)
 #### Maven
  ```
    <dependency>
       <groupId>com.github.jsonzou</groupId>
       <artifactId>jmockdata</artifactId>
-      <version>4.1.1</version>
+      <version>4.1.2</version>
     </dependency>
   ```
 #### Gradle
  ```
-   compile group: 'com.github.jsonzou', name: 'jmockdata', version: '4.1.1'
+   compile group: 'com.github.jsonzou', name: 'jmockdata', version: '4.1.2'
   ```
 #### 更多已发布版本下载
  > [https://github.com/jsonzou/jmockdata/releases](https://github.com/jsonzou/jmockdata/releases)
  
 ## History version
-- 1.0
-- 2.0
-- 2.1
-- 2.2
-- 2.3
-- 2.4
-- 3.0.0
-- 3.0.1
-- 3.1.0
-- 4.0.0
-- 4.0.1
-- 4.1.0
-  - 从这个版本开始支持正则模拟数据，需要依赖[automaton](http://central.maven.org/maven2/dk/brics/automaton/automaton/1.11-8/automaton-1.11-8.jar)(点击下载jar包)
-   ```xml
-     <dependency>
-           <groupId>dk.brics.automaton</groupId>
-           <artifactId>automaton</artifactId>
-           <version>1.11-8</version>
-     </dependency>
-   ```
-- 4.1.1
+- [1.0](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-1.0-RELEASE)
+- [2.0](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-2.0-RELEASE)
+- [2.1](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-2.1-RELEASE)
+- [2.2](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-2.2-RELEASE)
+- [2.3](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-2.3-RELEASE)
+- [2.4](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-2.4-RELEASE)
+- [3.0.0](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-3.0.0-RELEASE)
+- [3.0.1](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-3.0.1-RELEASE)
+- [3.1.0](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-3.1.0-RELEASE)
+- [4.0.0](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-4.0.0-RELEASE)
+- [4.0.1](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-4.0.1-RELEASE)
+- [4.1.0](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-4.1.0-RELEASE)
+- [4.1.1](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-4.1.1-RELEASE)
+- [4.1.2](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-4.1.2-RELEASE)
 
 ## Usage 
 
@@ -317,6 +310,12 @@ MockConfig mockConfig = new MockConfig()
  ```
 
 ### 根据正则模拟数据
+#### 支持\w \W \d \D \s \S
+#### 支持\[0-9a-zA-Z\] \[abc123_\]
+#### 支持{n} {n,} {n,m}
+#### 支持 * + . ?
+#### 不支持其他，如() ^ $ | \n \t \cx \b \B \f 等等
+
 
 ```java
 
@@ -325,29 +324,29 @@ MockConfig mockConfig = new MockConfig()
     * 正则优先于其他规则
     */
    @Test
-   public void testXegerMock() {
+   public void testRegexMock() {
      MockConfig mockConfig = new MockConfig()
-             // 随机段落字符串
-             .stringXeger("I'am a nice man\\.And I'll just scribble the characters, like：([0-9a-zA-Z]{3,5} {1}[0-9a-zA-Z]{3,5}){10,20}")
-             // 邮箱 name@sit.com|sit.cn|sit.com.cn
-             .subConfig(XgerTestDataBean.class,"userEmail")
-             .stringXeger("[a-z0-9]{5,15}\\@(qq|163|sina)\\.(com|cn|com\\.cn)")
-             // 用户名规则
-             .subConfig(XgerTestDataBean.class,"userName")
-             .stringXeger("[a-zA-Z_]{1}[a-z0-9_]{5,15}")
-             // 年龄1-99
-             .subConfig(XgerTestDataBean.class,"userAge")
-             .numberXeger("[1-9]{1}[0-9]?")
-             // 用户现金11 - 99.99
-             .subConfig(XgerTestDataBean.class,"userMoney")
-             .numberXeger("[1-9]{2}(\\.[0-9]{2})?")
-             // 用户的得分 10 - 100
-             .subConfig(XgerTestDataBean.class,"userScore")
-             .numberXeger("([1-9]{1}([0-9]{1})?|0|100)")
-             // 用户身价 1000 - 9999999999.99
-             .subConfig(XgerTestDataBean.class,"userValue")
-             .numberXeger("[1-9]{1}([0-9]{3,9})(\\.[0-9]{2})?")
-             .globalConfig();
+                 // 随机段落字符串
+                 .stringRegex("I'am a nice man\\.And I'll just scribble the characters, like：[0-9a-zA-Z]{3,5}[0-9a-zA-Z]{10,20}")
+                 // 邮箱
+                 .subConfig(RegexTestDataBean.class,"userEmail")
+                 .stringRegex("[a-z0-9]{5,15}\\@\\w{3,5}\\.[a-z]{2,3}")
+                 // 用户名规则
+                 .subConfig(RegexTestDataBean.class,"userName")
+                 .stringRegex("[a-zA-Z_]{1}[a-z0-9_]{5,15}")
+                 // 年龄
+                 .subConfig(RegexTestDataBean.class,"userAge")
+                 .numberRegex("[1-9]{1}[0-9]?")
+                 // 用户现金
+                 .subConfig(RegexTestDataBean.class,"userMoney")
+                 .numberRegex("[1-9]{2}\\.[0-9]?")
+                 // 用户的得分
+                 .subConfig(RegexTestDataBean.class,"userScore")
+                 .numberRegex("[1-9]{1}[0-9]{1}")
+                 // 用户身价
+                 .subConfig(RegexTestDataBean.class,"userValue")
+                 .numberRegex("[1-9]{1}[0-9]{3,8}")
+                 .globalConfig();
 
    }
 
