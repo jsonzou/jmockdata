@@ -327,7 +327,7 @@ MockConfig mockConfig = new MockConfig()
    public void testRegexMock() {
      MockConfig mockConfig = new MockConfig()
                  // 随机段落字符串
-                 .stringRegex("I'am a nice man\\.And I'll just scribble the characters, like：[0-9a-zA-Z]{3,5}[0-9a-zA-Z]{10,20}")
+                 .stringRegex("I'am a nice man\\.And I'll just scribble the characters, like：[a-z]{2}-[0-9]{2}-[abc123]{2}-\\w{2}-\\d{2}@\\s{1}-\\S{1}\\.?-.")
                  // 邮箱
                  .subConfig(RegexTestDataBean.class,"userEmail")
                  .stringRegex("[a-z0-9]{5,15}\\@\\w{3,5}\\.[a-z]{2,3}")
@@ -336,16 +336,16 @@ MockConfig mockConfig = new MockConfig()
                  .stringRegex("[a-zA-Z_]{1}[a-z0-9_]{5,15}")
                  // 年龄
                  .subConfig(RegexTestDataBean.class,"userAge")
-                 .numberRegex("[1-9]{1}[0-9]?")
+                 .numberRegex("[1-9]{1}\\d?")
                  // 用户现金
                  .subConfig(RegexTestDataBean.class,"userMoney")
-                 .numberRegex("[1-9]{2}\\.[0-9]?")
+                 .numberRegex("[1-9]{2}\\.\\d?")
                  // 用户的得分
                  .subConfig(RegexTestDataBean.class,"userScore")
-                 .numberRegex("[1-9]{1}[0-9]{1}")
+                 .numberRegex("[1-9]{1}\\d{1}")
                  // 用户身价
                  .subConfig(RegexTestDataBean.class,"userValue")
-                 .numberRegex("[1-9]{1}[0-9]{3,8}")
+                 .numberRegex("[1-9]{1}\\d{3,8}")
                  .globalConfig();
 
    }
