@@ -265,6 +265,14 @@ public class JMockDataTest {
     System.out.println(innerBeanObject);
     System.out.println(innerBean);
   }
+  /**
+   * 测试Lombok对象
+   */
+  @Test
+  public void testLombokBeanMock() {
+    LombokBean lombokBean = JMockData.mock(LombokBean.class);
+    System.out.println(JSON.toJSONString(lombokBean,true));
+  }
 
 
 }
