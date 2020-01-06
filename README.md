@@ -1,3 +1,6 @@
+开源项目不容易，如果觉得本项目对您的工作还是有帮助的话，请在帮忙
+<img src="https://img.shields.io/github/stars/jsonzou/jmockdata.svg?style=flat-square&amp;label=Stars&amp;logo=github" alt="github star">
+
 # Jmockdata
 [![Build Status](https://www.travis-ci.org/jsonzou/jmockdata.svg?branch=master)](https://www.travis-ci.org/jsonzou/jmockdata)
 [![Coverage Status](https://coveralls.io/repos/github/jsonzou/jmockdata/badge.svg)](https://coveralls.io/github/jsonzou/jmockdata)
