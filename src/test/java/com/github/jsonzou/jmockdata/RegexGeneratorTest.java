@@ -59,5 +59,14 @@ public class RegexGeneratorTest {
             assertTrue(text.matches(regex));
         }
     }
+    @Test
+    public void shouldAllPattern2() {
+        String regex = "[a-z]{2}\\.[0-9]{2}\\.[A-Z]{2}";
+        for (int i = 0; i < 100; i++) {
+            String text = RandomUtils.nextStringFromRegex(regex);
+            System.out.println(text);
+            assertTrue(text.matches(regex));
+        }
+    }
 
 }
