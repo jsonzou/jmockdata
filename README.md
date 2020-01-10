@@ -7,7 +7,7 @@
 [![License](http://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 
-Jmockdta是一款实现模拟JAVA类型或对象的实例化并随机初始化对象的数据的工具框架。单元测试的利器。
+Jmockdta是一款实现模拟JAVA类型或对象的实例化并随机初始化对象的数据的工具框架。
 
 ![mark](http://p1wz9nw0p.bkt.clouddn.com/blog/180118/0DaEC98Kib.png?imageslim)
 
@@ -26,26 +26,26 @@ Jmockdata插件通过随机算法模拟Java数据.
 * 支持忽略字段
 * 支持改变mockConfig来自定义模拟数据策略
 * 支持自定义Mocker类
-* 支持JDK1.7+
+* 支持JDK1.8+
 
 
 ## Download
 
 > 
-### _Jmockdata-4.1.2_
+### _Jmockdata-4.2.0_
 #### Jar
-> [Jmockdata-4.1.2](http://repo.maven.apache.org/maven2/com/github/jsonzou/jmockdata/4.1.2/jmockdata-4.1.2.jar)
+> [Jmockdata-4.2.0](http://repo.maven.apache.org/maven2/com/github/jsonzou/jmockdata/4.2.0/jmockdata-4.2.0.jar)
 #### Maven
  ```
    <dependency>
       <groupId>com.github.jsonzou</groupId>
       <artifactId>jmockdata</artifactId>
-      <version>4.1.2</version>
+      <version>4.2.0</version>
     </dependency>
   ```
 #### Gradle
  ```
-   compile group: 'com.github.jsonzou', name: 'jmockdata', version: '4.1.2'
+   compile group: 'com.github.jsonzou', name: 'jmockdata', version: '4.2.0'
   ```
 #### 更多已发布版本下载
  > [https://github.com/jsonzou/jmockdata/releases](https://github.com/jsonzou/jmockdata/releases)
@@ -65,6 +65,7 @@ Jmockdata插件通过随机算法模拟Java数据.
 - [4.1.0](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-4.1.0-RELEASE)
 - [4.1.1](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-4.1.1-RELEASE)
 - [4.1.2](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-4.1.2-RELEASE)
+- [4.2.0](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-4.2.0-RELEASE)
 
 ## Usage 
 
@@ -76,8 +77,8 @@ Jmockdata插件通过随机算法模拟Java数据.
 | ------ | ---------------------------------------- |
 | 基础类型   | ```byte```     ```boolean```     ```char```     ```short```     ```int```     ```long```     ```float```     ```double``` |
 | 包装类型包装 | ```Byte```     ```Boolean```     ```Character```     ```Short```     ```Integer```     ```Long```     ```Float```     ```Double``` |
-| 常用类型   | ```BigDecimal```        ```BigInteger```        ```Date```        ```String```      枚举 |
-| 多维数组   | 以上所有类型的多维数组  如：```int[]```      ```int[][]```  ```int[][][]```  .... 等 |
+| 常用类型   | ```BigDecimal```        ```BigInteger```        ```Date```         ```LocalDateTime```        ```LocalDate```        ```LocalTime```        ```java.sql.Timestamp```       ```String```        ```Enum``` |
+| 多维数组   | 以上所有类型的多维数组  如：```int[]```      ```int[][]```  ```int[][][]```  .... etc. |
 
 ```java
 //基本类型模拟
@@ -94,7 +95,7 @@ String str = JMockData.mock(String.class);
 
 ### JAVA对象
 
-模拟bean，被模拟的数据必须是plain bean，底层采用了java自带的内省方法来获取字段和对应的setter方法。
+模拟bean，被模拟的数据最好是plain bean，通过反射给属性赋值。
 
 支持模拟继承而来的属性。
 
@@ -243,7 +244,7 @@ public class BasicBean {
 //调用模拟数据的方法模拟Java对象
 BasicBean basicBean = JMockData.mock(BasicBean.class);
 ```
-### 任意类型（LIST,SET,MAP）
+### 容器类型（LIST,SET,MAP）
 
 ```java
 @Test
@@ -433,5 +434,4 @@ MockConfig mockConfig = new MockConfig()
             .registerMocker(Mocker mocker, Class<T>... clazzs)
 
 ```
-
 
