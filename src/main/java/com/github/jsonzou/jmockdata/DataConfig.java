@@ -37,7 +37,7 @@ public class DataConfig {
 
     /**
      * 配置转路器 - 设置全局配置
-     * @return
+     * @return MockConfig
      */
     public MockConfig globalConfig(){
         return this.config;
@@ -45,7 +45,7 @@ public class DataConfig {
 
     /**
      * 配置转路器 - 切换设置全局字段模拟配置
-     * @return
+     * @return DataConfig
      */
     public DataConfig subConfig(String... fieldNames){
         return this.config.subConfig(fieldNames);
@@ -53,7 +53,7 @@ public class DataConfig {
 
     /**
      * 配置转路器 - 设置局部配置
-     * @return
+     * @return DataConfig
      */
     public DataConfig subConfig(Class<?> clazz,String... fieldName){
         return this.config.subConfig(clazz,fieldName);

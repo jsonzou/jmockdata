@@ -92,7 +92,7 @@ public class MockConfig {
 
   /**
    * 提供实例化工厂
-   * @return
+   * @return MockConfig
      */
   public static MockConfig newInstance(){
     return new MockConfig();
@@ -154,7 +154,7 @@ public class MockConfig {
 
   /**
    * 配置转路器 - 切换设置全局配置
-   * @return
+   * @return MockConfig
      */
   public MockConfig globalConfig(){
     return this;
@@ -162,14 +162,14 @@ public class MockConfig {
 
   /**
    * 配置转路器 - 切换设置全局字段模拟配置
-   * @return
+   * @return DataConfig
    */
   public DataConfig subConfig(String... fieldNames){
     return this.subConfig(DataConfig.class,fieldNames);
   }
   /**
    * 配置转路器 - 切换设置局部Class字段模拟配置
-   * @return
+   * @return DataConfig
    */
   public <T> DataConfig subConfig(Class<T> clazz,String... fieldNames){
     /**
@@ -206,7 +206,7 @@ public class MockConfig {
   /**
    * 获取指定配置，如果没有则返回全局配置
    * @param clazz
-   * @return
+   * @return DataConfig
      */
   public <T> DataConfig getDataConfig(Class<T> clazz,String fieldName){
 
@@ -274,7 +274,7 @@ public class MockConfig {
   }
   /**
    * 获取全局配置
-   * @return
+   * @return DataConfig
    */
   public DataConfig globalDataConfig(){
     return this.GLOBAL_DATA_CONFIG;
@@ -290,7 +290,7 @@ public class MockConfig {
   /**
    * 模拟数据全局排除某些字段名
    * @param fieldNames
-   * @return
+   * @return MockConfig
      */
   public MockConfig excludes(String... fieldNames){
     excludeConfig.put(MockIgnore.class, Arrays.asList(fieldNames));
@@ -406,7 +406,7 @@ public class MockConfig {
    * 全局慎用，小数、整数、短整数等都会使用此表达式生成，有可能会超范围，
    * 建议通过转路器指定特定的字段或类型使用此功能
    * @param numberRegex
-   * @return
+   * @return MockConfig
      */
   @Deprecated
   public MockConfig numberXeger(String numberRegex) {
@@ -421,7 +421,7 @@ public class MockConfig {
   /**
    * 根据正则表达是模拟字符串类型，
    * @param stringRegex
-   * @return
+   * @return MockConfig
      */
   @Deprecated
   public MockConfig stringXeger(String stringRegex) {

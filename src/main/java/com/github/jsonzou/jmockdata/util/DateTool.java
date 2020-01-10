@@ -49,7 +49,7 @@ public class DateTool {
      * 日期字符串+日期字符串日期格式 转换为日期对象
      * @param dateStr
      * @param format
-     * @return
+     * @return Date
      * @throws ParseException
      */
     public static Date getString2Date(String dateStr,String format) throws ParseException {
@@ -59,7 +59,7 @@ public class DateTool {
     /**
      * 日期字符串自动转换为日期对象
      * @param dateStr
-     * @return
+     * @return Date
      * @throws ParseException
      */
     public static Date getString2DateAuto(String dateStr) throws ParseException {
@@ -70,7 +70,7 @@ public class DateTool {
     /**
      * 自动适配日期字符串的日期格式描述符
      * @param dateStr
-     * @return
+     * @return String
      */
     public static String getDateFormat(String dateStr){
         for (DatePattern dt:DatePattern.values()){

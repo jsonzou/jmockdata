@@ -14,7 +14,7 @@ public class FieldMatchingResolver {
      *    [FieldWord*]
      * @param fieldName
      * @param fieldPattern
-     * @return
+     * @return boolean
      */
     public static boolean isMatchPattern(String fieldName,String fieldPattern){
         boolean match=false;
