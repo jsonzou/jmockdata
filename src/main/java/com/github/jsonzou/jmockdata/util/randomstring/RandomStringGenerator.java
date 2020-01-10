@@ -129,38 +129,6 @@ public class RandomStringGenerator {
       sb.append(picker.pickRandomLetter());
     }
     return sb.toString();
-    /**
-     * Just Support JDK1.7+
-     */
-//    return Arrays.stream(pattern.split("")).map(patternCharacter -> {
-//      RandomLetterPicker picker;
-//      switch (patternCharacter) {
-//        case "c":
-//          picker = pickers.getLowerCase();
-//          break;
-//        case "C":
-//          picker = pickers.getUpperCase();
-//          break;
-//        case "n":
-//          picker = pickers.getDigit();
-//          break;
-//        case "!":
-//          picker = pickers.getSymbol();
-//          break;
-//        case ".":
-//          picker = pickers.getAny();
-//          break;
-//        case "s":
-//          picker = pickers.getSalt();
-//          break;
-//        case "b":
-//          picker = pickers.getBinary();
-//          break;
-//        default:
-//          throw new RuntimeException("Detected invalid pattern character: " + patternCharacter);
-//      }
-//      return picker.pickRandomLetter();
-//    }).collect(Collectors.joining());
   }
 
   /**

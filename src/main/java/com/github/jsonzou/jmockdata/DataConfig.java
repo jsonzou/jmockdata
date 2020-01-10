@@ -16,6 +16,7 @@ public class DataConfig {
     private int decimalScale = 2;
     private long[] longRange = {0L, 10000L};
     private String[] dateRange = {"1970-01-01", "2100-12-31"};
+    private int[] timeRange = {0,24,0,60,0,60};
     private int[] sizeRange = {1, 10};
 
     private char[] charSeed =
@@ -125,6 +126,15 @@ public class DataConfig {
         this.dateRange[1] = max;
         return this;
     }
+    public DataConfig timeRange(int minHour, int maxHour, int minMinute, int maxMinute, int minSecond, int maxSecond) {
+        this.timeRange[0] = minHour;
+        this.timeRange[1] = maxHour;
+        this.timeRange[2] = minMinute;
+        this.timeRange[3] = maxMinute;
+        this.timeRange[4] = minSecond;
+        this.timeRange[5] = maxSecond;
+        return this;
+    }
 
     public DataConfig sizeRange(int min, int max) {
         if(Math.abs(min)> Integer.MAX_VALUE || Math.abs(max) >Integer.MAX_VALUE || min> max){
@@ -194,6 +204,9 @@ public class DataConfig {
 
     public String[] dateRange() {
         return  this.dateRange;
+    }
+    public int[] timeRange() {
+        return  this.timeRange;
     }
 
     public int[] sizeRange() {

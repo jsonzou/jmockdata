@@ -10,6 +10,10 @@ import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 
 /**
@@ -29,6 +33,10 @@ public class MockConfig {
   private static final BigDecimalMocker BIG_DECIMAL_MOCKER = new BigDecimalMocker();
   private static final StringMocker STRING_MOCKER = new StringMocker();
   private static final DateMocker DATE_MOCKER = new DateMocker();
+  private static final LocalDateTimeMocker LOCAL_DATE_TIME_MOCKER = new LocalDateTimeMocker();
+  private static final LocalDateMocker LOCAL_DATE_MOCKER = new LocalDateMocker();
+  private static final LocalTimeMocker LOCAL_TIME_MOCKER = new LocalTimeMocker();
+  private static final TimestampMocker TIMESTAMP_MOCKER = new TimestampMocker();
   private boolean enabledCircle=false;
 
   /**
@@ -76,6 +84,10 @@ public class MockConfig {
     registerMocker(BIG_DECIMAL_MOCKER, BigDecimal.class);
     registerMocker(STRING_MOCKER, String.class);
     registerMocker(DATE_MOCKER, Date.class);
+    registerMocker(LOCAL_DATE_TIME_MOCKER, LocalDateTime.class);
+    registerMocker(LOCAL_DATE_MOCKER, LocalDate.class);
+    registerMocker(LOCAL_TIME_MOCKER, LocalTime.class);
+    registerMocker(TIMESTAMP_MOCKER, Timestamp.class);
   }
 
   /**
@@ -369,6 +381,10 @@ public class MockConfig {
     GLOBAL_DATA_CONFIG.dateRange(min,max);
     return this;
   }
+  public MockConfig timeRange(int minHour, int maxHour, int minMinute, int maxMinute, int minSecond, int maxSecond) {
+    GLOBAL_DATA_CONFIG.timeRange(minHour, maxHour, minMinute, maxMinute, minSecond, maxSecond);
+    return this;
+  }
 
   public MockConfig sizeRange(int min, int max) {
     GLOBAL_DATA_CONFIG.sizeRange(min,max);
@@ -453,6 +469,9 @@ public class MockConfig {
 
   public String[] dateRange() {
     return  GLOBAL_DATA_CONFIG.dateRange();
+  }
+  public int[] timeRange() {
+    return  GLOBAL_DATA_CONFIG.timeRange();
   }
 
   public int[] sizeRange() {

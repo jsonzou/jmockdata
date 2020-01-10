@@ -33,7 +33,7 @@ class UserDefinedLetterPickerScanner {
 
         key += beginCharacter + "-" + endCharacter;
 
-        bounds.add(endCharacter);
+        bounds.add(endCharacter + "-");
       } else {
         if (String.valueOf(character).matches("\\W")) {
           throw new RuntimeException("'" + character + "'" + "will be treated literally inside []");

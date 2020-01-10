@@ -12,7 +12,7 @@
     <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <argLine>-Dfile.encoding=UTF-8</argLine>
-    <jdk.version>1.7</jdk.version>
+    <jdk.version>1.8</jdk.version>
   </properties>
 
   <inceptionYear>2017</inceptionYear>

@@ -30,6 +30,19 @@ public final class ReflectionUtils {
   }
 
   /**
+   * 反射设置值
+   *
+   * @param object 对象
+   * @param field 属性
+   * @param value 属性值
+   * @throws ReflectiveOperationException 反射操作异常
+   */
+  public static void setFieldValue(Object object, Field field, Object value) throws IllegalAccessException {
+    field.setAccessible(true);
+    field.set(object, value);
+  }
+
+  /**
    * 有setter方法的字段及其setter方法
    *
    * @param clazz Class对象

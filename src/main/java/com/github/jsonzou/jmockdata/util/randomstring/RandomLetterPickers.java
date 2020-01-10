@@ -65,12 +65,6 @@ class RandomLetterPickers {
     binary = RandomLetterPicker.builder()
         .setRandom(random)
         .addAll(bynaryCharts)
-        /**
-         * Just Support JDK1.7+
-         */
-//        .addAll(IntStream.range(0, 255)
-//            .mapToObj(i -> Character.toString((char) i))
-//            .collect(Collectors.toList()))
         .build();
 
     word = RandomLetterPicker.builder()

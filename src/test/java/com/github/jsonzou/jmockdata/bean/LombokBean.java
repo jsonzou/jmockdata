@@ -10,10 +10,12 @@ import lombok.experimental.Accessors;
  * @version:V1.0
  * @description:
  */
-@Accessors
 public class LombokBean {
     @Setter
     @Getter
-  //  @Accessors(prefix = "i")
     private Long id;
+    @Setter
+    @Getter
+    @Accessors(chain = true, fluent = true)
+    private Long a;
 }

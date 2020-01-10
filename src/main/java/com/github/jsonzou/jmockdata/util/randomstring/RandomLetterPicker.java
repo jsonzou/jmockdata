@@ -24,12 +24,6 @@ class RandomLetterPicker {
       for(E e:enumConstants){
         letters.add(e.getLetter());
       }
-      /**
-       * Just Support JDK1.7+
-       */
-//      letters.addAll(Arrays.stream(enumClass.getEnumConstants())
-//          .map(e -> e.getLetter())
-//          .collect(Collectors.toList()));
       return this;
     }
 
@@ -50,12 +44,6 @@ class RandomLetterPicker {
         tempLetters.add(iterator.next());
       }
       letters = tempLetters;
-      /**
-       * Just Support JDK1.7+
-       */
-//      letters = letters.stream()
-//          .filter(l -> !l.equals(remove))
-//          .collect(Collectors.toList());
       return this;
     }
 
@@ -92,11 +80,11 @@ class RandomLetterPicker {
     Builder definedPickerBuilder = builder();
     int bufferSize = bounds.size();
 
-    for (int i = 0; i < bufferSize; i ++) {
+    for (int i = 0; i < bufferSize; ) {
       /**
        * 处理[a-z][A-Z][0-9]这种匹配规则
        */
-      if(i+2<bufferSize && bounds.get(i+1).charAt(0)=='-'){
+      if(i+2 <= bufferSize && bounds.get(i+1).length() == 2 && bounds.get(i+1).charAt(1) == '-'){
         int beginCode = (int) bounds.get(i).charAt(0);
         int endCode = (int) bounds.get(i + 1).charAt(0);
         i = i+2;
@@ -110,7 +98,7 @@ class RandomLetterPicker {
         }
 
       }else{
-        definedPickerBuilder.add(bounds.get(i));
+        definedPickerBuilder.add(bounds.get(i++));
       }
 
     }

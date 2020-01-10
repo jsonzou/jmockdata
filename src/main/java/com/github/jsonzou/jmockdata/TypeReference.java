@@ -5,7 +5,7 @@ import java.lang.reflect.Type;
 
 public abstract class TypeReference<T> {
 
-  private final Type type;
+  private Type type;
 
   public TypeReference() {
     Type superClass = getClass().getGenericSuperclass();
@@ -17,6 +17,9 @@ public abstract class TypeReference<T> {
 
   public Type getType() {
     return type;
+  }
+  public void setType(Type type) {
+    this.type = type;
   }
 
 }

@@ -42,7 +42,7 @@ public class RegexGeneratorTest {
 
     @Test
     public void shouldGPS() {
-        String regex = "([0-9]{3}\\.[0-9]{3}\\,[0-9]{3}\\.[0-9]{3})";
+        String regex = "\\([0-9]{3}\\.[0-9]{3}\\,[0-9]{3}\\.[0-9]{3}\\)";
         for (int i = 0; i < 100; i++) {
             String text =  RandomUtils.nextStringFromRegex(regex);
             System.out.println(text);

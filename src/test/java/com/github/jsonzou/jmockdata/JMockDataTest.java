@@ -1,23 +1,22 @@
 package com.github.jsonzou.jmockdata;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.fail;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.jsonzou.jmockdata.bean.*;
 import com.github.jsonzou.jmockdata.bean.circular.AXB;
 import com.github.jsonzou.jmockdata.bean.enums.DayEnum;
 import com.github.jsonzou.jmockdata.bean.enums.ErrorEnum;
+import org.junit.Test;
 
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class JMockDataTest {
 
@@ -117,6 +116,7 @@ public class JMockDataTest {
   public void testGenericData() {
     GenericData<Integer, String, BasicBean> genericData = JMockData.mock(new TypeReference<GenericData<Integer, String, BasicBean>>() {
     });
+    System.out.println(JSON.toJSONString(genericData,true));
     assertNotNull(genericData);
   }
 
@@ -269,9 +269,39 @@ public class JMockDataTest {
    * 测试Lombok对象
    */
   @Test
-  public void testLombokBeanMock() {
+  public void testLombokBeanMock() throws IllegalAccessException {
     LombokBean lombokBean = JMockData.mock(LombokBean.class);
-    System.out.println(JSON.toJSONString(lombokBean,true));
+    printBeanFieldInfo(LombokBean.class,lombokBean);
+  }
+  /**
+   * 测试Timestamp,LocalDateTime,LocalDate,LocalTime的模拟
+   */
+  @Test
+  public void testLocalDateTimeMock() throws IllegalAccessException {
+    LocalDateTimeBean localDateTimeBean = JMockData.mock(LocalDateTimeBean.class);
+    printBeanFieldInfo(LocalDateTimeBean.class,localDateTimeBean);
+  }
+  /**
+   * 测试Timestamp,LocalDateTime,LocalDate,LocalTime的模拟
+   */
+  @Test
+  public void noneGetterSetterAndPlainAndChainBeanMock() throws IllegalAccessException {
+    NoneGetterSetterAndFluentAndChainBean noneGetterSetterAndFluentAndChainBean = JMockData.mock(NoneGetterSetterAndFluentAndChainBean.class);
+    printBeanFieldInfo(NoneGetterSetterAndFluentAndChainBean.class,noneGetterSetterAndFluentAndChainBean);
+  }
+
+  /**
+   * 打印bean 属性信息
+   * @param clazz
+   * @param result
+   * @throws IllegalAccessException
+   */
+  private void printBeanFieldInfo(Class<?>clazz,Object result) throws IllegalAccessException {
+    Field[] fields = clazz.getDeclaredFields();
+    for(Field field:fields){
+      field.setAccessible(true);
+      System.out.println(field.getName()+" <---> "+field.get(result));
+    }
   }
 
 
