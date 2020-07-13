@@ -58,6 +58,11 @@ public class BeanMocker implements Mocker<Object> {
         if (field.isAnnotationPresent(MockIgnore.class)) {
           continue;
         }
+
+        if (field.getName() != null && field.getName().equalsIgnoreCase("serialVersionUID")) {
+          continue;
+        }
+        
         /**
          * 是否配置排除这个属性
          */
@@ -85,6 +90,11 @@ public class BeanMocker implements Mocker<Object> {
         if (field.isAnnotationPresent(MockIgnore.class)) {
           continue;
         }
+        
+        if (field.getName() != null && field.getName().equalsIgnoreCase("serialVersionUID")) {
+          continue;
+        }
+        
         /**
          * 是否配置排除这个属性
          */
