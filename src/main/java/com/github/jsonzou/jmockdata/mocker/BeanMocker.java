@@ -55,14 +55,14 @@ public class BeanMocker implements Mocker<Object> {
     for (Class<?> currentClass = clazz; currentClass != Object.class; currentClass = currentClass.getSuperclass()) {
       // 模拟有setter方法的字段
       for (Field field :currentClass.getDeclaredFields()) {
-        if (field.isAnnotationPresent(MockIgnore.class)) {
+        if (field.isAnnotationPresent(MockIgnore.class) || field.isSynthetic()) {
           continue;
         }
 
         if (field.getName() != null && field.getName().equalsIgnoreCase("serialVersionUID")) {
           continue;
         }
-        
+
         /**
          * 是否配置排除这个属性
          */
@@ -87,22 +87,22 @@ public class BeanMocker implements Mocker<Object> {
       // 模拟有setter方法的字段
       for (Entry<Field, Method> entry : ReflectionUtils.fieldAndSetterMethod(currentClass).entrySet()) {
         Field field = entry.getKey();
-        if (field.isAnnotationPresent(MockIgnore.class)) {
+        if (field.isAnnotationPresent(MockIgnore.class) || field.isSynthetic()) {
           continue;
         }
-        
+
         if (field.getName() != null && field.getName().equalsIgnoreCase("serialVersionUID")) {
           continue;
         }
-        
+
         /**
          * 是否配置排除这个属性
          */
         if(mockConfig.globalConfig().isConfigExcludeMock(clazz,field.getName())){
-           continue;
+          continue;
         }
         ReflectionUtils
-            .setRefValue(result, entry.getValue(), new BaseMocker(field.getGenericType()).mock(mockConfig.globalConfig().getDataConfig(currentClass,field.getName())));
+                .setRefValue(result, entry.getValue(), new BaseMocker(field.getGenericType()).mock(mockConfig.globalConfig().getDataConfig(currentClass,field.getName())));
       }
     }
   }
