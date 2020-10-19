@@ -54,6 +54,9 @@ public final class ReflectionUtils {
     BeanInfo beanInfo = Introspector.getBeanInfo(clazz, Object.class);
     PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
     for (Field field : clazz.getDeclaredFields()) {
+      if (field.isSynthetic()){
+        continue;
+      }
       for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
         if (propertyDescriptor.getName().equals(field.getName()) && propertyDescriptor.getWriteMethod() != null) {
           map.put(field, propertyDescriptor.getWriteMethod());
