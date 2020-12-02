@@ -54,6 +54,7 @@ public class JMockDataTest {
   @Test
   public void testBasicData() {
     BasicBean basicBean = JMockData.mock(BasicBean.class);
+    System.out.println(JSON.toJSONString(basicBean,true));
     assertNotNull(basicBean);
 
     try {
@@ -291,6 +292,51 @@ public class JMockDataTest {
   }
 
   /**
+   * 测试BeanMockerInterceptor
+   */
+  @Test
+  public void noneBeanMockerInterceptor() throws IllegalAccessException {
+      MockConfig mockConfig = new MockConfig();
+      mockConfig.registerBeanMockerInterceptor(new BeanMockerInterceptor<SimpleBean>() {
+          @Override
+          public Object mock(Class<SimpleBean> clazz, Field field, SimpleBean bean, DataConfig dataConfig) {
+              // 场景1
+              if(field.getName().startsWith("string")){
+                bean.setStringValue("abc");
+                return InterceptType.UNMOCK;
+              }
+              // 场景2
+              if(field.getName().startsWith("integer")){
+                return 888888999;
+              }
+               // 场景3
+              if(field.getName().startsWith("byte")){
+                return InterceptType.UNMOCK;
+              }
+              // 场景4
+              return InterceptType.MOCK;
+          }
+      });
+    SimpleBean simpleBean = JMockData.mock(SimpleBean.class, mockConfig);
+      printBeanFieldInfo(SimpleBean.class, simpleBean);
+  }
+
+    /**
+     * 测试字段修饰符
+     * @throws IllegalAccessException
+     */
+  @Test
+  public void noneModifierBean_1() throws IllegalAccessException {
+      MockConfig mockConfig = new MockConfig();
+      mockConfig.setEnabledStatic(true);
+      mockConfig.setEnabledPrivate(false);
+      mockConfig.setEnabledPublic(false);
+      mockConfig.setEnabledProtected(false);
+      ModifierBean basicBean = JMockData.mock(ModifierBean.class, mockConfig);
+      printBeanFieldInfo(ModifierBean.class,basicBean);
+  }
+
+  /**
    * 打印bean 属性信息
    * @param clazz
    * @param result
@@ -300,7 +346,7 @@ public class JMockDataTest {
     Field[] fields = clazz.getDeclaredFields();
     for(Field field:fields){
       field.setAccessible(true);
-      System.out.println(field.getName()+" <---> "+field.get(result));
+      System.out.println(field.getName()+" <---> "+JSON.toJSONString(field.get(result)));
     }
   }
 

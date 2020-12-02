@@ -37,21 +37,29 @@ public class MockConfig {
   private static final LocalDateMocker LOCAL_DATE_MOCKER = new LocalDateMocker();
   private static final LocalTimeMocker LOCAL_TIME_MOCKER = new LocalTimeMocker();
   private static final TimestampMocker TIMESTAMP_MOCKER = new TimestampMocker();
-  private boolean enabledCircle=false;
+  private boolean enabledCircle = false;
+  private boolean enabledStatic = false;
+  private boolean enabledPublic = true;
+  private boolean enabledProtected = true;
+  private boolean enabledPrivate = true;
 
   /**
    * Bean缓存
    */
-  private Map<String, Object> beanCache = new HashMap<>();
+  private Map<String, Object> beanCache = new HashMap<>(16);
   /**
    * TypeVariable缓存
    */
-  private Map<String, Type> typeVariableCache = new HashMap<>();
+  private Map<String, Type> typeVariableCache = new HashMap<>(8);
   /**
    * enum缓存
    */
-  private Map<String, Enum[]> enumCache = new HashMap<>();
-  private Map<Class<?>, Mocker> mockerContext = new HashMap<>();
+  private Map<String, Enum[]> enumCache = new HashMap<>(4);
+  /**
+   * 模拟器配置
+   */
+  private Map<Class<?>, Mocker> mockerContext = new HashMap<>(32);
+  private Map<Class<?>, BeanMockerInterceptor> beanMockerInterceptors = new HashMap<>(4);
 
   /**
    * 数据模拟范围全局配置
@@ -63,12 +71,12 @@ public class MockConfig {
    * [key] = ClassName[_Field]
    * [value] = DataConfig
    */
-  private Map<String,DataConfig> partDataConfig = new HashMap<>();
+  private Map<String,DataConfig> partDataConfig = new HashMap<>(16);
 
   /**
    * 排除模拟对象
    */
-  private Map<Class<?>, List<String>> excludeConfig = new HashMap<>();
+  private Map<Class<?>, List<String>> excludeConfig = new HashMap<>(4);
 
 
   public MockConfig() {
@@ -129,23 +137,87 @@ public class MockConfig {
   }
 
   public boolean isEnabledCircle() {
-    return enabledCircle;
+    return this.enabledCircle;
   }
 
   public MockConfig setEnabledCircle(boolean enabledCircle) {
     this.enabledCircle = enabledCircle;
     return this;
   }
+  public MockConfig setEnabledStatic(boolean enabledStatic) {
+    this.enabledStatic = enabledStatic;
+    return this;
+  }
+  public boolean isEnabledStatic() {
+    return this.enabledStatic;
+  }
+  public MockConfig setEnabledPublic(boolean enabledPublic) {
+    this.enabledPublic = enabledPublic;
+    return this;
+  }
+  public boolean isEnabledPublic() {
+    return this.enabledPublic;
+  }
+  public MockConfig setEnabledProtected(boolean enabledProtected) {
+    this.enabledProtected = enabledProtected;
+    return this;
+  }
+  public boolean isEnabledProtected() {
+    return this.enabledProtected;
+  }
+  public MockConfig setEnabledPrivate(boolean enabledPrivate) {
+    this.enabledPrivate = enabledPrivate;
+    return this;
+  }
+  public boolean isEnabledPrivate() {
+    return this.enabledPrivate;
+  }
 
   public Type getVariableType(String name) {
     return typeVariableCache.get(name);
   }
 
-
+  /**
+   * 注册数据模拟器
+   * @param mocker
+   * @param clazzs
+   * @param <T>
+   */
   public <T> void registerMocker(Mocker mocker, Class<T>... clazzs) {
     for (Class<T> clazz : clazzs) {
       mockerContext.put(clazz, mocker);
     }
+  }
+
+  /**
+   * 注册BeanMocker拦截器，改变模拟行为
+   * @param bi
+   * @return
+   */
+  public <T> MockConfig registerBeanMockerInterceptor(Class<T>clazz, BeanMockerInterceptor bi) {
+    beanMockerInterceptors.put(clazz, bi);
+    return this;
+  }
+
+    /**
+     * 注册全局BeanMocker拦截器，只能有一个，改变模拟行为
+     * @param bi
+     * @param <T>
+     * @return
+     */
+  public <T> MockConfig registerBeanMockerInterceptor(BeanMockerInterceptor bi) {
+    beanMockerInterceptors.put(MockConfig.class, bi);
+    return this;
+  }
+  public <T> BeanMockerInterceptor getBeanMockerInterceptor(Class<T>clazz) {
+      if(this.beanMockerInterceptors.size() == 0){
+          return null;
+      }
+      BeanMockerInterceptor bi = this.beanMockerInterceptors.get(clazz);
+      if(bi == null){
+          return this.beanMockerInterceptors.get(MockConfig.class);
+      }
+      return bi;
   }
 
   public <T> Mocker<T> getMocker(Class<T> clazz) {
@@ -213,7 +285,7 @@ public class MockConfig {
     Set<String> configKeys=partDataConfig.keySet();
     String clazzName=clazz.getName();
     /**
-     * 如果字段为空，则返回累的配置
+     * 如果字段为空，则返回类的配置
      */
     if(fieldName==null){
       return  partDataConfig.get(clazzName)==null?GLOBAL_DATA_CONFIG:partDataConfig.get(clazzName);
@@ -236,21 +308,22 @@ public class MockConfig {
       }
     }
 
-
     /**
-     * 优先级2 ： clazz
-     */
-    if(config==null){
-      config=partDataConfig.get(clazzName);
-    }
-
-    /**
-     * 优先级3 ： DataConfig.class + fieldName
+     * 优先级2 ： DataConfig.class + fieldName
      */
     if(config==null){
       clazzName=DataConfig.class.getName();
       config=partDataConfig.get(clazzName+"#"+fieldName);
     }
+
+    /**
+     * 优先级3 ： clazz
+     */
+    if(config==null){
+      config=partDataConfig.get(clazzName);
+    }
+
+
     /**
      * 查找不到则模式匹配
      */
