@@ -297,7 +297,8 @@ public class JMockDataTest {
   @Test
   public void noneBeanMockerInterceptor() throws IllegalAccessException {
       MockConfig mockConfig = new MockConfig();
-      mockConfig.registerBeanMockerInterceptor(new BeanMockerInterceptor<SimpleBean>() {
+//      mockConfig.registerBeanMockerInterceptor(new BeanMockerInterceptor() {
+      mockConfig.registerBeanMockerInterceptor(SimpleBean.class,new BeanMockerInterceptor<SimpleBean>() {
           @Override
           public Object mock(Class<SimpleBean> clazz, Field field, SimpleBean bean, DataConfig dataConfig) {
               // 场景1

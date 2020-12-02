@@ -272,6 +272,10 @@ public void testTypeRefrence() {
 MockConfig mockConfig = new MockConfig()
             // 全局配置
             .globalConfig()
+            .setEnabledStatic(false);
+            .setEnabledPrivate(false);
+            .setEnabledPublic(false);
+            .setEnabledProtected(false);
             .sizeRange(1,1)
             .charSeed((char) 97, (char) 98)
             .byteRange((byte) 0, Byte.MAX_VALUE)
@@ -432,6 +436,20 @@ public void testGenericData() {
 ```java
 MockConfig mockConfig = new MockConfig()
             .registerMocker(Mocker mocker, Class<T>... clazzs)
+
+```
+
+### 定义BeanMocker拦截器
+##### 通过实现接口BeanMockerInterceptor实现模拟bean时拦截功能，改变模拟行为
+#### 拦截器返回值类型说明:
+- 返回InterceptType.UNMOCK 不模拟, 排除此字段的模拟
+- 返回InterceptType.MOCK 自动模拟
+- 其他返回值，作为field的值通过反射注入
+
+```java
+MockConfig mockConfig = new MockConfig()
+           .registerBeanMockerInterceptor(new BeanMockerInterceptor() {...}) // 全局拦截
+           .registerBeanMockerInterceptor(SimpleBean.class,new BeanMockerInterceptor<SimpleBean>() {...})// 类型拦截
 
 ```
 
