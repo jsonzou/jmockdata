@@ -32,20 +32,20 @@ Jmockdata插件通过随机算法模拟Java数据.
 ## Download
 
 > 
-### _Jmockdata-4.2.0_
+### _Jmockdata-4.3.0_
 #### Jar
-> [Jmockdata-4.2.0](http://repo.maven.apache.org/maven2/com/github/jsonzou/jmockdata/4.2.0/jmockdata-4.2.0.jar)
+> [Jmockdata-4.3.0](http://repo.maven.apache.org/maven2/com/github/jsonzou/jmockdata/4.3.0/jmockdata-4.3.0.jar)
 #### Maven
  ```
    <dependency>
       <groupId>com.github.jsonzou</groupId>
       <artifactId>jmockdata</artifactId>
-      <version>4.2.0</version>
+      <version>4.3.0</version>
     </dependency>
   ```
 #### Gradle
  ```
-   compile group: 'com.github.jsonzou', name: 'jmockdata', version: '4.2.0'
+   compile group: 'com.github.jsonzou', name: 'jmockdata', version: '4.3.0'
   ```
 #### 更多已发布版本下载
  > [https://github.com/jsonzou/jmockdata/releases](https://github.com/jsonzou/jmockdata/releases)
@@ -66,6 +66,7 @@ Jmockdata插件通过随机算法模拟Java数据.
 - [4.1.1](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-4.1.1-RELEASE)
 - [4.1.2](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-4.1.2-RELEASE)
 - [4.2.0](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-4.2.0-RELEASE)
+- [4.3.0](https://github.com/jsonzou/jmockdata/releases/tag/jmockdata-4.3.0-RELEASE)
 
 ## Usage 
 
