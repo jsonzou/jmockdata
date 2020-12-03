@@ -1,11 +1,3 @@
-/**
- * *****************************************************
- * Copyright (C) 2020 pds-inc.com.cn. All Rights Reserved
- * This file is part of pds project.
- * Unauthorized copy of this file, via any medium is strictly prohibited.
- * Proprietary and Confidential.
- * ****************************************************
- **/
 package com.github.jsonzou.jmockdata;
 
 /**
