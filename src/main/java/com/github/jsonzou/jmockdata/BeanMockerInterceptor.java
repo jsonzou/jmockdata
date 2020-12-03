@@ -1,19 +1,7 @@
-/**
- * *****************************************************
- * Copyright (C) 2020 pds-inc.com.cn. All Rights Reserved
- * This file is part of pds project.
- * Unauthorized copy of this file, via any medium is strictly prohibited.
- * Proprietary and Confidential.
- * ****************************************************
- **/
 package com.github.jsonzou.jmockdata;
 
 import java.lang.reflect.Field;
 
-/**
- * @author jsonzou<pengfei.zou @ pds-inc.com.cn>
- * @date 12/02/2020 16:49
- */
 public interface BeanMockerInterceptor<T>{
     /**
      * 返回值类型说明：
