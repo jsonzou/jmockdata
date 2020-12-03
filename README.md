@@ -7,7 +7,7 @@
 [![License](http://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 
-Jmockdta是一款实现模拟JAVA类型或对象的实例化并随机初始化对象的数据的工具框架。
+Jmockdata是一款实现模拟JAVA类型或对象的实例化并随机初始化对象的数据的工具框架。
 
 ![mark](http://p1wz9nw0p.bkt.clouddn.com/blog/180118/0DaEC98Kib.png?imageslim)
 
