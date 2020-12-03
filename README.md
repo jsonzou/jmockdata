@@ -1,4 +1,4 @@
-## star * <img src="https://img.shields.io/github/stars/jsonzou/jmockdata.svg?style=flat-square&amp;label=Stars&amp;logo=github" alt="github star">
+## <img src="https://img.shields.io/github/stars/jsonzou/jmockdata.svg?style=flat-square&amp;label=Stars&amp;logo=github" alt="github star">
 
 # Jmockdata
 [![Build Status](https://www.travis-ci.org/jsonzou/jmockdata.svg?branch=master)](https://www.travis-ci.org/jsonzou/jmockdata)
