@@ -2,6 +2,10 @@ package com.github.jsonzou.jmockdata;
 
 import java.lang.reflect.Field;
 
+/**
+ * @author jsonzou
+ * @date 12/02/2020 16:49
+ */
 public interface BeanMockerInterceptor<T>{
     /**
      * 返回值类型说明：
