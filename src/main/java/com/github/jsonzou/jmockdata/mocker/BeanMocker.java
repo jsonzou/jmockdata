@@ -108,6 +108,12 @@ public class BeanMocker implements Mocker<Object> {
     }
     return fields;
   }
+
+  /**
+   * 是否支持模拟此类
+   * @param clazz
+   * @return
+   */
   private boolean isSupportMock(Class<?>clazz){
     boolean unSupport = clazz == Object.class
             || clazz.isInterface()
@@ -125,6 +131,13 @@ public class BeanMocker implements Mocker<Object> {
     return !unSupport;
 
   }
+
+  /**
+   * 是否支持模拟此属性
+   * @param mockConfig
+   * @param field
+   * @return
+   */
   private boolean isSupportMock(DataConfig mockConfig, Field field){
     if (field.isAnnotationPresent(MockIgnore.class)) {
       return false;
