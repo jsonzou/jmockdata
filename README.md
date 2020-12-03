@@ -26,6 +26,7 @@ Jmockdata插件通过随机算法模拟Java数据.
 * 支持忽略字段
 * 支持改变mockConfig来自定义模拟数据策略
 * 支持自定义Mocker类
+* 支持添加BeanMocker拦截器类
 * 支持JDK1.8+
 
 
