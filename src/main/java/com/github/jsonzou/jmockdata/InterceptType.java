@@ -9,7 +9,7 @@
 package com.github.jsonzou.jmockdata;
 
 /**
- * @author jsonzou<pengfei.zou @ pds-inc.com.cn>
+ * @author jsonzou
  * @date 12/02/2020 16:59
  */
 public enum InterceptType {
