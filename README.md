@@ -1,4 +1,4 @@
-## 开源项目不容易，如果觉得本项目对您的工作还是有帮助的话，请在帮忙 * <img src="https://img.shields.io/github/stars/jsonzou/jmockdata.svg?style=flat-square&amp;label=Stars&amp;logo=github" alt="github star">
+## <img src="https://img.shields.io/github/stars/jsonzou/jmockdata.svg?style=flat-square&amp;label=Stars&amp;logo=github" alt="github star">
 
 # Jmockdata
 [![Build Status](https://www.travis-ci.org/jsonzou/jmockdata.svg?branch=master)](https://www.travis-ci.org/jsonzou/jmockdata)
@@ -7,7 +7,7 @@
 [![License](http://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 
-Jmockdta是一款实现模拟JAVA类型或对象的实例化并随机初始化对象的数据的工具框架。
+Jmockdata是一款实现模拟JAVA类型或对象的实例化并随机初始化对象的数据的工具框架。
 
 ![mark](http://p1wz9nw0p.bkt.clouddn.com/blog/180118/0DaEC98Kib.png?imageslim)
 
