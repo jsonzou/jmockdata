@@ -5,10 +5,7 @@ import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.Mocker;
 import com.github.jsonzou.jmockdata.util.RandomUtils;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * 模拟Collection
@@ -30,6 +27,8 @@ public class CollectionMocker implements Mocker<Object> {
     Collection<Object> result;
     if (List.class.isAssignableFrom(clazz)) {
       result = new ArrayList<>(size);
+    } else if (EnumSet .class.isAssignableFrom(clazz)) {
+        result = EnumSet.noneOf((Class) genericType);
     } else {
       result = new HashSet<>(size);
     }
