@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
+import org.bson.types.Decimal128;
 
 /**
  * 模拟数据配置类
@@ -31,6 +32,7 @@ public class MockConfig {
   private static final DoubleMocker DOUBLE_MOCKER = new DoubleMocker();
   private static final BigIntegerMocker BIG_INTEGER_MOCKER = new BigIntegerMocker();
   private static final BigDecimalMocker BIG_DECIMAL_MOCKER = new BigDecimalMocker();
+  private static final Decimal128Mocker DECIMAL_128_MOCKER = new Decimal128Mocker();
   private static final StringMocker STRING_MOCKER = new StringMocker();
   private static final DateMocker DATE_MOCKER = new DateMocker();
   private static final LocalDateTimeMocker LOCAL_DATE_TIME_MOCKER = new LocalDateTimeMocker();
@@ -90,6 +92,7 @@ public class MockConfig {
     registerMocker(DOUBLE_MOCKER, double.class, Double.class);
     registerMocker(BIG_INTEGER_MOCKER, BigInteger.class);
     registerMocker(BIG_DECIMAL_MOCKER, BigDecimal.class);
+    registerMocker(DECIMAL_128_MOCKER, Decimal128.class);
     registerMocker(STRING_MOCKER, String.class);
     registerMocker(DATE_MOCKER, Date.class);
     registerMocker(LOCAL_DATE_TIME_MOCKER, LocalDateTime.class);
