@@ -6,6 +6,7 @@ import com.github.jsonzou.jmockdata.bean.*;
 import com.github.jsonzou.jmockdata.bean.circular.AXB;
 import com.github.jsonzou.jmockdata.bean.enums.DayEnum;
 import com.github.jsonzou.jmockdata.bean.enums.ErrorEnum;
+import org.bson.types.Decimal128;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
@@ -42,6 +43,8 @@ public class JMockDataTest {
     assertNotNull(str);
     DayEnum dayEnum = JMockData.mock(DayEnum.class);
     assertNotNull(dayEnum);
+    Decimal128 decimal128 = JMockData.mock(Decimal128.class);
+    assertNotNull(decimal128);
 
     try {
       JMockData.mock(ErrorEnum.class);
