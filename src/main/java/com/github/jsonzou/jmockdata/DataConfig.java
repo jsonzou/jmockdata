@@ -1,5 +1,9 @@
 package com.github.jsonzou.jmockdata;
 
+import java.math.BigDecimal;
+
+import com.github.jsonzou.jmockdata.util.StringUtils;
+
 /**
  * @Author: jsonzou
  * @Date: 2018/10/29 13:24
@@ -30,8 +34,24 @@ public class DataConfig {
 
     private String numberRegex = null;
     private String stringRegex = null;
+    
+    // 直接设置的值！！！
+    private String val;
 
-    public DataConfig(MockConfig config) {
+	public DataConfig setVal(String val) {
+		this.val = val;
+		return this;
+	}
+
+    public String getVal() {
+		return val;
+	}
+
+    public BigDecimal getValNum() {
+		return StringUtils.isEmpty(this.val) ? null : new BigDecimal(this.val);
+	}
+
+	public DataConfig(MockConfig config) {
         this.config = config;
     }
 
@@ -42,6 +62,10 @@ public class DataConfig {
     public MockConfig globalConfig(){
         return this.config;
     }
+    
+    public <T> Mocker<T> getMocker(Class<T> clazz) {
+        return globalConfig().getMocker(clazz);
+      }
 
     /**
      * 配置转路器 - 切换设置全局字段模拟配置

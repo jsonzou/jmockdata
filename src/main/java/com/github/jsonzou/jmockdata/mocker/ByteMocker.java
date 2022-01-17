@@ -12,6 +12,9 @@ public class ByteMocker implements Mocker<Byte> {
 
   @Override
   public Byte mock(DataConfig mockConfig) {
+	if(StringUtils.isNotEmpty(mockConfig.getVal())) {
+		return mockConfig.getValNum().byteValue();
+	}
     /**
      * 若根据正则模拟
      */

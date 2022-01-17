@@ -4,6 +4,7 @@ package com.github.jsonzou.jmockdata;
 import com.github.jsonzou.jmockdata.annotation.MockIgnore;
 import com.github.jsonzou.jmockdata.mocker.*;
 import com.github.jsonzou.jmockdata.util.FieldMatchingResolver;
+import com.github.jsonzou.jmockdata.util.ReflectionUtils;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -96,6 +97,7 @@ public class MockConfig {
     registerMocker(LOCAL_DATE_MOCKER, LocalDate.class);
     registerMocker(LOCAL_TIME_MOCKER, LocalTime.class);
     registerMocker(TIMESTAMP_MOCKER, Timestamp.class);
+    registerBeanMockerInterceptor(new GlobalBeanMockerInterceptor<>());
   }
 
   /**
@@ -123,16 +125,28 @@ public class MockConfig {
   }
 
   public MockConfig init(Type type) {
-    if (type instanceof ParameterizedType) {
-      Class clazz = (Class) ((ParameterizedType) type).getRawType();
-      Type[] types = ((ParameterizedType) type).getActualTypeArguments();
-      TypeVariable[] typeVariables = clazz.getTypeParameters();
-      if (typeVariables != null && typeVariables.length > 0) {
-        for (int index = 0; index < typeVariables.length; index++) {
-          typeVariableCache.put(typeVariables[index].getName(), types[index]);
-        }
-      }
+    if (null == type || !(type instanceof ParameterizedType)) {
+        return this;
     }
+    ParameterizedType paramType = (ParameterizedType) type; // 原始类型Rest<PageVo<DetailVO<>>>
+    Class<?> clazz = (Class<?>) paramType.getRawType(); // Rest
+    Type[] types = paramType.getActualTypeArguments(); // PageVo<DetailVO<>>
+    
+    Class<?> supperClazz = clazz;
+    while (supperClazz != null && !ReflectionUtils.isSystemClass(clazz.getName())) {
+        TypeVariable<?>[] typeVariables = supperClazz.getTypeParameters(); // Rest的泛型 T
+        if(typeVariables == null || typeVariables.length == 0) {
+        	break;
+        }
+    	for (int index = 0; index < typeVariables.length; index++) { // Rest.T : PageVo<DetailVO<>>
+    		typeVariableCache.put(ReflectionUtils.getTypeVariableName(typeVariables[index]), types[index]);
+            if (supperClazz == clazz) {
+                init(types[index]);
+            }
+    	}
+    	supperClazz = supperClazz.getSuperclass();
+    }
+  
     return this;
   }
 

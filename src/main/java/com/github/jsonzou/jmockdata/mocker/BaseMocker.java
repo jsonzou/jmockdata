@@ -2,6 +2,7 @@ package com.github.jsonzou.jmockdata.mocker;
 
 import com.github.jsonzou.jmockdata.DataConfig;
 import com.github.jsonzou.jmockdata.Mocker;
+import com.github.jsonzou.jmockdata.util.ReflectionUtils;
 
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
@@ -28,7 +29,7 @@ public class BaseMocker<T> implements Mocker<T> {
     } else if (type instanceof GenericArrayType) {
       mocker = new ArrayMocker(type);
     } else if (type instanceof TypeVariable) {
-      mocker = new BaseMocker(mockConfig.globalConfig().getVariableType(((TypeVariable) type).getName()));
+      mocker = new BaseMocker(mockConfig.globalConfig().getVariableType(ReflectionUtils.getTypeVariableName((TypeVariable<?>) type)));
     } else {
       mocker = new ClassMocker((Class) type, genericTypes);
     }

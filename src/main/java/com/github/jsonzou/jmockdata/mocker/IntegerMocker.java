@@ -12,6 +12,9 @@ public class IntegerMocker implements Mocker<Integer> {
 
   @Override
   public Integer mock(DataConfig mockConfig) {
+	if(StringUtils.isNotEmpty(mockConfig.getVal())) {
+		return mockConfig.getValNum().intValue();
+	}
     /**
      * 若根据正则模拟
      */

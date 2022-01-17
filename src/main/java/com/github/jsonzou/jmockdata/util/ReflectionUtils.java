@@ -5,9 +5,13 @@ import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
+import java.lang.reflect.GenericDeclaration;
 import java.lang.reflect.Method;
+import java.lang.reflect.TypeVariable;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import com.github.jsonzou.jmockdata.MockException;
 
 /**
  * 反射工具类
@@ -63,4 +67,22 @@ public final class ReflectionUtils {
     return map;
   }
 
+  public static boolean isSystemClass(String name) {
+	    return name.startsWith("java.") || name.startsWith("javax.");
+  }
+  
+  /**
+   * 将泛型的名称唯一化 <br/>
+   * @author jpq
+   * @param typeVariable
+   * @return
+   */
+  public static String getTypeVariableName(TypeVariable<?> typeVariable) {
+	    GenericDeclaration declaration = typeVariable.getGenericDeclaration();
+	    if (!(declaration instanceof Class<?>)) {
+	        throw new MockException("unknown error");
+	    }
+
+	    return String.format("%s.%s", ((Class<?>) declaration).getName(), typeVariable.getName());
+	}
 }

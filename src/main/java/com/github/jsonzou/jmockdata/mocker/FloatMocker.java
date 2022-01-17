@@ -14,6 +14,9 @@ public class FloatMocker implements Mocker<Float> {
 
   @Override
   public Float mock(DataConfig mockConfig) {
+	if(StringUtils.isNotEmpty(mockConfig.getVal())) {
+		return mockConfig.getValNum().floatValue();
+	}
     /**
      * 若根据正则模拟
      */
