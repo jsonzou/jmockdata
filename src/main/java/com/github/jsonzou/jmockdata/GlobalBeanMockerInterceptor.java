@@ -12,6 +12,8 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 
 import com.github.jsonzou.jmockdata.annotation.MockValue;
+import com.github.jsonzou.jmockdata.mocker.BaseMocker;
+import com.github.jsonzou.jmockdata.util.ReflectionUtils;
 import com.github.jsonzou.jmockdata.util.StringUtils;
 
 /**
@@ -25,9 +27,9 @@ public class GlobalBeanMockerInterceptor<T> implements BeanMockerInterceptor<T> 
 	public Object mock(Class<T> clazz, Field field, T bean, DataConfig dataConfig) throws IllegalAccessException {
 		MockValue mockValue = field.getAnnotation(MockValue.class);
 		if(null != mockValue) {
+			boolean isCharSeq = ReflectionUtils.isCharSeq(field.getType());
 			if(StringUtils.isNotEmpty(mockValue.value())) {
-				dataConfig.subConfig(clazz, field.getName());
-				if(CharSequence.class.isAssignableFrom(field.getType())) {
+				if(isCharSeq) {
 					field.set(bean, mockValue.value());
 				} else {
 					field.set(bean, dataConfig.setVal(mockValue.value()).getMocker(field.getType()).mock(dataConfig));
@@ -37,12 +39,17 @@ public class GlobalBeanMockerInterceptor<T> implements BeanMockerInterceptor<T> 
 			}
 			if(StringUtils.isNotEmpty(mockValue.regex())) {
 				dataConfig.subConfig(clazz, field.getName());
-				if(CharSequence.class.isAssignableFrom(field.getType())) {
+				Runnable func = null;
+				if(isCharSeq) {
 					dataConfig.stringRegex(mockValue.regex());
+					func = () -> dataConfig.stringRegex(null);
 				} else {
 					dataConfig.numberRegex(mockValue.regex());
+					func = () -> dataConfig.numberRegex(null);
 				}
-				return InterceptType.MOCK;
+				field.set(bean, new BaseMocker<>(field.getGenericType()).mock(dataConfig));
+				func.run();
+				return InterceptType.UNMOCK;
 			}
 //			if(!StringUtils.isAnyBlank(mockValue.rangeMin(), mockValue.rangeMax())) {
 //				dataConfig.subConfig(clazz, field.getName()).dateRange(mockValue.rangeMin(), mockValue.rangeMax());

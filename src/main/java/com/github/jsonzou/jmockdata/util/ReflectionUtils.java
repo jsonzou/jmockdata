@@ -85,4 +85,8 @@ public final class ReflectionUtils {
 
 	    return String.format("%s.%s", ((Class<?>) declaration).getName(), typeVariable.getName());
 	}
+  
+  public static boolean isCharSeq(Class<?> clazz) {
+	  return CharSequence.class.isAssignableFrom(clazz);
+  }
 }
