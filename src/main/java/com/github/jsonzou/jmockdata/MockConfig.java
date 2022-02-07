@@ -11,6 +11,7 @@ import java.lang.reflect.TypeVariable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -37,6 +38,7 @@ public class MockConfig {
   private static final LocalDateMocker LOCAL_DATE_MOCKER = new LocalDateMocker();
   private static final LocalTimeMocker LOCAL_TIME_MOCKER = new LocalTimeMocker();
   private static final TimestampMocker TIMESTAMP_MOCKER = new TimestampMocker();
+  private static final InstantMocker INSTANT_MOCKER = new InstantMocker();
   private boolean enabledCircle = false;
   private boolean enabledStatic = false;
   private boolean enabledPublic = true;
@@ -96,6 +98,7 @@ public class MockConfig {
     registerMocker(LOCAL_DATE_MOCKER, LocalDate.class);
     registerMocker(LOCAL_TIME_MOCKER, LocalTime.class);
     registerMocker(TIMESTAMP_MOCKER, Timestamp.class);
+    registerMocker(INSTANT_MOCKER, Instant.class);
   }
 
   /**
