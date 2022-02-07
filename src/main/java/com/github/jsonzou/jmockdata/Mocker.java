@@ -3,6 +3,7 @@ package com.github.jsonzou.jmockdata;
 /**
  * 模拟器接口
  */
+@FunctionalInterface
 public interface Mocker<T> {
 
   /**

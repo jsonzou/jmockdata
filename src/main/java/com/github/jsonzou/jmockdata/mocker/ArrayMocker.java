@@ -4,6 +4,8 @@ import com.github.jsonzou.jmockdata.DataConfig;
 import com.github.jsonzou.jmockdata.MockConfig;
 import com.github.jsonzou.jmockdata.Mocker;
 import com.github.jsonzou.jmockdata.util.RandomUtils;
+import com.github.jsonzou.jmockdata.util.ReflectionUtils;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
@@ -95,7 +97,7 @@ public class ArrayMocker implements Mocker<Object> {
     }
     if (componentType instanceof TypeVariable) {
       Map<Class, Type[]> map = new HashMap<>();
-      map.put((Class) mockConfig.globalConfig().getVariableType(((TypeVariable) componentType).getName()), null);
+      map.put((Class) mockConfig.globalConfig().getVariableType(ReflectionUtils.getTypeVariableName((TypeVariable) componentType)), null);
       result.put(dimension, map);
       return result;
     }

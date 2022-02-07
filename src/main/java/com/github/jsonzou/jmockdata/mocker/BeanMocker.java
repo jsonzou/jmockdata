@@ -5,9 +5,12 @@ import com.github.jsonzou.jmockdata.annotation.MockIgnore;
 import com.github.jsonzou.jmockdata.util.ReflectionUtils;
 
 import java.beans.IntrospectionException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +36,36 @@ public class BeanMocker implements Mocker<Object> {
           return cacheBean;
         }
       }
-      Object result = clazz.newInstance();
+      Object result = null;
+      try {
+    	  result = clazz.newInstance();
+      }catch (Exception e) {
+    	  // 某些类没有构造方法，clazz.getDeclaredConstructor(); 也会报错
+    	  Constructor<?>[] constructors = clazz.getDeclaredConstructors();
+    	  int idx = 0;
+    	  int len = 1;
+    	  for(int i=0; i<constructors.length; i++) {
+    		  if(!Modifier.isPublic(constructors[i].getModifiers())) {
+    			  continue;
+    		  }
+    		  if(len < constructors[i].getParameterCount()) {
+    			  idx = i;
+    			  len = constructors[i].getParameterCount();
+    		  }
+    	  }
+    	  Constructor<?> declaredConstructor = clazz.getDeclaredConstructors()[idx];
+    	  Object[] params = new Object[len];
+    	  Type type = null;
+    	  for(int i=0; i<len; i++) {
+    		  type = declaredConstructor.getGenericParameterTypes()[i];
+    		  if(type instanceof TypeVariable) {
+    			  type = mockConfig.globalConfig().getVariableType(ReflectionUtils.getTypeVariableName((TypeVariable<?>) type));
+    		  }
+    		  params[i] = JMockData.mock(type, mockConfig);
+    	  }
+//          Object param = JMockData.mock(declaredConstructor.getGenericParameterTypes()[0], mockConfig);
+          result = declaredConstructor.newInstance(params);
+	  }
       mockConfig.globalConfig().cacheBean(clazz.getName(), result);
       /**
        * 是否配置排除整个类

@@ -24,7 +24,9 @@ public class ClassMocker implements Mocker<Object> {
     if (clazz.isArray()) {
       mocker = new ArrayMocker(clazz);
     } else if (Map.class.isAssignableFrom(clazz)) {
-      mocker = new MapMocker(genericTypes);
+      mocker = mockConfig.globalConfig().getMocker(clazz);
+      // MapMocker 默认是HashMap，但是很多包自带的Map，所以先从上面获取，因为可以注入 registerMocker
+      mocker = null == mocker ? new MapMocker(genericTypes) : mocker;
     } else if (Collection.class.isAssignableFrom(clazz)) {
       mocker = new CollectionMocker(clazz, genericTypes[0]);
     } else if (clazz.isEnum()) {

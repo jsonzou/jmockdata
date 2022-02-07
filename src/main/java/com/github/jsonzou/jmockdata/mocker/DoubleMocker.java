@@ -14,6 +14,9 @@ public class DoubleMocker implements Mocker<Double> {
 
   @Override
   public Double mock(DataConfig mockConfig) {
+	if(StringUtils.isNotEmpty(mockConfig.getVal())) {
+		return mockConfig.getValNum().doubleValue();
+	}
     /**
      * 若根据正则模拟
      */

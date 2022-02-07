@@ -12,6 +12,9 @@ public class ShortMocker implements Mocker<Short> {
 
   @Override
   public Short mock(DataConfig mockConfig) {
+	if(StringUtils.isNotEmpty(mockConfig.getVal())) {
+		return mockConfig.getValNum().shortValue();
+	}
     /**
      * 若根据正则模拟
      */

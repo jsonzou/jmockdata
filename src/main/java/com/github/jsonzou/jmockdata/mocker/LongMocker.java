@@ -12,6 +12,9 @@ public class LongMocker implements Mocker<Long> {
 
   @Override
   public Long mock(DataConfig mockConfig) {
+	if(StringUtils.isNotEmpty(mockConfig.getVal())) {
+		return mockConfig.getValNum().longValue();
+	}
     /**
      * 若根据正则模拟
      */

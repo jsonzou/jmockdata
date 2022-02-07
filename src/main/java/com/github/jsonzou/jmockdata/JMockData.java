@@ -1,5 +1,7 @@
 package com.github.jsonzou.jmockdata;
 
+import java.lang.reflect.Type;
+
 import com.github.jsonzou.jmockdata.mocker.BaseMocker;
 
 /**
@@ -62,4 +64,20 @@ public class JMockData {
     return new BaseMocker<T>(typeReference.getType()).mock(config);
   }
 
+
+  public static <T> T mock(Type type) {
+    return mock(type, new MockConfig());
+  }
+  
+  public static <T> T mock(Type type, MockConfig mockConfig) {
+    mockConfig.init(type);
+    DataConfig config=mockConfig.globalDataConfig();
+    return new BaseMocker<T>(type).mock(config);
+  }
+  
+  public static <T> T mock(Type type, DataConfig dataConfig) {
+	MockConfig mockConfig = dataConfig.globalConfig();
+    mockConfig.init(type);
+    return new BaseMocker<T>(type).mock(dataConfig);
+  }
 }

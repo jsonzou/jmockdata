@@ -12,6 +12,9 @@ public class StringMocker implements Mocker<String> {
 
   @Override
   public String mock(DataConfig mockConfig) {
+	if(StringUtils.isNotEmpty(mockConfig.getVal())) {
+		return mockConfig.getVal();
+	}
     /**
      * 若根据正则模拟
      */
