@@ -121,6 +121,58 @@ public class JMockDataTest {
     assertNotNull(genericData);
   }
 
+  /**
+   * Test for issue: 普通对象包含含有泛型字段的集合时mock失败
+   * Test mocking a bean with a field containing a parameterized generic type
+   */
+  @Test
+  public void testGenericFieldInCollection() {
+    // Create a simple bean that contains List<GenericEntity<String>>
+    class GeneralEntity {
+      private List<GenericEntity<String>> rows;
+
+      public List<GenericEntity<String>> getRows() {
+        return rows;
+      }
+
+      public void setRows(List<GenericEntity<String>> rows) {
+        this.rows = rows;
+      }
+    }
+
+    class GenericEntity<T> {
+      private T key;
+
+      public T getKey() {
+        return key;
+      }
+
+      public void setKey(T key) {
+        this.key = key;
+      }
+    }
+
+    GeneralEntity entity = JMockData.mock(GeneralEntity.class);
+    assertNotNull(entity);
+    assertNotNull(entity.getRows());
+    assertFalse(entity.getRows().isEmpty());
+
+    // Verify that the generic field in GenericEntity is properly mocked
+    Object firstItem = entity.getRows().get(0);
+    assertNotNull(firstItem);
+    // Use reflection to get the key field since we can't directly access it due to local class
+    try {
+      java.lang.reflect.Field keyField = firstItem.getClass().getDeclaredField("key");
+      keyField.setAccessible(true);
+      Object key = keyField.get(firstItem);
+      assertNotNull(key);
+      assertTrue(key instanceof String);
+      System.out.println("Generic field test passed! Key type: " + key.getClass().getName());
+    } catch (Exception e) {
+      fail("Failed to access key field: " + e.getMessage());
+    }
+  }
+
   @Test
   public void testMockConfig() {
     MockConfig mockConfig = new MockConfig()
