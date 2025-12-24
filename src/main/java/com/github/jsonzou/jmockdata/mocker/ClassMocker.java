@@ -32,7 +32,7 @@ public class ClassMocker implements Mocker<Object> {
     } else {
       mocker = mockConfig.globalConfig().getMocker(clazz);
       if (mocker == null) {
-        mocker = new BeanMocker(clazz);
+        mocker = new BeanMocker(clazz, genericTypes);
       }
     }
     return mocker.mock(mockConfig);

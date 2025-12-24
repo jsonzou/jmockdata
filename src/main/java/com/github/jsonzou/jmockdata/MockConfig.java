@@ -114,6 +114,14 @@ public class MockConfig {
     return beanCache.get(beanClassName);
   }
 
+  public void cacheTypeVariable(String name, Type type) {
+    typeVariableCache.put(name, type);
+  }
+
+  public void removeTypeVariable(String name) {
+    typeVariableCache.remove(name);
+  }
+
   public void cacheEnum(String name, Enum[] enums) {
     enumCache.put(name, enums);
   }
