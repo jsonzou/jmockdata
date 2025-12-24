@@ -283,6 +283,22 @@ public class JMockDataTest {
     printBeanFieldInfo(LocalDateTimeBean.class,localDateTimeBean);
   }
   /**
+   * 测试java.sql.Date的模拟
+   */
+  @Test
+  public void testSqlDateMock() throws IllegalAccessException {
+    SqlDateBean sqlDateBean = JMockData.mock(SqlDateBean.class);
+    assertNotNull(sqlDateBean);
+    assertNotNull(sqlDateBean.getSqlDate());
+    assertNotNull(sqlDateBean.getSqlDates());
+    assertNotNull(sqlDateBean.getSqlDateList());
+    printBeanFieldInfo(SqlDateBean.class, sqlDateBean);
+    
+    // Test direct mocking
+    java.sql.Date sqlDate = JMockData.mock(java.sql.Date.class);
+    assertNotNull(sqlDate);
+  }
+  /**
    * 测试Timestamp,LocalDateTime,LocalDate,LocalTime的模拟
    */
   @Test
