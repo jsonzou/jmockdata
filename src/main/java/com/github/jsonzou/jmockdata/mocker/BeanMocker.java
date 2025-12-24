@@ -8,7 +8,10 @@ import java.beans.IntrospectionException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -17,9 +20,15 @@ import java.util.concurrent.ConcurrentHashMap;
 public class BeanMocker implements Mocker<Object> {
   private Map<Class<?>, List<Field>> classFieldCache = new ConcurrentHashMap<>((int)((float)32 / 0.75F + 1.0F));
   private final Class clazz;
+  private final Type[] genericTypes;
 
   BeanMocker(Class clazz) {
+    this(clazz, null);
+  }
+
+  BeanMocker(Class clazz, Type[] genericTypes) {
     this.clazz = clazz;
+    this.genericTypes = genericTypes;
   }
 
   @Override
@@ -41,7 +50,41 @@ public class BeanMocker implements Mocker<Object> {
       if(mockConfig.globalConfig().isConfigExcludeMock(clazz)){
         return result;
       }
-      setFieldValueByFieldAccessible(mockConfig, result);
+      // Initialize type variable cache if generic types are provided
+      Map<String, Type> savedTypeVariables = null;
+      if (genericTypes != null && genericTypes.length > 0) {
+        TypeVariable[] typeVariables = clazz.getTypeParameters();
+        if (typeVariables != null && typeVariables.length > 0) {
+          // Save current type variable mappings
+          savedTypeVariables = new HashMap<>();
+          for (int index = 0; index < Math.min(typeVariables.length, genericTypes.length); index++) {
+            String varName = typeVariables[index].getName();
+            Type oldValue = mockConfig.globalConfig().getVariableType(varName);
+            if (oldValue != null) {
+              savedTypeVariables.put(varName, oldValue);
+            }
+            mockConfig.globalConfig().cacheTypeVariable(varName, genericTypes[index]);
+          }
+        }
+      }
+      try {
+        setFieldValueByFieldAccessible(mockConfig, result);
+      } finally {
+        // Restore previous type variable mappings
+        if (savedTypeVariables != null) {
+          TypeVariable[] typeVariables = clazz.getTypeParameters();
+          if (typeVariables != null && typeVariables.length > 0) {
+            for (int index = 0; index < Math.min(typeVariables.length, genericTypes.length); index++) {
+              String varName = typeVariables[index].getName();
+              if (savedTypeVariables.containsKey(varName)) {
+                mockConfig.globalConfig().cacheTypeVariable(varName, savedTypeVariables.get(varName));
+              } else {
+                mockConfig.globalConfig().removeTypeVariable(varName);
+              }
+            }
+          }
+        }
+      }
       return result;
     } catch (Exception e) {
       throw new MockException(e);

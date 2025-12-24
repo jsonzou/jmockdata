@@ -121,6 +121,28 @@ public class JMockDataTest {
     assertNotNull(genericData);
   }
 
+  /**
+   * Test for issue: Mocking fails when regular objects contain collections with generic fields
+   * (普通对象包含含有泛型字段的集合时mock失败)
+   * Test mocking a bean with a field containing a parameterized generic type
+   */
+  @Test
+  public void testGenericFieldInCollection() {
+    GeneralBean entity = JMockData.mock(GeneralBean.class);
+    assertNotNull(entity);
+    assertNotNull(entity.getRows());
+    assertFalse(entity.getRows().isEmpty());
+
+    // Verify that the generic field in GenericFieldEntity is properly mocked
+    GenericFieldEntity<String> firstItem = entity.getRows().get(0);
+    assertNotNull(firstItem);
+    assertNotNull(firstItem.getKey());
+    assertTrue(firstItem.getKey() instanceof String);
+    
+    System.out.println("Generic field test passed! Key type: " + firstItem.getKey().getClass().getName());
+    System.out.println("Key value: " + firstItem.getKey());
+  }
+
   @Test
   public void testMockConfig() {
     MockConfig mockConfig = new MockConfig()
