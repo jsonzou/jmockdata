@@ -433,6 +433,39 @@ public void testGenericData() {
   }
 ```
 
+### 模拟HTTP结果包装类
+#### 支持模拟常见的HTTP响应结果包装类，如HttpResult<T>
+
+```java
+//定义一个泛型HTTP结果包装类
+public class HttpResult<T> {
+  private Integer code;
+  private String message;
+  private T data;
+  //getter setter省略...
+}
+
+@Test
+public void testHttpResult() {
+    // 模拟HttpResult<String>
+    HttpResult<String> result1 = JMockData.mock(new TypeReference<HttpResult<String>>(){});
+    assertNotNull(result1);
+    assertNotNull(result1.getCode());
+    assertNotNull(result1.getMessage());
+    assertNotNull(result1.getData());
+    
+    // 模拟HttpResult<BasicBean>
+    HttpResult<BasicBean> result2 = JMockData.mock(new TypeReference<HttpResult<BasicBean>>(){});
+    assertNotNull(result2);
+    assertNotNull(result2.getData());
+    
+    // 模拟HttpResult<List<String>>
+    HttpResult<List<String>> result3 = JMockData.mock(new TypeReference<HttpResult<List<String>>>(){});
+    assertNotNull(result3);
+    assertNotNull(result3.getData());
+  }
+```
+
 ### 自定义Mocker类注册
 
 ```java

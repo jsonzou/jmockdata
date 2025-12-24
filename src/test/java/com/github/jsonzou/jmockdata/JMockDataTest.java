@@ -338,6 +338,46 @@ public class JMockDataTest {
   }
 
   /**
+   * 测试HttpResult泛型结果包装类
+   */
+  @Test
+  public void testHttpResult() {
+    // 测试HttpResult<String>
+    HttpResult<String> result1 = JMockData.mock(new TypeReference<HttpResult<String>>(){});
+    assertNotNull(result1);
+    assertNotNull(result1.getCode());
+    assertNotNull(result1.getMessage());
+    assertNotNull(result1.getData());
+    assertTrue(result1.getData() instanceof String);
+    System.out.println("HttpResult<String>: " + JSON.toJSONString(result1, true));
+
+    // 测试HttpResult<Integer>
+    HttpResult<Integer> result2 = JMockData.mock(new TypeReference<HttpResult<Integer>>(){});
+    assertNotNull(result2);
+    assertNotNull(result2.getCode());
+    assertNotNull(result2.getMessage());
+    assertNotNull(result2.getData());
+    assertTrue(result2.getData() instanceof Integer);
+    System.out.println("HttpResult<Integer>: " + JSON.toJSONString(result2, true));
+
+    // 测试HttpResult<BasicBean>
+    HttpResult<BasicBean> result3 = JMockData.mock(new TypeReference<HttpResult<BasicBean>>(){});
+    assertNotNull(result3);
+    assertNotNull(result3.getCode());
+    assertNotNull(result3.getMessage());
+    assertNotNull(result3.getData());
+    assertTrue(result3.getData() instanceof BasicBean);
+    System.out.println("HttpResult<BasicBean>: " + JSON.toJSONString(result3, true));
+
+    // 测试HttpResult<List<String>>
+    HttpResult<List<String>> result4 = JMockData.mock(new TypeReference<HttpResult<List<String>>>(){});
+    assertNotNull(result4);
+    assertNotNull(result4.getData());
+    assertTrue(result4.getData() instanceof List);
+    System.out.println("HttpResult<List<String>>: " + JSON.toJSONString(result4, true));
+  }
+
+  /**
    * 打印bean 属性信息
    * @param clazz
    * @param result
