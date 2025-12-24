@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Bean containing a list of generic entities
- * Used to test the fix for issue: 普通对象包含含有泛型字段的集合时mock失败
+ * Used to test the fix for issue: Mocking fails when regular objects contain collections with generic fields
  */
 public class GeneralBean {
     private List<GenericFieldEntity<String>> rows;

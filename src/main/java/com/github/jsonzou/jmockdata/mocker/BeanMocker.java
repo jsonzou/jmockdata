@@ -11,6 +11,7 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -55,7 +56,7 @@ public class BeanMocker implements Mocker<Object> {
         TypeVariable[] typeVariables = clazz.getTypeParameters();
         if (typeVariables != null && typeVariables.length > 0) {
           // Save current type variable mappings
-          savedTypeVariables = new java.util.HashMap<>();
+          savedTypeVariables = new HashMap<>();
           for (int index = 0; index < Math.min(typeVariables.length, genericTypes.length); index++) {
             String varName = typeVariables[index].getName();
             Type oldValue = mockConfig.globalConfig().getVariableType(varName);

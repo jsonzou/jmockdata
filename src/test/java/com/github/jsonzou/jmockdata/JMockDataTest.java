@@ -122,7 +122,8 @@ public class JMockDataTest {
   }
 
   /**
-   * Test for issue: 普通对象包含含有泛型字段的集合时mock失败
+   * Test for issue: Mocking fails when regular objects contain collections with generic fields
+   * (普通对象包含含有泛型字段的集合时mock失败)
    * Test mocking a bean with a field containing a parameterized generic type
    */
   @Test
